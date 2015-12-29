@@ -26,7 +26,7 @@ namespace AdventOfCode.Day22
                 generation++;
                 spellPaths = GetNextPaths(spellPaths);
                 Console.WriteLine($"Generation #{generation}: total {spellPaths.Count} possible spell paths");
-                var donePaths = new List<List<Spell>>();
+                var donePaths = new List<int>();
                 var index = 0;
                 foreach (var spellPath in spellPaths)
                 {
@@ -34,22 +34,31 @@ namespace AdventOfCode.Day22
                     if (result > 0)
                     {
                         Console.WriteLine($"{result}: {string.Join(", ", spellPath.Select(s => s.Name))}");
-                        donePaths.Add(spellPath);
+                        donePaths.Add(index);
                         if (result < bestPathValue)
                             bestPathValue = result;
                     }
                     if (result < 0)
                     {
-                        donePaths.Add(spellPath);
+                        donePaths.Add(index);
                     }
                     index++;
-                    Console.WriteLine($"Processed {index}/{spellPaths.Count} paths. Eliminated {donePaths.Count} so far");
-                    Console.CursorTop--;
-
+                    if (index % 13 == 0)
+                    {
+                        Console.WriteLine($"Processed {index}/{spellPaths.Count} paths. Eliminated {donePaths.Count} so far");
+                        Console.CursorTop--;
+                    }
                 }
-                Console.WriteLine($"Removing Eliminated paths....");
-                Console.CursorTop--;
-                spellPaths.RemoveAll(sp => donePaths.Contains(sp));
+                //Console.WriteLine(new string(' ', Console.WindowWidth));
+                //Console.CursorTop--;
+                //Console.WriteLine($"Removing Eliminated paths....");
+                //Console.CursorTop--;
+                donePaths.Reverse();
+                foreach (var item in donePaths)
+                {
+                    spellPaths.RemoveAt(item);
+                }
+                //spellPaths.RemoveAll(sp => donePaths.Contains(sp));
                 Console.WriteLine($"Generation #{generation}: total {donePaths.Count} non-viable spell paths eliminated ");
                 Console.WriteLine($"Generation #{generation}: total {spellPaths.Count} viable spell paths found ");
                 Console.WriteLine();
