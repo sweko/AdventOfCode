@@ -14,10 +14,6 @@ namespace AdventOfCode.Day22
         public static int Simulate()
         {
             Init();
-            //var sx = new List<Spell> { spellsDict["Shield"], spellsDict["Recharge"], spellsDict["Poison"], spellsDict["Magic Missile"], spellsDict["Shield"], spellsDict["Recharge"], spellsDict["Poison"], spellsDict["Magic Missile"], spellsDict["Magic Missile"], spellsDict["Magic Missile"] };
-            //var r = ExecuteSpellPath(sx);
-            //return r;
-
             var spellPaths = new List<List<Spell>> { new List<Spell>() };
             var generation = 0;
             var bestPathValue = int.MaxValue;
@@ -30,13 +26,12 @@ namespace AdventOfCode.Day22
                 var index = 0;
                 foreach (var spellPath in spellPaths)
                 {
-                    var result = ExecuteSpellPath(spellPath);
+                    var result = ExecuteSpellPath(spellPath, bestPathValue);
                     if (result > 0)
                     {
-                        Console.WriteLine($"{result}: {string.Join(", ", spellPath.Select(s => s.Name))}");
+                        //Console.WriteLine($"{result}: {string.Join(", ", spellPath.Select(s => s.Name))}");
                         donePaths.Add(index);
-                        if (result < bestPathValue)
-                            bestPathValue = result;
+                        bestPathValue = result;
                     }
                     if (result < 0)
                     {
@@ -49,10 +44,10 @@ namespace AdventOfCode.Day22
                         Console.CursorTop--;
                     }
                 }
-                //Console.WriteLine(new string(' ', Console.WindowWidth));
-                //Console.CursorTop--;
-                //Console.WriteLine($"Removing Eliminated paths....");
-                //Console.CursorTop--;
+                Console.WriteLine(new string(' ', Console.WindowWidth));
+                Console.CursorTop--;
+                Console.WriteLine($"Removing Eliminated paths....");
+                Console.CursorTop--;
                 donePaths.Reverse();
                 foreach (var item in donePaths)
                 {
@@ -61,12 +56,13 @@ namespace AdventOfCode.Day22
                 //spellPaths.RemoveAll(sp => donePaths.Contains(sp));
                 Console.WriteLine($"Generation #{generation}: total {donePaths.Count} non-viable spell paths eliminated ");
                 Console.WriteLine($"Generation #{generation}: total {spellPaths.Count} viable spell paths found ");
+                Console.WriteLine($"Current best: {bestPathValue}");
                 Console.WriteLine();
             }
             return bestPathValue;
         }
 
-        private static int ExecuteSpellPath(List<Spell> spellPath)
+        private static int ExecuteSpellPath(List<Spell> spellPath, int bestPathValue)
         {
             var wizard = new Fighter
             {
@@ -89,6 +85,8 @@ namespace AdventOfCode.Day22
             {
                 var result = battle.NextTurn(spell);
                 if (!result)
+                    return -1;
+                if (battle.ManaSpent > bestPathValue)
                     return -1;
                 if (battle.Boss.Health <= 0)
                     return battle.ManaSpent;
@@ -238,6 +236,13 @@ namespace AdventOfCode.Day22
 
             internal bool NextTurn(Spell spell)
             {
+                //player turn
+                BeginTurn(true);
+                if (Wizard.Health <= 0)
+                    return false;
+                if (Boss.Health <= 0)
+                    return true;
+
                 if (ActiveSpells.Any(a => a.Spell.Name == spell.Name))
                 {
                     if (Debug)
@@ -251,13 +256,6 @@ namespace AdventOfCode.Day22
                         Console.WriteLine("Wizard is out of mana");
                     return false;
                 }
-
-                //player turn
-                BeginTurn(true);
-                if (Wizard.Health <= 0)
-                    return false;
-                if (Boss.Health <=0)
-                    return true;
                 Wizard.Mana -= spell.Cost;
                 ManaSpent += spell.Cost;
                 ActiveSpells.Add(spell.Cast());
