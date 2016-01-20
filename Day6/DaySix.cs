@@ -32,9 +32,9 @@ namespace AdventOfCode.Day6
                 var values = match.Groups.Cast<Group>().Skip(1).Select(g => g.Value).ToArray();
                 Type = TypeResolver[values[0]];
                 Left = int.Parse(values[1]);
-                Bottom = int.Parse(values[2]);
+                Top = int.Parse(values[2]);
                 Right = int.Parse(values[3]);
-                Top = int.Parse(values[4]);
+                Bottom = int.Parse(values[4]);
             }
         }
 
@@ -60,7 +60,13 @@ namespace AdventOfCode.Day6
             foreach (var command in commands)
             {
                 Operate(command, lights);
+                Console.WriteLine("Currently " + CountLigths(size, lights) + " lights are on");
             }
+            return CountLigths(size, lights);
+        }
+
+        private static int CountLigths(int size, bool[,] lights)
+        {
             var count = 0;
             for (int i = 0; i < size; i++)
             {
@@ -76,7 +82,7 @@ namespace AdventOfCode.Day6
         {
             for (int i = command.Left; i <= command.Right; i++)
             {
-                for (int j = command.Bottom; j <= command.Top; j++)
+                for (int j = command.Top; j <= command.Bottom; j++)
                 {
                     switch (command.Type)
                     {
@@ -118,7 +124,7 @@ namespace AdventOfCode.Day6
         {
             for (int i = command.Left; i <= command.Right; i++)
             {
-                for (int j = command.Bottom; j <= command.Top; j++)
+                for (int j = command.Top; j <= command.Bottom; j++)
                 {
                     switch (command.Type)
                     {

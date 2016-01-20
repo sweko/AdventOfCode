@@ -12,7 +12,7 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Stopwatch s = Stopwatch.StartNew();
-            var result = Day22.DayTwentyTwo.Simulate();
+            var result = Day6.DaySix.CountLitLights();
             s.Stop();
             Console.WriteLine(result);
             Console.WriteLine(s.ElapsedMilliseconds);
