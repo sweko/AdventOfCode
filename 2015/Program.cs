@@ -12,9 +12,11 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Stopwatch s = Stopwatch.StartNew();
-            var result = Day6.DaySix.CountLitLights();
-            s.Stop();
+            var result = Day5.DayFive.CountNice();
             Console.WriteLine(result);
+            result = Day5.DayFive.CountOtherNice();
+            Console.WriteLine(result);
+            s.Stop();
             Console.WriteLine(s.ElapsedMilliseconds);
         }
     }
