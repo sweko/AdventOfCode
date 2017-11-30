@@ -12,7 +12,7 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Stopwatch s = Stopwatch.StartNew();
-            var result = Day25.DayTwentyFive.Process();
+            var result = Day22.DayTwentyTwo.Simulate();
             Console.WriteLine(result);
             s.Stop();
             Console.WriteLine(s.ElapsedMilliseconds);

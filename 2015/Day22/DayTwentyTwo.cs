@@ -29,7 +29,7 @@ namespace AdventOfCode.Day22
                     var result = ExecuteSpellPath(spellPath, bestPathValue);
                     if (result > 0)
                     {
-                        //Console.WriteLine($"{result}: {string.Join(", ", spellPath.Select(s => s.Name))}");
+                        Console.WriteLine($"{result}: {string.Join(", ", spellPath.Select(s => s.Name))}");
                         donePaths.Add(index);
                         bestPathValue = result;
                     }
@@ -80,7 +80,7 @@ namespace AdventOfCode.Day22
                 Damage = 10
             };
             var battle = new Battle(wizard, boss);
-            //battle.Debug = true;
+            battle.Debug = false;
             foreach (var spell in spellPath)
             {
                 var result = battle.NextTurn(spell);
@@ -359,7 +359,7 @@ namespace AdventOfCode.Day22
                         ActiveSpells.Remove(current);
                     }
                 }
-                //part 2:
+                // part 2:
                 if (isPlayer)
                 {
                     if (Debug)
