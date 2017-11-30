@@ -12,9 +12,7 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             Stopwatch s = Stopwatch.StartNew();
-            var result = Day5.DayFive.CountNice();
-            Console.WriteLine(result);
-            result = Day5.DayFive.CountOtherNice();
+            var result = Day25.DayTwentyFive.Process();
             Console.WriteLine(result);
             s.Stop();
             Console.WriteLine(s.ElapsedMilliseconds);

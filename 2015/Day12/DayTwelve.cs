@@ -53,7 +53,7 @@ namespace AdventOfCode.Day12
             var input = Load();
             var objRegex = new Regex(@"{[^{}[\]]*}", RegexOptions.Compiled);
             var arrRegex = new Regex(@"\[[^{}[\]]*]", RegexOptions.Compiled);
-            while (input[0] == '{')
+            while (input[0] == '{' || input[0] == '[')
             {
                 input = objRegex.Replace(input, EvaluateObjectNode);
                 input = arrRegex.Replace(input, EvaluateArrayNode);

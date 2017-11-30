@@ -26,7 +26,7 @@ namespace AdventOfCode.Day23
             var program = Program.LoadFromFile(instructionDictionary, @"Day23\input.txt");
 
             //part2
-            machine.Registers['a'].Value = 1;
+            //machine.Registers['a'].Value = 1;
 
             machine.Execute(program);
             return machine.Registers['b'].Value;

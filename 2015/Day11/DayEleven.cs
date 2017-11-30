@@ -11,7 +11,7 @@ namespace AdventOfCode.Day11
         public static string Process()
         {
             var oldPassword = "hepxcrrq";
-            oldPassword= GetNextPassword(oldPassword);
+            //oldPassword= GetNextPassword(oldPassword);
             return GetNextPassword(oldPassword);
         }
 

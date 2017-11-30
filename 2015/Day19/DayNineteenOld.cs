@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.Day19
 {
-    class DayNineteen
+    class DayNineteenOld
     {
         internal static int CalculateMolecules()
         {
@@ -17,24 +17,24 @@ namespace AdventOfCode.Day19
             return result.Count;
         }
 
-        internal static int DecomposeMolecule(){
+        internal static int GenerateMolecule()
+        {
             var input = LoadInput();
-            var rules = InvertRules(input.Rules);
-            var molecule = input.Molecule;
-            var target = "E";
-            var iterations = 0;
-            while (molecule != target)
+            var generation = new HashSet<string> { "E" };
+            var number = 0;
+
+            while (!generation.Contains(input.Molecule))
             {
-                var rule = GetNextRule(molecule, rules);
-                molecule = ApplyRule(molecule, rule.Item1, rules[rule.Item1], rule.Item2);
-                Console.WriteLine($"{iterations}: {molecule}");
-                iterations++;
+                generation = NextGeneration(input.Rules, generation);
+                number++;
+
+                PrintGeneration(number, generation);
             }
 
-            return iterations;
+            return number;
         }
 
-        internal static int DecomposeMoleculeOld()
+        internal static int DecomposeMolecule()
         {
             var input = LoadInput();
             var rules = InvertRules(input.Rules);
@@ -143,6 +143,16 @@ namespace AdventOfCode.Day19
             return result;
         }
 
+        internal static int CalculateDecomposition()
+        {
+            var input = LoadInput();
+            var total = input.Molecule.Length;
+            var parens = input.Molecule.Count(c => c == '(');
+            var ypsilons = input.Molecule.Count(c => c == 'Y');
+            var result = total - 2 * parens - 2 * ypsilons - 1;
+            return result;
+        }
+
         private static string ApplyRule(string molecule, string rule, string value, int pos)
         {
             return molecule.Remove(pos, rule.Length).Insert(pos, value);
@@ -219,6 +229,26 @@ namespace AdventOfCode.Day19
                 {
                     result.Add(value, item.Key);
                 }
+            }
+            return result;
+        }
+
+        private static void PrintGeneration(int number, HashSet<string> generation)
+        {
+            Console.WriteLine($"Generation #{number} - {generation.Count} items");
+            //foreach (var item in generation)
+            //{
+            //    Console.WriteLine($"  {item}");
+            //}
+        }
+
+        private static HashSet<string> NextGeneration(Dictionary<string, List<string>> rules, HashSet<string> generation)
+        {
+            var result = new HashSet<string>();
+            foreach (var ancestor in generation)
+            {
+                var descendants = GetDescendants(rules, ancestor);
+                result.UnionWith(descendants);
             }
             return result;
         }

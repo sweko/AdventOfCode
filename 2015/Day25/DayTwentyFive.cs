@@ -8,8 +8,8 @@ namespace AdventOfCode.Day25
 {
     class DayTwentyFive
     {
-        public static int Row = 2981;
-        public static int Column = 3075;
+        public static int Row = 3010;
+        public static int Column = 3019;
         //public static int Row = 6;
         //public static int Column = 2;
 

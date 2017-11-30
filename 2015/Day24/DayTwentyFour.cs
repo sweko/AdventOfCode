@@ -13,9 +13,9 @@ namespace AdventOfCode.Day24
         internal static int Process()
         {
             var weights = File.ReadAllLines(@"Day24\input.txt").Select(l => int.Parse(l)).Reverse().ToArray();
-            //part1
-            //var partWeight = weights.Sum() / 3;
-            //part2 
+            // part1
+            // var partWeight = weights.Sum() / 3;
+            // part2 
             var partWeight = weights.Sum() / 4;
 
             var limit = (int)Math.Pow(2, weights.Length);

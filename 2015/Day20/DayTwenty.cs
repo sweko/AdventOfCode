@@ -9,7 +9,7 @@ namespace AdventOfCode.Day20
 {
     public class DayTwenty
     {
-        private static int Limit = 33100000;
+        private static int Limit = 29000000;
 
         public static int Process()
         {

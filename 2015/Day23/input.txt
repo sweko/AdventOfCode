@@ -1,28 +1,23 @@
-jio a, +22
-inc a
-tpl a
-tpl a
-tpl a
+jio a, +18
 inc a
 tpl a
 inc a
 tpl a
-inc a
-inc a
+tpl a
 tpl a
 inc a
+tpl a
 inc a
 tpl a
 inc a
 inc a
 tpl a
+tpl a
+tpl a
 inc a
+jmp +22
+tpl a
 inc a
-tpl a
-jmp +19
-tpl a
-tpl a
-tpl a
 tpl a
 inc a
 inc a
@@ -32,11 +27,15 @@ tpl a
 inc a
 inc a
 tpl a
+tpl a
 inc a
 inc a
 tpl a
 inc a
+inc a
 tpl a
+inc a
+inc a
 tpl a
 jio a, +8
 inc b

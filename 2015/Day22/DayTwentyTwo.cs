@@ -74,10 +74,10 @@ namespace AdventOfCode.Day22
             };
             var boss = new Fighter
             {
-                Health = 51,
+                Health = 71,
                 Mana = 0,
                 Armor = 0,
-                Damage = 9
+                Damage = 10
             };
             var battle = new Battle(wizard, boss);
             //battle.Debug = true;

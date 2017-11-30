@@ -8,48 +8,48 @@ namespace AdventOfCode.Day15
 {
     public class DayFifteen
     {
-        private static Ingredient sugar;
-        private static Ingredient sprinkles;
+        private static Ingredient frosting;
         private static Ingredient candy;
-        private static Ingredient chocolate;
+        private static Ingredient butterscotch;
+        private static Ingredient sugar;
 
         private static void Load()
         {
-            sugar = new Ingredient
+            frosting = new Ingredient
             {
-                Name = "Sugar",
-                Capacity = 3,
-                Durability = 0,
-                Flavor = 0,
-                Texture = -3,
-                Calories = 2
-            };
-            sprinkles = new Ingredient
-            {
-                Name = "Sprinkles",
-                Capacity = -3,
-                Durability = 3,
+                Name = "Frosting",
+                Capacity = 4,
+                Durability = -2,
                 Flavor = 0,
                 Texture = 0,
-                Calories = 9
+                Calories = 5
             };
             candy = new Ingredient
             {
                 Name = "Candy",
+                Capacity = 0,
+                Durability = 5,
+                Flavor = -1,
+                Texture = 0,
+                Calories = 8
+            };
+            butterscotch = new Ingredient
+            {
+                Name = "Butterscotch",
                 Capacity = -1,
                 Durability = 0,
-                Flavor = 4,
+                Flavor = 5,
                 Texture = 0,
-                Calories = 1
+                Calories = 6
             };
-            chocolate = new Ingredient
+            sugar = new Ingredient
             {
-                Name = "Chocolate",
+                Name = "Sugar",
                 Capacity = 0,
                 Durability = 0,
                 Flavor = -2,
                 Texture = 2,
-                Calories = 8
+                Calories = 1
             };
         }
 
@@ -65,16 +65,16 @@ namespace AdventOfCode.Day15
                     {
                         for (int l = 0; l <= 100 - i - j - k; l++)
                         {
-                            var capacity = i * sugar.Capacity + j * sprinkles.Capacity + k * candy.Capacity + l * chocolate.Capacity;
+                            var capacity = i * frosting.Capacity + j * candy.Capacity + k * butterscotch.Capacity + l * sugar.Capacity;
                             if (capacity < 0)
                                 capacity = 0;
-                            var durability = i * sugar.Durability + j * sprinkles.Durability + k * candy.Durability + l * chocolate.Durability;
+                            var durability = i * frosting.Durability + j * candy.Durability + k * butterscotch.Durability + l * sugar.Durability;
                             if (durability < 0)
                                 durability = 0;
-                            var flavor = i * sugar.Flavor + j * sprinkles.Flavor + k * candy.Flavor + l * chocolate.Flavor;
+                            var flavor = i * frosting.Flavor + j * candy.Flavor + k * butterscotch.Flavor + l * sugar.Flavor;
                             if (flavor < 0)
                                 flavor = 0;
-                            var texture = i * sugar.Texture + j * sprinkles.Texture + k * candy.Texture + l * chocolate.Texture;
+                            var texture = i * frosting.Texture + j * candy.Texture + k * butterscotch.Texture + l * sugar.Texture;
                             if (texture < 0)
                                 texture = 0;
 
@@ -101,20 +101,20 @@ namespace AdventOfCode.Day15
                     {
                         for (int l = 0; l <= 100 - i - j - k; l++)
                         {
-                            var calories = i * sugar.Calories + j * sprinkles.Calories + k * candy.Calories + l * chocolate.Calories;
+                            var calories = i * frosting.Calories + j * candy.Calories + k * butterscotch.Calories + l * sugar.Calories;
                             if (calories != targetCalories)
                                 continue;
 
-                            var capacity = i * sugar.Capacity + j * sprinkles.Capacity + k * candy.Capacity + l * chocolate.Capacity;
+                            var capacity = i * frosting.Capacity + j * candy.Capacity + k * butterscotch.Capacity + l * sugar.Capacity;
                             if (capacity < 0)
                                 capacity = 0;
-                            var durability = i * sugar.Durability + j * sprinkles.Durability + k * candy.Durability + l * chocolate.Durability;
+                            var durability = i * frosting.Durability + j * candy.Durability + k * butterscotch.Durability + l * sugar.Durability;
                             if (durability < 0)
                                 durability = 0;
-                            var flavor = i * sugar.Flavor + j * sprinkles.Flavor + k * candy.Flavor + l * chocolate.Flavor;
+                            var flavor = i * frosting.Flavor + j * candy.Flavor + k * butterscotch.Flavor + l * sugar.Flavor;
                             if (flavor < 0)
                                 flavor = 0;
-                            var texture = i * sugar.Texture + j * sprinkles.Texture + k * candy.Texture + l * chocolate.Texture;
+                            var texture = i * frosting.Texture + j * candy.Texture + k * butterscotch.Texture + l * sugar.Texture;
                             if (texture < 0)
                                 texture = 0;
 
