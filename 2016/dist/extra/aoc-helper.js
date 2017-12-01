@@ -66,7 +66,7 @@ function readInputLines() {
                 case 0: return [4 /*yield*/, readInput()];
                 case 1:
                     input = _a.sent();
-                    return [2 /*return*/, input.split("\n")];
+                    return [2 /*return*/, input.split("\r\n")];
             }
         });
     });
