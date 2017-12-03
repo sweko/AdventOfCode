@@ -63,23 +63,9 @@ class Machine {
 }
 
 async function main() {
-    // const machine = new Machine();
-    // machine.commands.push(["cpy", [10, "a"]]);
-    // machine.commands.push(["dec", ["a"]]);
-    // machine.commands.push(["cpy", ["a", "b"]]);
-    // machine.commands.push(["inc", ["b"]]);
-    // machine.commands.push(["cpy", [10, "c"]]);
-    // machine.commands.push(["inc", ["d"]]);
-    // machine.commands.push(["dec", ["c"]]);
-    // machine.commands.push(["jnz", ["c", -2]]);
-    // machine.runProgram();
-    // return;
-
-
     let lines = await readInputLines();
 
     let instructions = lines.map(cmd => parseInstruction(cmd))
-    //console.log(instructions);
 
     let avalue = processPartOne(instructions);
     console.log(`Part 1: value of register a is ${avalue}`);

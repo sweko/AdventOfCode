@@ -1,6 +1,5 @@
 import { readInput, readInputLines } from "../extra/aoc-helper";
 import { isNumber } from "util";
-import { fork } from "child_process";
 
 async function main() {
 
