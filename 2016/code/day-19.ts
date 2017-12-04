@@ -40,6 +40,7 @@ function processPartOne(numElves: number) {
 }
 
 function processPartTwo(numElves: number) {
+    // 31980 is wrong
     const elves = new Array(numElves);
     for (let index = 0; index < elves.length; index++) {
         elves[index] = index + 1;
