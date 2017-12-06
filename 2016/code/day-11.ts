@@ -215,6 +215,7 @@ function verifyState(floors: Floors) {
 }
 
 function processPartOne(floors: Floors) {
+    console.time("part one");
     let activeMoves = [];
     let endState = getEndState(floors);
     activeMoves = generateMoves(floors);
@@ -222,6 +223,7 @@ function processPartOne(floors: Floors) {
     while (true) {
         console.log(generation, activeMoves.length);
         if (activeMoves.some(f => f.state === endState)) {
+            console.timeEnd("part one");
             return generation;
         };
         const newMoves = [];

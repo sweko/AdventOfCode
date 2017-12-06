@@ -14,6 +14,7 @@ async function main() {
 }
 
 function processPartOne(numbers: number[]) {
+    console.time("part one");
     let count = 0;
     let ip = 0;
     while (ip < numbers.length) {
@@ -21,10 +22,12 @@ function processPartOne(numbers: number[]) {
         numbers[ip] += 1;
         ip += numbers[ip] - 1;
     }
+    console.timeEnd("part one");
     return count;
 }
 
 function processPartTwo(numbers: number[]) {
+    console.time("part two");
     let count = 0;
     let ip = 0;
     while (ip < numbers.length) {
@@ -37,7 +40,7 @@ function processPartTwo(numbers: number[]) {
             ip += numbers[ip] - 1;
         }
     }
-    console.log(numbers);
+    console.timeEnd("part two");
     return count;
 }
 

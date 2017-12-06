@@ -1,6 +1,7 @@
 import { readInput, readInputLines } from "../extra/aoc-helper";
 import { isNumber, debug } from "util";
 import { terminal } from "terminal-kit";
+import { setTimeout } from "timers";
 
 type Command = ["cpy" | "inc" | "dec" | "jnz" | "tgl" | "noop", any[]];
 
@@ -48,7 +49,6 @@ class Machine {
         if (!command) {
             console.log("toggling out of bound command", source, value);
             this.print();
-            //this.debug = true;
             return;
         }
         console.log("toggling command", command, value)
@@ -67,16 +67,11 @@ class Machine {
 
     runNoop() { }
 
-    runProgram() {
+    async runProgram() {
         this.totalCalls = 0;
         this.ip = 0;
         while (this.ip < this.commands.length) {
             const command = this.commands[this.ip];
-            if (this.debug){
-                console.log(command);
-                this.print();
-                return;
-            }
             if (command[0] === "cpy") {
                 this.runCopy(command[1][0], command[1][1])
             } else if (command[0] === "inc") {
@@ -90,10 +85,12 @@ class Machine {
             } else if (command[0] === "noop") {
                 this.runNoop();
             }
-            // if (this.debug){
-            //     this.print();
-            //     return;
-            // }
+            if (this.debug){
+                console.log(command, "                               ");
+                this.print();
+                terminal.previousLine(7);
+                await delay();
+            }
             this.ip += 1;
             this.totalCalls += 1;
             if (this.totalCalls % 123457 === 0) {
@@ -101,15 +98,14 @@ class Machine {
                 terminal.previousLine();
             }
         }
-        //this.print();
     }
 
     print() {
-        console.log(`a: ${this.a}`)
-        console.log(`b: ${this.b}`)
-        console.log(`c: ${this.c}`)
-        console.log(`d: ${this.d}`)
-        console.log(`ip: ${this.ip}`)
+        console.log(`a: ${this.a}      `)
+        console.log(`b: ${this.b}      `)
+        console.log(`c: ${this.c}      `)
+        console.log(`d: ${this.d}      `)
+        console.log(`ip: ${this.ip}      `)
         console.log(`totalCalls: ${this.totalCalls}`)
     }
 }
@@ -119,11 +115,20 @@ async function main() {
 
     let instructions = lines.map(cmd => parseInstruction(cmd))
 
-    let avalue = processPartOne(instructions);
+    let avalue = await processPartOne(instructions);
     console.log(`Part 1: value of register a is ${avalue}`);
 
-    avalue = processPartTwo(instructions);
+    instructions = lines.map(cmd => parseInstruction(cmd))
+    avalue = await processPartTwo(instructions);
     console.log(`Part 2: value of register a is ${avalue}`);
+}
+
+async function delay(ms: number = 100) {
+    return new Promise(r => {
+        setTimeout(() => {
+            r();
+        }, ms);
+    })
 }
 
 function parseInstruction(instruction: string): Command {
@@ -162,20 +167,22 @@ function parseInstruction(instruction: string): Command {
     throw Error(`invalid command ${instruction}`);
 }
 
-function processPartOne(instructions: Command[]) {
+async function processPartOne(instructions: Command[]) {
     const machine = new Machine();
     machine.a = 7;
     machine.commands = instructions;
-    machine.runProgram();
+    //machine.debug = true;
+    await machine.runProgram();
     machine.print();
     return machine.a;
 }
 
-function processPartTwo(instructions: Command[]) {
+async function processPartTwo(instructions: Command[]) {
     const machine = new Machine();
     machine.a = 12;
     machine.commands = instructions;
-    machine.runProgram();
+    //machine.debug = true;
+    await machine.runProgram();
     machine.print();
     return machine.a;
 }
