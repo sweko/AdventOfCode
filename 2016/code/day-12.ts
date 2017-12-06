@@ -67,10 +67,14 @@ async function main() {
 
     let instructions = lines.map(cmd => parseInstruction(cmd))
 
+    console.time("Part 1");
     let avalue = processPartOne(instructions);
+    console.timeEnd("Part 1");
     console.log(`Part 1: value of register a is ${avalue}`);
-
+    
+    console.time("Part 2");
     avalue = processPartTwo(instructions);
+    console.timeEnd("Part 2");
     console.log(`Part 2: value of register a is ${avalue}`);
 }
 
