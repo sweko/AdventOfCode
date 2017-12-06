@@ -47,12 +47,8 @@ class Machine {
         const value = (isNumber(source)) ? source : this[source];
         const command = this.commands[this.ip + value];
         if (!command) {
-            console.log("toggling out of bound command", source, value);
-            this.print();
             return;
         }
-        console.log("toggling command", command, value)
-        this.print();
         if (["tgl", "dec"].includes(command[0])) {
             command[0] = "inc";
         } else if (command[0] === "inc") {
@@ -62,7 +58,6 @@ class Machine {
         } else if (command[0] === "cpy") {
             command[0] = "jnz"
         }
-        console.log("toggled  command", command, value)
     }
 
     runNoop() { }
@@ -113,13 +108,16 @@ class Machine {
 async function main() {
     let lines = await readInputLines();
 
+    console.time("part one");
     let instructions = lines.map(cmd => parseInstruction(cmd))
-
     let avalue = await processPartOne(instructions);
+    console.timeEnd("part one");
     console.log(`Part 1: value of register a is ${avalue}`);
-
+    
+    console.time("part two");
     instructions = lines.map(cmd => parseInstruction(cmd))
     avalue = await processPartTwo(instructions);
+    console.timeEnd("part two");
     console.log(`Part 2: value of register a is ${avalue}`);
 }
 

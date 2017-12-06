@@ -1,11 +1,10 @@
 import { readInput, readInputLines } from "../extra/aoc-helper";
 
 async function main() {
+    console.time("total");
     const line = await readInput();
 
     let numbers = line.split("\t").map(line => parseInt(line));
-
-    //numbers = [0, 2, 7, 0]
 
     console.time("part one");
     let cycleCount = processPartOne(numbers);
@@ -17,7 +16,7 @@ async function main() {
     cycleCount = processPartTwo(numbers);
     console.timeEnd("part two");
     console.log(`Part 2: cycle length = ${cycleCount}`);
-
+    console.timeEnd("total");
 }
 
 function processPartOne(numbers: number[]) {
