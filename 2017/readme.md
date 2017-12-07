@@ -35,4 +35,12 @@ We need to find the only two numbers that evenly divide each other (We are promi
 My solution for every row is to simply sort the numbers (no need to try to divide a smaller number by a larger one).
 Then we can then brute force all pairs looking for zero remainders.
 
+## Day 03 - Spiral Memory
+This task involves generating numbers into a spiral matrix, according to some rule, with the number 1 in the center. A nice observation is that the side of the matrix is always an odd number, as the even-numbered matrices do not have a center. Each run on the spiral can be sa
+
+
+
+
+
+
 
