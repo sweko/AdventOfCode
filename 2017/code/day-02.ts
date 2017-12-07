@@ -5,8 +5,6 @@ async function main() {
     
     const numbers = lines.map(line => line.split("\t").map(c => parseInt(c)).filter(n=> !isNaN(n)));
 
-    console.log(numbers);
-
     let checksum = processPartOne(numbers);
     console.log(`Part 1: Checksum value = ${checksum}`);
 

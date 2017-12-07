@@ -65,22 +65,14 @@ function processPartOne(input: number) {
 
 function getCellValue(matrix: number[][], width: number, height: number) {
     let sum = 0;
-    if (width > 0 && height > 0)
-        sum += matrix[width - 1][height - 1];
-    if (width > 0)
-        sum += matrix[width - 1][height];
-    if (width > 0 && height < matrix.length)
-        sum += matrix[width - 1][height + 1];
-    if (height > 0)
-        sum += matrix[width][height - 1];
-    if (height < matrix.length)
-        sum += matrix[width][height + 1];
-    if (width < matrix.length && height > 0)
-        sum += matrix[width + 1][height - 1]
-    if (width < matrix.length)
-        sum += matrix[width + 1][height]
-    if (width < matrix.length && height < matrix.length)
-        sum += matrix[width + 1][height + 1];
+    sum += matrix[width - 1][height - 1];
+    sum += matrix[width - 1][height];
+    sum += matrix[width - 1][height + 1];
+    sum += matrix[width][height - 1];
+    sum += matrix[width][height + 1];
+    sum += matrix[width + 1][height - 1]
+    sum += matrix[width + 1][height]
+    sum += matrix[width + 1][height + 1];
     return sum;
 }
 
