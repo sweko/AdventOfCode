@@ -46,7 +46,7 @@ In this part the generated numbers are the integer sequence. The solution is not
 ### Part 2
 Now, we need to generate numbers according to the sum of a cell's neighbours. I got lucky on this part, since my generation algorithm is independent of the value generated. I just needed to add the calculation of the cell's value into the generation, and cutoff the generation once the value is reached.
 
-## [Day 4 - High-Entropy Passphrases](http://adventofcode.com/2017/day/4)
+## [Day 04 - High-Entropy Passphrases](http://adventofcode.com/2017/day/4)
 This task gives us a list of "passphrases", and we need to filter out the valid ones, according to a rule
 
 ### Part 1
@@ -55,7 +55,17 @@ Here the rule is that the passphrases should not contain two duplicate words. Th
 ### Part 2
 Here the rule is that any two words should not be anagrams of each other. Instead of comparing the values and frequencies of each letter, we can transform each word to a base alternative, by sorting the characters within. Once we sort all the characters in the words, we can sort the words, and the check is, again, whether two consecutive indices have the same value
 
-## [Day 5 - A Maze of Twisty Trampolines, All Alike](http://adventofcode.com/2017/day/5)
+## [Day 05 - A Maze of Twisty Trampolines, All Alike](http://adventofcode.com/2017/day/5)
+Today's task was relatively easy, even if the description is complicated. Basically we need to keep track of a certain index within a list that gets changed according to the value under the index. Also on each change of the index, the value itself is incremented, so we are kinda guaranteed that eventually the index will be out-of-range.   
+Once the index shuffles off the list's coil, we have our answer. The only difference between the parts is the rule how the index is changed.
+
+### Part 1
+Here the rule is that the index moves ("jumps") the value of element under the index. Simple simulation solved the task with no problems.
+
+### Part 2
+The rule for part 2 is changed slightly, that if the jump offset is three or more, we should decrease the jump instead of increasing, effectively making all the jumps shorter. Again, simple simulation solves the task.
+
+## [Day 06 - Memory Reallocation](http://adventofcode.com/2017/day/6)
 
 
 
