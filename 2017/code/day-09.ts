@@ -41,5 +41,4 @@ function processPartTwo(input: string) {
     return inputArr.join("").match(/<[^>]*>/g).map(m => m.length - 2).reduce((a, b) => a + b, 0);
 }
 
-
 main();
