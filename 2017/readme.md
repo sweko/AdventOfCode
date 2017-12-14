@@ -66,10 +66,25 @@ Here the rule is that the index moves ("jumps") the value of element under the i
 The rule for part 2 is changed slightly, that if the jump offset is three or more, we should decrease the jump instead of increasing, effectively making all the jumps shorter. Again, simple simulation solves the task.
 
 ## [Day 06 - Memory Reallocation](http://adventofcode.com/2017/day/6)
+Today we're helping a debugger diagnose an infinite loop in a memory reallocation routine. Basically we have a list of values, and the process or redistribution starts with taking the largest value and redistributing it to all others, one at a time, ad infinitum.
 
+### Part 1
+The task in the first part of the problem is to detect when a cycle happens for the first time, i.e. the first time we see a configuration that has been seen before. I made a simulation of the process, with a slight optimization that the adding of the bits is done with a modulo operation, instead of one by one.  
+First the currrent situation is saved in a cache object, by generating a dash-separated string from the list, and using that as a property name into a JavaScript object (the value of the property itself is `true`). Now we just loop this process until we run into a situation that we've already seen (i.e. the cache contains a property with the currently generated string). Once we get there, we just return the number of runs.
 
+### Part 2
+This is one of the easiest part two's so far, because we need to find the length of the cycle from the previous task. I've just make a simple modification, so the value that is cached is not a uniform `true` but the current run count. Once we detect a cycle, we just need to deduct the run count at the point where the cycle started from the current run count and return that
 
+## [Day 07 - Recursive Circus](http://adventofcode.com/2017/day/7)
+Ok, time for some tree balancing. We are given a list of nodes, each node consisting of a name, weight, and a list of names of children.
 
+### Part 1
+The task in part 1 is just to find the root of the tree. What I've done, is a simple trick. Every node, except the root is mentioned in the input twice, once as a parent, and once as somebody's child. So, the root is the only name that is only mentioned once in the input.  
+To use that fact, I've (ab)used the JavaScript object model, where we are free to add and delete properties from an object. I'm parsing all the names in the input into a simple list and just process the list linearly. If a name is not a property to the container object, I add a property with that name, otherwise, I delete the property with that name. So, all the other nodes are added and deleted as properties, except the root, which is only added.  
+The name of the root is the value of the first (and only) property name left in the object.
+
+### Part 2
+So, in part 1, I was able to sidestep the need of tree generation.
 
 
 
