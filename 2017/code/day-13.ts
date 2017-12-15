@@ -1,11 +1,14 @@
 import { readInput, readInputLines } from "../extra/aoc-helper";
 import { terminal } from "terminal-kit";
+import '../extra/group-by';
 
 interface FirewallLayer {
     index: number;
     depth: number;
     scannerPos: number;
     direction: number;
+    offset?: number;
+    multiplier?: number;
 }
 
 type Firewall = FirewallLayer[];
@@ -78,14 +81,14 @@ function processPartOne(firewallIn: Firewall) {
     return severity;
 }
 
-function processPartTwo(firewallIn: Firewall) {
+function processPartTwoManual(firewallIn: Firewall) {
     // magic numbers based on input analysis
     let delay = 17370;
     let step = 30030;
 
     let baseFirewall = fillFirewall(firewallIn);
     for (let i = 0; i < delay; i++) moveScanners(baseFirewall);
-    
+
     while (true) {
         let severity = 0;
         let pathIndex = 0;
@@ -106,8 +109,46 @@ function processPartTwo(firewallIn: Firewall) {
         if (!caught) return delay;
         baseFirewall = fillFirewall(baseFirewall);
         for (let i = 0; i < step; i++) moveScanners(baseFirewall);
-        // magic number based on input
         delay += step;
+    }
+}
+
+function processPartTwo(firewallIn: Firewall) {
+    // prepare data
+    firewallIn.forEach(layer => {
+        layer.multiplier = 2 * (layer.depth - 1);
+        layer.offset = (100 * layer.multiplier - layer.index) % layer.multiplier;
+    });
+    const groupsStraight = firewallIn.groupBy(layer => layer.multiplier).map(group => ({
+        key: group.key,
+        items: group.items.map(layer => layer.offset)
+    }));
+    groupsStraight.sort((a, b) => a.key - b.key);
+
+    const groupsReverse = groupsStraight.map(group => ({
+        key: group.key,
+        items: Array(group.key).fill(0).map((_, i) => i).filter(i => !group.items.includes(i))
+    }));
+
+    for (let index = 0; index < groupsStraight.length; index++) {
+        const group = groupsStraight[index];
+        const otherGroups = groupsReverse.filter(g => g.key % group.key === 0 && g.key !== group.key);
+        otherGroups.forEach(og => {
+            og.items = og.items.filter(item => !group.items.includes(item % group.key));
+        });
+    }
+    // const values = groupsReverse.filter(g => g.items.length === 1).map(group => ({
+    //     index: group.key,
+    //     offset: group.items[0]
+    // }))
+
+    // looping - could be calculated if we exctract the groups with a single value
+    let index = 1;
+    while (true) {
+        if (groupsReverse.every(group => group.items.includes(index % group.key))) {
+            return index;
+        }
+        index++;
     }
 }
 

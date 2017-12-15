@@ -8,9 +8,11 @@ async function main() {
     let bitCount = processPartOne(input);
     console.log(`Part 1: total number of set bits = ${bitCount}`);
 
+    console.time("part 2");
     let regionCount = processPartTwo(input);
+    console.timeEnd("part 2");
     console.log(`Part 2: total number of regions = ${regionCount}`);
-
+    
 }
 
 
@@ -78,7 +80,7 @@ function processPartOne(keyString: string) {
 
 function processPartTwo(keyString: string) {
     const diskMap = getDiskMap(keyString);
-    let bitCount = processPartOne(keyString);
+    let bitCount = diskMap.map(row => row.split("").filter(c => c === "1").length).reduce((a, b) => a + b);
     const bitField: (number | string)[][] = diskMap.map(row => row.split("").map(c => c === "1" ? 0 : "X"));
     let regindex = 0;
     while (bitCount != 0) {
