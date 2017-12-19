@@ -1,5 +1,4 @@
 import { readInput, readInputLines } from "../extra/aoc-helper";
-import { listenerCount } from "cluster";
 
 async function main() {
 
