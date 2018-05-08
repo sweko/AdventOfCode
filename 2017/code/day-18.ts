@@ -17,21 +17,21 @@ class Machine {
     // hard mode properties
     programId: number;
     sendCount: number = 0;
-    recieveCount: number = 0;
+    receiveCount: number = 0;
     sendBuffer: number[];
-    recieveBuffer: number[];
+    receiveBuffer: number[];
     suspended: boolean = false;
 
     debug: boolean;
     halt: boolean = false;
 
-    constructor(options: { mode: "easy" | "hard", id?: number, sendBuffer?: number[], recieveBuffer?: number[] }) {
+    constructor(options: { mode: "easy" | "hard", id?: number, sendBuffer?: number[], receiveBuffer?: number[] }) {
         this.mode = options.mode;
         if (options.id !== undefined) {
             this.programId = options.id;
             this.registers["p"] = this.programId;
             this.sendBuffer = options.sendBuffer,
-                this.recieveBuffer = options.recieveBuffer
+                this.receiveBuffer = options.receiveBuffer
         }
     }
 
@@ -80,13 +80,13 @@ class Machine {
                     this.recoverCallback(this.sound);
             }
         } else {
-            // recieve message
-            if (this.recieveBuffer.length <= this.recieveCount) {
+            // receive message
+            if (this.receiveBuffer.length <= this.receiveCount) {
                 this.suspended = true;
             } else {
                 this.suspended = false;
-                const message = this.recieveBuffer[this.recieveCount];
-                this.recieveCount += 1;
+                const message = this.receiveBuffer[this.receiveCount];
+                this.receiveCount += 1;
                 this.registers[source] = message;
             }
         }
@@ -185,8 +185,8 @@ function processPartOne(instructions: Command[]) {
 function processPartTwo(instructions: Command[]) {
     const zeroBuffer = [];
     const oneBuffer = [];
-    const zero = new Machine({ mode: "hard", id: 0, sendBuffer: zeroBuffer, recieveBuffer: oneBuffer })
-    const one = new Machine({ mode: "hard", id: 1, sendBuffer: oneBuffer, recieveBuffer: zeroBuffer });
+    const zero = new Machine({ mode: "hard", id: 0, sendBuffer: zeroBuffer, receiveBuffer: oneBuffer })
+    const one = new Machine({ mode: "hard", id: 1, sendBuffer: oneBuffer, receiveBuffer: zeroBuffer });
     zero.commands = instructions;
     one.commands = instructions;
     let stalled = false;

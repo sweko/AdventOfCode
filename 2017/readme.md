@@ -9,14 +9,14 @@ Ok, getting our toes wet. We have to solve a CAPTCHA, but the other way around -
 The input is a (circular) series of digits.
 
 ### Part 1
-The task is to find how many digits are identical to the one preceeding them, with wrapping.
+The task is to find how many digits are identical to the one preceding them, with wrapping.
 A simple way to avoid weird index math, is to add the first index to the end of the list, and then process all items that have a successor.
 If the successor is identical to the current index, add it to the sum, and that's it.
 
 ### Part 2
 The task is to find how many digits are identical to the one halfway around the list, with wrapping.
 We're also guaranteed that the list has an even number of elements.
-So, what we can do is slice the list in two halfs, and go, index by index, throught them simultaneously.
+So, what we can do is slice the list in two halfs, and go, index by index, through them simultaneously.
 That's usually done with the `zip` method, but JavaScript (and by extension TypeScript) does not have that - so back to a regular `for` cycle.
 We're looping through both arrays, and if the digits are identical, we add them to the sum.
 Note, that if a digit from the first half is identical to a digit from the second half, the reverse is true as well, we need to add the digit to the sum twice.
@@ -50,7 +50,7 @@ Now, we need to generate numbers according to the sum of a cell's neighbours. I 
 This task gives us a list of "passphrases", and we need to filter out the valid ones, according to a rule
 
 ### Part 1
-Here the rule is that the passphrases should not contain two duplicate words. The naive approach is to compare every word to every other word, and stop if a pair is equal. What I've done instead is to sort the input, and once sorted, I just need to check if any two consecutive indices have the same value. The solution is straightforward, since alphabetical sorting is default sorting behavour in javascript.
+Here the rule is that the passphrases should not contain two duplicate words. The naive approach is to compare every word to every other word, and stop if a pair is equal. What I've done instead is to sort the input, and once sorted, I just need to check if any two consecutive indices have the same value. The solution is straightforward, since alphabetical sorting is default sorting behavior in javascript.
 
 ### Part 2
 Here the rule is that any two words should not be anagrams of each other. Instead of comparing the values and frequencies of each letter, we can transform each word to a base alternative, by sorting the characters within. Once we sort all the characters in the words, we can sort the words, and the check is, again, whether two consecutive indices have the same value

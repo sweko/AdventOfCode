@@ -38,10 +38,10 @@ class Machine {
         this.state = [...this.state.slice(0, first), ...reversed, ...this.state.slice(second + 1)]
     }
 
-    private runRotatePosition(direction: "left" | "right", ammount: number) {
+    private runRotatePosition(direction: "left" | "right", amount: number) {
         if (direction === "right")
-            ammount = this.state.length - ammount;
-        this.state = [...this.state.slice(ammount), ...this.state.slice(0, ammount)]
+            amount = this.state.length - amount;
+        this.state = [...this.state.slice(amount), ...this.state.slice(0, amount)]
     }
 
     private runMove(first: number, second: number) {
