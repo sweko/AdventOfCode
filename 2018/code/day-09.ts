@@ -47,7 +47,7 @@ function getIndex<T>(array: T[], index: number) {
     return index % array.length;
 }
 
-function processPartOneArray(players: number, marbles: number): number {
+function playMarbleGameArray(players: number, marbles: number): number {
     const field = [0];
     let currentIndex = 0;
     let currentPlayer = 0;

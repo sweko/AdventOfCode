@@ -41,36 +41,31 @@ async function main() {
     console.log(`Running time for input is ${Math.round(endInput - startInput)}ms`);
 
     const startOne = performance.now();
-    let metadataSum = processPartOne(points);
+    let tickCount = process(points);
     const endOne = performance.now();
 
-    console.log(`Part 1: total metadata sum is ${metadataSum}`);
-    console.log(`Running time for part 1 is ${Math.round(endOne - startOne)}ms`);
+    console.log(`Part 1: (see console)`);
+    console.log(`Part 2: required number of ticks is ${tickCount}`);
+    console.log(`Running time for processing is ${Math.round(endOne - startOne)}ms`);
     return;
 
-    const startTwo = performance.now();
-    let nodeValue = processPartTwo(rootNode);
-    const endTwo = performance.now();
-
-    console.log(`Part 2: total node value is ${nodeValue}`);
-    console.log(`Running time for part 2 is ${Math.round(endTwo - startTwo)}ms`);
 }
 
-
-function toMatrix(points: Point[], print = false) {
-    const rect = getBoundingRectangle(points);
+function getArea(rect: Rectangle) {
     const area = (rect.left - rect.right) * (rect.top - rect.bottom);
-    if (print) {
-        for (let rindex = rect.top; rindex <= rect.bottom; rindex++) {
-            let line = "";
-            for (let cindex = rect.left; cindex <= rect.right; cindex++) {
-                const hasPoint = points.find(p => p.position.top === rindex && p.position.left === cindex);
-                line += hasPoint ? "#" : ".";
-            }
-            console.log(line);
-        }
-    }
     return area;
+}
+
+function toMatrix(points: Point[]) {
+    const rect = getBoundingRectangle(points);
+    for (let rindex = rect.top; rindex <= rect.bottom; rindex++) {
+        let line = "";
+        for (let cindex = rect.left; cindex <= rect.right; cindex++) {
+            const hasPoint = points.find(p => p.position.top === rindex && p.position.left === cindex);
+            line += hasPoint ? "#" : ".";
+        }
+        console.log(line);
+    }
 }
 
 function tick(points: Point[]): Point[] {
@@ -79,6 +74,16 @@ function tick(points: Point[]): Point[] {
         position: {
             top: point.position.top + point.velocity.top,
             left: point.position.left + point.velocity.left
+        }
+    }));
+}
+
+function untick(points: Point[]): Point[] {
+    return points.map(point => ({
+        velocity: point.velocity,
+        position: {
+            top: point.position.top - point.velocity.top,
+            left: point.position.left - point.velocity.left
         }
     }));
 }
@@ -92,30 +97,21 @@ function getBoundingRectangle(points: Point[]): Rectangle {
     }
 }
 
-function processPartOne(points: Point[]): number {
-    let minArea = Number.POSITIVE_INFINITY;
-    let minPoints = null;
-    let mindex = -1;
+function process(points: Point[]): number {
+    let area = Number.POSITIVE_INFINITY;
+    let index = 0;
 
-    for (let index = 0; index < 20000; index++) {
-        const boundArea = toMatrix(points);
-        
-        if (boundArea < minArea) {
-            minArea = boundArea;
-            minPoints = points;
-            mindex = index;
-            // console.log(`Current min area is ${minArea} on pass ${index}`);
-        }
-        
+    while (true) {
+        const oldArea = area;
         points = tick(points);
+        area = getArea(getBoundingRectangle(points));
+        if (area > oldArea) {
+            points = untick(points);
+            toMatrix(points);
+            return index;
+        }
+        index++;
     }
-
-    toMatrix(minPoints, true);
-    return mindex;
-}
-
-function processPartTwo(rootNode: Node): number {
-    return getNodeValue(rootNode);
 }
 
 
