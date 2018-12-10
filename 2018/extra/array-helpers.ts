@@ -5,6 +5,8 @@ interface Array<T> {
         reducer: (accumulator: V, item: T) => V,
         initial: V): { key: U, value: V }[];
     sum(selector?: (item: T, index: number)=> number): number;
+    min(selector?: (item: T, index: number)=> number): number;
+    max(selector?: (item: T, index: number)=> number): number;
 }
 
 if (!Array.prototype.groupBy) {
@@ -67,5 +69,19 @@ if (!Array.prototype.sum) {
     Array.prototype.sum = function <T>(selector: (item: T, index: number)=> number = (item => item as unknown as number)): number {
         const array = this;
         return array.reduce((acc, item, index) => acc + selector(item, index), 0);
+    };
+}
+
+if (!Array.prototype.min) {
+    Array.prototype.min = function <T>(selector: (item: T, index: number)=> number = (item => item as unknown as number)): number {
+        const array = this;
+        return array.reduce((acc, item, index) => acc < selector(item, index) ? acc : selector(item, index), Number.POSITIVE_INFINITY);
+    };
+}
+
+if (!Array.prototype.max) {
+    Array.prototype.max = function <T>(selector: (item: T, index: number)=> number = (item => item as unknown as number)): number {
+        const array = this;
+        return array.reduce((acc, item, index) => acc > selector(item, index) ? acc : selector(item, index), Number.NEGATIVE_INFINITY);
     };
 }
