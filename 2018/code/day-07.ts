@@ -119,7 +119,7 @@ function processPartTwo(steps: Step[], workers: number, offset: number): number 
 
         available -= nextSteps.length;
 
-        secondsPassed = events.reduce((min, event) => (!event.completed && min >event.end) ? event.end : min, Number.POSITIVE_INFINITY);
+        secondsPassed = events.reduce((min, event) => (!event.completed && min > event.end) ? event.end : min, Number.POSITIVE_INFINITY);
     }
 
     return secondsPassed;
