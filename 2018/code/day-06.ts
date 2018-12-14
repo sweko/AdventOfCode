@@ -1,4 +1,4 @@
-import { readInputLines, printMatrix, loopMatrix } from "../extra/aoc-helper";
+import { readInputLines, loopMatrix } from "../extra/aoc-helper";
 import { performance } from "perf_hooks";
 import "../extra/array-helpers";
 

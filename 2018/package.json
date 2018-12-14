@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^10.12.11",
+    "@types/node": "^10.12.15",
     "md5": "^2.2.1",
-    "terminal-kit": "^1.26.6"
+    "terminal-kit": "^1.26.8"
   }
 }

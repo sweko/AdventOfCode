@@ -1,4 +1,4 @@
-import { readInput, readInputLines } from "../extra/aoc-helper";
+import { readInputLines } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 
 interface Claim {

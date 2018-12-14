@@ -18,13 +18,6 @@ export async function readInputLines() {
     return input.split("\r\n");
 }
 
-export function printMatrix(matrix: any[][]) {
-    for (let rindex = 0; rindex < matrix.length; rindex++) {
-        const row = matrix[rindex];
-        console.log(row.join(""));
-    }
-}
-
 export function loopMatrix(matrix: any[][], operation: (row, column, element)=>any) {
     for (let rindex = 0; rindex < matrix.length; rindex++) {
         const row = matrix[rindex];

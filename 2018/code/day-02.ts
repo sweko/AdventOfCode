@@ -1,4 +1,4 @@
-import { readInput, readInputLines } from "../extra/aoc-helper";
+import { readInputLines } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 
 async function main() {
@@ -6,8 +6,8 @@ async function main() {
 
     // const lines = ['abcdef', 'bababc', 'abbcde', 'abcccd', 'aabcdd', 'abcdee', 'ababab']
 
-    // let checksum = processPartOne(lines);
-    // console.log(`Part 1: Checksum value = ${checksum}`);
+    let checksum = processPartOne(lines);
+    console.log(`Part 1: Checksum value = ${checksum}`);
 
     // const lines = ['abcde', 'fghij', 'klmno', 'pqrst', 'fguij', 'axcye', 'wvxyz'];
 
