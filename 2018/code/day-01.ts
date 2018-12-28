@@ -1,4 +1,5 @@
 import { readInputLines } from "../extra/aoc-helper";
+import "../extra/array-helpers";
 
 async function main() {
     const input = await readInputLines();

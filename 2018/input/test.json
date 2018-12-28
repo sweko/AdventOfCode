@@ -1,0 +1,4408 @@
+{
+    "guildData": {
+        "memberLimit": 40,
+        "allow_fortress": true,
+        "members": [
+            {
+                "allowJoin": 0,
+                "onlineFor": 43861,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 1317,
+                "user": "kong12266192",
+                "online": 0,
+                "networth": 80987224358,
+                "lowername": "appetite",
+                "tier": 3,
+                "Investments": {
+                    "Library": 3644646560,
+                    "SacrificialTower": 3747997312,
+                    "Stable": 2270913186,
+                    "Total": 80987224358,
+                    "Aqua": 3124501538,
+                    "Bank": 2039880443,
+                    "Fortress": 1880225988,
+                    "Spatial": 2263149560,
+                    "Sawmill": 57766874521,
+                    "Warehouse": 1263332380,
+                    "Altar": 2985702870
+                },
+                "name": "Appetite",
+                "lastOnline": 187,
+                "iou": 250097
+            },
+            {
+                "allowJoin": 1,
+                "onlineFor": 6604361,
+                "canJoin": 1,
+                "rank": "1",
+                "level": 1295,
+                "user": "lordmavric",
+                "online": 1,
+                "networth": 9878380785,
+                "lowername": "lordmavric1",
+                "tier": 3,
+                "Investments": {
+                    "Library": 190013222,
+                    "SacrificialTower": 1665548757,
+                    "Stable": 30844741,
+                    "Total": 9878380785,
+                    "Aqua": 539819371,
+                    "Bank": 893450863,
+                    "Fortress": 1103797673,
+                    "Spatial": 222776603,
+                    "Sawmill": 3966448738,
+                    "Warehouse": 687890641,
+                    "Altar": 577790176
+                },
+                "name": "LordMavric1",
+                "lastOnline": 0,
+                "iou": 104566
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 17620124,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 1111,
+                "user": "kong24602045",
+                "online": 1,
+                "networth": 3133975261,
+                "lowername": "dondanger",
+                "tier": 3,
+                "Investments": {
+                    "Library": 340813930,
+                    "SacrificialTower": 150901443,
+                    "Stable": 478253862,
+                    "Total": 3133975261,
+                    "Aqua": 266660868,
+                    "Bank": 131543328,
+                    "Fortress": 753868734,
+                    "Spatial": 58756412,
+                    "Sawmill": 468057748,
+                    "Warehouse": 71123915,
+                    "Altar": 413995021
+                },
+                "name": "DonDanger",
+                "lastOnline": 0,
+                "iou": 196568
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 15440383,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 952,
+                "user": "ag_3ec8886d155b9f4cbb2929071b37779c",
+                "online": 1,
+                "networth": 4484802166,
+                "lowername": "swyft",
+                "tier": 3,
+                "Investments": {
+                    "Library": 224808620,
+                    "SacrificialTower": 168452758,
+                    "Stable": 73339595,
+                    "Total": 4484802166,
+                    "Aqua": 208089139,
+                    "Bank": 661808,
+                    "Fortress": 743380420,
+                    "Spatial": 1464644894,
+                    "Sawmill": 516350351,
+                    "Warehouse": 551057814,
+                    "Altar": 534016767
+                },
+                "name": "Swyft",
+                "lastOnline": 0,
+                "iou": 160679
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 14322288,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1292,
+                "user": "kong192369",
+                "online": 0,
+                "networth": 4950838188,
+                "lowername": "kazby",
+                "tier": 3,
+                "Investments": {
+                    "Library": 516479598,
+                    "SacrificialTower": 349888642,
+                    "Stable": 858661487,
+                    "Total": 4950838188,
+                    "Aqua": 546630809,
+                    "Bank": 346476271,
+                    "Fortress": 651636312,
+                    "Spatial": 237535167,
+                    "Sawmill": 832863169,
+                    "Warehouse": 11154329,
+                    "Altar": 599512404
+                },
+                "name": "Kazby",
+                "lastOnline": 1133,
+                "iou": 236894
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 18052474,
+                "canJoin": 0,
+                "rank": "2",
+                "level": 1275,
+                "user": "kong2812006",
+                "online": 1,
+                "networth": 6850345724,
+                "lowername": "fatefinal",
+                "tier": 3,
+                "Investments": {
+                    "Library": 607938562,
+                    "SacrificialTower": 550721629,
+                    "Stable": 981797629,
+                    "Total": 6850345724,
+                    "Aqua": 773736368,
+                    "Bank": 291812148,
+                    "Fortress": 602794811,
+                    "Spatial": 366778458,
+                    "Sawmill": 1147090093,
+                    "Warehouse": 198498783,
+                    "Altar": 1329177243
+                },
+                "name": "fatefinal",
+                "lastOnline": 0,
+                "iou": 232048
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 9574948,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1089,
+                "user": "kong1401366",
+                "online": 1,
+                "networth": 3827752130,
+                "lowername": "myrddraal",
+                "tier": 3,
+                "Investments": {
+                    "Library": 477925579,
+                    "SacrificialTower": 295076937,
+                    "Stable": 446418963,
+                    "Total": 3827752130,
+                    "Aqua": 436300253,
+                    "Bank": 268392659,
+                    "Fortress": 358247757,
+                    "Spatial": 285771546,
+                    "Sawmill": 682942912,
+                    "Warehouse": 110119165,
+                    "Altar": 466556359
+                },
+                "name": "Myrddraal",
+                "lastOnline": 0,
+                "iou": 193750
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 8411649,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 1007,
+                "user": "kong1692132",
+                "online": 1,
+                "networth": 2727538156,
+                "lowername": "hypnocil",
+                "tier": 3,
+                "Investments": {
+                    "Library": 311855439,
+                    "SacrificialTower": 211287252,
+                    "Stable": 303049496,
+                    "Total": 2727538156,
+                    "Aqua": 188126800,
+                    "Bank": 113656846,
+                    "Fortress": 349556286,
+                    "Spatial": 332263989,
+                    "Sawmill": 462363080,
+                    "Warehouse": 6749523,
+                    "Altar": 448629445
+                },
+                "name": "hypnocil",
+                "lastOnline": 0,
+                "iou": 177998
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 54663475,
+                "canJoin": 0,
+                "rank": "3",
+                "level": 1054,
+                "user": "poi",
+                "online": 0,
+                "networth": 3090000001,
+                "lowername": "rofu",
+                "tier": 3,
+                "Investments": {
+                    "Library": 390000000,
+                    "SacrificialTower": 370000000,
+                    "Stable": 360000000,
+                    "Total": 3090000001,
+                    "Aqua": 290000001,
+                    "Bank": 190000000,
+                    "Fortress": 340000000,
+                    "Spatial": 140000000,
+                    "Sawmill": 500000000,
+                    "Warehouse": 190000000,
+                    "Altar": 320000000
+                },
+                "name": "Rofu",
+                "lastOnline": 664,
+                "iou": 40290
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 4828267,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1011,
+                "user": "kong24211068",
+                "online": 1,
+                "networth": 2506479000,
+                "lowername": "pfts",
+                "tier": 3,
+                "Investments": {
+                    "Library": 100009000,
+                    "SacrificialTower": 176600000,
+                    "Stable": 526300000,
+                    "Total": 2506479000,
+                    "Aqua": 17500000,
+                    "Bank": 0,
+                    "Fortress": 301001000,
+                    "Spatial": 1078000000,
+                    "Sawmill": 298069000,
+                    "Warehouse": 9000000,
+                    "Altar": 0
+                },
+                "name": "Pfts",
+                "lastOnline": 0,
+                "iou": 171072
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 5514723,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1267,
+                "user": "kong36672577",
+                "online": 1,
+                "networth": 2891892263,
+                "lowername": "david194",
+                "tier": 3,
+                "Investments": {
+                    "Library": 407905666,
+                    "SacrificialTower": 215130269,
+                    "Stable": 515679518,
+                    "Total": 2891892263,
+                    "Aqua": 261519798,
+                    "Bank": 145414315,
+                    "Fortress": 288897475,
+                    "Spatial": 212922314,
+                    "Sawmill": 437606195,
+                    "Warehouse": 70292550,
+                    "Altar": 336524163
+                },
+                "name": "David194",
+                "lastOnline": 0,
+                "iou": 231853
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 13449187,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 415,
+                "user": "kong1418550",
+                "online": 0,
+                "networth": 505636956,
+                "lowername": "cromat",
+                "tier": 3,
+                "Investments": {
+                    "Library": 834732,
+                    "SacrificialTower": 150956770,
+                    "Stable": 39238884,
+                    "Total": 505636956,
+                    "Aqua": 22218767,
+                    "Bank": 249943,
+                    "Fortress": 261652643,
+                    "Spatial": 0,
+                    "Sawmill": 1419229,
+                    "Warehouse": 5982507,
+                    "Altar": 23083481
+                },
+                "name": "cromat",
+                "lastOnline": 811,
+                "iou": 30191
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 20973796,
+                "canJoin": 0,
+                "rank": "2",
+                "level": 1190,
+                "user": "kong12411935",
+                "online": 0,
+                "networth": 1925713508,
+                "lowername": "barry1990",
+                "tier": 3,
+                "Investments": {
+                    "Library": 170080000,
+                    "SacrificialTower": 104666000,
+                    "Stable": 170925485,
+                    "Total": 1925713508,
+                    "Aqua": 268208802,
+                    "Bank": 88773000,
+                    "Fortress": 241688000,
+                    "Spatial": 38194000,
+                    "Sawmill": 95945000,
+                    "Warehouse": 36432000,
+                    "Altar": 710801221
+                },
+                "name": "Barry1990",
+                "lastOnline": 683,
+                "iou": 204471
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 8801531,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 669,
+                "user": "kong19984071",
+                "online": 1,
+                "networth": 1943927887,
+                "lowername": "eower",
+                "tier": 3,
+                "Investments": {
+                    "Library": 198167233,
+                    "SacrificialTower": 128199742,
+                    "Stable": 164771098,
+                    "Total": 1943927887,
+                    "Aqua": 200622067,
+                    "Bank": 69052249,
+                    "Fortress": 199963720,
+                    "Spatial": 318727159,
+                    "Sawmill": 505253637,
+                    "Warehouse": 69368320,
+                    "Altar": 89802662
+                },
+                "name": "Eower",
+                "lastOnline": 0,
+                "iou": 110586
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 20822951,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 847,
+                "user": "kong11059803",
+                "online": 1,
+                "networth": 1726249908,
+                "lowername": "kaizix",
+                "tier": 3,
+                "Investments": {
+                    "Library": 112662639,
+                    "SacrificialTower": 303758856,
+                    "Stable": 188681065,
+                    "Total": 1726249908,
+                    "Aqua": 189540180,
+                    "Bank": 153093791,
+                    "Fortress": 199370768,
+                    "Spatial": 149303403,
+                    "Sawmill": 118422268,
+                    "Warehouse": 32320917,
+                    "Altar": 279096021
+                },
+                "name": "Kaizix",
+                "lastOnline": 0,
+                "iou": 146696
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 18216041,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 612,
+                "user": "ag_48a6fc66efc8afe925a50c0232ed4eb9",
+                "online": 1,
+                "networth": 1198855811,
+                "lowername": "manicboom44",
+                "tier": 3,
+                "Investments": {
+                    "Library": 322736213,
+                    "SacrificialTower": 189920692,
+                    "Stable": 296647342,
+                    "Total": 1198855811,
+                    "Aqua": 11791033,
+                    "Bank": 10427988,
+                    "Fortress": 188233477,
+                    "Spatial": 33720295,
+                    "Sawmill": 81390945,
+                    "Warehouse": 8232863,
+                    "Altar": 55754963
+                },
+                "name": "manicboom44",
+                "lastOnline": 0,
+                "iou": 102557
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 1680185,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1021,
+                "user": "nekonya2",
+                "online": 1,
+                "networth": 1607213988,
+                "lowername": "nekonyanya2",
+                "tier": 3,
+                "Investments": {
+                    "Library": 212819430,
+                    "SacrificialTower": 158342658,
+                    "Stable": 211892381,
+                    "Total": 1607213988,
+                    "Aqua": 198930912,
+                    "Bank": 131497447,
+                    "Fortress": 186928723,
+                    "Spatial": 78629415,
+                    "Sawmill": 204907987,
+                    "Warehouse": 3646911,
+                    "Altar": 219618124
+                },
+                "name": "NekoNyaNya2",
+                "lastOnline": 0,
+                "iou": 174601
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 7928869,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1136,
+                "user": "ag_bc8dcff45f3942e837084e3231a0dbdd",
+                "online": 1,
+                "networth": 1972279973,
+                "lowername": "drakkrow",
+                "tier": 3,
+                "Investments": {
+                    "Library": 300816050,
+                    "SacrificialTower": 160575928,
+                    "Stable": 126537593,
+                    "Total": 1972279973,
+                    "Aqua": 161576334,
+                    "Bank": 111186502,
+                    "Fortress": 186653356,
+                    "Spatial": 92784514,
+                    "Sawmill": 533184807,
+                    "Warehouse": 36148048,
+                    "Altar": 262816841
+                },
+                "name": "Drakkrow",
+                "lastOnline": 0,
+                "iou": 156344
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 13328919,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 1155,
+                "user": "kong15031113",
+                "online": 0,
+                "networth": 1345034068,
+                "lowername": "jojos",
+                "tier": 3,
+                "Investments": {
+                    "Library": 125927337,
+                    "SacrificialTower": 54147773,
+                    "Stable": 235456375,
+                    "Total": 1345034068,
+                    "Aqua": 91735410,
+                    "Bank": 146650873,
+                    "Fortress": 178396339,
+                    "Spatial": 262884400,
+                    "Sawmill": 180836398,
+                    "Warehouse": 16441858,
+                    "Altar": 52557305
+                },
+                "name": "Jojos",
+                "lastOnline": 400,
+                "iou": 204436
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 4716174,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 1064,
+                "user": "kong28947076",
+                "online": 1,
+                "networth": 1201968375,
+                "lowername": "spicyicedtea",
+                "tier": 3,
+                "Investments": {
+                    "Library": 140728927,
+                    "SacrificialTower": 112859671,
+                    "Stable": 271108965,
+                    "Total": 1201968375,
+                    "Aqua": 110309063,
+                    "Bank": 101424225,
+                    "Fortress": 174952234,
+                    "Spatial": 114993067,
+                    "Sawmill": 140455888,
+                    "Warehouse": 9769369,
+                    "Altar": 25366966
+                },
+                "name": "SpicyIcedTea",
+                "lastOnline": 0,
+                "iou": 179943
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 5606080,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 721,
+                "user": "kong6502657",
+                "online": 0,
+                "networth": 1805819140,
+                "lowername": "charlie31666",
+                "tier": 3,
+                "Investments": {
+                    "Library": 171973787,
+                    "SacrificialTower": 198214535,
+                    "Stable": 123982619,
+                    "Total": 1805819140,
+                    "Aqua": 165017728,
+                    "Bank": 180168292,
+                    "Fortress": 154242469,
+                    "Spatial": 224210269,
+                    "Sawmill": 196781405,
+                    "Warehouse": 197053834,
+                    "Altar": 194174202
+                },
+                "name": "charlie31666",
+                "lastOnline": 451,
+                "iou": 130609
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 10546397,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 937,
+                "user": "kong40748559",
+                "online": 0,
+                "networth": 2157176381,
+                "lowername": "freya",
+                "tier": 3,
+                "Investments": {
+                    "Library": 276608569,
+                    "SacrificialTower": 195831440,
+                    "Stable": 267814213,
+                    "Total": 2157176381,
+                    "Aqua": 454857982,
+                    "Bank": 68895433,
+                    "Fortress": 144008168,
+                    "Spatial": 53538666,
+                    "Sawmill": 246863332,
+                    "Warehouse": 63250424,
+                    "Altar": 385508154
+                },
+                "name": "Freya",
+                "lastOnline": 133,
+                "iou": 95061
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 9548090,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 789,
+                "user": "kong1105054",
+                "online": 0,
+                "networth": 1255134843,
+                "lowername": "brightillusion",
+                "tier": 3,
+                "Investments": {
+                    "Library": 40622590,
+                    "SacrificialTower": 47130395,
+                    "Stable": 321823298,
+                    "Total": 1255134843,
+                    "Aqua": 75751267,
+                    "Bank": 5457464,
+                    "Fortress": 135412513,
+                    "Spatial": 74407244,
+                    "Sawmill": 273071578,
+                    "Warehouse": 102441307,
+                    "Altar": 179017187
+                },
+                "name": "BrightIllusion",
+                "lastOnline": 13176,
+                "iou": 88261
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 14258158,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 825,
+                "user": "kong10163372",
+                "online": 0,
+                "networth": 709178760,
+                "lowername": "solacia",
+                "tier": 3,
+                "Investments": {
+                    "Library": 102060934,
+                    "SacrificialTower": 62520472,
+                    "Stable": 108093050,
+                    "Total": 709178760,
+                    "Aqua": 106961862,
+                    "Bank": 44338424,
+                    "Fortress": 130550699,
+                    "Spatial": 51000,
+                    "Sawmill": 52709966,
+                    "Warehouse": 39305692,
+                    "Altar": 62586661
+                },
+                "name": "Solacia",
+                "lastOnline": 557,
+                "iou": 96196
+            },
+            {
+                "allowJoin": 1,
+                "onlineFor": 9575036,
+                "canJoin": 1,
+                "rank": "0",
+                "level": 440,
+                "user": "kong7077795",
+                "online": 0,
+                "networth": 1071384147,
+                "lowername": "battlebro",
+                "tier": 3,
+                "Investments": {
+                    "Library": 149514085,
+                    "SacrificialTower": 85003835,
+                    "Stable": 174359616,
+                    "Total": 1071384147,
+                    "Aqua": 117445354,
+                    "Bank": 15895856,
+                    "Fortress": 123439679,
+                    "Spatial": 46010875,
+                    "Sawmill": 167789595,
+                    "Warehouse": 51230297,
+                    "Altar": 140694955
+                },
+                "name": "BattleBro",
+                "lastOnline": 441,
+                "iou": 31243
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 3155569,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 639,
+                "user": "kong11288102",
+                "online": 0,
+                "networth": 704238735,
+                "lowername": "kurokaeru",
+                "tier": 3,
+                "Investments": {
+                    "Library": 53565346,
+                    "SacrificialTower": 57047391,
+                    "Stable": 74931100,
+                    "Total": 704238735,
+                    "Aqua": 68202949,
+                    "Bank": 86555374,
+                    "Fortress": 115077005,
+                    "Spatial": 100579115,
+                    "Sawmill": 124686418,
+                    "Warehouse": 0,
+                    "Altar": 23594037
+                },
+                "name": "Kurokaeru",
+                "lastOnline": 392,
+                "iou": 106401
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 7884499,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 609,
+                "user": "kong6752792",
+                "online": 0,
+                "networth": 963530435,
+                "lowername": "sunhere",
+                "tier": 3,
+                "Investments": {
+                    "Library": 123968949,
+                    "SacrificialTower": 54468273,
+                    "Stable": 165729374,
+                    "Total": 963530435,
+                    "Aqua": 55244452,
+                    "Bank": 173466763,
+                    "Fortress": 86704893,
+                    "Spatial": 34317592,
+                    "Sawmill": 62386125,
+                    "Warehouse": 19797765,
+                    "Altar": 187446249
+                },
+                "name": "SunHere",
+                "lastOnline": 66,
+                "iou": 101027
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 3395791,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 632,
+                "user": "kong2671739",
+                "online": 0,
+                "networth": 867110273,
+                "lowername": "cresil",
+                "tier": 3,
+                "Investments": {
+                    "Library": 129836237,
+                    "SacrificialTower": 90036515,
+                    "Stable": 136699618,
+                    "Total": 867110273,
+                    "Aqua": 137154231,
+                    "Bank": 25453856,
+                    "Fortress": 77809201,
+                    "Spatial": 58563406,
+                    "Sawmill": 77931764,
+                    "Warehouse": 0,
+                    "Altar": 133625445
+                },
+                "name": "cresil",
+                "lastOnline": 368,
+                "iou": 106176
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 13949438,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 646,
+                "user": "kong22378792",
+                "online": 0,
+                "networth": 458330407,
+                "lowername": "gk1",
+                "tier": 3,
+                "Investments": {
+                    "Library": 45062315,
+                    "SacrificialTower": 31038485,
+                    "Stable": 56104597,
+                    "Total": 458330407,
+                    "Aqua": 53456407,
+                    "Bank": 16508348,
+                    "Fortress": 60020627,
+                    "Spatial": 0,
+                    "Sawmill": 115266064,
+                    "Warehouse": 3828287,
+                    "Altar": 77045277
+                },
+                "name": "gk1",
+                "lastOnline": 6472,
+                "iou": 66940
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 4065882,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 638,
+                "user": "kong18722999",
+                "online": 0,
+                "networth": 1003953081,
+                "lowername": "nejix",
+                "tier": 3,
+                "Investments": {
+                    "Library": 156227309,
+                    "SacrificialTower": 156456446,
+                    "Stable": 23821596,
+                    "Total": 1003953081,
+                    "Aqua": 403374526,
+                    "Bank": 27263821,
+                    "Fortress": 47914421,
+                    "Spatial": 40827268,
+                    "Sawmill": 65199,
+                    "Warehouse": 24101206,
+                    "Altar": 123901289
+                },
+                "name": "Nejix",
+                "lastOnline": 1680,
+                "iou": 107317
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 9406701,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 1053,
+                "user": "kong1313634",
+                "online": 1,
+                "networth": 1036338202,
+                "lowername": "ectroverse",
+                "tier": 3,
+                "Investments": {
+                    "Library": 101113533,
+                    "SacrificialTower": 152332284,
+                    "Stable": 172775353,
+                    "Total": 1036338202,
+                    "Aqua": 224718760,
+                    "Bank": 36280004,
+                    "Fortress": 46925733,
+                    "Spatial": 158286404,
+                    "Sawmill": 59708748,
+                    "Warehouse": 30281295,
+                    "Altar": 53916088
+                },
+                "name": "ectroverse",
+                "lastOnline": 0,
+                "iou": 182944
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 2220202,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 789,
+                "user": "kong798192",
+                "online": 1,
+                "networth": 344515190,
+                "lowername": "sweko",
+                "tier": 3,
+                "Investments": {
+                    "Library": 33874766,
+                    "SacrificialTower": 22603364,
+                    "Stable": 53207170,
+                    "Total": 344515190,
+                    "Aqua": 21604317,
+                    "Bank": 7674058,
+                    "Fortress": 45526749,
+                    "Spatial": 44434929,
+                    "Sawmill": 25128796,
+                    "Warehouse": 4218408,
+                    "Altar": 86242633
+                },
+                "name": "sweko",
+                "lastOnline": 0,
+                "iou": 136192
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 17433164,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 598,
+                "user": "kong12369150",
+                "online": 0,
+                "networth": 403178749,
+                "lowername": "camille",
+                "tier": 3,
+                "Investments": {
+                    "Library": 54677657,
+                    "SacrificialTower": 24878836,
+                    "Stable": 55310591,
+                    "Total": 403178749,
+                    "Aqua": 41491681,
+                    "Bank": 52830338,
+                    "Fortress": 45104335,
+                    "Spatial": 15105344,
+                    "Sawmill": 44591613,
+                    "Warehouse": 4114363,
+                    "Altar": 65073991
+                },
+                "name": "Camille",
+                "lastOnline": 259,
+                "iou": 97718
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 8275393,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 2022,
+                "user": "bud",
+                "online": 0,
+                "networth": 4153173943,
+                "lowername": "meister",
+                "tier": 3,
+                "Investments": {
+                    "Library": 10553748,
+                    "SacrificialTower": 45114806,
+                    "Stable": 37926098,
+                    "Total": 4153173943,
+                    "Aqua": 403767530,
+                    "Bank": 138375097,
+                    "Fortress": 27167678,
+                    "Spatial": 1791331624,
+                    "Sawmill": 54438434,
+                    "Warehouse": 1644498928,
+                    "Altar": 0
+                },
+                "name": "Meister",
+                "lastOnline": 875,
+                "iou": 392666
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 4030483,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 981,
+                "user": "kong214374",
+                "online": 0,
+                "networth": 291794064,
+                "lowername": "blitzreck",
+                "tier": 3,
+                "Investments": {
+                    "Library": 0,
+                    "SacrificialTower": 100000,
+                    "Stable": 100000000,
+                    "Total": 291794064,
+                    "Aqua": 2230000,
+                    "Bank": 3100000,
+                    "Fortress": 8101000,
+                    "Spatial": 1000000,
+                    "Sawmill": 67000000,
+                    "Warehouse": 10243064,
+                    "Altar": 100020000
+                },
+                "name": "Blitzreck",
+                "lastOnline": 674,
+                "iou": 166461
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 26234112,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 426,
+                "user": "ag_03a18377eb26aa7f90fc489744e2451f",
+                "online": 0,
+                "networth": 13036351,
+                "lowername": "tschulz",
+                "tier": 3,
+                "Investments": {
+                    "Library": 0,
+                    "SacrificialTower": 0,
+                    "Stable": 10117,
+                    "Total": 13036351,
+                    "Aqua": 9006424,
+                    "Bank": 1245,
+                    "Fortress": 165665,
+                    "Spatial": 0,
+                    "Sawmill": 3832900,
+                    "Warehouse": 10000,
+                    "Altar": 10000
+                },
+                "name": "tschulz",
+                "lastOnline": 5281,
+                "iou": 59834
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 18152496,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 353,
+                "user": "kong533733",
+                "online": 0,
+                "networth": 47470166,
+                "lowername": "xclone",
+                "tier": 3,
+                "Investments": {
+                    "Library": 4910145,
+                    "SacrificialTower": 0,
+                    "Stable": 1864444,
+                    "Total": 47470166,
+                    "Aqua": 40664525,
+                    "Bank": 0,
+                    "Fortress": 31052,
+                    "Spatial": 0,
+                    "Sawmill": 0,
+                    "Warehouse": 0,
+                    "Altar": 0
+                },
+                "name": "Xclone",
+                "lastOnline": 6370,
+                "iou": 21210
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 13336684,
+                "canJoin": 0,
+                "rank": "0",
+                "level": 693,
+                "user": "kong11278470",
+                "online": 0,
+                "networth": 466385152,
+                "lowername": "pagani",
+                "tier": 3,
+                "Investments": {
+                    "Library": 160885771,
+                    "SacrificialTower": 3158452,
+                    "Stable": 42251532,
+                    "Total": 466385152,
+                    "Aqua": 129857419,
+                    "Bank": 62546436,
+                    "Fortress": 0,
+                    "Spatial": 0,
+                    "Sawmill": 67234227,
+                    "Warehouse": 451315,
+                    "Altar": 0
+                },
+                "name": "Pagani",
+                "lastOnline": 74,
+                "iou": 62807
+            },
+            {
+                "allowJoin": 0,
+                "onlineFor": 42646596,
+                "canJoin": 0,
+                "rank": "1",
+                "level": 4162,
+                "user": "apleciper",
+                "online": 0,
+                "networth": 2529518561835,
+                "lowername": "alfey",
+                "tier": 3,
+                "Investments": {
+                    "Library": 35130,
+                    "SacrificialTower": 0,
+                    "Stable": 0,
+                    "Total": 2529518561835,
+                    "Aqua": 1882748,
+                    "Bank": 0,
+                    "Fortress": 0,
+                    "Spatial": 0,
+                    "Sawmill": 0,
+                    "Warehouse": 2529516643957,
+                    "Altar": 0
+                },
+                "name": "Alfey",
+                "lastOnline": 710777,
+                "iou": 914969
+            }
+        ],
+        "allow_sawmill": true,
+        "online": null,
+        "allow_library": true,
+        "level": 143,
+        "motd": "Welcome! Goal: Altar90-->ST lvl90. Extra gold to WishingWell. Guild Discord: https://discord.gg/uvrwNNe",
+        "allow_aqua": true,
+        "leader": "poi",
+        "name": "goodNeighbour",
+        "buildings": null,
+        "reqdps": null,
+        "allow_spatial": true,
+        "reqinvest": 0,
+        "allow_warehouse": true,
+        "reqsupport": 0,
+        "allow_stable": true,
+        "reqlineage": 0,
+        "allow_altar": true,
+        "iou": 0,
+        "allow_guildhall": false,
+        "Investments": {
+            "Library": 10412659608,
+            "SacrificialTower": 10490968618,
+            "Stable": 10467222051,
+            "Total": 2685995319971,
+            "Aqua": 10420507675,
+            "Bank": 6178455508,
+            "Fortress": 10439447603,
+            "Spatial": 10394498932,
+            "Sawmill": 70579968130,
+            "Warehouse": 2535099032035,
+            "Altar": 11512559811
+        },
+        "reqlevel": 0,
+        "isOpen": 0,
+        "allow_tower": true,
+        "Well": {
+            "diamondsecs": -401360,
+            "goldlv": 75,
+            "goldsecs": 647007,
+            "total": 75,
+            "goldcost": "154159942860800000",
+            "diamondlv": 0,
+            "diamondcost": 50,
+            "gold": 3151011888665857000,
+            "diamonds": 0
+        },
+        "memberCount": 39,
+        "allow_bank": true
+    },
+    "expeditionSystem": {
+        "nextFuel": 1714,
+        "planetaryCores": 215,
+        "ships": {
+            "ship2": {
+                "thruster": 6,
+                "fuelinjector": 6,
+                "sensors": 6,
+                "hull": 6,
+                "extractor": 6,
+                "drill": 2
+            },
+            "ship1": {
+                "thruster": 6,
+                "fuelinjector": 6,
+                "sensors": 6,
+                "hull": 6,
+                "extractor": 6,
+                "drill": 2
+            },
+            "ship4": {
+                "thruster": 6,
+                "fuelinjector": 6,
+                "sensors": 6,
+                "hull": 6,
+                "extractor": 6,
+                "drill": 2
+            },
+            "ship3": {
+                "thruster": 6,
+                "fuelinjector": 6,
+                "sensors": 6,
+                "hull": 6,
+                "extractor": 6,
+                "drill": 2
+            }
+        },
+        "expeditions": {
+            "exp2": {
+                "max": 7,
+                "currencyType": 6,
+                "exp": 26,
+                "tier": 3,
+                "secs": 41769,
+                "type": 1,
+                "length": 41904,
+                "fuelcost": 5238,
+                "min": 3
+            },
+            "exp4": {
+                "max": 7,
+                "currencyType": 6,
+                "exp": 26,
+                "tier": 3,
+                "secs": 41774,
+                "type": 1,
+                "length": 41904,
+                "fuelcost": 5238,
+                "min": 3
+            },
+            "exp1": {
+                "max": 7,
+                "currencyType": 6,
+                "exp": 26,
+                "tier": 3,
+                "secs": 41776,
+                "type": 1,
+                "length": 41904,
+                "fuelcost": 5238,
+                "min": 3
+            },
+            "exp3": {
+                "max": 7,
+                "currencyType": 6,
+                "exp": 26,
+                "tier": 3,
+                "secs": 41771,
+                "type": 1,
+                "length": 41904,
+                "fuelcost": 5238,
+                "min": 3
+            }
+        },
+        "lab1": 27,
+        "maxFuel": 100000,
+        "lab2": 9,
+        "ship2": true,
+        "lab3": 27,
+        "ship1": true,
+        "ship3": true,
+        "lab4": 27,
+        "fuelRate": 2000,
+        "fuelUpgradeCost1b": 2,
+        "lab5": 27,
+        "fuelUpgradeCost1": 20708030000,
+        "fuelUpgradeCost2": 20,
+        "lab6": 27,
+        "fuelUpgradeCost3": 1,
+        "labResetSecs": 0,
+        "fuelUpgrade1": 100,
+        "fuelUpgrade2": 0,
+        "fuelUpgrade3": 0,
+        "infiniteMatter": 208,
+        "fuel": 35408,
+        "ship4": true,
+        "ultinumParticles": 308
+    },
+    "soulOrbs": {
+        "goldOffers": 0,
+        "virtueLevel": 3,
+        "fishOffers": 0,
+        "virtueXP": 962,
+        "orbs": [
+            {
+                "xp": 4576,
+                "unlocked": true,
+                "rate": 81.2,
+                "id": 1,
+                "bonus": 81.2,
+                "level": 0,
+                "name": "Auto Damage",
+                "rarity": 4,
+                "desc": "+81.2000% Auto Damage",
+                "hovertip": "Increases Auto Damage"
+            },
+            {
+                "xp": 9136,
+                "unlocked": true,
+                "rate": 81.2,
+                "id": 2,
+                "bonus": 81.2,
+                "level": 0,
+                "name": "Wood Damage",
+                "rarity": 4,
+                "desc": "+81.2000% Wood Damage",
+                "hovertip": "Increases Woodcutting Damage"
+            },
+            {
+                "xp": 5803,
+                "unlocked": true,
+                "rate": 32.48,
+                "id": 3,
+                "bonus": 32.48,
+                "level": 0,
+                "name": "Stone Yield",
+                "rarity": 4,
+                "desc": "+32.4800% Stone Yield",
+                "hovertip": "Increases Stone found from mining"
+            },
+            {
+                "xp": 2766,
+                "unlocked": true,
+                "rate": 81.5654,
+                "id": 4,
+                "bonus": 81.5654,
+                "level": 1,
+                "name": "Click Damage",
+                "rarity": 4,
+                "desc": "+81.5654% Click Damage",
+                "hovertip": "Increases Click Damage"
+            },
+            {
+                "xp": 3180,
+                "unlocked": true,
+                "rate": 32.48,
+                "id": 5,
+                "bonus": 32.48,
+                "level": 0,
+                "name": "XP Rate",
+                "rarity": 4,
+                "desc": "+32.4800% XP Rate",
+                "hovertip": "Increases XP gained from kills"
+            },
+            {
+                "xp": 336,
+                "unlocked": true,
+                "rate": 81.5654,
+                "id": 6,
+                "bonus": 81.5654,
+                "level": 1,
+                "name": "Pet Damage",
+                "rarity": 4,
+                "desc": "+81.5654% Pet Damage",
+                "hovertip": "Increases Pet Damage"
+            },
+            {
+                "xp": 4692,
+                "unlocked": true,
+                "rate": 81.2,
+                "id": 7,
+                "bonus": 81.2,
+                "level": 0,
+                "name": "Challenge DMG",
+                "rarity": 4,
+                "desc": "+81.2000% Challenge DMG",
+                "hovertip": "Increases Challenge Damage"
+            },
+            {
+                "xp": 1083,
+                "unlocked": true,
+                "rate": 81.9308,
+                "id": 8,
+                "bonus": 81.9308,
+                "level": 2,
+                "name": "Crit Damage",
+                "rarity": 4,
+                "desc": "+81.9308% Crit Damage",
+                "hovertip": "Increases Critical Damage"
+            },
+            {
+                "xp": 4163,
+                "unlocked": true,
+                "rate": 32.48,
+                "id": 9,
+                "bonus": 32.48,
+                "level": 0,
+                "name": "Gold Rate",
+                "rarity": 4,
+                "desc": "+32.4800% Gold Rate",
+                "hovertip": "Increases GOLD gained from kills"
+            },
+            {
+                "xp": 1002,
+                "unlocked": true,
+                "rate": 81.5654,
+                "id": 10,
+                "bonus": 81.5654,
+                "level": 1,
+                "name": "Fish Value",
+                "rarity": 4,
+                "desc": "+81.5654% Fish Value",
+                "hovertip": "Increases fish value from catches"
+            },
+            {
+                "xp": 3556,
+                "unlocked": true,
+                "rate": 65.2523,
+                "id": 11,
+                "bonus": 65.2523,
+                "level": 1,
+                "name": "Multi Catch",
+                "rarity": 4,
+                "desc": "+65.2523% Multi Catch",
+                "hovertip": "Increases chance to catch additional fish"
+            },
+            {
+                "xp": 9262,
+                "unlocked": true,
+                "rate": 64.96,
+                "id": 12,
+                "bonus": 64.96,
+                "level": 0,
+                "name": "Card Yield",
+                "rarity": 4,
+                "desc": "+64.9600% Card Yield",
+                "hovertip": "Increases amount of cards dropped"
+            },
+            {
+                "xp": 247,
+                "unlocked": true,
+                "rate": 33.6493,
+                "id": 13,
+                "bonus": 33.6493,
+                "level": 8,
+                "name": "Ship Arena HP/DMG",
+                "rarity": 4,
+                "desc": "+33.6493% Ship Arena HP/DMG",
+                "hovertip": "Increases your damage and max health in the ship arena (AI ONLY)"
+            },
+            {
+                "xp": 5935,
+                "unlocked": true,
+                "rate": 65.5446,
+                "id": 14,
+                "bonus": 65.5446,
+                "level": 2,
+                "name": "Well Efficiency",
+                "rarity": 4,
+                "desc": "+65.5446% Well Efficiency",
+                "hovertip": "Increases the value of your donations towards the Wishing Well"
+            },
+            {
+                "xp": 2897,
+                "unlocked": true,
+                "rate": 48.72,
+                "id": 15,
+                "bonus": 48.72,
+                "level": 0,
+                "name": "Multi Attack Chance",
+                "rarity": 4,
+                "desc": "+48.7200% Multi Attack Chance",
+                "hovertip": "Increases your chance to deal additional auto attacks"
+            },
+            {
+                "xp": 9722,
+                "unlocked": true,
+                "rate": 16.4592,
+                "id": 16,
+                "bonus": 16.4592,
+                "level": 3,
+                "name": "Card Damage",
+                "rarity": 4,
+                "desc": "+16.4592% Card Damage",
+                "hovertip": "Increases your card damage"
+            },
+            {
+                "xp": 5698,
+                "unlocked": true,
+                "rate": 81.9308,
+                "id": 17,
+                "bonus": 81.9308,
+                "level": 2,
+                "name": "Expedition Pts",
+                "rarity": 4,
+                "desc": "+81.9308% Expedition Pts",
+                "hovertip": "Increases your expedition point gains per mission"
+            },
+            {
+                "xp": 260,
+                "unlocked": true,
+                "rate": 32.6262,
+                "id": 18,
+                "bonus": 32.6262,
+                "level": 1,
+                "name": "Pet Training",
+                "rarity": 4,
+                "desc": "+32.6262% Pet Training",
+                "hovertip": "Increases your Pet Training efficiency"
+            },
+            {
+                "xp": 9107,
+                "unlocked": true,
+                "rate": 40900,
+                "id": 19,
+                "bonus": 409,
+                "level": 3,
+                "name": "Mining Damage",
+                "rarity": 4,
+                "desc": "+409 Mining Damage",
+                "hovertip": "Increases your mining damage"
+            },
+            {
+                "xp": 2550,
+                "unlocked": true,
+                "rate": 32.7723,
+                "id": 20,
+                "bonus": 32.7723,
+                "level": 2,
+                "name": "Mining Critical",
+                "rarity": 4,
+                "desc": "+32.7723% Mining Critical",
+                "hovertip": "Increases your mining critical chance"
+            }
+        ],
+        "nextCost": 100000
+    },
+    "challengeData": {
+        "challengeMilestone": 5200,
+        "challenges": [
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 1
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 16
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 16
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 16
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 16
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 16
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 15
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 11
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 10
+            },
+            {
+                "stage": 0,
+                "mode": 1,
+                "difficulty": 10
+            }
+        ],
+        "points": 5171,
+        "challengeBonus": 159,
+        "challengeBonusNext": 162,
+        "series": {
+            "series1": {
+                "progress": 51,
+                "tier": 1
+            }
+        }
+    },
+    "statistics": {
+        "cpAcc": 5171,
+        "crystalAcc": 43792,
+        "totalDmg": 38294669483242800,
+        "woodAcc": 67619147,
+        "wellGoldInvest": 1570000001,
+        "dmg": {
+            "total": 2432391,
+            "ChallengeMilstoneDamage": 159,
+            "InfernoBoost": 196105,
+            "ChallengeDamageBoost": 0,
+            "GuildDamageBoost": 0,
+            "CardDamageBoost": 2233475,
+            "LevelDamage": 2652
+        },
+        "level": 789,
+        "apAcc": 98646,
+        "totalCards": 12801757,
+        "highDmg": 226315517112,
+        "ultAcc": 38583,
+        "epAcc": 230,
+        "petPointsAcc": 3043396,
+        "diamondAcc": 55008,
+        "stoneAcc": 355604090,
+        "arenaNoAP": 45,
+        "xpAcc": 68100751044,
+        "monsterSum": 83718199237,
+        "imatterAcc": 59788,
+        "series1prog": 75,
+        "challengePointsAcc": 5171,
+        "fishTotal": 19139,
+        "soAcc": 37027,
+        "dynamiteAcc": 66,
+        "highKill": 245515,
+        "pcoreAcc": 90615,
+        "miningDepth": 158,
+        "shipPower": 6779,
+        "woodLv": 27,
+        "fishUpgPtsAcc": 3592330,
+        "fishValue": 3982062,
+        "valorAcc": 2708,
+        "chestClaims": 1246,
+        "k1": 1274078,
+        "fishptAcc": 1271866,
+        "bingoPlays": 22,
+        "goldLogAcc": 1085473,
+        "parenalv": 65,
+        "guildXPAcc": 313416801,
+        "bingolLines": 23,
+        "dailyClaims": 200,
+        "highClick": 93252123368,
+        "bingoDabs": 502,
+        "petFoodAcc": 49208,
+        "infernoPointsAcc": 1691702792343940,
+        "expendPointsAcc": 35832,
+        "fishPointsAcc": 1424403024,
+        "goldAcc": 31518421002941960
+    },
+    "currencies": {
+        "arenaValor": 240,
+        "arenaPetPoints": 168376,
+        "goldLogs": 48148,
+        "wood": 1255247,
+        "challengePoints": 5171,
+        "legendaryPoints": 0,
+        "clix": 1000,
+        "expeditionPoints": 2772,
+        "diamonds": 58,
+        "sacrificialOfferings": 40,
+        "petFood": 14,
+        "ascensionPoints": 10,
+        "guildXP": 2291190,
+        "fishPoints": 336913200,
+        "eventPoints": 230,
+        "stone": 0,
+        "gold": 262526461616974,
+        "petPoints": 164675,
+        "ap": 82292,
+        "crystals": 1393
+    },
+    "party": [
+        {
+            "level": 861,
+            "dps": 186419272024,
+            "UserID": "kong182034",
+            "pet1": 0,
+            "online": 0,
+            "kills": "-1",
+            "name": "Devlar",
+            "cards": 3535920,
+            "pet1tier": 11,
+            "pet2": 0,
+            "pet2tier": 11
+        },
+        {
+            "level": 714,
+            "dps": 16085423901,
+            "UserID": "ag_4e1b8db9863716d5ab5f8f16080eb4e8",
+            "pet1": 0,
+            "online": 0,
+            "kills": "-1",
+            "name": "YKor",
+            "cards": 139525,
+            "pet1tier": 10,
+            "pet2": 0,
+            "pet2tier": 10
+        },
+        {
+            "level": 789,
+            "dps": 55311749311,
+            "UserID": "kong1105054",
+            "pet1": 0,
+            "online": 0,
+            "kills": "-1",
+            "name": "BrightIllusion",
+            "cards": 47920,
+            "pet1tier": 11,
+            "pet2": 0,
+            "pet2tier": 11
+        }
+    ],
+    "trades": {
+        "Fishing": {
+            "baitcost": 781250,
+            "whistle": -10727695,
+            "bait": 5,
+            "upgradepts": 509830,
+            "knife": false,
+            "sex": 7,
+            "highFishValue": 3982062,
+            "boat": 5,
+            "tax": {
+                "fish53": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish5": {
+                    "caught": 572,
+                    "level": 11
+                },
+                "fish19": {
+                    "caught": 410,
+                    "level": 9
+                },
+                "fish41": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish54": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish13": {
+                    "caught": 1535,
+                    "level": 19
+                },
+                "fish29": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish42": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish55": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish20": {
+                    "caught": 365,
+                    "level": 9
+                },
+                "fish6": {
+                    "caught": 550,
+                    "level": 11
+                },
+                "fish43": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish56": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish7": {
+                    "caught": 571,
+                    "level": 11
+                },
+                "fish30": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish14": {
+                    "caught": 1327,
+                    "level": 18
+                },
+                "fish31": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish21": {
+                    "caught": 275,
+                    "level": 7
+                },
+                "fish44": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish57": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish32": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish45": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish58": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish22": {
+                    "caught": 233,
+                    "level": 7
+                },
+                "fish15": {
+                    "caught": 1478,
+                    "level": 18
+                },
+                "fish33": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish46": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish59": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish1": {
+                    "caught": 468,
+                    "level": 10
+                },
+                "fish9": {
+                    "caught": 910,
+                    "level": 15
+                },
+                "fish8": {
+                    "caught": 866,
+                    "level": 14
+                },
+                "fish34": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish23": {
+                    "caught": 167,
+                    "level": 6
+                },
+                "fish47": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish60": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish16": {
+                    "caught": 1266,
+                    "level": 17
+                },
+                "fish35": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish48": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish24": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish10": {
+                    "caught": 1518,
+                    "level": 19
+                },
+                "fish2": {
+                    "caught": 612,
+                    "level": 12
+                },
+                "fish49": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish25": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish36": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish17": {
+                    "caught": 643,
+                    "level": 12
+                },
+                "fish37": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish50": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish3": {
+                    "caught": 692,
+                    "level": 13
+                },
+                "fish26": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish11": {
+                    "caught": 1740,
+                    "level": 20
+                },
+                "fish38": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish51": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish27": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish18": {
+                    "caught": 602,
+                    "level": 11
+                },
+                "fish39": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish52": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish28": {
+                    "caught": 0,
+                    "level": 0
+                },
+                "fish12": {
+                    "caught": 1671,
+                    "level": 20
+                },
+                "fish4": {
+                    "caught": 668,
+                    "level": 12
+                },
+                "fish40": {
+                    "caught": 0,
+                    "level": 0
+                }
+            },
+            "hook": 6,
+            "totalupgpts": 3592330,
+            "hookcost": 1562500,
+            "energy": 0,
+            "linecost": 781250,
+            "rod": 6,
+            "nextNRG": 699,
+            "rodcost": 1562500,
+            "line": 5,
+            "minRarity": 15
+        },
+        "Woodcutting": {
+            "goldCost": 8053063680000,
+            "maxNRG": 282,
+            "zone": 27,
+            "treeMaxHP": 169850,
+            "curTree": 27,
+            "nrg": 3,
+            "woodCost": 105468549,
+            "treeHP": 149551,
+            "maxZone": 27,
+            "secsLeft": "Tue Dec 25 14:59:10 GMT+0100 2018",
+            "apCost": 99999900
+        },
+        "Mining": {
+            "maxNRG": 266,
+            "dmg": 509,
+            "goal": 500,
+            "squares": [
+                "0",
+                "0",
+                "0",
+                "765",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000",
+                "1000"
+            ],
+            "dynamite": 51,
+            "nrg": 3,
+            "depth": 158,
+            "woodCost": 1264050,
+            "secsLeft": "Tue Dec 25 15:01:32 GMT+0100 2018",
+            "used": 266
+        }
+    },
+    "pets": {
+        "arena": {
+            "healsLeft": 250,
+            "pet1HP": 0,
+            "bestNoAP": 45,
+            "best": 65,
+            "pet2HP": 0,
+            "pp": 250,
+            "rew2": 38,
+            "rew1": 7000,
+            "rew3": 2,
+            "enemyMaxHP": 1,
+            "curEnemy": 0,
+            "mode": 0,
+            "heals": 0,
+            "boost1": 0,
+            "opponent": 2,
+            "av": 0,
+            "food": 1,
+            "boost2": 0,
+            "enemyHP": 0,
+            "auto": false,
+            "skipCost": 36
+        },
+        "pet1": {
+            "trainSecs": "Tue Dec 25 18:03:15 GMT+0100 2018",
+            "speed": 32,
+            "level": 1,
+            "perTrain": 3841,
+            "reqxp": 151300,
+            "perFeed": 100,
+            "xp": 113947,
+            "skin": 3,
+            "tier": 11,
+            "arenaDmg": 0.384,
+            "damage": 32508,
+            "baseDamage": 17216,
+            "maxhp": 3890
+        },
+        "pet2": {
+            "trainSecs": "Tue Dec 25 18:03:05 GMT+0100 2018",
+            "speed": 30,
+            "level": 6,
+            "perTrain": 3841,
+            "reqxp": 100000,
+            "perFeed": 100,
+            "xp": 92101,
+            "skin": 120,
+            "tier": 10,
+            "arenaDmg": 0.384,
+            "damage": 23950,
+            "baseDamage": 12684,
+            "maxhp": 3298
+        },
+        "petMap": {
+            "bottomleft": {
+                "node_2": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "center": 4,
+                "node_3": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": -1,
+                    "progress": 0
+                }
+            },
+            "totalUnlocks": 64,
+            "center": {
+                "center": 0,
+                "node_2": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_3": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": 2,
+                    "progress": 0
+                }
+            },
+            "availableUnlocks": 0,
+            "left": {
+                "node_2": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "center": 0,
+                "node_3": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": -1,
+                    "progress": 0
+                }
+            },
+            "right": {
+                "node_2": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "center": 6,
+                "node_3": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": 3,
+                    "progress": 0
+                }
+            },
+            "bottomright": {
+                "node_2": {
+                    "level": 2,
+                    "progress": 3
+                },
+                "node_13": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": 2,
+                    "progress": 3
+                },
+                "node_16": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "center": 5,
+                "node_3": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": 2,
+                    "progress": 4
+                },
+                "node_6": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": 2,
+                    "progress": 5
+                },
+                "node_12": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": 0,
+                    "progress": 0
+                }
+            },
+            "topleft": {
+                "node_2": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "center": 4,
+                "node_3": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": -1,
+                    "progress": 0
+                }
+            },
+            "top": {
+                "node_2": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "center": 4,
+                "node_3": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": -1,
+                    "progress": 0
+                }
+            },
+            "topright": {
+                "node_2": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_11": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "center": 6,
+                "node_3": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": 4,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": 3,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": 3,
+                    "progress": 0
+                }
+            },
+            "nodePacks": 1,
+            "bottom": {
+                "node_2": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_13": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_18": {
+                    "level": 2,
+                    "progress": 4
+                },
+                "node_11": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_16": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_9": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "center": 5,
+                "node_3": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_5": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_6": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_14": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_7": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_12": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_4": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_10": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_0": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_19": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_17": {
+                    "level": -1,
+                    "progress": 0
+                },
+                "node_15": {
+                    "level": 0,
+                    "progress": 0
+                },
+                "node_8": {
+                    "level": 2,
+                    "progress": 0
+                },
+                "node_1": {
+                    "level": 2,
+                    "progress": 0
+                }
+            }
+        }
+    },
+    "shipArena": {
+        "drone2": 5,
+        "drone1": 7,
+        "rank": 1559,
+        "drone3": 1,
+        "nrg": 0,
+        "nmePower": 39824,
+        "ship1": {
+            "id": 1,
+            "xtra1": 0,
+            "reactor": 0,
+            "xtra2": 0,
+            "weapon": 0,
+            "xtra3": 0,
+            "hull_level": 21,
+            "xtra1_level": 0,
+            "wings_level": 15,
+            "xtra2_level": 0,
+            "reactor_level": 22,
+            "hull": 0,
+            "xtra3_level": 0,
+            "weapon_level": 15,
+            "wings": 0
+        },
+        "drone4": 2,
+        "ship2": {
+            "id": 2,
+            "xtra1": 0,
+            "reactor": 0,
+            "xtra2": 0,
+            "weapon": 0,
+            "xtra3": 0,
+            "hull_level": 20,
+            "xtra1_level": 0,
+            "wings_level": 15,
+            "xtra2_level": 0,
+            "reactor_level": 20,
+            "hull": 0,
+            "xtra3_level": 0,
+            "weapon_level": 15,
+            "wings": 0
+        },
+        "drone5": 4,
+        "power": 6779,
+        "ship3": {
+            "id": 3,
+            "xtra1": 0,
+            "reactor": 0,
+            "xtra2": 0,
+            "weapon": 0,
+            "xtra3": 0,
+            "hull_level": 15,
+            "xtra1_level": 0,
+            "wings_level": 25,
+            "xtra2_level": 0,
+            "reactor_level": 15,
+            "hull": 0,
+            "xtra3_level": 0,
+            "weapon_level": 25,
+            "wings": 0
+        },
+        "dronelevel1": 7,
+        "chprogress": 75,
+        "dronelevel2": 7,
+        "skins_hull": "1!",
+        "dronelevel3": 7,
+        "skins_reactor": "1!",
+        "dronelevel4": 7,
+        "skins_weapon": "1!",
+        "dronelevel5": 7,
+        "skins_wing": "1!",
+        "nrgsecs": 54636,
+        "drones": 5,
+        "weeksecs": 486636,
+        "droneunlocks": "1!",
+        "ShipResetSecs": 0,
+        "ships": 3
+    },
+    "generatedAt": 1545745763997,
+    "upgrades": {
+        "ascension": {
+            "clixRegen": {
+                "cost": 12,
+                "varname": "clixRegen",
+                "maxLevel": 3,
+                "apCost": 100000000,
+                "level": 3,
+                "bonus": "+3 Mana/Stamina Regen",
+                "description": "Regenerate more Mana/Stamina",
+                "nextBonus": "+4 Mana/Stamina Regen",
+                "icon": 62,
+                "currency": "ascension",
+                "name": "Clix Regen",
+                "hardcap": 3
+            },
+            "petSpd": {
+                "cost": 16,
+                "varname": "petSpd",
+                "maxLevel": 15,
+                "apCost": 100000000,
+                "level": 15,
+                "bonus": "+30% Pet Speed",
+                "description": "Increases your pet attack speed further",
+                "nextBonus": "+32% Pet Speed",
+                "icon": 48,
+                "currency": "ascension",
+                "name": "Pet Speed",
+                "hardcap": 15
+            },
+            "miningNRGGains": {
+                "cost": 30,
+                "varname": "miningNRGGains",
+                "maxLevel": 2,
+                "apCost": 100000000,
+                "level": 2,
+                "bonus": "+2NRG per replenish",
+                "description": "Increases your Mining NRG Gains",
+                "nextBonus": "+3NRG per replenish",
+                "icon": 65,
+                "currency": "ascension",
+                "name": "Mining NRG+",
+                "hardcap": 2
+            },
+            "petDmg": {
+                "cost": 9,
+                "varname": "petDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 2,
+                "bonus": "+4% Pet Damage",
+                "description": "Increases your pet attack damage further",
+                "nextBonus": "+6% Pet Damage",
+                "icon": 49,
+                "currency": "ascension",
+                "name": "Pet Damage",
+                "hardcap": 50
+            },
+            "shipDmg": {
+                "cost": 22,
+                "varname": "shipDmg",
+                "maxLevel": 10,
+                "apCost": 100000000,
+                "level": 10,
+                "bonus": "+20% Ship DMG",
+                "description": "Increases Ship Arena Damage (verse AI)",
+                "nextBonus": "+22% Ship DMG",
+                "icon": 77,
+                "currency": "ascension",
+                "name": "Ship Damage (AI)",
+                "hardcap": 10
+            },
+            "fishQuality": {
+                "cost": 3,
+                "varname": "fishQuality",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Fish Value",
+                "description": "Increases Fish value from caught fish",
+                "nextBonus": "+4% Fish Value",
+                "icon": 79,
+                "currency": "ascension",
+                "name": "Fish Value",
+                "hardcap": 25
+            },
+            "skillCD": {
+                "cost": 11,
+                "varname": "skillCD",
+                "maxLevel": 10,
+                "apCost": 100000000,
+                "level": 10,
+                "bonus": "-10% Ability Cooldown",
+                "description": "Reduces cooldown on abilities further",
+                "nextBonus": "-11% Ability Cooldown",
+                "icon": 50,
+                "currency": "ascension",
+                "name": "Ability Cooldown",
+                "hardcap": 10
+            },
+            "shipHp": {
+                "cost": 22,
+                "varname": "shipHp",
+                "maxLevel": 10,
+                "apCost": 100000000,
+                "level": 10,
+                "bonus": "+20% Max Ship HP",
+                "description": "Increases Max Ship HP (verse AI)",
+                "nextBonus": "+22% Max Ship HP",
+                "icon": 78,
+                "currency": "ascension",
+                "name": "Ship Health (AI)",
+                "hardcap": 10
+            },
+            "xpBoost": {
+                "cost": 4,
+                "varname": "xpBoost",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% XP Gains",
+                "description": "Increases your XP Gains further",
+                "nextBonus": "+2% XP Gains",
+                "icon": 51,
+                "currency": "ascension",
+                "name": "XP Boost",
+                "hardcap": 50
+            },
+            "miningYield": {
+                "cost": 21,
+                "varname": "miningYield",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 6,
+                "bonus": "+24% Mining Yield",
+                "description": "Increases stone found in mining",
+                "nextBonus": "+28% Mining Yield",
+                "icon": 80,
+                "currency": "ascension",
+                "name": "Mining Yield",
+                "hardcap": 25
+            },
+            "goldBoost": {
+                "cost": 11,
+                "varname": "goldBoost",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 10,
+                "bonus": "+30% Gold Gains",
+                "description": "Increases your Gold Gains further",
+                "nextBonus": "+33% Gold Gains",
+                "icon": 52,
+                "currency": "ascension",
+                "name": "Gold Boost",
+                "hardcap": 50
+            },
+            "cardDrop": {
+                "cost": 48,
+                "varname": "cardDrop",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 15,
+                "bonus": "+60% Cards Dropped",
+                "description": "Increases card drop amount",
+                "nextBonus": "+64% Cards Dropped",
+                "icon": 81,
+                "currency": "ascension",
+                "name": "Card Drop Yield",
+                "hardcap": 25
+            },
+            "partyBoost": {
+                "cost": 16,
+                "varname": "partyBoost",
+                "maxLevel": 15,
+                "apCost": 100000000,
+                "level": 15,
+                "bonus": "+60% Gains in Party",
+                "description": "Increases your XP/Gold gains in a party further",
+                "nextBonus": "+64% Gains in Party",
+                "icon": 53,
+                "currency": "ascension",
+                "name": "Party Boost",
+                "hardcap": 15
+            },
+            "treasureDmg": {
+                "cost": 4,
+                "varname": "treasureDmg",
+                "maxLevel": 15,
+                "apCost": 100000000,
+                "level": 3,
+                "bonus": "+12% Damage to Treasure",
+                "description": "Increases damage against treasures further",
+                "nextBonus": "+16% Damage to Treasure",
+                "icon": 54,
+                "currency": "ascension",
+                "name": "Treasure Damage",
+                "hardcap": 15
+            },
+            "autoDmg": {
+                "cost": 26,
+                "varname": "autoDmg",
+                "maxLevel": 100,
+                "apCost": 100000000,
+                "level": 12,
+                "bonus": "+48% Auto Damage",
+                "description": "Increases your auto damage further",
+                "nextBonus": "+52% Auto Damage",
+                "icon": 42,
+                "currency": "ascension",
+                "name": "Auto Damage",
+                "hardcap": 100
+            },
+            "woodDmg": {
+                "cost": 7,
+                "varname": "woodDmg",
+                "maxLevel": 100,
+                "apCost": 100000000,
+                "level": 6,
+                "bonus": "+164% Woodcutting Damage",
+                "description": "Increases your Woodcutting Damage",
+                "nextBonus": "+178% Woodcutting Damage",
+                "icon": 55,
+                "currency": "ascension",
+                "name": "Woodcutting Damage",
+                "hardcap": 100
+            },
+            "autoSpd": {
+                "cost": 26,
+                "varname": "autoSpd",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 25,
+                "bonus": "+25% Auto Speed",
+                "description": "Increases your auto speed further",
+                "nextBonus": "+26% Auto Speed",
+                "icon": 43,
+                "currency": "ascension",
+                "name": "Auto Speed",
+                "hardcap": 25
+            },
+            "woodGains": {
+                "cost": 6,
+                "varname": "woodGains",
+                "maxLevel": 100,
+                "apCost": 100000000,
+                "level": 5,
+                "bonus": "+150% Log Gains",
+                "description": "Increases your log yield when Woodcutting",
+                "nextBonus": "+164% Log Gains",
+                "icon": 56,
+                "currency": "ascension",
+                "name": "Log Gains",
+                "hardcap": 100
+            },
+            "autoCritDmg": {
+                "cost": 17,
+                "varname": "autoCritDmg",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 16,
+                "bonus": "+128% Auto Crit Damage",
+                "description": "Increases your auto critical damage further",
+                "nextBonus": "+136% Auto Crit Damage",
+                "icon": 44,
+                "currency": "ascension",
+                "name": "Auto Crit",
+                "hardcap": 25
+            },
+            "woodNRGGains": {
+                "cost": 30,
+                "varname": "woodNRGGains",
+                "maxLevel": 2,
+                "apCost": 100000000,
+                "level": 2,
+                "bonus": "+2NRG per replenish",
+                "description": "Increases your Woodcutting NRG Gains",
+                "nextBonus": "+3NRG per replenish",
+                "icon": 57,
+                "currency": "ascension",
+                "name": "Woodcutting NRG+",
+                "hardcap": 2
+            },
+            "clickDmg": {
+                "cost": 6,
+                "varname": "clickDmg",
+                "maxLevel": 100,
+                "apCost": 100000000,
+                "level": 5,
+                "bonus": "+25% Click Damage",
+                "description": "Increases your click damage further",
+                "nextBonus": "+30% Click Damage",
+                "icon": 45,
+                "currency": "ascension",
+                "name": "Click Damage",
+                "hardcap": 100
+            },
+            "chestBonus": {
+                "cost": 5,
+                "varname": "chestBonus",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 4,
+                "bonus": "+32% Chest Claim Gold",
+                "description": "Increases your Chest Claim Gold Gains",
+                "nextBonus": "+40% Chest Claim Gold",
+                "icon": 58,
+                "currency": "ascension",
+                "name": "Claim Boost",
+                "hardcap": 50
+            },
+            "clickSpd": {
+                "cost": 4,
+                "varname": "clickSpd",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 3,
+                "bonus": "+30% Click Speed",
+                "description": "Increases your click speed further",
+                "nextBonus": "+40% Click Speed",
+                "icon": 46,
+                "currency": "ascension",
+                "name": "Click Speed",
+                "hardcap": 25
+            },
+            "doublePetTrain": {
+                "cost": 16,
+                "varname": "doublePetTrain",
+                "maxLevel": 3,
+                "apCost": 100000000,
+                "level": 3,
+                "bonus": "+3 Food Value",
+                "description": "Increases pet feed amount per Pet Training (NOT feeding)",
+                "nextBonus": "+4 Food Value",
+                "icon": 59,
+                "currency": "ascension",
+                "name": "Pet Training",
+                "hardcap": 3
+            },
+            "clickCritDmg": {
+                "cost": 2,
+                "varname": "clickCritDmg",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 1,
+                "bonus": "+8% Click Crit Damage",
+                "description": "Increases your click critical damage further",
+                "nextBonus": "+16% Click Crit Damage",
+                "icon": 47,
+                "currency": "ascension",
+                "name": "Critical Click",
+                "hardcap": 25
+            }
+        },
+        "attack": {
+            "doubleAttackChance": {
+                "cost": 412120400,
+                "varname": "doubleAttackChance",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+27.25% Chance",
+                "description": "Increase the chance to perform additional attack(s)",
+                "nextBonus": "+27.26% Chance",
+                "icon": 3,
+                "currency": "gold",
+                "name": "Multi Attack",
+                "hardcap": 200
+            },
+            "speed": {
+                "cost": 13931406950400,
+                "varname": "speed",
+                "maxLevel": 200,
+                "apCost": 170,
+                "level": 70,
+                "bonus": "+33.75% Speed",
+                "description": "Increases the rate that you can click attack",
+                "nextBonus": "+34% Speed",
+                "icon": 4,
+                "currency": "gold",
+                "name": "Attack Speed",
+                "hardcap": 200
+            },
+            "maxClix": {
+                "cost": 53060400,
+                "varname": "maxClix",
+                "maxLevel": 100,
+                "apCost": 120,
+                "level": 100,
+                "bonus": "+500 Max Mana/Stamina",
+                "description": "Increases your Max Mana/Stamina",
+                "nextBonus": "+505 Max Mana/Stamina",
+                "icon": 61,
+                "currency": "gold",
+                "name": "Max Mana/Stamina",
+                "hardcap": 100
+            },
+            "critMult": {
+                "cost": 412120400,
+                "varname": "critMult",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+200%",
+                "description": "Increase your critical click damage multiplier",
+                "nextBonus": "+200.5%",
+                "icon": 6,
+                "currency": "gold",
+                "name": "Critical Multiplier",
+                "hardcap": 200
+            },
+            "critChance": {
+                "cost": 824240800,
+                "varname": "critChance",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+28.75% Chance",
+                "description": "Increase the chance to critically attack",
+                "nextBonus": "+28.775% Chance",
+                "icon": 5,
+                "currency": "gold",
+                "name": "Critical Chance",
+                "hardcap": 200
+            },
+            "clixSpeed": {
+                "cost": 175590400,
+                "varname": "clixSpeed",
+                "maxLevel": 30,
+                "apCost": 109,
+                "level": 30,
+                "bonus": "-300s regen delay",
+                "description": "Speeds up Mana/Stamina Regeneration",
+                "nextBonus": "-290s regen delay",
+                "icon": 63,
+                "currency": "gold",
+                "name": "Regen Speed",
+                "hardcap": 30
+            },
+            "baseDamage": {
+                "cost": 100300300100,
+                "varname": "baseDamage",
+                "maxLevel": 6090,
+                "apCost": 200,
+                "level": 6090,
+                "bonus": "+2509178 Damage",
+                "description": "Increase your base click damage",
+                "nextBonus": "+2509689 Damage",
+                "icon": 1,
+                "currency": "gold",
+                "name": "Base Damage",
+                "hardcap": 6090
+            }
+        },
+        "wood": {
+            "nrg": {
+                "cost": 16820,
+                "varname": "nrg",
+                "maxLevel": 250,
+                "apCost": 1000000,
+                "level": 58,
+                "bonus": "282 Max Woodcutting Energy",
+                "description": "Increase your maximum woodcutting energy",
+                "nextBonus": "+286 Max Woodcutting Energy",
+                "icon": 29,
+                "currency": "woodGold",
+                "name": "Energy Capacity",
+                "hardcap": 250
+            },
+            "goldLogs": {
+                "cost": 54880,
+                "varname": "goldLogs",
+                "maxLevel": 100,
+                "apCost": 1000000,
+                "level": 13,
+                "bonus": "16.5% Reduction",
+                "description": "Reduces Max HP of trees",
+                "nextBonus": "+17.0% Reduction",
+                "icon": 102,
+                "currency": "woodGold",
+                "name": "Weakpoint",
+                "hardcap": 100
+            },
+            "axeSharpening": {
+                "cost": 49130,
+                "varname": "axeSharpening",
+                "maxLevel": 100,
+                "apCost": 1000000,
+                "level": 16,
+                "bonus": "370 Cut Damage",
+                "description": "Increases the strength of your axe",
+                "nextBonus": "390 Cut Damage",
+                "icon": 28,
+                "currency": "woodGold",
+                "name": "Axe Sharpening",
+                "hardcap": 100
+            },
+            "critAxe": {
+                "cost": 49130,
+                "varname": "critAxe",
+                "maxLevel": 100,
+                "apCost": 1000000,
+                "level": 16,
+                "bonus": "22.25% chance for critical cut",
+                "description": "Increase the chance for double damage when woodcutting",
+                "nextBonus": "+23.25% chance for critical cut",
+                "icon": 60,
+                "currency": "woodGold",
+                "name": "Critical Axe",
+                "hardcap": 100
+            },
+            "logSplit": {
+                "cost": 49130,
+                "varname": "logSplit",
+                "maxLevel": 100,
+                "apCost": 1000000,
+                "level": 16,
+                "bonus": "22.25% chance for double logs",
+                "description": "Increase the chance for double wood logs",
+                "nextBonus": "+23.25% chance for double logs",
+                "icon": 31,
+                "currency": "woodGold",
+                "name": "Log Splitting",
+                "hardcap": 100
+            }
+        },
+        "trophy": {
+            "splatReduce": {
+                "cost": 15,
+                "varname": "splatReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 2,
+                "bonus": "-5% Cooldown",
+                "description": "Reduces the Cooldown for Splat",
+                "nextBonus": "-7.5% Cooldown",
+                "icon": 37,
+                "currency": "t1",
+                "name": "Splat Reduction",
+                "hardcap": 100
+            },
+            "expeditionReduce": {
+                "cost": 30,
+                "varname": "expeditionReduce",
+                "maxLevel": 5,
+                "apCost": 0,
+                "level": 5,
+                "bonus": "-5% Timer",
+                "description": "Reduces the Fuel Recharge Timer",
+                "nextBonus": "-6% Timer",
+                "icon": 35,
+                "currency": "t6",
+                "name": "Fuel Generation",
+                "hardcap": 100
+            },
+            "chClickDouble": {
+                "cost": 5,
+                "varname": "chClickDouble",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 0,
+                "bonus": "+0% Chance",
+                "description": "Increase Multiple Attack Chance",
+                "nextBonus": "+1% Chance",
+                "icon": 91,
+                "currency": "t1",
+                "name": "Click Multi",
+                "hardcap": 100
+            },
+            "expSuccess": {
+                "cost": 45,
+                "varname": "expSuccess",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 8,
+                "bonus": "+16% Success Chance",
+                "description": "Increase Chance for success in expeditions",
+                "nextBonus": "+18% Success Chance",
+                "icon": 95,
+                "currency": "t6",
+                "name": "Expedition Success",
+                "hardcap": 100
+            },
+            "chClickCrit": {
+                "cost": 10,
+                "varname": "chClickCrit",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 1,
+                "bonus": "+1% Chance",
+                "description": "Increases Click Crit Chance",
+                "nextBonus": "+2% Chance",
+                "icon": 90,
+                "currency": "t1",
+                "name": "Click Crit",
+                "hardcap": 100
+            },
+            "shipDmg": {
+                "cost": 70,
+                "varname": "shipDmg",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 13,
+                "bonus": "+13% Damage",
+                "description": "Increase Ship Arena AI Damage",
+                "nextBonus": "+14% Damage",
+                "icon": 92,
+                "currency": "t6",
+                "name": "Arena AI Damage",
+                "hardcap": 100
+            },
+            "fishCount": {
+                "cost": 25,
+                "varname": "fishCount",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 4,
+                "bonus": "+16% Chance",
+                "description": "Increases chance to catch additional fish",
+                "nextBonus": "+20% Chance",
+                "icon": 100,
+                "currency": "t4",
+                "name": "Fish Jackpot",
+                "hardcap": 100
+            },
+            "petTrainReduce": {
+                "cost": 20,
+                "varname": "petTrainReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 3,
+                "bonus": "-3% Pet Training Cooldown",
+                "description": "Reduces the Pet Training cooldown",
+                "nextBonus": "-4% Pet Training Cooldown",
+                "icon": 34,
+                "currency": "t5",
+                "name": "Pet Train Reduction",
+                "hardcap": 100
+            },
+            "speedBoostReduce": {
+                "cost": 30,
+                "varname": "speedBoostReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 5,
+                "bonus": "-12.5% Cooldown",
+                "description": "Reduces the Cooldown for Speed Boost",
+                "nextBonus": "-14.5% Cooldown",
+                "icon": 38,
+                "currency": "t1",
+                "name": "SpeedBoost Reduction",
+                "hardcap": 100
+            },
+            "expInc": {
+                "cost": 45,
+                "varname": "expInc",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 8,
+                "bonus": "+16% Expedition Pts",
+                "description": "Increase percentage of expedition points received",
+                "nextBonus": "+18% Expedition Pts",
+                "icon": 94,
+                "currency": "t6",
+                "name": "Expedition Increase",
+                "hardcap": 100
+            },
+            "chClickDmg": {
+                "cost": 15,
+                "varname": "chClickDmg",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 2,
+                "bonus": "+6% Click Dmg",
+                "description": "Increase Click Damage",
+                "nextBonus": "+9% Click Dmg",
+                "icon": 89,
+                "currency": "t1",
+                "name": "Click DMG",
+                "hardcap": 100
+            },
+            "cardMin": {
+                "cost": 45,
+                "varname": "cardMin",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 8,
+                "bonus": "+8% Minimum",
+                "description": "Reduce the randomness of cards dropped",
+                "nextBonus": "+9% Minimum",
+                "icon": 83,
+                "currency": "t3",
+                "name": "Card Min Increase",
+                "hardcap": 100
+            },
+            "autoDouble": {
+                "cost": 60,
+                "varname": "autoDouble",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 11,
+                "bonus": "+5.5% Chance",
+                "description": "Increase chance for additional auto attacks",
+                "nextBonus": "+6% Chance",
+                "icon": 98,
+                "currency": "t2",
+                "name": "Auto Multi",
+                "hardcap": 100
+            },
+            "woodNrgReduce": {
+                "cost": 45,
+                "varname": "woodNrgReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 8,
+                "bonus": "-18.5% NRG Cooldown",
+                "description": "Reduces the Woodcutting NRG replenish timer",
+                "nextBonus": "-20.5% NRG Cooldown",
+                "icon": 32,
+                "currency": "t4",
+                "name": "Wood NRG Reduction",
+                "hardcap": 100
+            },
+            "damageBoostReduce": {
+                "cost": 25,
+                "varname": "damageBoostReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 4,
+                "bonus": "-10% Cooldown",
+                "description": "Reduces the Cooldown for Damage Boost",
+                "nextBonus": "-12.5% Cooldown",
+                "icon": 39,
+                "currency": "t1",
+                "name": "DamageBoost Reduction",
+                "hardcap": 100
+            },
+            "critChanceReduce": {
+                "cost": 20,
+                "varname": "critChanceReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 3,
+                "bonus": "-7.5% Cooldown",
+                "description": "Reduces the Cooldown for Critical Chance",
+                "nextBonus": "-10% Cooldown",
+                "icon": 41,
+                "currency": "t1",
+                "name": "CritChance Reduction",
+                "hardcap": 100
+            },
+            "goldRate": {
+                "cost": 30,
+                "varname": "goldRate",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 5,
+                "bonus": "+10% Gold",
+                "description": "Increases Gold Amount Dropped",
+                "nextBonus": "+12% Gold",
+                "icon": 99,
+                "currency": "t3",
+                "name": "Gold Rate",
+                "hardcap": 100
+            },
+            "shipHP": {
+                "cost": 65,
+                "varname": "shipHP",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 12,
+                "bonus": "+12% Max HP",
+                "description": "Increases HP against AI in the Ship Arena",
+                "nextBonus": "+13% Max HP",
+                "icon": 93,
+                "currency": "t6",
+                "name": "Arena AI HP",
+                "hardcap": 100
+            },
+            "parenaShield": {
+                "cost": 25,
+                "varname": "parenaShield",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 4,
+                "bonus": "+4% Shield Efficiency",
+                "description": "Increase Shield Buff Efficiency",
+                "nextBonus": "+5% Shield Efficiency",
+                "icon": 88,
+                "currency": "t5",
+                "name": "Pet Arena Shield",
+                "hardcap": 100
+            },
+            "parenaDmg": {
+                "cost": 20,
+                "varname": "parenaDmg",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 3,
+                "bonus": "+3% From Damage Buff",
+                "description": "Increase Damage Buff Efficiency",
+                "nextBonus": "+4% From Damage Buff",
+                "icon": 87,
+                "currency": "t5",
+                "name": "Pet Arena Booster",
+                "hardcap": 100
+            },
+            "miningNrgReduce": {
+                "cost": 50,
+                "varname": "miningNrgReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 9,
+                "bonus": "-20.5% NRG Cooldown",
+                "description": "Reduces the Mining NRG replenish timer",
+                "nextBonus": "-22.5% NRG Cooldown",
+                "icon": 69,
+                "currency": "t4",
+                "name": "Mining NRG Reduction",
+                "hardcap": 100
+            },
+            "chestClaimReduce": {
+                "cost": 30,
+                "varname": "chestClaimReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 5,
+                "bonus": "-2.5% Claim Cooldown",
+                "description": "Reduces the timer required for claims",
+                "nextBonus": "-2.75% Claim Cooldown",
+                "icon": 33,
+                "currency": "t3",
+                "name": "Claim Reduction",
+                "hardcap": 100
+            },
+            "critBoostReduce": {
+                "cost": 50,
+                "varname": "critBoostReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 9,
+                "bonus": "-20.5% Cooldown",
+                "description": "Reduces the Cooldown for Critical Boost",
+                "nextBonus": "-22.5% Cooldown",
+                "icon": 40,
+                "currency": "t1",
+                "name": "CritBoost Reduction",
+                "hardcap": 100
+            },
+            "parenaHeal": {
+                "cost": 25,
+                "varname": "parenaHeal",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 4,
+                "bonus": "+4% From Heals",
+                "description": "Increase Healing Buff Efficiency",
+                "nextBonus": "+5% From Heals",
+                "icon": 86,
+                "currency": "t5",
+                "name": "Pet Arena Heals",
+                "hardcap": 100
+            },
+            "timeFreezeReduce": {
+                "cost": 30,
+                "varname": "timeFreezeReduce",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 5,
+                "bonus": "-12.5% Cooldown",
+                "description": "Reduces the Cooldown for Time Freeze",
+                "nextBonus": "-14.5% Cooldown",
+                "icon": 36,
+                "currency": "t1",
+                "name": "TimeFreeze Reduction",
+                "hardcap": 100
+            },
+            "mineCrit": {
+                "cost": 55,
+                "varname": "mineCrit",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 10,
+                "bonus": "+20% Crit Chance",
+                "description": "Increases chance to deal additional damage to mining bricks",
+                "nextBonus": "+22% Crit Chance",
+                "icon": 84,
+                "currency": "t4",
+                "name": "Mining Critical",
+                "hardcap": 100
+            },
+            "dynEff": {
+                "cost": 20,
+                "varname": "dynEff",
+                "maxLevel": 25,
+                "apCost": 0,
+                "level": 3,
+                "bonus": "+300 Damage",
+                "description": "Increase Dynamite Total Damage",
+                "nextBonus": "+400 Damage",
+                "icon": 85,
+                "currency": "t4",
+                "name": "Dynamite Efficiency",
+                "hardcap": 100
+            },
+            "autoCrit": {
+                "cost": 60,
+                "varname": "autoCrit",
+                "maxLevel": 100,
+                "apCost": 0,
+                "level": 11,
+                "bonus": "+5.5% Chance",
+                "description": "Increase Auto Crit Chance",
+                "nextBonus": "+6% Chance",
+                "icon": 97,
+                "currency": "t2",
+                "name": "Auto Crit",
+                "hardcap": 100
+            }
+        },
+        "world": {
+            "chestRate": {
+                "cost": 106120800,
+                "varname": "chestRate",
+                "maxLevel": 100,
+                "apCost": 40,
+                "level": 100,
+                "bonus": "+90.0% more gold",
+                "description": "Increase rate of treasure gold drops!",
+                "nextBonus": "+90.1% more gold",
+                "icon": 25,
+                "currency": "gold",
+                "name": "Huge Loots",
+                "hardcap": 100
+            },
+            "goldCoinCount": {
+                "cost": 500000000,
+                "varname": "goldCoinCount",
+                "maxLevel": 5,
+                "apCost": 1000,
+                "level": 5,
+                "bonus": "+5 Potential Coins dropped",
+                "description": "Increases potential coin drops",
+                "nextBonus": "+6 Potential Coins dropped",
+                "icon": 8,
+                "currency": "gold",
+                "name": "Coin Count",
+                "hardcap": 5
+            },
+            "chestChance": {
+                "cost": 106120800,
+                "varname": "chestChance",
+                "maxLevel": 100,
+                "apCost": 40,
+                "level": 100,
+                "bonus": "+90.0% Higher Chance",
+                "description": "Increase the chance for treasure to show up",
+                "nextBonus": "+90.1% Higher Chance",
+                "icon": 24,
+                "currency": "gold",
+                "name": "Treasure Hunter",
+                "hardcap": 100
+            },
+            "chestHP": {
+                "cost": 106120800,
+                "varname": "chestHP",
+                "maxLevel": 100,
+                "apCost": 40,
+                "level": 100,
+                "bonus": "-18.75% health",
+                "description": "Reduce the max health of treasure spawns",
+                "nextBonus": "-18.775% health",
+                "icon": 26,
+                "currency": "gold",
+                "name": "Easy Loots",
+                "hardcap": 100
+            },
+            "goldAmount": {
+                "cost": 106120800,
+                "varname": "goldAmount",
+                "maxLevel": 100,
+                "apCost": 40,
+                "level": 100,
+                "bonus": "+77.5% Gold",
+                "description": "Increased gold value earnings",
+                "nextBonus": "+77.6% Gold",
+                "icon": 9,
+                "currency": "gold",
+                "name": "Gold Rate",
+                "hardcap": 100
+            },
+            "tripleSize": {
+                "cost": 265302000,
+                "varname": "tripleSize",
+                "maxLevel": 100,
+                "apCost": 40,
+                "level": 100,
+                "bonus": "+9.00% chance",
+                "description": "Gives a chance for 3x the amount of coins dropped for all monsters",
+                "nextBonus": "+9.01% chance",
+                "icon": 27,
+                "currency": "gold",
+                "name": "Triple Size",
+                "hardcap": 100
+            },
+            "timeExtension": {
+                "cost": 100300300100,
+                "varname": "timeExtension",
+                "maxLevel": 1000,
+                "apCost": 800,
+                "level": 1000,
+                "bonus": "+41.250 Seconds",
+                "description": "Increases Fight Time",
+                "nextBonus": "+41.250 Seconds",
+                "icon": 7,
+                "currency": "gold",
+                "name": "Time Extend",
+                "hardcap": 1000
+            },
+            "monsterHpReduction": {
+                "cost": 159181200,
+                "varname": "monsterHpReduction",
+                "maxLevel": 100,
+                "apCost": 120,
+                "level": 100,
+                "bonus": "-18.75% HP",
+                "description": "Reduces the Max Health of non-treasure monsters",
+                "nextBonus": "-18.775% HP",
+                "icon": 2,
+                "currency": "gold",
+                "name": "HP Reduction",
+                "hardcap": 100
+            }
+        },
+        "ability": {
+            "timeFreeze": {
+                "cost": 1,
+                "varname": "timeFreeze",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 1,
+                "bonus": "+5.25s",
+                "description": "Freeze time for a duration",
+                "nextBonus": "5.5s",
+                "icon": 16,
+                "currency": "xp",
+                "name": "Time Freeze",
+                "hardcap": 200
+            },
+            "critChanceBoost": {
+                "cost": 1,
+                "varname": "critChanceBoost",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 25,
+                "bonus": "+47.5% for 10s",
+                "description": "Increase the chance to critically attack",
+                "nextBonus": "47.75% for 10s",
+                "icon": 21,
+                "currency": "xp",
+                "name": "Crit Chance Boost",
+                "hardcap": 100
+            },
+            "damageBoost": {
+                "cost": 1,
+                "varname": "damageBoost",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 47,
+                "bonus": "+137% for 10s",
+                "description": "Increase your click/auto attack damage",
+                "nextBonus": "138% for 10s",
+                "icon": 19,
+                "currency": "xp",
+                "name": "Damage Boost",
+                "hardcap": 100
+            },
+            "splat": {
+                "cost": 1,
+                "varname": "splat",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 1,
+                "bonus": "225% damage",
+                "description": "Deal a mass amount of damage in one swift attack",
+                "nextBonus": "250% damage",
+                "icon": 17,
+                "currency": "xp",
+                "name": "Splat",
+                "hardcap": 200
+            },
+            "speedBost": {
+                "cost": 1,
+                "varname": "speedBoost",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 100,
+                "bonus": "+190% for 10s",
+                "description": "Increase your auto/click speed",
+                "nextBonus": "190.25% for 10s",
+                "icon": 18,
+                "currency": "xp",
+                "name": "Speed Boost",
+                "hardcap": 200
+            },
+            "critBoost": {
+                "cost": 1,
+                "varname": "critBoost",
+                "maxLevel": 100,
+                "apCost": -1,
+                "level": 25,
+                "bonus": "+112.5% for 10s",
+                "description": "Increases the damage from critical attacks",
+                "nextBonus": "113.5% for 10s",
+                "icon": 20,
+                "currency": "xp",
+                "name": "Crit Enhancer",
+                "hardcap": 100
+            }
+        },
+        "mine": {
+            "nrg": {
+                "cost": 1266325,
+                "varname": "nrg",
+                "maxLevel": 200,
+                "apCost": 370,
+                "level": 36,
+                "bonus": "266 Max Mining Energy",
+                "description": "Increase your maximum Mining energy",
+                "nextBonus": "+272 Max Mining Energy",
+                "icon": 68,
+                "currency": "stone",
+                "name": "Energy Capacity",
+                "hardcap": 200
+            }
+        },
+        "vip": {
+            "multiFish": {
+                "cost": 300,
+                "varname": "multiFish",
+                "maxLevel": 150,
+                "apCost": 10000,
+                "level": 51,
+                "bonus": "+51% Multiple Fish Catch",
+                "description": "Permanent increase your chance to catch additional fish",
+                "nextBonus": "+52% Multiple Fish Catch",
+                "icon": 101,
+                "currency": "diamond",
+                "name": "Multi Catch",
+                "hardcap": 150
+            },
+            "goldRate": {
+                "cost": 300,
+                "varname": "goldRate",
+                "maxLevel": 150,
+                "apCost": 10000,
+                "level": 51,
+                "bonus": "+71% Gold Drops",
+                "description": "Increases the amount of gold dropped",
+                "nextBonus": "+72%  Gold Drops",
+                "icon": 23,
+                "currency": "diamond",
+                "name": "Gold Boost",
+                "hardcap": 150
+            },
+            "ascPoints": {
+                "cost": 250,
+                "varname": "ascPoints",
+                "maxLevel": 150,
+                "apCost": 10000,
+                "level": 120,
+                "bonus": "+240 Ascension Pts",
+                "description": "Permanent increase to the max amount of ascension points you can spend",
+                "nextBonus": "+242 Ascension Pts",
+                "icon": 82,
+                "currency": "diamond",
+                "name": "Ascension Points",
+                "hardcap": 150
+            },
+            "xpRate": {
+                "cost": 300,
+                "varname": "xpRate",
+                "maxLevel": 150,
+                "apCost": 10000,
+                "level": 50,
+                "bonus": "+70% XP",
+                "description": "Increase the amount of experience gained",
+                "nextBonus": "+71% XP",
+                "icon": 22,
+                "currency": "diamond",
+                "name": "Exp Boost",
+                "hardcap": 150
+            }
+        },
+        "idle": {
+            "critMult": {
+                "cost": 412120400,
+                "varname": "critMult",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+200%",
+                "description": "Increase the Damage from Auto criticals",
+                "nextBonus": "+200.5%",
+                "icon": 66,
+                "currency": "gold",
+                "name": "Critical Multiplier",
+                "hardcap": 200
+            },
+            "doubleAttackChance": {
+                "cost": 412120400,
+                "varname": "doubleAttackChance",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+27.25% Chance",
+                "description": "Increase the chance to perform additional attack(s)",
+                "nextBonus": "+27.26% Chance",
+                "icon": 67,
+                "currency": "gold",
+                "name": "Multi Attack",
+                "hardcap": 200
+            },
+            "speed": {
+                "cost": 1386724501562500,
+                "varname": "speed",
+                "maxLevel": 200,
+                "apCost": 240,
+                "level": 153,
+                "bonus": "+46.55% Speed",
+                "description": "Increases the rate that you can auto attack",
+                "nextBonus": "+46.65% Speed",
+                "icon": 43,
+                "currency": "gold",
+                "name": "Auto Speed",
+                "hardcap": 200
+            },
+            "critChance": {
+                "cost": 824240800,
+                "varname": "critChance",
+                "maxLevel": 200,
+                "apCost": 80,
+                "level": 200,
+                "bonus": "+28.75% Chance",
+                "description": "Increase the Chance to Critical hit with Auto Attacks",
+                "nextBonus": "+28.775% Chance",
+                "icon": 44,
+                "currency": "gold",
+                "name": "Critical Chance",
+                "hardcap": 200
+            },
+            "baseDamage": {
+                "cost": 100300300100,
+                "varname": "baseDamage",
+                "maxLevel": 6090,
+                "apCost": 200,
+                "level": 6090,
+                "bonus": "+1672785 Damage",
+                "description": "Increase your base Auto attack damage",
+                "nextBonus": "+1673126 Damage",
+                "icon": 42,
+                "currency": "gold",
+                "name": "Base Damage",
+                "hardcap": 6090
+            }
+        },
+        "legend": {
+            "goldYield": {
+                "cost": 1,
+                "varname": "goldYield",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Gold Gains",
+                "description": "Increases your Gold Gains further",
+                "nextBonus": "+1% Gold Gains",
+                "icon": 76,
+                "currency": "legend",
+                "name": "Gold Boost",
+                "hardcap": 50
+            },
+            "clickDmg": {
+                "cost": 2,
+                "varname": "clickDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Click Damage",
+                "description": "Increases your click damage further",
+                "nextBonus": "+1% Click Damage",
+                "icon": 71,
+                "currency": "legend",
+                "name": "Click Damage",
+                "hardcap": 50
+            },
+            "autoDmg": {
+                "cost": 3,
+                "varname": "autoDmg",
+                "maxLevel": 100,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Auto Damage",
+                "description": "Increases your auto damage further",
+                "nextBonus": "+2% Auto Damage",
+                "icon": 70,
+                "currency": "legend",
+                "name": "Auto Damage",
+                "hardcap": 100
+            },
+            "woodDmg": {
+                "cost": 1,
+                "varname": "woodDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Woodcutting Damage",
+                "description": "Increases your Woodcutting Damage",
+                "nextBonus": "+2% Woodcutting Damage",
+                "icon": 73,
+                "currency": "legend",
+                "name": "Woodcutting Damage",
+                "hardcap": 50
+            },
+            "challengeDmg": {
+                "cost": 1,
+                "varname": "challengeDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Challenge Damage",
+                "description": "Increase Auto and Click Damage in Non-Series Challenges",
+                "nextBonus": "+1% Challenge Damage",
+                "icon": 72,
+                "currency": "legend",
+                "name": "Challenge Damage",
+                "hardcap": 50
+            },
+            "petDmg": {
+                "cost": 2,
+                "varname": "petDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Pet Damage",
+                "description": "Increases your pet attack damage in arena",
+                "nextBonus": "+1% Pet Damage",
+                "icon": 75,
+                "currency": "legend",
+                "name": "Pet Arena Damage",
+                "hardcap": 50
+            },
+            "shipArenaDmg": {
+                "cost": 1,
+                "varname": "shipArenaDmg",
+                "maxLevel": 50,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Ship Damage",
+                "description": "Increases your ship arena damage against AI Opponents",
+                "nextBonus": "+1% Ship Damage",
+                "icon": 74,
+                "currency": "legend",
+                "name": "Ship Arena Damage",
+                "hardcap": 50
+            },
+            "petRealDmg": {
+                "cost": 5,
+                "varname": "petRealDmg",
+                "maxLevel": 25,
+                "apCost": 100000000,
+                "level": 0,
+                "bonus": "+0% Pet Damage",
+                "description": "Increases your pet damage",
+                "nextBonus": "+1% Pet Damage",
+                "icon": 103,
+                "currency": "legend",
+                "name": "Pet Damage",
+                "hardcap": 25
+            }
+        }
+    },
+    "name": "sweko",
+    "partyID": "kong2333683587479738902",
+    "cards": [
+        330208,
+        183294,
+        400165,
+        349621,
+        5071,
+        438495,
+        191851,
+        320077,
+        708051,
+        11181,
+        326621,
+        261033,
+        204831,
+        393083,
+        12294,
+        140486,
+        171749,
+        208740,
+        1115908,
+        10964,
+        114448,
+        240777,
+        171698,
+        250251,
+        5006,
+        118555,
+        346539,
+        128979,
+        286940,
+        5123,
+        57971,
+        11285,
+        12266,
+        16348,
+        7463,
+        10037,
+        12486,
+        16708,
+        12448,
+        11725,
+        11196,
+        12919,
+        14528,
+        12412,
+        5543,
+        13511,
+        11267,
+        10461,
+        10908,
+        10974,
+        17911,
+        17527,
+        16456,
+        22430,
+        10426,
+        19895,
+        12132,
+        10540,
+        20411,
+        5003,
+        10199,
+        13256,
+        13061,
+        18982,
+        10192,
+        11273,
+        11405,
+        11727,
+        71590,
+        7200,
+        16388,
+        28962,
+        12676,
+        21282,
+        11153,
+        11450,
+        17266,
+        14529,
+        33298,
+        5165,
+        10571,
+        17620,
+        16092,
+        19041,
+        5114,
+        10095,
+        689161,
+        17590,
+        13774,
+        16003,
+        50774,
+        22804,
+        15135,
+        10630,
+        10904,
+        25681,
+        12453,
+        20532,
+        16131,
+        5084,
+        12705,
+        29700,
+        850748,
+        43692,
+        10045,
+        15191,
+        57658,
+        37256,
+        15438,
+        3997,
+        63192,
+        33262,
+        13897,
+        25911,
+        5051,
+        22711,
+        50498,
+        10339,
+        12494,
+        10298,
+        11581,
+        12334,
+        17954,
+        83533,
+        5106,
+        15551,
+        21754,
+        13879,
+        19801,
+        10088,
+        25033,
+        16772,
+        21027,
+        12058,
+        5134,
+        10864,
+        17041,
+        10846,
+        35324,
+        29665,
+        43810,
+        57411,
+        62828,
+        26151,
+        7695,
+        31018,
+        38197,
+        242810,
+        138812,
+        10647,
+        29857,
+        110803,
+        18293,
+        16645,
+        10194,
+        25852,
+        22787,
+        31058,
+        20567,
+        10115,
+        30644,
+        55371,
+        213165,
+        54972,
+        5224,
+        277224,
+        84699,
+        51458,
+        120162,
+        11579
+    ],
+    "adventure": {
+        "xp": 11738854517168,
+        "zone": 7,
+        "highestZone": 45,
+        "ascensionTier": 3,
+        "world": 7,
+        "level": 789,
+        "infernoTier": 1000,
+        "highestWorld": 10
+    },
+    "personalInvestments": {
+        "SacrificialTower": 22603364,
+        "Library_Level": 35,
+        "Total": 344515190,
+        "Stable_Level": 30,
+        "Bank": 7674058,
+        "Aqua_Level": 35,
+        "Fortress_Level": 31,
+        "Sawmill": 25128796,
+        "Spatial_Level": 35,
+        "Altar": 86242633,
+        "Warehouse_Level": 30,
+        "Library": 33874766,
+        "Stable": 53207170,
+        "SacrificialTower_Level": 35,
+        "Aqua": 21604317,
+        "Fortress": 45526749,
+        "Bank_Level": 30,
+        "Spatial": 44434929,
+        "Warehouse": 4218408,
+        "Sawmill_Level": 30,
+        "Altar_Level": 30
+    },
+    "account": {
+        "vipLevel": 7,
+        "lineageLevel": 8
+    }
+}

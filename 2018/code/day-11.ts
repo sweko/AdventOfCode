@@ -1,12 +1,15 @@
 import { readInput, loopMatrix } from "../extra/aoc-helper";
 import { performance } from "perf_hooks";
 import "../extra/array-helpers";
+import { generatePrinter } from "../extra/terminal-helper";
 
 interface Node {
     value: number;
     prev: Node;
     next: Node;
 }
+
+const printer = generatePrinter();
 
 async function main() {
     const startInput = performance.now();
@@ -87,8 +90,10 @@ function processPartTwo(serial: number): { top: number, left: number, size: numb
         size: -1
     }
 
+    initPowerDict(powers);
+
     for (let sqsize = 1; sqsize <= size; sqsize++) {
-        const {top, left, maxPower} = processPowers(powers, sqsize);
+        const { top, left, maxPower } = processPowers(powers, sqsize);
         if (maxPower > total.maxPower) {
             total = {
                 maxPower,
@@ -101,19 +106,54 @@ function processPartTwo(serial: number): { top: number, left: number, size: numb
 
     return total;
 }
+const powerDict: { [key: string]: number } = {};
+
+function initPowerDict(powers: number[][]) {
+    for (let row = 0; row < powers.length; row++) {
+        for (let column = 0; column < powers.length; column++) {
+            const key = `${row},${column},1`;
+            powerDict[key] = powers[row][column];
+        }
+    }
+}
+
+function getPowerMemo(squareSize: number, powers: number[][], rowIndex: number, colIndex: number) {
+    const key = `${rowIndex},${colIndex},${squareSize}`;
+    if (powerDict[key] !== undefined) {
+        return powerDict[key];
+    }
+    let power;
+    if (squareSize % 2 === 0) {
+        const half = squareSize / 2;
+        power = getPowerMemo(half, powers, rowIndex, colIndex)
+            + getPowerMemo(half, powers, rowIndex + half, colIndex)
+            + getPowerMemo(half, powers, rowIndex, colIndex + half)
+            + getPowerMemo(half, powers, rowIndex + half, colIndex + half);
+    } else {
+        power = getPower(squareSize, powers, rowIndex, colIndex);
+    }
+    powerDict[key] = power;
+    return power;
+}
+
+
+function getPower(squareSize: number, powers: number[][], rowIndex: number, colIndex: number) {
+    let power = 0;
+    for (let row = 0; row < squareSize; row++) {
+        for (let column = 0; column < squareSize; column++) {
+            power += powers[rowIndex + row][colIndex + column];
+        }
+    }
+    return power;
+}
 
 function processPowers(powers: number[][], squareSize: number) {
-    console.log(`---- ${squareSize}----`);
+    printer.print(squareSize, `---- ${squareSize} ----`, Object.keys(powerDict).length);
     let maxPower = Number.NEGATIVE_INFINITY;
     let top, left;
     for (let rowIndex = 1; rowIndex <= powers.length - squareSize; rowIndex++) {
         for (let colIndex = 1; colIndex <= powers.length - squareSize; colIndex++) {
-            let power = 0;
-            for (let row = 0; row < squareSize; row++) {
-                for (let column = 0; column < squareSize; column++) {
-                    power += powers[rowIndex + row][colIndex + column];
-                }
-            }
+            let power = getPowerMemo(squareSize, powers, rowIndex, colIndex);
             if (power > maxPower) {
                 maxPower = power;
                 top = rowIndex;
@@ -127,3 +167,5 @@ function processPowers(powers: number[][], squareSize: number) {
 
 
 main();
+
+
