@@ -9,15 +9,13 @@ const processInput = async (day: number) => {
 };
 
 const partOne = (modules: number[]) => {
-    const fuels = modules.map(module => ((module / 3) | 0) - 2);
-    const sum = fuels.reduce((fuel, sum) => sum + fuel, 0);
-    return sum;
+    const fuelSum = modules.map(module => ((module / 3) | 0) - 2).sum();
+    return fuelSum;
 };
 
 const partTwo = (modules: number[]) => {
-    const fuels = modules.map(module => getFuelRequirement(module));
-    const sum = fuels.reduce((fuel, sum) => sum + fuel, 0);
-    return sum;
+    const fuelSum = modules.map(module => getFuelRequirement(module)).sum();
+    return fuelSum;
 };
 
 const resultMessage = (modules: number[], result: number) => {
