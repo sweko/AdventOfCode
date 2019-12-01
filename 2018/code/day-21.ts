@@ -37,15 +37,23 @@ async function main() {
     let regZero = processPartOne(program);
     const endOne = performance.now();
 
-    console.log(`Part 1: Register zero has value of ${regZero}`);
+    console.log(`Part 1: Register zero should have value of ${regZero} for minimal ops`);
     console.log(`Running time for part 1 is ${Math.round(endOne - startOne)}ms`);
 
     const startTwo = performance.now();
     regZero = processPartTwo(program);
     const endTwo = performance.now();
 
-    console.log(`Part 2: Register zero has value of ${regZero}`);
+    console.log(`Part 2: Register zero should have value of ${regZero} for maximal ops`);
     console.log(`Running time for part 2 is ${Math.round(endTwo - startTwo)}ms`);
+
+    /*
+        Running time for input is 14ms
+        Part 1: Register zero should have value of 3909249 for minimal ops
+        Running time for part 1 is 7ms
+        Part 2: Register zero should have value of 12333799 for maximal ops
+        Running time for part 2 is 1004687ms    
+    */
 }
 
 function processLines(lines: string[]): Program {
@@ -265,58 +273,45 @@ function processPartOne(program: Program): number {
     let state: Registers = [0, 0, 0, 0, 0, 0];
     const { ipIndex, instructions } = program;
     let ip = 0;
-    let runLength = 0;
-    const printer = generateModuloPrinter(1000);
     while (ip < instructions.length) {
         const instruction = instructions[ip];
         state[ipIndex] = ip;
         const operation = opcodes.find(opcode => opcode.mnemonic === instruction.opcode);
+        if (operation.mnemonic === "eqrr") {
+            // the only place where the register 0 is used is in the command
+            // eqrr 3 0 5
+            // I'm abusing the fact that it's the only place where the mnemonic "eqrr" is used, 
+            // since I don't have an index of the operation
+            return state[3];
+        }
         state = operation.operation(state, instruction.a, instruction.b, instruction.c);
         ip = state[ipIndex] + 1;
-        runLength += 1;
-        printer.print(runLength, runLength, state);
     }
-    console.log(runLength, state);
-    return state[0];
 }
 
-function rewrite(program: Program) {
-    const { ipIndex, instructions } = program;
-    const rewrites = [];
-    for (const instruction of instructions) {
-        const operation = opcodes.find(opcode => opcode.mnemonic === instruction.opcode);
-        const rewritten = operation.rewrite(instruction.a, instruction.b, instruction.c).replace(`r${ipIndex}`, "IP");
-        rewrites.push(rewritten);
-    }
-    return rewrites;
-}
-
+// takes a long, long time - the original program needs to be changed to run faster
 function processPartTwo(program: Program): number {
-    // this will never end, but the solution is the sum of divisors of the value that ends up in r[1]
-    // const rewrites = rewrite(program);
-    let state: Registers = [1, 0, 0, 0, 0, 0];
+    let state: Registers = [0, 0, 0, 0, 0, 0];
     const { ipIndex, instructions } = program;
     let ip = 0;
-    let runLength = 0;
-    const histogram = Array(instructions.length).fill(0);
+    const breakers = [];
     while (ip < instructions.length) {
         const instruction = instructions[ip];
-        histogram[ip] += 1;
-        // console.log(`${(ip + 1).toString().padStart(3, " ")}: ${rewrites[ip]}`);
         state[ipIndex] = ip;
         const operation = opcodes.find(opcode => opcode.mnemonic === instruction.opcode);
+        if (operation.mnemonic === "eqrr") {
+            // if the current value of register 3 is in the breakers array, the last added one is the solution
+            // otherwise, add the value to the breakers and continue
+            if (breakers.includes(state[3])) {
+                return breakers[breakers.length-1];
+            }
+            breakers.push(state[3]);
+            console.log(`Adding \t${state[3]} to breakers array, total \t${breakers.length} breakers\t\t`);
+            terminal.previousLine();
+        }
         state = operation.operation(state, instruction.a, instruction.b, instruction.c);
         ip = state[ipIndex] + 1;
-        runLength += 1;
-        if (runLength % 100000 === 0) {
-            console.log(printRow(state, 10));
-            console.log(histogram);
-            terminal.previousLine(37);
-        }
     }
-    console.log(histogram);
-    console.log(runLength, state);
-    return state[0];
 }
 
 main();
