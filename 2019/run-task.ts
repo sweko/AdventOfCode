@@ -1,4 +1,5 @@
-import { solution } from "./code/day-01";
+import { solution as solution_1} from "./code/day-01";
+import { solution } from "./code/day-02";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
