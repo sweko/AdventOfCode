@@ -41,7 +41,7 @@ const test = () => {
     console.log(getFuelRequirement(100756));
 };
 
-export const solution: Puzzle<number[], number> = {
+export const solutionOne: Puzzle<number[], number> = {
     day: 1,
     input: processInput,
     partOne,

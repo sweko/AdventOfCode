@@ -62,7 +62,7 @@ const test = () => {
     }
 };
 
-export const solution: Puzzle<number[], number> = {
+export const solutionTwo: Puzzle<number[], number> = {
     day: 2,
     input: processInput,
     partOne,

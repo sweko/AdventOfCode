@@ -1,5 +1,7 @@
-import { solution as solution_1} from "./code/day-01";
-import { solution } from "./code/day-02";
+import { solutionOne} from "./code/day-01";
+import { solutionTwo} from "./code/day-02";
+import { solutionThree as solution} from "./code/day-03";
+import { solution17_2018} from "./code/day-17.2018";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
