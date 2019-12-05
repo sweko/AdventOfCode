@@ -1,13 +1,17 @@
-import { solutionOne} from "./code/day-01";
-import { solutionTwo} from "./code/day-02";
-import { solutionThree as solution} from "./code/day-03";
-import { solution17_2018} from "./code/day-17.2018";
+import { solutionOne } from "./code/day-01";
+import { solutionTwo } from "./code/day-02";
+import { solutionThree } from "./code/day-03";
+import { solutionFour } from "./code/day-04";
+import { solutionFive } from "./code/day-05";
+import { solution17_2018 } from "./code/day-17.2018";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
 
 (async () => {
+
+    const solution = solutionFour;
 
     console.log(`Start processing input`)
     const startInput = performance.now();
@@ -21,7 +25,7 @@ const test = process.env.TEST;
 
     if (test) {
         solution.test(input);
-        return;        
+        return;
     }
 
     console.log(`Part 1: Initiating processing`);

@@ -36,18 +36,31 @@ const lineToCommands = (line: string): Command[] => line.split(",").map(cmd => (
 }));
 
 const partOne = (commands: CommandPair) => {
-    const result: { [key: string]: number } = {};
-    runMazeOne(commands.first, result, 1);
-    runMazeOne(commands.second, result, 2);
-    const closest = Object.entries(result)
-        .filter(entry => entry[1] === 3)
-        .map(entry => entry[0].split(":").map(c => parseInt(c)).sum(x => Math.abs(x)))
-        .min();
+    const fmaze = runMazeOne(commands.first).sort();
+    const smaze = runMazeOne(commands.second).sort();
+    let findex = 0, sindex = 0;
+    let closest = Number.MAX_SAFE_INTEGER;
+    while (findex !== fmaze.length && sindex !== fmaze.length) {
+        if (fmaze[findex] > smaze[sindex]) {
+            sindex += 1;
+        } else if (fmaze[findex] < smaze[sindex]) {
+            findex += 1;
+        } else {
+            const coords = fmaze[findex].split(":").map(c => parseInt(c));
+            const value = Math.abs(coords[0]) + Math.abs(coords[1]);
+            if (closest > value) {
+                closest = value;
+            }
+            findex += 1;
+            sindex += 1;
+        }
+    }
     return closest;
 };
 
-const runMazeOne = (commands: Command[], maze: { [key: string]: number }, factor: number) => {
-    let loc = { x: 0, y: 0 };
+const runMazeOne = (commands: Command[]) => {
+    const maze: string[] = [];
+    let locx = 0, locy = 0;// = { x: 0, y: 0 };
     for (const command of commands) {
         const vector = vectors[command.direction];
         for (let index = 0; index < command.ammount; index += 1) {
@@ -56,7 +69,7 @@ const runMazeOne = (commands: Command[], maze: { [key: string]: number }, factor
                 y: loc.y + vector.y
             };
             const id = `${pos.x}:${pos.y}`;
-            maze[id] = maze[id] | factor;
+            maze.push(id);
             loc = pos;
         }
     }
@@ -64,38 +77,43 @@ const runMazeOne = (commands: Command[], maze: { [key: string]: number }, factor
 }
 
 const partTwo = (commands: CommandPair) => {
-    const result: { [key: string]: { [key: number]: number } } = {};
-    runMazeTwo(commands.first, result, 1);
-    runMazeTwo(commands.second, result, 2);
-    const closest = Object.entries(result)
-        .filter(entry => Object.keys(entry[1]).length === 2)
-        .map(entry => ({
-            key: entry[0],
-            value: Object.values(entry[1]).sum()
-        }))
-        .min(kvp => kvp.value);
+    const fmaze = runMazeTwo(commands.first);
+    const smaze = runMazeTwo(commands.second);
+    fmaze.sort((akvp, bkvp) => akvp.key > bkvp.key ? 1 : akvp.key < bkvp.key ? -1 : 0);
+    smaze.sort((akvp, bkvp) => akvp.key > bkvp.key ? 1 : akvp.key < bkvp.key ? -1 : 0);
+    let findex = 0, sindex = 0;
+    let closest = Number.MAX_SAFE_INTEGER;
+    while (findex !== fmaze.length && sindex !== fmaze.length) {
+        if (fmaze[findex].key > smaze[sindex].key) {
+            sindex += 1;
+        } else if (fmaze[findex].key < smaze[sindex].key) {
+            findex += 1;
+        } else {
+            const value = fmaze[findex].step + smaze[sindex].step;
+            if (closest > value) {
+                closest = value
+            }
+            findex += 1;
+            sindex += 1;
+        }
+    }
     return closest;
 };
 
-const runMazeTwo = (commands: Command[], maze:  { [key: string]: { [key: number]: number } }, cid: number) => {
+const runMazeTwo = (commands: Command[]) => {
+    const maze: { key: string, step: number }[] = [];
     let loc = { x: 0, y: 0 };
-    let factor = 0;
+    let steps = 0;
     for (const command of commands) {
         const vector = vectors[command.direction];
         for (let index = 0; index < command.ammount; index += 1) {
-            factor += 1;
+            steps += 1;
             const pos = {
                 x: loc.x + vector.x,
                 y: loc.y + vector.y
             };
             const id = `${pos.x}:${pos.y}`;
-            if (maze[id]) {
-                if (!maze[id][cid]) {
-                    maze[id][cid] = factor ;    
-                }
-            } else {
-                maze[id] = { [cid]: factor }
-            }
+            maze.push({ key: id, step: steps });
             loc = pos;
         }
     }
@@ -110,7 +128,6 @@ const resultTwo = (_: any, result: number) => {
     return `Fewest number of steps to get to an intersect is ${result}`;
 };
 
-
 const showInput = (input: CommandPair) => {
     console.log(input);
 };
@@ -121,7 +138,7 @@ const test = () => {
         first: lineToCommands(lines[0]),
         second: lineToCommands(lines[1])
     }
-    const result = partTwo(commands);
+    const result = partOne(commands);
     console.log(result);
 };
 
