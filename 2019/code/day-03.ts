@@ -65,12 +65,13 @@ const runMazeOne = (commands: Command[]) => {
         const vector = vectors[command.direction];
         for (let index = 0; index < command.ammount; index += 1) {
             const pos = {
-                x: loc.x + vector.x,
-                y: loc.y + vector.y
+                x: locx + vector.x,
+                y: locy + vector.y
             };
             const id = `${pos.x}:${pos.y}`;
             maze.push(id);
-            loc = pos;
+            locx = pos.x;
+            locy = pos.y;
         }
     }
     return maze;
