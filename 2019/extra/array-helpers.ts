@@ -124,9 +124,3 @@ if (!Array.prototype.maxFind) {
     };
 }
 
-if (!Array.prototype.flatMap) {
-    Array.prototype.flatMap = function <T, U>(selector: (item: T, index: number, array: T[]) => U[]): U[] {
-        const array: T[] = this;
-        return array.reduce((acc: U[], item: T, index: number) => [...acc, ...selector(item, index, array)], []);
-    }
-}

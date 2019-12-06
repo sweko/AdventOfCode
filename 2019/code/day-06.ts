@@ -54,7 +54,13 @@ const partOne = (orbits: [string, string][]) => {
 };
 
 const toArray = (root: CelestialBody): CelestialBody[] => {
-    return [root, ...root.satelites.flatMap(s => toArray(s))];
+    // flat map is slow
+    // return [root, ...root.satelites.flatMap(s => toArray(s))];
+    const result = [root];
+    for (const satelite of root.satelites) {
+        result.push(...toArray(satelite));
+    }
+    return result;
 }
 
 const getParents = (body: CelestialBody, bodies: CelestialBody[]) : string[] =>{
@@ -79,7 +85,6 @@ const partTwo = (orbits: [string, string][]) => {
 
     return youPath.length + sanPath.length - 2;
 };
-
 
 const resultOne = (_: any, result: number) => {
     return `Total number of orbits is ${result}`;
@@ -108,4 +113,3 @@ export const solutionSix: Puzzle<[string, string][], number> = {
     showInput,
     test,
 }
-
