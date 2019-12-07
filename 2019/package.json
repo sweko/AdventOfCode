@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node run-task",
     "test": "cross-env TEST=true npm start",
-    "debug": "cross-env DEBUG=true npm start"
+    "debug": "cross-env DEBUG=true npm start",
+    "test:mon": "cross-env TEST=true nodemon"
   },
   "author": "",
   "license": "ISC",

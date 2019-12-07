@@ -1,7 +1,7 @@
 import { FileSystem } from "./file-system";
 
 export function getDay(day: number) {
-    if (day<10) {
+    if (day < 10) {
         return `day-0${day}.txt`;
     } else {
         return `day-${day}.txt`;
@@ -19,7 +19,7 @@ export async function readInputLines(day: number) {
     return input.split("\r\n");
 }
 
-export function loopMatrix(matrix: any[][], operation: (row, column, element)=>any) {
+export function loopMatrix<T>(matrix: T[][], operation: (row: number, column: number, element: T) => any) {
     for (let rindex = 0; rindex < matrix.length; rindex++) {
         const row = matrix[rindex];
         for (let cindex = 0; cindex < row.length; cindex++) {

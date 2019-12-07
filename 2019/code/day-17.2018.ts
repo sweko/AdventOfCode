@@ -18,6 +18,11 @@ interface Raster {
     source: number;
 }
 
+interface Point {
+    x: number,
+    y: number
+}
+
 
 const wallRegex = /^(x|y)=(\d+), (x|y)=(\d+)\.\.(\d+)$/i;
 
@@ -60,7 +65,7 @@ const wallToRaster = (walls: Wall[]): Raster => {
         y: wall.y
     }));
 
-    const map = new Array(maxY).fill(null).map(_ => new Array(maxX).fill("."));
+    const map = new Array(maxY).fill(null).map(_ => new Array(maxX).fill(" "));
 
     for (const wall of walls2) {
         for (let x = wall.x.from; x <= wall.x.to; x += 1) {
@@ -70,9 +75,9 @@ const wallToRaster = (walls: Wall[]): Raster => {
         }
     };
 
-    return { 
+    return {
         map,
-        source: 500-minX
+        source: 500 - minX
     };
 }
 
@@ -103,8 +108,30 @@ const showInput = (walls: Wall[]) => {
     // console.log(minY, maxY);
 };
 
+const get = (raster: Raster, source: Point) => {
+    return raster.map[source.x][source.y];
+}
+
+const set = (raster: Raster, source: Point, value: string) => {
+    raster.map[source.x][source.y] = value;
+}
+
 const runPipe = (raster: Raster): Raster => {
-    raster.map[0][raster.source] = "~";
+    let source = { x: 0, y: raster.source };
+
+    //fall down
+    while (get(raster, source) === " ") {
+        set(raster, source, "~");
+        source = { x: source.x + 1, y: source.y };
+    }
+    //fill and backtrack
+    let offset = -1;
+    while (get(raster, {x: source.x + offset, y: source.x}) === " ") {
+
+        offset -=1;
+    }
+
+
     printMatrix(raster.map);
     return raster;
 }

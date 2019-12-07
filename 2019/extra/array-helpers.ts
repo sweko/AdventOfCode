@@ -11,6 +11,8 @@ interface Array<T> {
 
     minFind(selector?: (item: T, index: number) => number): T;
     maxFind(selector?: (item: T, index: number) => number): T;
+
+    last():T
 }
 
 if (!Array.prototype.groupBy) {
@@ -122,5 +124,12 @@ if (!Array.prototype.maxFind) {
         }
         return maxElement;
     };
+}
+
+if (!Array.prototype.last) {
+    Array.prototype.last = function <T>() {
+        const array = this;
+        return array[array.length-1];
+    }
 }
 
