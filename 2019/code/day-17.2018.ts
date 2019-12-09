@@ -1,4 +1,4 @@
-import { readInputLines } from "../extra/aoc-helper";
+import { readInputLines, loopMatrix } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { printMatrix } from "../extra/terminal-helper";
 import { Puzzle } from "./model";
@@ -101,9 +101,6 @@ const showInput = (walls: Wall[]) => {
 
     //printMatrix(result.map);
     runPipe(result);
-
-
-
     // console.log(minX, maxX);
     // console.log(minY, maxY);
 };
@@ -112,29 +109,106 @@ const get = (raster: Raster, source: Point) => {
     return raster.map[source.x][source.y];
 }
 
-const set = (raster: Raster, source: Point, value: string) => {
-    raster.map[source.x][source.y] = value;
+let step = 0;
+let limit = 25700000;
+
+const set = (raster: Raster, source: Point, value: string, force = false) => {
+    step += 1;
+    if (step < limit || force) {
+        raster.map[source.x][source.y] = value;
+    }
 }
+
+const below = (point: Point) => ({ x: point.x + 1, y: point.y });
+const above = (point: Point) => ({ x: point.x - 1, y: point.y });
+const left = (point: Point) => ({ x: point.x, y: point.y - 1 });
+const right = (point: Point) => ({ x: point.x, y: point.y + 1 });
 
 const runPipe = (raster: Raster): Raster => {
     let source = { x: 0, y: raster.source };
-
-    //fall down
-    while (get(raster, source) === " ") {
-        set(raster, source, "~");
-        source = { x: source.x + 1, y: source.y };
-    }
-    //fill and backtrack
-    let offset = -1;
-    while (get(raster, {x: source.x + offset, y: source.x}) === " ") {
-
-        offset -=1;
-    }
-
-
+    runSource(raster, source);
     printMatrix(raster.map);
+    let count = 0;
+    loopMatrix(raster.map, (_, __, element) => {
+        if (element === "~") {
+            count +=1;
+        }
+    })
+    console.log("count is ", count);
     return raster;
 }
+
+const runSource = (raster: Raster, source: { x: number; y: number; }, level = 0) => {
+    if (step >= limit) {
+        console.log("BREAKING");
+        return;
+    }
+    if (get(raster, below(source)) === "~") {
+        return;
+    }
+    while (get(raster, source) === " ") {
+        set(raster, source, "~");
+        source = below(source);
+        if (source.x === raster.map.length) {
+            console.log("GLU GLU");
+            return;
+        }
+    }
+    if (get(raster, source) === "~") {
+        //test left (should be water with air above until wall);
+        let current = left(source);
+        while (get(raster, current) === "~") { 
+            current = left(current)
+        }
+        if (get(raster, current) !== "#") {
+            return;
+        }
+        current = right(source);
+        while (get(raster, current) === "~") { 
+            current = right(current)
+        }
+        if (get(raster, current) !== "#") {
+            return;
+        }
+    }
+    source = above(source);
+    let isInContainer = true;
+    let lsource = null, rsource = null;
+    //fill and backtrack
+    while (isInContainer) {
+        set(raster, source, "~");
+        //fill left and right
+        let current = left(source);
+        while (["#", "~"].includes(get(raster, below(current))) && [" ", "~"].includes(get(raster, current))) {
+            set(raster, current, "~");
+            current = left(current);
+        }
+        if (get(raster, below(current)) === " ") {
+            isInContainer = false;
+            lsource = current;
+        }
+
+        current = right(source);
+        while (["#", "~"].includes(get(raster, below(current))) && [" ", "~"].includes(get(raster, current))) {
+            set(raster, current, "~");
+            current = right(current);
+        }
+        if (get(raster, below(current)) === " ") {
+            isInContainer = false;
+            rsource = current;
+        }
+        if (lsource) {
+            console.log("running left", lsource, level);
+            runSource(raster, lsource, level + 1);
+        }
+        if (rsource) {
+            console.log("running right", rsource, level, "-->", lsource);
+            runSource(raster, rsource, level + 1);
+        }
+        source = above(source);
+    }
+}
+
 
 const test = () => {
     const inputLines = [
@@ -161,4 +235,5 @@ export const solution17_2018: Puzzle<Wall[], number> = {
     showInput,
     test,
 }
+
 

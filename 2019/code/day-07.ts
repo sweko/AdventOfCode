@@ -1,6 +1,5 @@
 import { readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
-import "../extra/num-helpers";
 import { Puzzle } from "./model";
 import { getAllPermutations, range } from "../extra/num-helpers";
 

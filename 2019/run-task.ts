@@ -5,6 +5,7 @@ import { solutionFour } from "./code/day-04";
 import { solutionFive } from "./code/day-05";
 import { solutionSix } from "./code/day-06";
 import { solutionSeven } from "./code/day-07";
+import { solutionEight } from "./code/day-08";
 import { solution17_2018 } from "./code/day-17.2018";
 import { performance } from "perf_hooks";
 
@@ -13,7 +14,7 @@ const test = process.env.TEST;
 
 (async () => {
 
-    const solution = solutionSeven;
+    const solution = solution17_2018;
 
     console.log(`Start processing input`)
     const startInput = performance.now();

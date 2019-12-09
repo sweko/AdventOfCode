@@ -13,6 +13,7 @@ interface Array<T> {
     maxFind(selector?: (item: T, index: number) => number): T;
 
     last():T
+    splitAt(index: number): T[][]
 }
 
 if (!Array.prototype.groupBy) {
@@ -130,6 +131,19 @@ if (!Array.prototype.last) {
     Array.prototype.last = function <T>() {
         const array = this;
         return array[array.length-1];
+    }
+}
+
+if (!Array.prototype.splitAt) {
+    Array.prototype.splitAt = function <T>(index: number) {
+        const array = this;
+        const result = [];
+        let start = 0;
+        while (start < array.length) {
+            result.push(array.slice(start, start+index));
+            start += index;
+        }
+        return result;
     }
 }
 
