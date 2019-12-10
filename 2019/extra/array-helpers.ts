@@ -1,5 +1,8 @@
 interface Array<T> {
-    groupBy<U>(keySelector: (item: T, index: number) => U): { key: U, items: T[] }[];
+    groupBy<U>(
+        keySelector: (item: T, index: number) => U, 
+        keyEquality?: (first: U, second: U) => boolean
+    ): { key: U, items: T[] }[];
     groupReduce<U, V>(
         keySelector: (item: T, index: number) => U,
         reducer: (accumulator: V, item: T) => V,
@@ -17,13 +20,16 @@ interface Array<T> {
 }
 
 if (!Array.prototype.groupBy) {
-    Array.prototype.groupBy = function <T, U>(keySelector: (item: T, index: number) => U) {
+    Array.prototype.groupBy = function <T, U>(
+        keySelector: (item: T, index: number) => U,
+        keyEquality: (first: U, second: U) => boolean = (first, second) => (first === second)
+    ) {
         const result: { key: U, items: T[] }[] = [];
         const array = this;
 
         array.forEach((item, index) => {
             const key = keySelector(item, index);
-            const keyItem = result.find(r => r.key === key);
+            const keyItem = result.find(r => keyEquality(r.key, key));
             if (!keyItem) {
                 result.push({
                     key: key,

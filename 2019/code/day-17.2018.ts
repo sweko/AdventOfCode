@@ -23,7 +23,6 @@ interface Point {
     y: number
 }
 
-
 const wallRegex = /^(x|y)=(\d+), (x|y)=(\d+)\.\.(\d+)$/i;
 
 const lineToWall = (line: string) => {
@@ -53,9 +52,10 @@ const lineToWall = (line: string) => {
 };
 
 const wallToRaster = (walls: Wall[]): Raster => {
-    const minX = walls.min(wall => wall.x.from) - 1;
+    const minX = walls.min(wall => wall.x.from) - 2;
     const maxX = walls.max(wall => wall.x.to) + 1 - minX + 1;
     const maxY = walls.max(wall => wall.y.to);
+    const minY = walls.min(wall => wall.y.from);
 
     const walls2 = walls.map(wall => ({
         x: {
@@ -76,7 +76,7 @@ const wallToRaster = (walls: Wall[]): Raster => {
     };
 
     return {
-        map,
+        map: map.slice(minY - 1),
         source: 500 - minX
     };
 }
@@ -85,38 +85,88 @@ const processInput = async (day: number) => {
     const lines = await readInputLines(day);
 
     const walls = lines.map(lineToWall);
-    return walls;
+    const raster = wallToRaster(walls);
+    return raster;
 };
 
-const partOne = (walls: Wall[]) => {
-    return 0;
+const partOne = (raster: Raster, debug = false) => {
+    let source = { x: 0, y: raster.source };
+    runSource(raster, source);
+    // if (debug) {
+    //     printMatrix(raster.map);
+    // }
+    let count = 0;
+    loopMatrix(raster.map, (_, __, element) => {
+        if (element === "~") {
+            count += 1;
+        }
+    })
+    return count;
+};
+
+const partTwo = (raster: Raster, debug = false) => {
+    let source = { x: 0, y: raster.source };
+    runSource(raster, source);
+    loopMatrix(raster.map, (x, y, element) => {
+        if (element === "~") {
+            let pos = {x, y};
+            while (get(raster, pos)==="~") pos = left(pos);
+            if (get(raster, pos) !== "#") {
+                set(raster, {x, y}, " ");
+                return;
+            }
+            pos = {x, y};
+            while (get(raster, pos)==="~") pos = right(pos);
+            if (get(raster, pos) !== "#") {
+                set(raster, {x, y}, " ");
+                return;
+            }
+        }
+    });
+
+    loopMatrix(raster.map, (x, y, element) => {
+        if (element === "~") {
+            let pos = {x, y};
+            while (get(raster, pos)==="~") pos = below(pos);
+            if (get(raster, pos) !== "#") {
+                set(raster, {x, y}, " ");
+                return;
+            }
+        }
+    });
+
+    if (debug) {
+        printMatrix(raster.map);
+    }
+    let count = 0;
+    loopMatrix(raster.map, (_, __, element) => {
+        if (element === "~") {
+            count += 1;
+        }
+    })
+    return count;
 };
 
 const resultOne = (_: any, result: number) => {
-    return `Value at position zero is ${result}`;
+    return `Total number of wet fields is ${result}`;
 };
 
-const showInput = (walls: Wall[]) => {
-    const result = wallToRaster(walls);
+const resultTwo = (_: any, result: number) => {
+    // 27084 - too high
+    // 16 points at loc 322 identified
+    // Answer is 27068
+    return `Total number of water fields is ${result}`;
+};
 
-    //printMatrix(result.map);
-    runPipe(result);
-    // console.log(minX, maxX);
-    // console.log(minY, maxY);
+const showInput = (_:any) => {
 };
 
 const get = (raster: Raster, source: Point) => {
     return raster.map[source.x][source.y];
 }
 
-let step = 0;
-let limit = 25700000;
-
 const set = (raster: Raster, source: Point, value: string, force = false) => {
-    step += 1;
-    if (step < limit || force) {
-        raster.map[source.x][source.y] = value;
-    }
+    raster.map[source.x][source.y] = value;
 }
 
 const below = (point: Point) => ({ x: point.x + 1, y: point.y });
@@ -124,25 +174,7 @@ const above = (point: Point) => ({ x: point.x - 1, y: point.y });
 const left = (point: Point) => ({ x: point.x, y: point.y - 1 });
 const right = (point: Point) => ({ x: point.x, y: point.y + 1 });
 
-const runPipe = (raster: Raster): Raster => {
-    let source = { x: 0, y: raster.source };
-    runSource(raster, source);
-    printMatrix(raster.map);
-    let count = 0;
-    loopMatrix(raster.map, (_, __, element) => {
-        if (element === "~") {
-            count +=1;
-        }
-    })
-    console.log("count is ", count);
-    return raster;
-}
-
 const runSource = (raster: Raster, source: { x: number; y: number; }, level = 0) => {
-    if (step >= limit) {
-        console.log("BREAKING");
-        return;
-    }
     if (get(raster, below(source)) === "~") {
         return;
     }
@@ -150,21 +182,21 @@ const runSource = (raster: Raster, source: { x: number; y: number; }, level = 0)
         set(raster, source, "~");
         source = below(source);
         if (source.x === raster.map.length) {
-            console.log("GLU GLU");
+            //console.log("GLU GLU");
             return;
         }
     }
     if (get(raster, source) === "~") {
         //test left (should be water with air above until wall);
         let current = left(source);
-        while (get(raster, current) === "~") { 
+        while (get(raster, current) === "~") {
             current = left(current)
         }
         if (get(raster, current) !== "#") {
             return;
         }
         current = right(source);
-        while (get(raster, current) === "~") { 
+        while (get(raster, current) === "~") {
             current = right(current)
         }
         if (get(raster, current) !== "#") {
@@ -198,11 +230,11 @@ const runSource = (raster: Raster, source: { x: number; y: number; }, level = 0)
             rsource = current;
         }
         if (lsource) {
-            console.log("running left", lsource, level);
+            //console.log("running left", lsource, level);
             runSource(raster, lsource, level + 1);
         }
         if (rsource) {
-            console.log("running right", rsource, level, "-->", lsource);
+            //console.log("running right", rsource, level, "-->", lsource);
             runSource(raster, rsource, level + 1);
         }
         source = above(source);
@@ -225,13 +257,13 @@ const test = () => {
     showInput(walls);
 };
 
-export const solution17_2018: Puzzle<Wall[], number> = {
+export const solution17_2018: Puzzle<Raster, number> = {
     day: 172018,
     input: processInput,
     partOne,
-    //    partTwo,
+    partTwo,
     resultOne,
-    //    resultTwo,
+    resultTwo,
     showInput,
     test,
 }
