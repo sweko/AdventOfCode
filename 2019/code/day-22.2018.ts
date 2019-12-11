@@ -70,7 +70,42 @@ const partOne = (input: Input, debug = false) => {
 };
 
 const partTwo = (input: Input, debug = false) => {
-    return 0;
+    const { depth, target } = input;
+    const extra = 100
+    const cave = Array(target.y + 1 + extra).fill(null).map(_ => Array(target.x + 1 + extra).fill(null));
+
+    for (let xindex = 0; xindex <= input.target.x + extra; xindex++) {
+        for (let yindex = 0; yindex <= input.target.y + extra; yindex++) {
+            if ((xindex === 0) && (yindex === 0)) {
+                cave[yindex][xindex] = depth % data.modulo;
+                continue;
+            }
+            if ((xindex === target.x) && (yindex === target.y)) {
+                cave[yindex][xindex] = depth % data.modulo;
+                continue;
+            }
+            if (xindex === 0) {
+                cave[yindex][xindex] = (yindex * data.yfactor + depth) % data.modulo;
+                continue;
+            }
+            if (yindex === 0) {
+                cave[yindex][xindex] = (xindex * data.xfactor + depth) % data.modulo;
+                continue;
+            }
+            const geoIndex = cave[yindex - 1][xindex] * cave[yindex][xindex - 1];
+            cave[yindex][xindex] = (geoIndex + depth) % data.modulo;
+        }
+
+    }
+
+    if (debug) {
+        printMatrix(cave, (level) => {
+            const type = getType(level);
+            return type === 0 ? "." : type === 1 ? "=" : type === 2 ? "|" : "X"
+        })
+    }
+
+    return cave.sum(line => line.sum(item => getType(item)));
 };
 
 const resultOne = (_: any, result: number) => {
@@ -78,7 +113,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `There are ${result} rooms distant a 1000 or more doors`;
+    return `The total risk level + 100 is ${result}`;
 };
 
 const showInput = (input: Input) => {
@@ -100,7 +135,7 @@ export const solution22_2018: Puzzle<Input, number> = {
     day: 222018,
     input: processInput,
     partOne,
-    //partTwo,
+    partTwo,
     resultOne,
     resultTwo,
     showInput,
