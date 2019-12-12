@@ -29,14 +29,22 @@ export function getAllPermutations<T>(source: T[]): T[][] {
     if (source.length === 0) {
         return [[]];
     };
-    const result = source.map(item => 
-        getAllPermutations(source.filter(s => s!== item))
-        .map(perm => [item, ...perm])    
-    ); 
+    const result = source.map(item =>
+        getAllPermutations(source.filter(s => s !== item))
+            .map(perm => [item, ...perm])
+    );
     return result.flatMap(x => x);
 }
 
-export function getPermutation(of: number, index: number) {
-    const limit = factoriel(of);
+export function gcd(first : number, second: number) {
+    while (second) {
+        const temp = second;
+        second = first % second;
+        first = temp;
+    }
+    return first;
+}
 
+export function lcm(first: number, second: number) {
+    return first / gcd(first, second) * second;
 }
