@@ -169,6 +169,17 @@ export class IntcodeSimulator {
     }
 
     private read(modes: Modes) {
+        if (this.debug) {
+            //slow it up
+            let sum: number;
+            for (let i = 0; i < 40000000; i++) {
+                sum += i;
+            }
+            if (sum === 0) {
+                return;
+            }
+        }
+
         const to = this.getResultLocation(modes.first, 1);
         if (this.inputIndex === this.inputs.length) {
             this.state = "suspended";

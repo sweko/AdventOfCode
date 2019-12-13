@@ -10,6 +10,7 @@ import { solutionNine } from "./code/day-09";
 import { solutionTen } from "./code/day-10";
 import { solutionEleven } from "./code/day-11";
 import { solutionTwelve } from "./code/day-12";
+import { solution13 } from "./code/day-13";
 
 import { solution17_2018 } from "./code/day-17.2018";
 import { solution20_2018 } from "./code/day-20.2018";
@@ -18,7 +19,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwelve;
+const solution = solution13;
 
 (async () => {
     console.log(`Start processing input`)
