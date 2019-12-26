@@ -11,6 +11,18 @@ import { solutionTen } from "./code/day-10";
 import { solutionEleven } from "./code/day-11";
 import { solutionTwelve } from "./code/day-12";
 import { solution13 } from "./code/day-13";
+import { solution14 } from "./code/day-14";
+import { solution15 } from "./code/day-15";
+import { solution16 } from "./code/day-16";
+import { solution17 } from "./code/day-17";
+import { solution18 } from "./code/day-18";
+import { solution19 } from "./code/day-19";
+import { solution20 } from "./code/day-20";
+import { solution21 } from "./code/day-21";
+import { solution22 } from "./code/day-22";
+import { solution23 } from "./code/day-23";
+import { solution24 } from "./code/day-24";
+import { solution25 } from "./code/day-25";
 
 import { solution17_2018 } from "./code/day-17.2018";
 import { solution20_2018 } from "./code/day-20.2018";
@@ -19,7 +31,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solution13;
+const solution = solution15;
 
 (async () => {
     console.log(`Start processing input`)

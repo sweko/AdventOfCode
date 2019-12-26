@@ -152,4 +152,3 @@ if (!Array.prototype.splitAt) {
         return result;
     }
 }
-
