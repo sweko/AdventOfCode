@@ -1,7 +1,6 @@
 export function memoize(f: (arg: number | string) => any) {
     const resDict = {};
     const result = (rarg: number | string) => {
-        console.log("memoization");
         if (resDict[rarg] === undefined) {
             resDict[rarg] = f(rarg);
         }

@@ -123,14 +123,13 @@ const floodFill = (maze: Marker[][]) => {
     return filled[finish.x][finish.y];
 }
 
-const partOne = (instructions: number[], debug: boolean) => {
+const getMazeData = (instructions: number[], debug: boolean) => {
     const inputs = [1];
     const simulator = new IntcodeSimulator(instructions.slice(), inputs, false);
 
     let current: DataPoint = { x: 0, y: 0, d: 0, v: "o" };
     const processed: { [key: string]: DataPoint } = { "0:0": current };
     let side = 1; // what is the next side to check
-    let result: number;
 
     // north (1), south (2), west (3), and east (4)
     simulator.output = (value) => {
@@ -146,19 +145,11 @@ const partOne = (instructions: number[], debug: boolean) => {
             // turn and continue
             side = turnRight(side);
             inputs.push(side);
-        } else if (value === 1) {
+        } else if ((value === 1) || (value === 2)) {
             // passage
-            debugLog(false, "Gotten 1 from", current, "going", sides[side].name);
-            processed[key] = { x: nextPoint.x, y: nextPoint.y, v: "." };
+            debugLog(false, `Gotten ${value} from`, current, "going", sides[side].name);
+            processed[key] = { x: nextPoint.x, y: nextPoint.y, v: value === 1 ? "." : "s" };
             // continue straight
-            current = nextPoint;
-            side = turnLeft(side);
-            inputs.push(side);
-        } else if (value === 2) {
-            //set the result
-            result = current.d;
-            debugLog(debug, "Gotten 2 from", current, "going", sides[side].name);
-            processed[key] = { x: nextPoint.x, y: nextPoint.y, v: "s" };
             current = nextPoint;
             side = turnLeft(side);
             inputs.push(side);
@@ -166,15 +157,48 @@ const partOne = (instructions: number[], debug: boolean) => {
     };
 
     simulator.run();
+    return processed;
+}
 
-    const maze = generateImage(processed);
+const partOne = (instructions: number[], debug: boolean) => {
+
+    const maze = generateImage(getMazeData(instructions, debug));
     const solved = floodFill(maze);
 
     return solved;
 };
 
+const floodFillPartDeux = (maze: Marker[][]) => {
+    let finish;
+    const pending: Point[] = [];
+    const filled = mapMatrix(maze, (item, rindex, cindex) => {
+        if (item === "#") return Number.NEGATIVE_INFINITY;
+        if (item === "o") finish = { x: rindex, y: cindex };
+        if (item === "s") {
+            pending.push({ x: rindex, y: cindex });
+            return 0;
+        }
+        return Number.POSITIVE_INFINITY;
+    });
+
+    while (pending.length > 0) {
+        const next = pending.shift();
+        const neighbours = getNeighbours(next).filter(p => filled[p.x][p.y] === Number.POSITIVE_INFINITY);
+        for (const neighbour of neighbours) {
+            filled[neighbour.x][neighbour.y] = filled[next.x][next.y] + 1;
+            pending.push(neighbour)
+        }
+    }
+
+    return filled;
+}
+
+
 const partTwo = (instructions: number[], debug: boolean) => {
-    return 0;
+    const maze = generateImage(getMazeData(instructions, debug));
+    const solved = floodFillPartDeux(maze);
+
+    return solved.max(row => row.filter(value => isFinite(value)).max());
 };
 
 const resultOne = (_: any, result: number) => {
@@ -182,7 +206,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `Total score is ${result}`;
+    return `Total time to fill the maze with oxygen is ${result}`;
 };
 
 const showInput = (input: number[]) => {
@@ -196,7 +220,7 @@ export const solution15: Puzzle<number[], number> = {
     day: 15,
     input: processInput,
     partOne,
-    //partTwo,
+    partTwo,
     resultOne: resultOne,
     resultTwo: resultTwo,
     showInput,
