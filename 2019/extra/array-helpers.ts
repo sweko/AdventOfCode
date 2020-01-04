@@ -1,6 +1,6 @@
 interface Array<T> {
     groupBy<U>(
-        keySelector: (item: T, index: number) => U, 
+        keySelector: (item: T, index: number) => U,
         keyEquality?: (first: U, second: U) => boolean
     ): { key: U, items: T[] }[];
     groupReduce<U, V>(
@@ -15,8 +15,11 @@ interface Array<T> {
     minFind(selector?: (item: T, index: number) => number): T;
     maxFind(selector?: (item: T, index: number) => number): T;
 
-    last():T
+    last(): T
     splitAt(index: number): T[][]
+
+    skipWhile(predicate?: (item: T, index: number) => boolean): T[];
+    takeWhile(predicate?: (item: T, index: number) => boolean): T[];
 }
 
 if (!Array.prototype.groupBy) {
@@ -136,7 +139,7 @@ if (!Array.prototype.maxFind) {
 if (!Array.prototype.last) {
     Array.prototype.last = function <T>() {
         const array = this;
-        return array[array.length-1];
+        return array[array.length - 1];
     }
 }
 
@@ -146,9 +149,39 @@ if (!Array.prototype.splitAt) {
         const result = [];
         let start = 0;
         while (start < array.length) {
-            result.push(array.slice(start, start+index));
+            result.push(array.slice(start, start + index));
             start += index;
         }
         return result;
+    }
+}
+
+if (!Array.prototype.skipWhile) {
+    Array.prototype.skipWhile = function <T>(predicate?: (item: T, index: number) => boolean) {
+        const array: T[] = this;
+        let index = 0;
+        while (index < array.length) {
+            if (predicate(array[index], index)) {
+                index += 1;
+            } else {
+                return array.slice(index);
+            }
+        }
+        return [];
+    }
+}
+
+if (!Array.prototype.takeWhile) {
+    Array.prototype.takeWhile = function <T>(predicate?: (item: T, index: number) => boolean) {
+        const array: T[] = this;
+        let index = 0;
+        while (index < array.length) {
+            if (predicate(array[index], index)) {
+                index += 1;
+            } else {
+                return array.slice(0, index);
+            }
+        }
+        return array.slice();
     }
 }
