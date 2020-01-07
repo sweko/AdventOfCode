@@ -31,7 +31,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solution25;
+const solution = solution24;
 
 (async () => {
     console.log(`Start processing input`)

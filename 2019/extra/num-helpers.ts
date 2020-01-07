@@ -35,7 +35,7 @@ export function getAllPermutations<T>(source: T[]): T[][] {
     return result.flatMap(x => x);
 }
 
-export function gcd(first : number, second: number) {
+export function gcd(first: number, second: number) {
     while (second) {
         const temp = second;
         second = first % second;
@@ -46,4 +46,8 @@ export function gcd(first : number, second: number) {
 
 export function lcm(first: number, second: number) {
     return first / gcd(first, second) * second;
+}
+
+export function mod(n: number, m: number) {
+    return ((n % m) + m) % m;
 }
