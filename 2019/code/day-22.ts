@@ -22,16 +22,6 @@ interface DealBy {
 
 type Op = DealInto | Cut | DealBy;
 
-const getOperation = (op: Op): MapOperation => {
-    if (op.type === "dealInto") {
-        return dealInto;
-    } else if (op.type === "cut") {
-        return cut(op.offset);
-    } else {
-        return dealBy(op.increment);
-    }
-}
-
 const processInput = async (day: number) => {
     const lines = await readInputLines(day);
     const result: Op[] = [];
@@ -51,56 +41,50 @@ const processInput = async (day: number) => {
     return result;
 };
 
-const dealInto = (cards: number[]) => {
-    const result = Array(cards.length);
-    for (let index = 0; index < cards.length; index++) {
-        const card = cards[index];
-        const position = cards.length - index - 1;
-        result[position] = card;
-    }
-    return result;
-}
+// const dealInto = (cards: number[]) => {
+//     const result = Array(cards.length);
+//     for (let index = 0; index < cards.length; index++) {
+//         const card = cards[index];
+//         const position = cards.length - index - 1;
+//         result[position] = card;
+//     }
+//     return result;
+// }
 
-const cut = (offset: number) => (cards: number[]) => {
-    const result = Array(cards.length);
-    for (let index = 0; index < cards.length; index++) {
-        const card = cards[index];
-        const position = (index + cards.length - offset) % cards.length;
-        result[position] = card;
-    }
-    return result;
-}
+// const cut = (offset: number) => (cards: number[]) => {
+//     const result = Array(cards.length);
+//     for (let index = 0; index < cards.length; index++) {
+//         const card = cards[index];
+//         const position = (index + cards.length - offset) % cards.length;
+//         result[position] = card;
+//     }
+//     return result;
+// }
 
-const dealBy = (increment: number) => (cards: number[]) => {
-    const result = Array(cards.length);
-    for (let index = 0; index < cards.length; index++) {
-        const card = cards[index];
-        const position = (index * increment) % cards.length;
-        result[position] = card;
-    }
-    return result;
-}
+// const dealBy = (increment: number) => (cards: number[]) => {
+//     const result = Array(cards.length);
+//     for (let index = 0; index < cards.length; index++) {
+//         const card = cards[index];
+//         const position = (index * increment) % cards.length;
+//         result[position] = card;
+//     }
+//     return result;
+// }
 
 const partOne = (ops: Op[], debug: boolean) => {
-    let deck = Array(10007).fill(0).map((_, index) => index);
-
-    for (const op of ops) {
-        deck = getOperation(op)(deck);
-    }
-    return deck.indexOf(2019);
+    const deckSize = 10007;
+    const index = 2019;
+    const operation = combineOps(ops, deckSize);
+    return operation(index);
 };
 
-const partTwo = (operations: Op[], debug: boolean) => {
+const partTwo = (ops: Op[], debug: boolean) => {
+    const deckSize = 119_315_717_514_047;
     // go backward, i.e. where does a card have to be to end up in pos 2020?
     // use part 1 to reverse engineer
 
-    // inverse of deal into is deal into :)
-    let deck = Array(10007).fill(0).map((_, index) => index);
-
-    let result = dealInto(dealInto(deck));
-    console.log(result);
-    // inverse of cut (x) is 
-
+    const operation = combineOps(ops, deckSize);
+    return operation(2020);
     return 0;
 };
 
@@ -117,11 +101,6 @@ const showInput = (input: Op[]) => {
 };
 
 const combineOps = (ops: Op[], length: number): Operation => {
-    // const position = - index - 1;
-    // const position = index - offset;
-    // const position = index * increment;
-
-    // format ax + b
     let a = 1;
     let b = 0;
 
@@ -130,19 +109,23 @@ const combineOps = (ops: Op[], length: number): Operation => {
             a *= -1;
             b = -b - 1;
         } else if (op.type === "cut") {
-            b += op.offset;
+            b -= op.offset;
         } else {
+            if (a * op.increment > Number.MAX_SAFE_INTEGER) {
+                console.log("OVERFLOW", a, op.increment);
+            }
             a *= op.increment;
             b *= op.increment;
         }
         a = mod(a, length);
         b = mod(b, length);
     }
+    console.log(a, b);
     return (n: number) => mod(a * n + b, length);
 }
 
 const test = (ops: Op[]) => {
-    let deck = Array(10).fill(0).map((_, index) => index);
+    let deck = Array(11).fill(0).map((_, index) => index);
 
     const operation = combineOps(ops, deck.length);
     console.log(deck.map(card => operation(card)));
