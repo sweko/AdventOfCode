@@ -1,10 +1,16 @@
 import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
-import { mod } from "../extra/num-helpers";
+import { absmod, mulmod, powmod, modinverse } from "../extra/num-helpers";
 
 type MapOperation = (deck: number[]) => number[];
 type Operation = (card: number) => number;
+
+interface LinearOp  {
+    a: number;
+    b: number;
+    m: number;
+}
 
 interface DealInto {
     type: "dealInto";
@@ -75,17 +81,37 @@ const partOne = (ops: Op[], debug: boolean) => {
     const deckSize = 10007;
     const index = 2019;
     const operation = combineOps(ops, deckSize);
-    return operation(index);
+    return exec(operation, index);
 };
+
+const repeat = (linop:LinearOp, times:number):LinearOp => {
+    const digits = times.toString(2).split("").map(c => Number(c)).slice(1);
+    let result = linop;
+    
+    for (const digit of digits) {
+        result = combineLinOps(result, result);
+        if (digit === 1) {
+            result = combineLinOps(result, linop);
+        }
+    }
+
+    return result;
+}
 
 const partTwo = (ops: Op[], debug: boolean) => {
     const deckSize = 119_315_717_514_047;
+
+    const steps = 101_741_582_076_661;
+    const operation = repeat(combineOps(ops, deckSize), steps);
+
+    const lookup = inverse(operation);
+
     // go backward, i.e. where does a card have to be to end up in pos 2020?
     // use part 1 to reverse engineer
 
-    const operation = combineOps(ops, deckSize);
-    return operation(2020);
-    return 0;
+    return exec(lookup, 2020);
+    // 24_044_128_914_219 is too low
+    // 56_276_109_790_847 is too low
 };
 
 const resultOne = (_: any, result: number) => {
@@ -93,14 +119,22 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
+    return `The card in position 2020 is ${result}`;
 };
 
 const showInput = (input: Op[]) => {
     console.log(input);
 };
 
-const combineOps = (ops: Op[], length: number): Operation => {
+const combineLinOps = (first: LinearOp, second:LinearOp): LinearOp => {
+    return {
+        a: mulmod(first.a, second.a, first.m),
+        b: absmod(mulmod(first.a, second.b, first.m)+first.b, first.m),
+        m: first.m
+    }
+}
+
+const combineOps = (ops: Op[], length: number): LinearOp => {
     let a = 1;
     let b = 0;
 
@@ -111,52 +145,37 @@ const combineOps = (ops: Op[], length: number): Operation => {
         } else if (op.type === "cut") {
             b -= op.offset;
         } else {
-            if (a * op.increment > Number.MAX_SAFE_INTEGER) {
-                console.log("OVERFLOW", a, op.increment);
-            }
-            a *= op.increment;
-            b *= op.increment;
+            a = mulmod(a, op.increment, length);
+            b = mulmod(b, op.increment, length);
         }
-        a = mod(a, length);
-        b = mod(b, length);
+        a = absmod(a, length);
+        b = absmod(b, length);
     }
-    console.log(a, b);
-    return (n: number) => mod(a * n + b, length);
+
+    return { a, b, m: length }
 }
 
-const test = (ops: Op[]) => {
-    let deck = Array(11).fill(0).map((_, index) => index);
+const inverse = (operation: LinearOp):LinearOp => {
+    const ainverse = modinverse(operation.a, operation.m);
+    return {
+        a: ainverse,
+        b: mulmod(-operation.b, ainverse, operation.m),
+        m: operation.m
+    };
+};
 
-    const operation = combineOps(ops, deck.length);
-    console.log(deck.map(card => operation(card)));
-    // for (const op of ops) deck = getOperation(op)(deck);
-    // console.log(deck);
+const exec = (op:LinearOp, n: number):number => {
+    const an = mulmod(op.a, n, op.m);
+    return absmod(an + op.b, op.m);
+}
 
+const test = (ops: Op[]) => {    
+    // const deckSize = 119_315_717_514_047;
+    // const steps = 101_741_582_076_661;
+    // const operation = combineOps(ops, deckSize);
+    // console.log(repeat(operation, steps));
 
-
-
-    // const rops = ops.reverse();
-    // // unscramble
-    // const invDealInto = (deck: number[]) => (position: number) => deck.length - position - 1;
-    // const invCutBy = (deck: number[]) => (position: number) => deck.length - position - 1;
-
-
-
-    // // maximum deal by increment: 
-    // const maxDealBy = ops.filter(op => op.type === "dealBy").max(op  => (op as DealBy).increment);
-    // console.log(maxDealBy);
-
-    // // inverse of deal into is deal into :)
-    // let deck = Array(15).fill(0).map((_, index) => index);
-
-    // // inverse of deal into is deal into
-    // let result = dealInto(dealInto(deck));
-
-    // // inverse of cut (x) is cut (-x) 
-    // let change = cut(3)(deck);
-    // result = cut(-3)(change);
-    // console.log(result);
-
+    console.log(powmod(2, 20, 1000000));
 };
 
 export const solution22: Puzzle<Op[], number> = {

@@ -112,10 +112,17 @@ const switchTool = (terrain: Terrain, current: Equipment) => {
     // if (markIndex % markCount === 0) {
     //     console.log(`switching from ${Equipment[current]} to ${Equipment[result]}`);
     // }
+    if (Equipment[result]===undefined) {
+        throw Error("Invalid call");
+    }
     return result;
 }
 
 const getTerrainType = (level: number) => terrains[level % 3];
+
+const canProceed = (terrain: Terrain, equipment: Equipment ) => {
+    return (allowed[terrain] & equipment) !== 0;
+}
 
 const partTwo = (input: Input, debug = false) => {
     const { depth, target } = input;
@@ -131,7 +138,7 @@ const partTwo = (input: Input, debug = false) => {
                 cave[yindex][xindex] = { level: depth % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
             } else if (xindex === 0) {
                 cave[yindex][xindex] = { level: (yindex * data.yfactor + depth) % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
-            } else if (yindex === 0) {
+            } else if (yindex === 0) {0
                 cave[yindex][xindex] = { level: (xindex * data.xfactor + depth) % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
             } else {
                 const geoIndex = cave[yindex - 1][xindex].level * cave[yindex][xindex - 1].level;
@@ -147,10 +154,10 @@ const partTwo = (input: Input, debug = false) => {
         if (neighbour.price <= current.price) {
             return;
         }
-        const canProceed = (allowed[neighbour.terrain] & current.equipment) !== 0;
+        const isToolApplicable = canProceed(neighbour.terrain, current.equipment)
         let price: number, equipment: Equipment;
 
-        if (canProceed) {
+        if (isToolApplicable) {
             price = current.price + 1;
             equipment = current.equipment;
         } else {
@@ -234,14 +241,44 @@ const showInput = (input: Input) => {
 };
 
 const test = () => {
-    const input: Input = {
-        target: {
-            x: 10,
-            y: 10,
-        },
-        depth: 510
+    // switch tool tests
+    console.log("--switch tool tests--");
+
+    console.log(Equipment[switchTool("narrow", Equipment.FullRocky)]);
+
+
+    console.log(Equipment[switchTool("narrow", Equipment.Neither)]===Equipment[Equipment.Torch]);
+    console.log(Equipment[switchTool("narrow", Equipment.Torch)]===Equipment[Equipment.Neither]);
+    try {
+        switchTool("narrow", Equipment.ClimbingGear);
+    } catch (e) {
+        console.log(e.message === "Invalid call");
     }
-    console.log(partOne(input, true));
+
+    console.log(Equipment[switchTool("rocky", Equipment.ClimbingGear)]===Equipment[Equipment.Torch]);
+    console.log(Equipment[switchTool("rocky", Equipment.Torch)]===Equipment[Equipment.ClimbingGear]);
+    try {
+        switchTool("rocky", Equipment.Neither);
+    } catch (e) {
+        console.log(e.message === "Invalid call");
+    }
+
+    console.log(Equipment[switchTool("wet", Equipment.Neither)]===Equipment[Equipment.ClimbingGear]);
+    console.log(Equipment[switchTool("wet", Equipment.ClimbingGear)]===Equipment[Equipment.Neither]);
+    try {
+        switchTool("wet", Equipment.Torch);
+    } catch (e) {
+        console.log(e.message === "Invalid call");
+    }
+
+    //can proceed tests
+    console.log("--can proceed tests--");
+    console.log(canProceed("rocky", Equipment.ClimbingGear));
+    console.log(canProceed("rocky", Equipment.Neither));
+    console.log(canProceed("rocky", Equipment.Torch));
+    console.log(canProceed("rocky", Equipment.FullNarrow));
+    console.log(canProceed("rocky", Equipment.FullRocky));
+    console.log(canProceed("rocky", Equipment.FullWet));
 };
 
 

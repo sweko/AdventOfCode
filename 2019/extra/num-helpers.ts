@@ -48,6 +48,48 @@ export function lcm(first: number, second: number) {
     return first / gcd(first, second) * second;
 }
 
-export function mod(n: number, m: number) {
+export function absmod(n: number, m: number) {
     return ((n % m) + m) % m;
+}
+
+export function mulmod(a: number, b: number, mod: number) {
+    a = absmod(a, mod);
+    b = absmod(b, mod);
+    if (a * b < Number.MAX_SAFE_INTEGER) {
+        return absmod(a * b, mod);
+    };
+    const max = Math.max(a, b);
+    const min = Math.min(a, b);
+
+    const factor = Math.floor(Number.MAX_SAFE_INTEGER / max);
+
+    if (factor === 1) {
+        throw Error("this won't work");
+    };
+
+    // min = k * factor + m;
+    const k = Math.floor(min / factor);
+    const m = min - k * factor;
+
+    return absmod(mulmod(max * factor, k, mod)  + mulmod(max, m, mod), mod);
+}
+
+/**
+ * Only works when mod is prime
+ */
+export function modinverse(value: number, mod: number) {
+    return powmod(value, mod-2, mod);
+}
+
+export function powmod(a: number, exp: number, mod: number) {
+    const digits = exp.toString(2).split("").map(c => Number(c)).slice(1);
+    let result = a;
+    
+    for (const digit of digits) {
+        result = mulmod(result, result, mod);
+        if (digit === 1) {
+            result = mulmod(result, a, mod);
+        }
+    }
+    return result;
 }
