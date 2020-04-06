@@ -10,7 +10,6 @@ export function memoize(f: (arg: number | string) => any) {
 }
 
 export const factoriel = memoize((num: number) => {
-    console.log("called");
     let index = 2;
     let result = 1;
     while (index <= num) {

@@ -35,6 +35,14 @@ const processInput = async (day: number) => {
             y: 785
         }
     };
+
+    // return {
+    //     depth: 11820,
+    //     target: {
+    //         x: 7,
+    //         y: 782
+    //     }
+    // }
 };
 
 const getType = (level: number) => level % 3;
@@ -78,53 +86,112 @@ const partOne = (input: Input, debug = false) => {
 };
 
 enum Equipment {
-    None = 0,
-    Torch = 1,
-    ClimbingGear = 2,
-    Neither = 4,
+    //    None = 0,
 
-    FullRocky = 3,
-    FullWet = 6,
-    FullNarrow = 5
+    Torch = "torch",
+    ClimbingGear = "climbing",
+    Neither = "neither",
+
+    // FullRocky = 3,
+    // FullWet = 6,
+    // FullNarrow = 5
 }
 
 type Terrain = "rocky" | "narrow" | "wet";
 const terrains: Terrain[] = ["rocky", "wet", "narrow"];
 
-const allowed: { [key in Terrain]: Equipment } = {
-    rocky: Equipment.FullRocky,
-    wet: Equipment.FullWet,
-    narrow: Equipment.FullNarrow
+// const allowed: { [key in Terrain]: Equipment } = {
+//     rocky: Equipment.FullRocky,
+//     wet: Equipment.FullWet,
+//     narrow: Equipment.FullNarrow
+// }
+
+interface PricePoint {
+    price: number;
+    from: Point
 }
 
-interface Cell {
+interface Price {
+    [Equipment.Torch]: PricePoint;
+    [Equipment.ClimbingGear]: PricePoint;
+    [Equipment.Neither]: PricePoint;
+};
+
+interface Cell extends Point {
     level: number,
     terrain: Terrain,
-    price: number,
-    equipment?: Equipment
+    price: Price
 }
 
-let markCount = 1234;
+let markCount = 999999;
 let markIndex = 0;
 
-const switchTool = (terrain: Terrain, current: Equipment) => {
-    const result = allowed[terrain] ^ current;
-    // if (markIndex % markCount === 0) {
-    //     console.log(`switching from ${Equipment[current]} to ${Equipment[result]}`);
-    // }
-    if (Equipment[result]===undefined) {
-        throw Error("Invalid call");
-    }
-    return result;
-}
+// const switchTool = (terrain: Terrain, current: Equipment) => {
+//     const result = allowed[terrain] ^ current;
+//     if (Equipment[result] === undefined) {
+//         throw Error("Invalid call");
+//     }
+//     return result;
+// }
 
 const getTerrainType = (level: number) => terrains[level % 3];
 
-const canProceed = (terrain: Terrain, equipment: Equipment ) => {
-    return (allowed[terrain] & equipment) !== 0;
+// const canProceed = (terrain: Terrain, equipment: Equipment) => {
+//     return (allowed[terrain] & equipment) !== 0;
+// }
+
+const getNeighbourPrice = (current: Cell, neighbour: Cell): Price => {
+    // two cases, same terain, or different terrains
+    if (current.terrain === neighbour.terrain) {
+        // copy over and increase
+        return {
+            [Equipment.Neither]: {
+                price: current.price[Equipment.Neither].price + 1,
+                from: current
+            },
+            [Equipment.Torch]: {
+                price: current.price[Equipment.Torch].price + 1,
+                from: current
+            },
+            [Equipment.ClimbingGear]: {
+                price: current.price[Equipment.ClimbingGear].price + 1,
+                from: current
+            }
+        }
+    } else {
+        const forbiddenCurrent = Object.keys(current.price).find(key => isNaN(current.price[key].price)) as unknown as Equipment;
+        const forbiddenNeighbour = Object.keys(neighbour.price).find(key => isNaN(neighbour.price[key].price)) as unknown as Equipment;
+
+        const common = [Equipment.Neither, Equipment.Torch, Equipment.ClimbingGear]
+            .find(item => item !== forbiddenCurrent && item !== forbiddenNeighbour)
+
+        return {
+            [common]: {
+                price: current.price[common].price + 1,
+                from: current
+            },
+            [forbiddenNeighbour]: {
+                price: Number.NaN,
+                from: undefined
+            },
+            [forbiddenCurrent]: {
+                price: current.price[common].price + 8,
+                from: current
+            },
+        } as unknown as Price;
+    }
 }
 
 const partTwo = (input: Input, debug = false) => {
+    // 1088 - incorrect
+    // 1082 - incorrect
+    // 1083 - incorrect
+    // 1084 - 
+    // 1085 - 
+    // 1086 - incorrect
+    // 1087 - incorrect (other data set)
+    // { level: 4080, price: 1081, terrain: 'rocky', equipment: 2 }
+
     const { depth, target } = input;
     const extra = 50;
     const cave: Cell[][] = Array(target.y + 1 + extra).fill(null).map(_ => Array(target.x + 1 + extra).fill(null));
@@ -133,56 +200,82 @@ const partTwo = (input: Input, debug = false) => {
     for (let xindex = 0; xindex <= input.target.x + extra; xindex++) {
         for (let yindex = 0; yindex <= input.target.y + extra; yindex++) {
             if ((xindex === 0) && (yindex === 0)) {
-                cave[yindex][xindex] = { level: depth % data.modulo, price: 0, terrain: "rocky", equipment: Equipment.Torch };
+                cave[yindex][xindex] = {
+                    level: depth % data.modulo, price: {
+                        [Equipment.Torch]: {
+                            price: 0,
+                            from: undefined
+                        },
+                        [Equipment.ClimbingGear]: {
+                            price: 7,
+                            from: undefined
+                        },
+                        [Equipment.Neither]: {
+                            price: Number.NaN,
+                            from: undefined
+                        },
+                    }, terrain: "rocky",
+                    x: yindex,
+                    y: xindex
+                };
+                continue;
             } else if ((xindex === target.x) && (yindex === target.y)) {
-                cave[yindex][xindex] = { level: depth % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
+                cave[yindex][xindex] = { level: depth % data.modulo, price: undefined, terrain: "rocky", x: yindex, y: xindex };
             } else if (xindex === 0) {
-                cave[yindex][xindex] = { level: (yindex * data.yfactor + depth) % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
-            } else if (yindex === 0) {0
-                cave[yindex][xindex] = { level: (xindex * data.xfactor + depth) % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
+                cave[yindex][xindex] = { level: (yindex * data.yfactor + depth) % data.modulo, price: undefined, terrain: "rocky", x: yindex, y: xindex };
+            } else if (yindex === 0) {
+                cave[yindex][xindex] = { level: (xindex * data.xfactor + depth) % data.modulo, price: undefined, terrain: "rocky", x: yindex, y: xindex };
             } else {
                 const geoIndex = cave[yindex - 1][xindex].level * cave[yindex][xindex - 1].level;
-                cave[yindex][xindex] = { level: (geoIndex + depth) % data.modulo, price: Number.POSITIVE_INFINITY, terrain: "rocky", equipment: Equipment.None };
+                cave[yindex][xindex] = { level: (geoIndex + depth) % data.modulo, price: undefined, terrain: "rocky", x: yindex, y: xindex };
             }
-            cave[yindex][xindex].terrain = getTerrainType(cave[yindex][xindex].level);
+            const cell = cave[yindex][xindex];
+            cell.terrain = getTerrainType(cell.level);
+            cell.price = {
+                [Equipment.Torch]: {
+                    price: cell.terrain === "wet" ? Number.NaN : Number.POSITIVE_INFINITY,
+                    from: undefined
+                },
+                [Equipment.ClimbingGear]: {
+                    price: cell.terrain === "narrow" ? Number.NaN : Number.POSITIVE_INFINITY,
+                    from: undefined
+                },
+                [Equipment.Neither]: {
+                    price: cell.terrain === "rocky" ? Number.NaN : Number.POSITIVE_INFINITY,
+                    from: undefined
+                }
+            }
         }
     }
 
     const marked: [number, number][] = [[0, 0]];
     const processNeighbour = (current: Cell, x: number, y: number) => {
         const neighbour = cave[x][y];
-        if (neighbour.price <= current.price) {
-            return;
-        }
-        const isToolApplicable = canProceed(neighbour.terrain, current.equipment)
-        let price: number, equipment: Equipment;
+        const neighbourPrice = getNeighbourPrice(current, neighbour);
+        let doMark = false;
 
-        if (isToolApplicable) {
-            price = current.price + 1;
-            equipment = current.equipment;
-        } else {
-            price = current.price + 8;
-            equipment = switchTool(current.terrain, current.equipment);
+        if (neighbourPrice[Equipment.Neither].price < neighbour.price[Equipment.Neither].price) {
+            doMark = true;
+            neighbour.price[Equipment.Neither] = neighbourPrice[Equipment.Neither];
         }
 
-        if (neighbour.price > price) {
-            neighbour.price = price;
-            neighbour.equipment = equipment & allowed[neighbour.terrain];
+        if (neighbourPrice[Equipment.Torch].price < neighbour.price[Equipment.Torch].price) {
+            doMark = true;
+            neighbour.price[Equipment.Torch] = neighbourPrice[Equipment.Torch];
+        }
+
+        if (neighbourPrice[Equipment.ClimbingGear].price < neighbour.price[Equipment.ClimbingGear].price) {
+            doMark = true;
+            neighbour.price[Equipment.ClimbingGear] = neighbourPrice[Equipment.ClimbingGear];
+        }
+
+        if (doMark) {
             markIndex += 1;
-            if (markIndex % markCount === 0) {
-                console.log(`Marking cell [${x}:${y}] with equipment ${Equipment[equipment]} and price ${price}`);
-            }
+            // this can be moved to priority queue, but brute force is fast enough
             marked.push([x, y]);
-        } else if (neighbour.price === price) {
-            const changedEquipement = (neighbour.equipment | equipment) & allowed[neighbour.terrain];
-            if (neighbour.equipment !== changedEquipement) {
-                markIndex += 1;
-                if (markIndex % markCount === 0) {
-                    console.log(`Marking cell [${x}:${y}] with equipment ${Equipment[equipment]} and price ${price}`);
-                    console.log(`    changing ${Equipment[neighbour.equipment]}  to ${Equipment[(neighbour.equipment | equipment) & allowed[neighbour.terrain]]}`);
-                }
-                neighbour.equipment = changedEquipement;
-                marked.push([x, y]);
+            
+            if (debug && (markIndex % markCount === 0)) {
+                console.log(`Marking from [${current.x}:${current.y}] cell [${x}:${y}] with price ${neighbour.price}`);
             }
         }
     }
@@ -222,10 +315,12 @@ const partTwo = (input: Input, debug = false) => {
         // });
     }
 
-    console.log(cave[target.y][target.x]);
-    console.log(Equipment[cave[target.y][target.x].equipment])
+    const result = cave[target.y][target.x];
+    if (debug) {
+        console.log(result);
+    }
 
-    return -1;
+    return result.price[Equipment.Torch].price;
 };
 
 const resultOne = (_: any, result: number) => {
@@ -233,7 +328,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `The total risk level + 100 is ${result}`;
+    return `The fastest way is ${result} minutes`;
 };
 
 const showInput = (input: Input) => {
@@ -241,44 +336,7 @@ const showInput = (input: Input) => {
 };
 
 const test = () => {
-    // switch tool tests
-    console.log("--switch tool tests--");
 
-    console.log(Equipment[switchTool("narrow", Equipment.FullRocky)]);
-
-
-    console.log(Equipment[switchTool("narrow", Equipment.Neither)]===Equipment[Equipment.Torch]);
-    console.log(Equipment[switchTool("narrow", Equipment.Torch)]===Equipment[Equipment.Neither]);
-    try {
-        switchTool("narrow", Equipment.ClimbingGear);
-    } catch (e) {
-        console.log(e.message === "Invalid call");
-    }
-
-    console.log(Equipment[switchTool("rocky", Equipment.ClimbingGear)]===Equipment[Equipment.Torch]);
-    console.log(Equipment[switchTool("rocky", Equipment.Torch)]===Equipment[Equipment.ClimbingGear]);
-    try {
-        switchTool("rocky", Equipment.Neither);
-    } catch (e) {
-        console.log(e.message === "Invalid call");
-    }
-
-    console.log(Equipment[switchTool("wet", Equipment.Neither)]===Equipment[Equipment.ClimbingGear]);
-    console.log(Equipment[switchTool("wet", Equipment.ClimbingGear)]===Equipment[Equipment.Neither]);
-    try {
-        switchTool("wet", Equipment.Torch);
-    } catch (e) {
-        console.log(e.message === "Invalid call");
-    }
-
-    //can proceed tests
-    console.log("--can proceed tests--");
-    console.log(canProceed("rocky", Equipment.ClimbingGear));
-    console.log(canProceed("rocky", Equipment.Neither));
-    console.log(canProceed("rocky", Equipment.Torch));
-    console.log(canProceed("rocky", Equipment.FullNarrow));
-    console.log(canProceed("rocky", Equipment.FullRocky));
-    console.log(canProceed("rocky", Equipment.FullWet));
 };
 
 

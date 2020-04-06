@@ -28,11 +28,13 @@ import { solution17_2018 } from "./code/day-17.2018";
 import { solution20_2018 } from "./code/day-20.2018";
 import { solution22_2018 } from "./code/day-22.2018";
 import { solution23_2018 } from "./code/day-23.2018";
+import { solution24_2018 } from "./code/day-24.2018";
+import { solution25_2018 } from "./code/day-25.2018";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solution22;
+const solution = solution25_2018;
 
 (async () => {
     console.log(`Start processing input`)

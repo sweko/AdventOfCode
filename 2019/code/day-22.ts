@@ -3,10 +3,7 @@ import "../extra/array-helpers";
 import { Puzzle } from "./model";
 import { absmod, mulmod, powmod, modinverse } from "../extra/num-helpers";
 
-type MapOperation = (deck: number[]) => number[];
-type Operation = (card: number) => number;
-
-interface LinearOp  {
+interface LinearOp {
     a: number;
     b: number;
     m: number;
@@ -47,36 +44,6 @@ const processInput = async (day: number) => {
     return result;
 };
 
-// const dealInto = (cards: number[]) => {
-//     const result = Array(cards.length);
-//     for (let index = 0; index < cards.length; index++) {
-//         const card = cards[index];
-//         const position = cards.length - index - 1;
-//         result[position] = card;
-//     }
-//     return result;
-// }
-
-// const cut = (offset: number) => (cards: number[]) => {
-//     const result = Array(cards.length);
-//     for (let index = 0; index < cards.length; index++) {
-//         const card = cards[index];
-//         const position = (index + cards.length - offset) % cards.length;
-//         result[position] = card;
-//     }
-//     return result;
-// }
-
-// const dealBy = (increment: number) => (cards: number[]) => {
-//     const result = Array(cards.length);
-//     for (let index = 0; index < cards.length; index++) {
-//         const card = cards[index];
-//         const position = (index * increment) % cards.length;
-//         result[position] = card;
-//     }
-//     return result;
-// }
-
 const partOne = (ops: Op[], debug: boolean) => {
     const deckSize = 10007;
     const index = 2019;
@@ -84,10 +51,10 @@ const partOne = (ops: Op[], debug: boolean) => {
     return exec(operation, index);
 };
 
-const repeat = (linop:LinearOp, times:number):LinearOp => {
+const repeat = (linop: LinearOp, times: number): LinearOp => {
     const digits = times.toString(2).split("").map(c => Number(c)).slice(1);
     let result = linop;
-    
+
     for (const digit of digits) {
         result = combineLinOps(result, result);
         if (digit === 1) {
@@ -106,12 +73,7 @@ const partTwo = (ops: Op[], debug: boolean) => {
 
     const lookup = inverse(operation);
 
-    // go backward, i.e. where does a card have to be to end up in pos 2020?
-    // use part 1 to reverse engineer
-
     return exec(lookup, 2020);
-    // 24_044_128_914_219 is too low
-    // 56_276_109_790_847 is too low
 };
 
 const resultOne = (_: any, result: number) => {
@@ -126,10 +88,10 @@ const showInput = (input: Op[]) => {
     console.log(input);
 };
 
-const combineLinOps = (first: LinearOp, second:LinearOp): LinearOp => {
+const combineLinOps = (first: LinearOp, second: LinearOp): LinearOp => {
     return {
         a: mulmod(first.a, second.a, first.m),
-        b: absmod(mulmod(first.a, second.b, first.m)+first.b, first.m),
+        b: absmod(mulmod(first.a, second.b, first.m) + first.b, first.m),
         m: first.m
     }
 }
@@ -155,7 +117,7 @@ const combineOps = (ops: Op[], length: number): LinearOp => {
     return { a, b, m: length }
 }
 
-const inverse = (operation: LinearOp):LinearOp => {
+const inverse = (operation: LinearOp): LinearOp => {
     const ainverse = modinverse(operation.a, operation.m);
     return {
         a: ainverse,
@@ -164,12 +126,12 @@ const inverse = (operation: LinearOp):LinearOp => {
     };
 };
 
-const exec = (op:LinearOp, n: number):number => {
+const exec = (op: LinearOp, n: number): number => {
     const an = mulmod(op.a, n, op.m);
     return absmod(an + op.b, op.m);
 }
 
-const test = (ops: Op[]) => {    
+const test = (ops: Op[]) => {
     // const deckSize = 119_315_717_514_047;
     // const steps = 101_741_582_076_661;
     // const operation = combineOps(ops, deckSize);
