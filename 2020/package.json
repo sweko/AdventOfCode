@@ -1,0 +1,24 @@
+{
+  "name": "advent-of-code-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run-task.js",
+  "scripts": {
+    "start": "ts-node run-task",
+    "test": "cross-env TEST=true npm start",
+    "debug": "cross-env DEBUG=true npm start",
+    "test:mon": "cross-env TEST=true nodemon"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.12.15",
+    "fnv-plus": "^1.2.12",
+    "md5": "^2.2.1",
+    "terminal-kit": "^1.26.8"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1",
+    "typescript": "^3.7.2"
+  }
+}
