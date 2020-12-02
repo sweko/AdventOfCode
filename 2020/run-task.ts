@@ -1,9 +1,10 @@
 import { solutionOne } from "./code/day-01";
+import { solutionTwo } from "./code/day-02";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionOne;
+const solution = solutionTwo;
 
 (async () => {
     console.log(`Start processing input`)

@@ -44,12 +44,8 @@ const partTwo = (input: number[], debug: boolean) => {
     return first * second * third;
 };
 
-const resultOne = (_: any, result: number) => {
+const result = (_: any, result: number) => {
     return `The product of the numbers is ${result}`;
-};
-
-const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
 };
 
 const showInput = (input: number[]) => {
@@ -65,8 +61,8 @@ export const solutionOne: Puzzle<number[], number> = {
     input: processInput,
     partOne,
     partTwo,
-    resultOne: resultOne,
-    resultTwo: resultTwo,
+    resultOne: result,
+    resultTwo: result,
     showInput,
     test
 }
