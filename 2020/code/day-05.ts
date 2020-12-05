@@ -7,7 +7,8 @@ const processInput = async (day: number) => {
     return input;
 };
 
-const toNumber = (pass:string) => pass.split("").reduce((acc, letter) => (2*acc) + (["B", "R"].includes(letter) ? 1 : 0),  0);
+// the reduce is perverse. It uses that both R and B have a 0 for a third bit, and L and F have a 1.
+const toNumber = (pass:string) => pass.split("").map(c => c.charCodeAt(0)).reduce((acc, c) => (acc << 1) + +!(c & 4),  0);
 
 const partOne = (input: string[], debug: boolean) => {
     const passes = input.map(toNumber).sort((f, s) => s-f);
