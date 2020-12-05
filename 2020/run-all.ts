@@ -2,12 +2,13 @@ import { solutionOne } from "./code/day-01";
 import { solutionTwo } from "./code/day-02";
 import { solutionThree } from "./code/day-03";
 import { solutionFour } from "./code/day-04";
+import { solutionFive } from "./code/day-05";
 import { performance } from "perf_hooks";
 import { Puzzle } from "./code/model";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour];
+const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive];
 
 const runSolution = async <T>(solution: Puzzle<T, number>) => {
   console.log(`Start processing input`);
