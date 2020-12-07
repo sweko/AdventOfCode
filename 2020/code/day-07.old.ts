@@ -3,7 +3,8 @@ import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
 interface IBag {
-    name: string;
+    type: string;
+    color: string;
 }
 
 interface BigBag extends IBag {
@@ -16,17 +17,19 @@ interface BagQuantity extends IBag {
 
 const processInput = async (day: number) => {
     const input = await readInputLines(day);
-    const regex = /^([a-z]+ [a-z]+) bags contain (.*)\.$/;
-    const regex2 = /^(\d+) ([a-z]+ [a-z]+) bags?$/;
+    const regex = /^([a-z]+) ([a-z]+) bags contain (.*)\.$/;
+    const regex2 = /^(\d+) ([a-z]+) ([a-z]+) bags?$/;
     const result: BigBag[] = input.map(line => {
         const match = line.match(regex);
         return {
-            name: match[1],
-            bags: match[2].split(", ").map(bag => {
+            type: match[1],
+            color: match[2],
+            bags: match[3].split(", ").map(bag => {
                 const m2 = bag.match(regex2);
                 if (m2) {
                     return {
-                        name: m2[2],
+                        type: m2[2],
+                        color: m2[3],
                         quantity: +m2[1]
                     }
                 } else {
@@ -35,33 +38,43 @@ const processInput = async (day: number) => {
             }).filter(x=>x)
         };
     });
+    console.log(result[0]);
     return result;
 };
 
+const cmp = (first: IBag, second: IBag) => first.type === second.type && first.color === second.color;
+
 const partOne = (input: BigBag[], debug: boolean) => {
-    let targets = ['shiny gold'];
+    let targets = [{type: 'shiny', color: 'gold'}];
     let sources = input.slice();
     let result = 0;
 
-    while (targets.length !== 0) {
-        const next = sources.filter(bag => targets.some(tgt => bag.bags.find(sb => sb.name === tgt)));
-        result += next.length;
-        sources = sources.filter(bag => targets.every(tgt => !bag.bags.find(sb => sb.name === tgt)));
-        targets = next.map(tgt => tgt.name);
+    while (true) {
+        const newTargets = sources.filter(bag => targets.some(tgt => bag.bags.find(sb => cmp(sb, tgt))));
+        result += newTargets.length;
+        if (newTargets.length === 0) {
+            break;
+        }
+        sources = sources.filter(bag => targets.every(tgt => !bag.bags.find(sb => cmp(sb, tgt))));
+        targets = newTargets;
     }
 
     return result;
 };
 
 const getWeight = (allBags: BigBag[], bag: BigBag) => {
+    if (!bag.bags) {
+        console.log("here");
+    }
     return 1 + bag.bags.map(subbag => {
-        const child = allBags.find(ab => ab.name === subbag.name);
+        const child = allBags.find(ab => cmp(ab, subbag));
         return getWeight(allBags, child) * subbag.quantity;
     }).sum();
 }
 
 const partTwo = (input: BigBag[], debug: boolean) => {
-    const shiny = input.find(bag => bag.name === 'shiny gold');
+    let target = {type: 'shiny', color: 'gold'};
+    const shiny = input.find(bag => cmp(bag, target));
     return getWeight(input, shiny)-1;
 };
 
