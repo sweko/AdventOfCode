@@ -5,11 +5,13 @@ import { solutionFour } from "./code/day-04";
 import { solutionFive } from "./code/day-05";
 import { solutionSix } from "./code/day-06";
 import { solutionSeven } from "./code/day-07";
+import { solutionEight } from "./code/day-08";
+import { solutionNine } from "./code/day-09";
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionSeven;
+const solution = solutionNine;
 
 (async () => {
     console.log(`Start processing input`)
