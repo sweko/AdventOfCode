@@ -13,7 +13,6 @@ const partOne = (input: number[], debug: boolean) => {
     const diffs = chargers.map((c, i, a) => c - a[i-1]);
     diffs.push(3);
     const grouped = diffs.groupReduce(diff => diff, (acc, diff) => acc +1, 0);
-    console.log(grouped);
     const ones = grouped.find(g => g.key === 1).value;
     const threes = grouped.find(g => g.key === 3).value;
     return ones * threes;
@@ -21,30 +20,44 @@ const partOne = (input: number[], debug: boolean) => {
 
 let callCount = 0;
 
-const getNext = (chargers:number[], level: number): number => {
-    callCount +=1;
+const cachedResults: {[key:string]:number} = {};
 
-    if (callCount % 12345671 === 0) {
-        console.log(callCount);
+const getKey = (chargers:number[], level: number): string => `${chargers.join(":")}-${level}`;
+
+const getNext = (chargers:number[], level: number): number => {
+    const key = getKey(chargers, level);
+
+    if (cachedResults[key]) {
+        return cachedResults[key];
     }
 
     const candidates = chargers.filter(c => c-level <= 3);
     if (candidates.length === 0) {
+        cachedResults[key] = 1;
         return 1;
     }
     let setups = 0;
-    // console.log(candidates);
     for (const candidate of candidates) {
         const rest = chargers.filter(c => c > candidate);
         const result = getNext(rest, candidate);
         setups += result;
     }
+    cachedResults[key] = setups;
     return setups;
 }
 
 const partTwo = (input: number[], debug: boolean) => {
     const chargers = input.slice().sort((f, s) => f-s);
-    const result = getNext(chargers, 0)
+
+    // const results: {[key:number]:number} = {0: 1};
+    
+    // for (const charger of chargers) {
+    //     results[charger] = (results[charger-1] || 0) + (results[charger-2] || 0) + (results[charger-3] || 0);
+    // }
+
+    // return results[chargers[chargers.length-1]];
+
+    const result = getNext(chargers, 0);
     return result;
 };
 
@@ -53,7 +66,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
+    return `Total number of distinct ways ${result}`;
 };
 
 const showInput = (input: number[]) => {
