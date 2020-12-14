@@ -10,9 +10,10 @@ interface Schedule {
 interface LineOffset{
     line: number;
     offset: number;
+    reminder: number;
 }
 
-const isDivisible = (bigger: number, smaller: number) => Math.floor(bigger / smaller) * smaller === bigger;
+const isDivisible = (bigger: number, smaller: number) => bigger % smaller === 0;
 
 const processInput = async (day: number) => {
     const input = await readInputLines(day);
@@ -38,13 +39,25 @@ const partOne = (input: Schedule, debug: boolean) => {
 
 
 const partTwo = (input: Schedule, debug: boolean) => {
-    const lines = input.lines.map((line, index) => ({
+    let lines = input.lines.map((line, index) => ({
         line: line,
-        offset: index
+        offset: index,
+        reminder: ((line as number - index)  % (line as number) + (line as number)) % (line as number)
     })).filter(item => item.line !== "x") as LineOffset[];
 
-    return 0;
+    let period = lines[0].line;
+    let depart = lines[0].reminder;
+    lines = lines.slice(1);
 
+    while (lines.length) {
+        const line = lines[0];
+        while (depart % line.line !== line.reminder) {
+            depart += period;
+        }
+        period *= line.line;
+        lines = lines.slice(1);
+    }
+    return depart;
 };
 
 const partTwoBruteForce = (input: Schedule, debug: boolean) => {
