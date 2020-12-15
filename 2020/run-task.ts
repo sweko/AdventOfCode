@@ -12,15 +12,17 @@ import { solutionEleven } from "./code/day-11";
 import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
+import { solutionFifteen } from "./code/day-15";
 
 
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionFourteen;
+const solution = solutionFifteen;
 
 (async () => {
+    console.log(`Running code for day ${solution.day}`)
     console.log(`Start processing input`)
     const startInput = performance.now();
     const input = await solution.input(solution.day);

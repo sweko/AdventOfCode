@@ -18,7 +18,7 @@ interface MaskCommand {
 type Command = SetCommand | MaskCommand;
 
 interface Computer {
-    state: number[],
+    state: {[key: number] : number},
     mask: MaskState[]
 }
 
@@ -42,9 +42,9 @@ const processInput = async (day: number) => {
     }) as Command[];
 };
 
-const processCommand = (computer: Computer, command: Command): Computer => {
+const processCommandOne = (computer: Computer, command: Command): Computer => {
     const result = {
-        state: computer.state.slice(),
+        state: {...computer.state},
         mask: computer.mask.slice()
     }
     if (command.kind === "mask") {
@@ -70,32 +70,66 @@ const showComputer = ({mask, state}: Computer) => {
 
 const partOne = (input: Command[], debug: boolean) => {
     let computer: Computer = {
-        state: [],
+        state: {},
         mask: new Array(36).fill("X")
     };
     
     for (const command of input) {
-        computer = processCommand(computer, command);
+        computer = processCommandOne(computer, command);
         // showComputer(computer);
     }
 
     return Object.keys(computer.state).map(key => computer.state[key]).sum();
 };
 
+const processCommandTwo = (computer: Computer, command: Command): Computer => {
+    const result = {
+        state: computer.state,
+        mask: computer.mask.slice()
+    }
 
-const partTwo = (input: Command[], debug: boolean) => {
-    for (const command of input) {
-        if (command.kind === "mask") {
-            console.log(command.mask.join(""));
-            console.log(command.mask.filter(bit => bit === "X").length);
-            
+    if (command.kind === "mask") {
+        result.mask = command.mask.slice();
+    } else {
+        const bits = command.address.toString(2).padStart(36, "0").split("")
+            .map((bit, index) => result.mask[index] === "0" ? bit :result.mask[index]);
+
+        const addresses = [bits];
+        while (addresses[0].indexOf("X") !== -1) {
+            const target = addresses.shift();
+            const xloc = target.indexOf("X");
+            addresses.push(
+                [...target.slice(0,xloc), "0", ...target.slice(xloc+1)],
+                [...target.slice(0,xloc), "1", ...target.slice(xloc+1)]
+            );
+        }
+
+        for (const address of addresses) {
+            result.state[parseInt(address.join(""), 2)] = command.value;
         }
     }
-    return 0;
+
+    return result;
+}
+
+
+const partTwo = (input: Command[], debug: boolean) => {
+    let computer: Computer = {
+        state: {},
+        mask: new Array(36).fill("X")
+    };
+    
+    for (const command of input) {
+        computer = processCommandTwo(computer, command);
+        // showComputer(computer);
+    }
+
+    const sum =  Object.keys(computer.state).map(key => computer.state[key]).sum();
+    return sum;
 };
 
 const result = (_: any, result: number) => {
-    return `The wait time by the line number is ${result}`;
+    return `The sum of all addresses is ${result}`;
 };
 
 const showInput = (input: Command[]) => {
