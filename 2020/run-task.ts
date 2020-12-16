@@ -13,13 +13,14 @@ import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
 import { solutionFifteen } from "./code/day-15";
+import { solutionSixteen } from "./code/day-16";
 
 
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionFifteen;
+const solution = solutionSixteen;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
