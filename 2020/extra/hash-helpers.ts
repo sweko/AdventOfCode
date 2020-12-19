@@ -4,7 +4,7 @@ export type StringHash = Hash<string>;
 
 export const toHash = <T, U>(
     items: T[], 
-    selector: (item:T)=>string, 
+    selector: (item:T)=>string|number, 
     processor: (item:T) => U = item => item as unknown as U): Hash<U> => 
         items.reduce((acc, item) => ({...acc, [selector(item)]: processor(item)}), {});
 
