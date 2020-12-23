@@ -1,5 +1,3 @@
-import { nextTick } from "process";
-
 type Node<T> = {
     data: T;
     next: Node<T>;
@@ -41,32 +39,41 @@ export class CircularBuffer<T> {
         }
 
         prev.next = first;
+        first.prev = prev;
     }
 
-    toArray() {
-        const first = this.data.keys().next().value;
-        if (first === undefined) {
+    toArray(from : T = this.data.keys().next().value) {
+
+        if (from === undefined) {
             return [];
         }
-        const result = [first];
-        let current = this.data.get(first).next;
+        const result = [from];
+        let current = this.data.get(from).next;
 
-        while (current.data !== first) {
+        while (current.data !== from) {
             result.push(current.data);
             current = current.next;
         }
         return result as T[];
     }
 
-    addAfter(target: T, element: T) {
-        const existing = this.data.get(target);
-        const item = {
-            data: element,
-            next: existing.next,
-            prev: existing
-        };
-        existing.next = item;
-        this.data.set(element, item);
+    addAfter(target: T, ...elements: T[]) {
+        let index = 0;
+        let current = this.data.get(target);
+
+        while (index < elements.length) {
+            const element = elements[index];
+            const item = {
+                data: element,
+                prev: current,
+                next: current.next,
+            };
+            current.next = item;
+            this.data.set(element, item);
+            current = item;
+            index += 1;
+        }
+        current.next.prev = current;
     }
 
     remove(element: T) {
@@ -75,6 +82,34 @@ export class CircularBuffer<T> {
         current.next.prev = current.prev;
 
         this.data.delete(element);
+    }
+
+    removeAfter(element: T, count: number) {
+        const current = this.data.get(element);
+        const result: T[] = [];
+        let active = current.next;
+        for (let index = 0; index < count; index +=1) {
+            result.push(active.data);
+            this.data.delete(active.data);
+            active = active.next;
+        }
+        active.prev = current;
+        current.next = active;
+        return result;
+    }
+
+    next(element: T) {
+        const current = this.data.get(element);
+        return current.next.data;
+    }
+
+    prevois(element: T) {
+        const current = this.data.get(element);
+        return current.prev.data;
+    }
+
+    size() {
+        return this.data.size;
     }
 
 }
