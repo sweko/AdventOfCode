@@ -12,8 +12,17 @@ import { solutionEleven } from "./code/day-11";
 import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
-import { solutionFifteen} from "./code/day-15";
+import { solutionFifteen } from "./code/day-15";
 import { solutionSixteen } from "./code/day-16";
+import { solutionSeventeen } from "./code/day-17";
+import { solutionEighteen } from "./code/day-18";
+import { solutionNineteen } from "./code/day-19";
+import { solutionTwenty } from "./code/day-20";
+import { solutionTwentyOne } from "./code/day-21";
+import { solutionTwentyTwo } from "./code/day-22";
+import { solutionTwentyThree } from "./code/day-23";
+import { solutionTwentyFour } from "./code/day-24";
+import { solutionTwentyFive } from "./code/day-25";
 import { performance } from "perf_hooks";
 import { Puzzle } from "./code/model";
 
@@ -22,7 +31,8 @@ const test = process.env.TEST;
 const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
   solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
-  solutionSixteen];
+  solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
+  solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
 
 const runSolution = async <T>(solution: Puzzle<T, number>) => {
   console.log(`Start processing input`);
@@ -50,6 +60,7 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
 
   console.log(solution.resultOne(input, resultOne));
   console.log(`Running time for part 1 is ${Math.round(endOne - startOne)}ms`);
+  const totalOne = endOne - startOne;
 
   if (!solution.partTwo) {
     return;
@@ -63,20 +74,37 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
 
   console.log(solution.resultTwo(input, resultTwo));
   console.log(`Running time for part 2 is ${Math.round(endTwo - startTwo)}ms`);
+  const totalTwo = endTwo - startTwo;
+
+  return {
+    day: solution.day,
+    partOne: totalOne,
+    partTwo: totalTwo
+  }
 };
 
 (async () => {
   let total = 0;
+  const perfs = [];
   for (const solution of solutions) {
     console.log("------------------");
     console.log(`Task #${solution.day}`);
     console.log("------------------");
     const start = performance.now();
-    await runSolution(solution as any);
+    const result = await runSolution(solution as any);
     const end = performance.now();
     total += Math.round(end - start)
+    result["total"]=end-start;
+    perfs.push(result);
   }
   console.log("------------------");
   console.log(`Total run time is ${total}ms`);
+  console.log("------------------");
+  
+  console.table(perfs.map(p => ({
+    ...p,
+    percentage: p.total / total * 100
+  })));
+
 })();
 
