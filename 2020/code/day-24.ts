@@ -2,19 +2,120 @@ import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
+type Direction = "east" | "west" | "north-east" | "north-west" | "south-east" | "south-west";
+type Coords = {
+    x: number;
+    y: number;
+    z: number;
+}
+
 const processInput = async (day: number) => {
-    return [];
+    const input = await readInputLines(day);
+    return input.map(line => {
+        const result: Direction[] = [];
+        while (line !== "") {
+            if (line.startsWith("e")) {
+                result.push("east");
+                line = line.slice(1);
+            }
+            if (line.startsWith("w")) {
+                result.push("west");
+                line = line.slice(1);
+            }
+            if (line.startsWith("ne")) {
+                result.push("north-east");
+                line = line.slice(2);
+            }
+            if (line.startsWith("nw")) {
+                result.push("north-west");
+                line = line.slice(2);
+            }
+            if (line.startsWith("se")) {
+                result.push("south-east");
+                line = line.slice(2);
+            }
+            if (line.startsWith("sw")) {
+                result.push("south-west");
+                line = line.slice(2);
+            }
+        }
+        return result;
+    });
 };
 
-const partOne = (input: number[], debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
+const moves: {[key in Direction]: (coord: Coords) => Coords} = {
+    "east": (coord) => ({
+        x: coord.x + 1,
+        y: coord.y - 1,
+        z: coord.z
+    }),
+    "west": (coord) => ({
+        x: coord.x - 1,
+        y: coord.y + 1,
+        z: coord.z
+    }),
+    "north-east": (coord) => ({ 
+        x: coord.x + 1,
+        y: coord.y,
+        z: coord.z - 1
+    }),
+    "south-west": (coord) => ({ 
+        x: coord.x - 1,
+        y: coord.y,
+        z: coord.z + 1
+    }),
+    "north-west": (coord) => ({ 
+        x: coord.x,
+        y: coord.y + 1,
+        z: coord.z - 1
+    }),
+    "south-east": (coord) => ({ 
+        x: coord.x,
+        y: coord.y - 1,
+        z: coord.z + 1
+    }),
+}
+
+const partOne = (input: Direction[][], debug: boolean) => {
+    const origin: Coords = {
+        x: 0,
+        y: 0,
+        z: 0
+    };
+    const state: {[key:string]: boolean} = {};
+    for (const tilePath of input) {
+        let location = origin;
+        for (const direction of tilePath) {
+            location = moves[direction](location);
+        }
+        const key = `${location.x}:${location.y}:${location.z}`;
+        if (state[key]) {
+            state[key] = false;
+        } else {
+            state[key] = true;
+        };
     }
 
-    return 0;
+    const result = Object.keys(state).map(key => state[key]).filter(item => item).length;
+
+    return result;
 };
 
-const partTwo = (input: number[], debug: boolean) => {
+
+const getNeighbourKeys = ({x, y, z}:Coords):string[] => {
+    return [
+        `${x}:${y+1}:${z-1}`,
+        `${x}:${y-1}:${z+1}`,
+        `${x+1}:${y}:${z-1}`,
+        `${x-1}:${y}:${z+1}`,
+        `${x+1}:${y-1}:${z}`,
+        `${x-1}:${y+1}:${z}`
+    ]
+}
+
+
+
+const partTwo = (input: Direction[][], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
@@ -23,22 +124,22 @@ const partTwo = (input: number[], debug: boolean) => {
 };
 
 const resultOne = (_: any, result: number) => {
-    return `Total system energy is ${result}`;
+    return `Total flipped tiles are ${result}`;
 };
 
 const resultTwo = (_: any, result: number) => {
     return `The period of the orbit is ${result}`;
 };
 
-const showInput = (input: number[]) => {
+const showInput = (input: Direction[][]) => {
     console.log(input);
 };
 
-const test = (_: number[]) => {
+const test = (_: Direction[][]) => {
     console.log("----Test-----");
 };
 
-export const solutionTwentyFour: Puzzle<number[], number> = {
+export const solutionTwentyFour: Puzzle<Direction[][], number> = {
     day: 24,
     input: processInput,
     partOne,

@@ -105,7 +105,6 @@ const getRegex = (rule: SubstitutionRule, rules: RuleHash): string => {
   const fregex = firstTwo ? `${firstOne}${firstTwo}` : firstOne;
   const sregex = secondOne ? (secondTwo ? `${secondOne}${secondTwo}` : secondOne) : "";
   const regex = sregex ? `(${fregex}|${sregex})` : fregex;
-  console.log(`Setting regex for rule #${rule.index} to ${regex}`);
   return regex;
 }
 
@@ -149,7 +148,7 @@ const partTwo = ({rules, tests}: Input, debug: boolean) => {
 };
 
 const result = (_: any, result: number) => {
-  return `Total sum of expression results is ${result}`;
+  return `Total matching messages: ${result}`;
 };
 
 const showInput = (input: Input) => {

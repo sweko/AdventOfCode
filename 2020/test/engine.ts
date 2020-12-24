@@ -22,6 +22,22 @@ export const assert: {[key: string]: Assert} = Object.keys(assertImpl).map(key =
     }
 }).reduce((acc, item) => ({...acc, [item.key]: item.code}), {})
 
+export const expectError = (code: () => void, message: string) => {
+    try {
+        code();
+        return false;
+    } catch (err) {
+        return true;
+    }
+}
+
+assert.expectError = (code) => {
+    const result = expectError(code, "NOT USED");
+    if (!result) {
+        throw Error(`Test failed: Expected error, but code executed`);
+    };
+};
+
 export const test = (name: string, code: () => void) => {
     try {
         code();
@@ -31,3 +47,4 @@ export const test = (name: string, code: () => void) => {
         console.log(`\x1b[31m${name} failed - ${error.message}\x1b[0m`);
     }
 }
+

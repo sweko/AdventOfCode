@@ -9,7 +9,7 @@ export class CircularBuffer<T> {
 
     constructor(input: T[]) {
         if (input.length === 0) {
-            return;
+            throw Error("Must initiate circular buffer with at least one element");
         }
 
         const first = {
@@ -65,7 +65,7 @@ export class CircularBuffer<T> {
             const element = elements[index];
             const item = {
                 data: element,
-                prev: current,
+                prev: null, //current,
                 next: current.next,
             };
             current.next = item;
@@ -73,7 +73,6 @@ export class CircularBuffer<T> {
             current = item;
             index += 1;
         }
-        current.next.prev = current;
     }
 
     remove(element: T) {
@@ -103,7 +102,7 @@ export class CircularBuffer<T> {
         return current.next.data;
     }
 
-    prevois(element: T) {
+    previous(element: T) {
         const current = this.data.get(element);
         return current.prev.data;
     }
