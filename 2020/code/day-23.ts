@@ -63,8 +63,6 @@ const partTwo = (input: number[], debug: boolean) => {
     const fstar = cups.next(1);
     const sstar = cups.next(fstar);
 
-    console.log(fstar, sstar);
-
     return fstar * sstar;
 
     // for (let index = 0; index < 100; index += 1) {

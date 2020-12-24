@@ -1,6 +1,7 @@
 import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
+import { Hash } from "../extra/hash-helpers";
 
 type Direction = "east" | "west" | "north-east" | "north-west" | "south-east" | "south-west";
 type Coords = {
@@ -101,7 +102,6 @@ const partOne = (input: Direction[][], debug: boolean) => {
     return result;
 };
 
-
 const getNeighbourKeys = ({x, y, z}:Coords):string[] => {
     return [
         `${x}:${y+1}:${z-1}`,
@@ -113,14 +113,70 @@ const getNeighbourKeys = ({x, y, z}:Coords):string[] => {
     ]
 }
 
+const getNextState = (state: Hash<boolean>): Hash<boolean> => {
+    const result: Hash<boolean> = {};
 
+    for (const key in state) {
+        const parts = key.split(":");
+        const coords = {
+            x: +parts[0],
+            y: +parts[1],
+            z: +parts[2],
+        };
+        const around = getNeighbourKeys(coords);
 
-const partTwo = (input: Direction[][], debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
+        const blacks = around.map(key => state[key]).filter(value => value).length;
+        if (state[key]) {
+            if ((blacks === 1) || (blacks === 2)) {
+                result[key] = true;
+            }
+        } else {
+            if (blacks === 2) {
+                result[key] = true;
+            }
+        }
+
+        if (result[key]) {
+            for (const nkey of around) {
+                result[nkey] = result[nkey] || false;
+            }
+        }
     }
 
-    return 0;
+    return result;
+}
+
+const partTwo = (input: Direction[][], debug: boolean) => {
+    const origin: Coords = {
+        x: 0,
+        y: 0,
+        z: 0
+    };
+    let state: Hash<boolean> = {};
+    for (const tilePath of input) {
+        let location = origin;
+        for (const direction of tilePath) {
+            location = moves[direction](location);
+        }
+        const key = `${location.x}:${location.y}:${location.z}`;
+        if (state[key]) {
+            state[key] = false;
+        } else {
+            state[key] = true;
+        };
+        const around = getNeighbourKeys(location);
+        for (const nkey of around) {
+            state[nkey] = state[nkey] || false;
+        }
+    }
+
+    for (let index = 0; index < 100; index +=1) {
+        state = getNextState(state);
+        // const result = Object.keys(state).map(key => state[key]).filter(item => item).length;
+        // console.log(result);
+    }
+    const result = Object.keys(state).map(key => state[key]).filter(item => item).length;
+    return result;
 };
 
 const resultOne = (_: any, result: number) => {
@@ -128,7 +184,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
+    return `Total flipped tiles are ${result}`;
 };
 
 const showInput = (input: Direction[][]) => {
