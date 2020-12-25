@@ -1,33 +1,30 @@
-import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
+import { mulmod, powmod } from "../extra/num-helpers";
 import { Puzzle } from "./model";
 
+const modulo = 20201227;
+
 const processInput = async (day: number) => {
-    return [];
+    // return [5764801, 17807724];
+    return [13135480, 8821721];
 };
 
 const partOne = (input: number[], debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
+    const cardPublic = input[0];
+    const doorPublic = input[1];
+
+    let cardLoopSize = findLoopSize(cardPublic);
+
+    let result = 1;
+    for (let loop = 0; loop < cardLoopSize; loop +=1) {
+        result = mulmod(result, doorPublic, modulo);
     }
 
-    return 0;
-};
-
-const partTwo = (input: number[], debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
-    }
-
-    return 0;
+    return result;
 };
 
 const resultOne = (_: any, result: number) => {
-    return `Total system energy is ${result}`;
-};
-
-const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
+    return `The encryption key is ${result}`;
 };
 
 const showInput = (input: number[]) => {
@@ -42,9 +39,20 @@ export const solutionTwentyFive: Puzzle<number[], number> = {
     day: 25,
     input: processInput,
     partOne,
-    partTwo,
     resultOne: resultOne,
-    resultTwo: resultTwo,
     showInput,
     test,
 }
+
+function findLoopSize(target: number) {
+    let state = 1;
+    const subject = 7;
+
+    let loopSize = 0;
+    while (state !== target) {
+        state = mulmod(state, subject, modulo);
+        loopSize += 1;
+    }
+    return loopSize;
+}
+

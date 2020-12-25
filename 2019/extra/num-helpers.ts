@@ -83,7 +83,7 @@ export function modinverse(value: number, mod: number) {
 export function powmod(a: number, exp: number, mod: number) {
     const digits = exp.toString(2).split("").map(c => Number(c)).slice(1);
     let result = a;
-    
+
     for (const digit of digits) {
         result = mulmod(result, result, mod);
         if (digit === 1) {

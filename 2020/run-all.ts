@@ -63,7 +63,11 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
   const totalOne = endOne - startOne;
 
   if (!solution.partTwo) {
-    return;
+    return {
+      day: solution.day,
+      partOne: totalOne,
+      partTwo: 0
+    }
   }
 
   console.log(`Part 2: Initiating processing`);
