@@ -92,3 +92,14 @@ export function powmod(a: number, exp: number, mod: number) {
     }
     return result;
 }
+
+
+export function getAllVariations<T>(source: T[], order: number): T[][] {
+    if (order === 0) {
+        return [[]];
+    };
+    const result = source.map(item =>
+        getAllVariations(source.filter(s => s !== item), order-1).map(variation => [item, ...variation])
+    ).flat();
+    return result;
+}
