@@ -22,7 +22,7 @@ const processInput = async (day: number) => {
 
 const getAllergyData = (input: Food[]) => {
     const allergenArray = Array.from(new Set(input.map(food => food.allergens).flat()));
-    const allergens =toHash(allergenArray, allergen => allergen, _ => true);
+    const allergens = toHash(allergenArray, allergen => allergen, _ => true);
 
     const ingredients = Array.from(new Set(input.map(food => food.ingredients).flat())).map(ingredient => ({
         ingredient,
@@ -48,11 +48,11 @@ const getAllergyData = (input: Food[]) => {
 }
 
 const partOne = (input: Food[], debug: boolean) => {
-    
+
     const safeFoods = getAllergyData(input)
     .filter(item => item.allergens.length === 0)
     .map(item => item.ingredient);
-    
+
     let count = 0;
     for (const food of input) {
         for (const ingredient of food.ingredients) {

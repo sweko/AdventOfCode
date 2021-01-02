@@ -6,7 +6,7 @@ import { CircularBuffer } from "../extra/circular-buffer";
 
 const processInput = async (day: number) => {
     // return [3,8,9,1,2,5,4,6,7];
-    return [6,1,4,7,5,2,8,3,9];
+    return "614752839".split("").map(c => +c);
 };
 
 const nextState = (current: number, cups: CircularBuffer<number>) => {

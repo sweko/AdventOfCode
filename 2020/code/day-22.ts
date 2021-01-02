@@ -31,7 +31,6 @@ const processInput = async (day: number) => {
 };
 
 const partOne = (input: Combat, debug: boolean) => {
-
     const first = input.first.slice();
     const second = input.second.slice();
     let round = 1;
@@ -75,10 +74,11 @@ const partOne = (input: Combat, debug: boolean) => {
 
 let counter = 0;
 
-const runGame = ({first, second}: Combat, gameId: number, debug: boolean) => {
+const runGame = (first: number[], second: number[], gameId: number, debug: boolean) => {
     let round = 1;
     debugLog(debug, `=== Game ${gameId} ===`);
-    
+    debugLog(debug, "");
+
     const states = new Map<string, boolean>();
     while (first.length * second.length !== 0) {
         debugLog(debug, `-- Round ${round} (Game ${gameId}) --`);
@@ -97,7 +97,21 @@ const runGame = ({first, second}: Combat, gameId: number, debug: boolean) => {
         debugLog(debug, `Player 1 plays: ${fcard}`);
         debugLog(debug, `Player 2 plays: ${scard}`);
 
-        if (fcard > scard) {
+        if ((fcard <= first.length) && (scard <= second.length)) {
+            debugLog(debug, "Playing a sub-game to determine the winner...");
+            debugLog(debug, "");
+            const {first:fresult} = runGame(first.slice(0, fcard), second.slice(0, scard), ++counter, debug);
+            debugLog(debug, "");
+            debugLog(debug, `...anyway, back to game ${gameId}.`);
+
+            if (fresult.length) {
+                debugLog(debug, `Player 1 wins round ${round} of game ${gameId}!`);
+                first.push(fcard, scard);
+            } else {
+                debugLog(debug, `Player 2 wins round ${round} of game ${gameId}!`);
+                second.push(scard, fcard);
+            }
+        } else if (fcard > scard) {
             debugLog(debug, `Player 1 wins round ${round} of game ${gameId}!`);
             first.push(fcard, scard);
         } else {
@@ -108,20 +122,24 @@ const runGame = ({first, second}: Combat, gameId: number, debug: boolean) => {
         round -=- 1;
     }
 
-    debugLog(debug, `PLAYER ${first.length ===  0 ? 2 : 1} wins`);
-    
-    const winner = first.length ===  0 ? second : first;
+    debugLog(debug, `The winner of game ${gameId} is player ${first.length ===  0 ? 2 : 1}!`);
 
-    debugLog(debug, `== Post-game results ==`)
-    debugLog(debug, `Player 1's deck: ${first.join(", ")}`);
-    debugLog(debug, `Player 2's deck: ${second.join(", ")}`);
+    return {first, second};
 }
 
 
 const partTwo = (input: Combat, debug: boolean) => {
-    runGame(input, ++counter, debug);
+    const first = input.first.slice();
+    const second = input.second.slice();
+    const {first:fresult, second: sresult} = runGame(first, second, ++counter, false);
 
-    return 0;
+    debugLog(debug, `== Post-game results ==`)
+    debugLog(debug, `Player 1's deck: ${fresult.join(", ")}`);
+    debugLog(debug, `Player 2's deck: ${sresult.join(", ")}`);
+
+    const winner = fresult.length ===  0 ? sresult : fresult;
+
+    return winner.reduce((acc, item, index) => acc + item * (winner.length - index), 0);
 };
 
 const resultOne = (_: any, result: number) => {
@@ -129,7 +147,7 @@ const resultOne = (_: any, result: number) => {
 };
 
 const resultTwo = (_: any, result: number) => {
-    return `The period of the orbit is ${result}`;
+    return `The winning players score is ${result}`;
 };
 
 const showInput = (input: Combat) => {

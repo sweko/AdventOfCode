@@ -30,7 +30,7 @@ if (!Array.prototype.groupBy) {
         const result: { key: U, items: T[] }[] = [];
         const array = this;
 
-        array.forEach((item, index) => {
+        array.forEach((item: T, index: number) => {
             const key = keySelector(item, index);
             const keyItem = result.find(r => keyEquality(r.key, key));
             if (!keyItem) {
@@ -64,7 +64,7 @@ if (!Array.prototype.groupReduce) {
             initFunc = () => initial;
         }
 
-        array.forEach((item, index) => {
+        array.forEach((item: T, index: number) => {
             const key = keySelector(item, index);
             let keyItem = result.find(r => r.key === key);
             if (!keyItem) {
@@ -84,14 +84,14 @@ if (!Array.prototype.groupReduce) {
 if (!Array.prototype.sum) {
     Array.prototype.sum = function <T>(selector: (item: T, index: number) => number = (item => item as unknown as number)): number {
         const array = this;
-        return array.reduce((acc, item, index) => acc + selector(item, index), 0);
+        return array.reduce((acc: number, item: T, index: number) => acc + selector(item, index), 0);
     };
 }
 
 if (!Array.prototype.min) {
     Array.prototype.min = function <T>(selector: (item: T, index: number) => number = (item => item as unknown as number)): number {
         const array = this;
-        return array.reduce((acc, item, index) => acc < selector(item, index) ? acc : selector(item, index), Number.POSITIVE_INFINITY);
+        return array.reduce((acc: number, item: T, index: number) => acc < selector(item, index) ? acc : selector(item, index), Number.POSITIVE_INFINITY);
     };
 }
 
