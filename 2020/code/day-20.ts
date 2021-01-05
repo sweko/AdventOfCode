@@ -443,7 +443,7 @@ const partTwo = (input: Tile[], debug: boolean) => {
     const monsterSize = 15;
 
     const totalHash = images[0].sum(row => row.sum(cell => cell === "#" ? 1 : 0));
-    
+
     return totalHash - monsterSize * monsters;
 };
 
