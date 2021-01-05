@@ -6,6 +6,7 @@ type Node<T> = {
 
 export class CircularBuffer<T> {
     private data = new Map<T, Node<T>>();
+    private _size: number;
 
     constructor(input: T[]) {
         if (input.length === 0) {
@@ -19,14 +20,14 @@ export class CircularBuffer<T> {
         };
         this.data.set(input[0], first);
 
-        const len = input.length;
-        if (len === 1) {
+        this._size = input.length;
+        if (this._size === 1) {
             first.prev = first;
             first.next = first;
         }
 
         let prev = first; 
-        for (let index = 1; index < len; index += 1) {
+        for (let index = 1; index < this._size; index += 1) {
             const element = input[index]
             const item = {
                 data: element,
@@ -73,6 +74,8 @@ export class CircularBuffer<T> {
             current = item;
             index += 1;
         }
+
+        this._size += elements.length;
     }
 
     remove(element: T) {
@@ -81,6 +84,7 @@ export class CircularBuffer<T> {
         current.next.prev = current.prev;
 
         this.data.delete(element);
+        this._size -= 1;
     }
 
     removeAfter(element: T, count: number) {
@@ -89,11 +93,13 @@ export class CircularBuffer<T> {
         let active = current.next;
         for (let index = 0; index < count; index +=1) {
             result.push(active.data);
-            this.data.delete(active.data);
+            // no need to actually delete the data
+            // this.data.delete(active.data);
             active = active.next;
         }
         active.prev = current;
         current.next = active;
+        this._size -= count;
         return result;
     }
 
@@ -108,7 +114,7 @@ export class CircularBuffer<T> {
     }
 
     size() {
-        return this.data.size;
+        return this._size;
     }
 
 }

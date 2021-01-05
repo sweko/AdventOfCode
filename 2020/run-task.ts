@@ -24,12 +24,11 @@ import { solutionTwentyThree } from "./code/day-23";
 import { solutionTwentyFour } from "./code/day-24";
 import { solutionTwentyFive } from "./code/day-25";
 
-
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwenty;
+const solution = solutionTwentyThree;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)

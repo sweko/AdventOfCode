@@ -1,7 +1,5 @@
-import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
-import { performance } from 'perf_hooks'
 import { CircularBuffer } from "../extra/circular-buffer";
 
 const processInput = async (day: number) => {
@@ -9,9 +7,7 @@ const processInput = async (day: number) => {
     return "614752839".split("").map(c => +c);
 };
 
-const nextState = (current: number, cups: CircularBuffer<number>) => {
-
-    let size = cups.size();
+const nextState = (current: number, cups: CircularBuffer<number>, size: number) => {
     let pickUp = cups.removeAfter(current, 3);
 
     let destination = (current === 1) ? size : current - 1;
@@ -30,9 +26,10 @@ const nextState = (current: number, cups: CircularBuffer<number>) => {
 const partOne = (input: number[], debug: boolean) => {
     let current = input[0];
     let cups = new CircularBuffer(input);
+    let size = input.length;
 
     for (let index = 0; index < 100; index += 1) {
-        const result = nextState(current, cups);
+        const result = nextState(current, cups, size);
         current = result.current;
         cups = result.cups;
     }
@@ -48,6 +45,7 @@ const partTwo = (input: number[], debug: boolean) => {
     let current = input[0];
     let cupsArray = new Array(1_000_000).fill(0).map((_, index) => index + 1);
     cupsArray.splice(0, 9, ...input);
+    let size = 1_000_000;
 
     let cups = new CircularBuffer(cupsArray);
 
@@ -55,7 +53,7 @@ const partTwo = (input: number[], debug: boolean) => {
         if (debug && (index % 123457 === 0)) {
             console.log(index);
         }
-        const result = nextState(current, cups);
+        const result = nextState(current, cups, size);
         current = result.current;
         cups = result.cups;
     }
@@ -64,19 +62,6 @@ const partTwo = (input: number[], debug: boolean) => {
     const sstar = cups.next(fstar);
 
     return fstar * sstar;
-
-    // for (let index = 0; index < 100; index += 1) {
-    //     if (index % 10 === 0) {
-    //         console.log(index);
-    //     }
-    //     const result = nexterState(current, cups);
-    //     current = result.current;
-    //     cups = result.cups;
-    // }
-
-    // console.log(perfs);
-
-    // return 0;
 };
 
 const resultOne = (_: any, result: number) => {
