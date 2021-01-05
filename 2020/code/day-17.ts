@@ -20,7 +20,7 @@ type State4 = {
   y: Range;
   z: Range;
   w: Range;
-  actives: Point4[];
+  actives: Map<string, Point4>;
 };
 
 const processInput = async (day: number) => {
@@ -139,6 +139,8 @@ const getNeighbours4 = ({ x, y, z, w }: Point4) => {
   return result;
 };
 
+const getKey4 = ({x,y,z,w}: Point4):string => `${x}:${y}:${z}:${w}`;
+
 const getNextState4 = (state: State4): State4 => {
   const result: State4 = {
     x: {
@@ -157,7 +159,7 @@ const getNextState4 = (state: State4): State4 => {
       min: state.w.min - 1,
       max: state.w.max + 1,
     },
-    actives: [],
+    actives: new Map<string, Point4>(),
   };
 
   for (let x = result.x.min; x <= result.x.max; x += 1) {
@@ -165,40 +167,37 @@ const getNextState4 = (state: State4): State4 => {
       for (let z = result.z.min; z <= result.z.max; z += 1) {
         for (let w = result.w.min; w <= result.w.max; w += 1) {
           const neighbours = getNeighbours4({ x, y, z, w });
-          const active = neighbours.filter((n) =>
-            state.actives.find((p) => n.x === p.x && n.y === p.y && n.z === p.z && n.w === p.w)
-          ).length;
-          const current = state.actives.find(
-            (p) => x === p.x && y === p.y && z === p.z && w === p.w
-          );
+          const active = neighbours.filter(n => state.actives.has(getKey4(n))).length;
+          const current = state.actives.get(getKey4({x, y, z, w}));
+
           if (current) {
             // active
             if (active === 2 || active === 3) {
-              result.actives.push({ x, y, z, w });
+              result.actives.set(getKey4({ x, y, z, w }), { x, y, z, w });
             }
           } else {
             // inactive
             if (active === 3) {
-              result.actives.push({ x, y, z, w });
+              result.actives.set(getKey4({ x, y, z, w }), { x, y, z, w });
             }
           }
         }
       }
     }
   }
-
   return result;
 };
 
 const partTwo = (input: boolean[][], debug: boolean) => {
   let actives = input
-    .map((line, x) =>
-      line
+    .map((line, x) => line
         .map((cube, y) => ({ cube, point: { x, y, z: 0, w: 0 } }))
-        .filter((cube) => cube.cube)
-        .map((cube) => cube.point)
+        .filter(cube => cube.cube)
+        .map(cube => cube.point)
     )
     .flat();
+
+  let activeMap = new Map<string, Point4>(actives.map(item => [getKey4(item), item]));
 
   let state: State4 = {
     x: {
@@ -217,7 +216,7 @@ const partTwo = (input: boolean[][], debug: boolean) => {
       min: 0,
       max: 0,
     },
-    actives,
+    actives: activeMap,
   };
 
   for (let index = 0; index < 6; index += 1) {
@@ -225,7 +224,7 @@ const partTwo = (input: boolean[][], debug: boolean) => {
     // console.log(state.actives.length);
   }
 
-  return state.actives.length;
+  return state.actives.size;
 };
 
 const result = (_: any, result: number) => {
