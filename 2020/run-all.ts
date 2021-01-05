@@ -60,7 +60,7 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
 
   console.log(solution.resultOne(input, resultOne));
   console.log(`Running time for part 1 is ${Math.round(endOne - startOne)}ms`);
-  const totalOne = endOne - startOne;
+  const totalOne = (((endOne - startOne) * 1000) | 0) / 1000;
 
   if (!solution.partTwo) {
     return {
@@ -78,7 +78,7 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
 
   console.log(solution.resultTwo(input, resultTwo));
   console.log(`Running time for part 2 is ${Math.round(endTwo - startTwo)}ms`);
-  const totalTwo = endTwo - startTwo;
+  const totalTwo = (((endTwo - startTwo) * 1000) | 0) / 1000;
 
   return {
     day: solution.day,
@@ -97,18 +97,22 @@ const runSolution = async <T>(solution: Puzzle<T, number>) => {
     const start = performance.now();
     const result = await runSolution(solution as any);
     const end = performance.now();
-    total += Math.round(end - start)
-    result["total"]=end-start;
+    total += end - start;
+    result["total"]=(((end - start) * 1000) | 0) / 1000;
     perfs.push(result);
   }
-  console.log("------------------");
-  console.log(`Total run time is ${total}ms`);
-  console.log("------------------");
   
-  console.table(perfs.map(p => ({
+  const results = perfs.map(p => ({
     ...p,
-    percentage: p.total / total * 100
-  })));
+    percentage: (((p.total / total * 100) * 1000) | 0) / 1000
+  }));
+
+  results.sort((f, s) => f.percentage - s.percentage);
+
+  console.table(results);
+  console.log("------------------");
+  console.log(`Total run time is ${Math.round(total)}ms`);
+  console.log("------------------");
 
 })();
 

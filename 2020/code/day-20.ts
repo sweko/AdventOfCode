@@ -1,48 +1,38 @@
-import { strict } from "assert";
-import { reverse } from "dns";
-import { getEnabledCategories } from "trace_events";
-import { readInputLines, readInput } from "../extra/aoc-helper";
+import { readInputLines } from "../extra/aoc-helper";
 import { printMatrix } from "../extra/terminal-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
-interface Tile<T=boolean> {
+type Side = "top" | "bottom" | "left" | "right";
+
+type Direction = "straight" | "reverse";
+
+interface Tile {
     id: number;
-    values: T[][];
+    values: boolean[][];
 }
 
-interface TileMetadata<T=boolean> {
+type LineNumbers = {
+    [key in Direction]: number;
+};
+
+type TileNumbers = {
+    [key in Side]: LineNumbers;
+};
+
+type TileState = {
     id: number;
-    numbers: TileNumbers;
-    states: TileStates<T>
-}
+    data: boolean[][]
+} & {
+    [key in Side]: number;
+};
 
-interface LineNumbers {
-    straight: number;
-    reverse: number;
-}
-
-interface TileNumbers {
-    top: LineNumbers;
-    bottom: LineNumbers;
-    left: LineNumbers;
-    right: LineNumbers;
-}
-
-interface TileState<T=boolean> {
-    straight: T[][];
-    reverse: T[][];
-}
-
-interface TileStates<T> {
+type TileMatch = {
+    state: TileState;
     id: number;
-    top: TileState<T>;
-    bottom: TileState<T>;
-    left: TileState<T>;
-    right: TileState<T>;
-}
-
-
+} & {
+    [key in Side]: number;
+};
 
 const processInput = async (day: number) => {
     const input = await readInputLines(day);
@@ -128,161 +118,333 @@ const partOne = (input: Tile[], debug: boolean) => {
     return corners[0] * corners[1] * corners[2] * corners[3];
 };
 
-const emptyTile = <T>(size:number, dfault: T): T[][] => new Array(size).fill(null).map(_ => new Array(size).fill(dfault));
+const emptyTile = (size:number): boolean[][] => new Array(size).fill(null).map(_ => new Array(size).fill(false));
 
-const getTileStates = <T>({id, values}:Tile<T>, dfault: T): TileStates<T> => {
+const getTileStates = ({id, values}:Tile): TileState[] => {
     const size = values.length;
 
-    const topStraight = emptyTile(size, dfault);
-    const topReverse = emptyTile(size, dfault);
-    const bottomStraight = emptyTile(size, dfault);
-    const bottomReverse = emptyTile(size, dfault);
-    const leftStraight = emptyTile(size, dfault);
-    const leftReverse = emptyTile(size, dfault);
-    const rightStraight = emptyTile(size, dfault);
-    const rightReverse = emptyTile(size, dfault);
+    const states = new Array(8).fill(undefined).map(_ => ({
+        id,
+        top: -1,
+        bottom: -1,
+        left: -1,
+        right: -1,
+        data: emptyTile(size)
+    }));
     for (let row = 0; row < size; row += 1) {
         for (let column = 0; column < size; column +=1) {
-            topStraight[row][column] = values[row][column];
-            topReverse[row][column] = values[row][size-1-column];
-            bottomStraight[row][column] = values[size-1-row][column];
-            bottomReverse[row][column] = values[size-1-row][size-1-column];
+            states[0].data[row][column] = values[row][column];
+            states[1].data[row][column] = values[row][size-1-column];
+            states[2].data[row][column] = values[size-1-row][column];
+            states[3].data[row][column] = values[size-1-row][size-1-column];
 
-            leftStraight[row][column] = values[column][row];
-            leftReverse[row][column] = values[size-1-column][row];
-            rightStraight[row][column] = values[column][size-1-row];
-            rightReverse[row][column] = values[size-1-column][size-1-row];
+            states[4].data[row][column] = values[column][row];
+            states[5].data[row][column] = values[size-1-column][row];
+            states[6].data[row][column] = values[column][size-1-row];
+            states[7].data[row][column] = values[size-1-column][size-1-row];
         }
     }
 
-    return {
-        id,
-        top: {
-            straight: topStraight,
-            reverse: topReverse,
-        },
-        bottom: {
-            straight: bottomStraight,
-            reverse: bottomReverse,
-        },
-        left: {
-            straight: leftStraight,
-            reverse: leftReverse,
-        },
-        right: {
-            straight: rightStraight,
-            reverse: rightReverse
-        }
+    for (const state of states) {
+        const topline = state.data[0];
+        const bottomline = state.data[state.data.length-1];
+        const leftline = state.data.map(row => row[0]);
+        const rightline = state.data.map(row => row[row.length-1]);
+
+        state.top = asNumber(topline);
+        state.bottom = asNumber(bottomline);
+        state.left = asNumber(leftline),
+        state.right = asNumber(rightline)
     };
 
-    // return [
-    //     {
-    //         top: top.straight, 
-    //         bottom: bottom.straight,
-    //         left: left.straight, 
-    //         right: right.straight
-    //     },
-    //     {
-    //         top: left.reverse, 
-    //         bottom: right.reverse,
-    //         left: bottom.straight,
-    //         right: top.straight
-    //     },
-    //     {
-    //         top: bottom.reverse,
-    //         bottom: top.reverse,
-    //         left: right.reverse,
-    //         right: left.reverse
-    //     },
-    //     {
-    //         top: right.straight,
-    //         bottom: left.straight,
-    //         left: top.reverse,
-    //         right: bottom.reverse,
-    //     },
-    //     {
-    //         top: top.reverse,
-    //         bottom: bottom.reverse,
-    //         left: right.straight,
-    //         right: left.straight
-    //     },
-    //     {
-    //         top: right.reverse,
-    //         bottom: left.reverse,
-    //         left: bottom.reverse,
-    //         right: top.reverse,
-    //     },
-    //     {
-    //         top: bottom.straight,
-    //         bottom: top.straight,
-    //         left: left.reverse,
-    //         right: right.reverse,
-    //     },
-    //     {
-    //         top: left.straight,
-    //         bottom: right.straight,
-    //         left: top.straight,
-    //         right: bottom.straight
-    //     }
-    // ];
+    return states;
 }
 
-const getTilesMetadata = <T>(input: Tile<T>[]):TileMetadata<T> => {
-    const tiles = input.map(tile => ({
-        id: tile.id,
-        numbers: getTileNumbers(tile),
-        states: getTileStates(tile, false);
-    }));
-}
+const extractImage = (data: boolean[][]) => data.slice(1, data.length-1).map(line => line.slice(1, line.length-1));
 
-const getCorners = (input: Tile[]):[Tile, Tile, Tile, Tile] => {
-    const tiles = input.map(tile => ({
-        id: tile.id,
-        numbers: getTileNumbers(tile)
-    }));
+const getMatchingTiles = (tileInput: Tile[]): TileMatch[] => {
+    const tiles = tileInput.flatMap(tile => getTileStates(tile));
 
-    const x0 = tiles.flatMap(tile => [
-        { id: tile.id, value: Math.min(tile.numbers.top.straight, tile.numbers.top.reverse) },
-        { id: tile.id, value: Math.min(tile.numbers.bottom.straight, tile.numbers.bottom.reverse) },
-        { id: tile.id, value: Math.min(tile.numbers.left.straight, tile.numbers.left.reverse) },
-        { id: tile.id, value: Math.min(tile.numbers.right.straight, tile.numbers.right.reverse) },
-    ]);
+    let rest = tiles.slice();
+    const current = rest.pop();
+    rest = rest.filter(state => state.id !== current.id);
 
-    const x1 = x0.groupBy(item => item.value);
-    const x2 = x1.filter(group => group.items.length % 2 !== 0);
-    const x3 = x2.map(group => group.items).flat();
-    const x4 = x3.groupBy(item => item.id);
-    const x5 = x4.filter(group => group.items.length >= 2);
-    const x6 = x5.map(group => group.key);
+    const matched = [{
+        state: current,
+        id: current.id,
+        top: undefined,
+        left: undefined,
+        right: undefined,
+        bottom: undefined
+    }];
 
-    if (x6.length !== 4) {
-        console.log(x0);
-        throw new Error("FOUR CORNERS NOT FOUND");
+    while (rest.length !== 0) {
+        for (const piece of matched.filter(tile => tile.top === undefined)) {
+            const candidates = rest.filter(state => state.bottom === piece.state.top);
+            if (candidates.length > 1) {
+                debugger;
+            }
+            if (candidates.length === 0) {
+                piece.top = null; // corner or side
+                continue;
+            }
+            const item = {
+                state: candidates[0],
+                id: candidates[0].id,
+                top: undefined,
+                left: undefined,
+                right: undefined,
+                bottom: piece.id
+            }
+            piece.top = item.id;
+            rest = rest.filter(state => state.id !== item.id);
+
+            // find other connections
+            const itemtop = matched.find(t => t.bottom === undefined && t.state.bottom == item.state.top);
+            if (itemtop) {
+                itemtop.bottom = item.id;
+                item.top = itemtop.id;
+            }
+
+            const itemleft = matched.find(t => t.right === undefined && t.state.right == item.state.left);
+            if (itemleft) {
+                itemleft.right = item.id;
+                item.left = itemleft.id;
+            }
+
+            const itemright = matched.find(t => t.left === undefined && t.state.left == item.state.right);
+            if (itemright) {
+                itemright.left = item.id;
+                item.right = itemright.id;
+            }
+
+            matched.push(item);
+        };
+
+        for (const piece of matched.filter(tile => tile.bottom === undefined)) {
+            const candidates = rest.filter(state => state.top === piece.state.bottom);
+            if (candidates.length > 1) {
+                debugger;
+            }
+            if (candidates.length === 0) {
+                piece.bottom = null; // corner or side
+                continue;
+            }
+            const item = {
+                state: candidates[0],
+                id: candidates[0].id,
+                top: piece.id,
+                left: undefined,
+                right: undefined,
+                bottom: undefined
+            }
+            piece.bottom = item.id;
+            rest = rest.filter(state => state.id !== item.id);
+
+            // find other connections
+            const itembottom = matched.find(t => t.top === undefined && t.state.top == item.state.bottom);
+            if (itembottom) {
+                itembottom.top = item.id;
+                item.bottom = itembottom.id;
+            }
+
+            const itemleft = matched.find(t => t.right === undefined && t.state.right == item.state.left);
+            if (itemleft) {
+                itemleft.right = item.id;
+                item.left = itemleft.id;
+            }
+
+            const itemright = matched.find(t => t.left === undefined && t.state.left == item.state.right);
+            if (itemright) {
+                itemright.left = item.id;
+                item.right = itemright.id;
+            }
+
+            matched.push(item);
+        };
+
+        for (const piece of matched.filter(tile => tile.left === undefined)) {
+            const candidates = rest.filter(state => state.right === piece.state.left);
+            if (candidates.length > 1) {
+                debugger;
+            }
+            if (candidates.length === 0) {
+                piece.left = null; // corner or side
+                continue;
+            }
+            const item = {
+                state: candidates[0],
+                id: candidates[0].id,
+                top: undefined,
+                left: undefined,
+                right: piece.id,
+                bottom: undefined
+            }
+            piece.left = item.id;
+            rest = rest.filter(state => state.id !== item.id);
+
+            // find other connections
+            const itemtop = matched.find(t => t.bottom === undefined && t.state.bottom == item.state.top);
+            if (itemtop) {
+                itemtop.bottom = item.id;
+                item.top = itemtop.id;
+            }
+
+            const itemleft = matched.find(t => t.right === undefined && t.state.right == item.state.left);
+            if (itemleft) {
+                itemleft.right = item.id;
+                item.left = itemleft.id;
+            }
+
+            const itembottom = matched.find(t => t.top === undefined && t.state.top == item.state.bottom);
+            if (itembottom) {
+                itembottom.top = item.id;
+                item.bottom = itembottom.id;
+            }
+
+            matched.push(item);
+        };
+
+        for (const piece of matched.filter(tile => tile.right === undefined)) {
+            const candidates = rest.filter(state => state.left === piece.state.right);
+            if (candidates.length > 1) {
+                debugger;
+            }
+            if (candidates.length === 0) {
+                piece.right = null; // corner or side
+                continue;
+            }
+            const item = {
+                state: candidates[0],
+                id: candidates[0].id,
+                top: undefined,
+                left: piece.id,
+                right: undefined,
+                bottom: undefined
+            }
+            piece.right = item.id;
+            rest = rest.filter(state => state.id !== item.id);
+
+            // find other connections
+            const itemtop = matched.find(t => t.bottom === undefined && t.state.bottom == item.state.top);
+            if (itemtop) {
+                itemtop.bottom = item.id;
+                item.top = itemtop.id;
+            }
+
+            const itembottom = matched.find(t => t.top === undefined && t.state.top == item.state.bottom);
+            if (itembottom) {
+                itembottom.top = item.id;
+                item.bottom = itembottom.id;
+            }
+
+            const itemright = matched.find(t => t.left === undefined && t.state.left == item.state.right);
+            if (itemright) {
+                itemright.left = item.id;
+                item.right = itemright.id;
+            }
+
+            matched.push(item);
+        };
     }
-    return x6 as any;
+
+    for (const tile of matched) {
+        if (tile.top === undefined) {
+            tile.top = null;
+        }
+        if (tile.bottom === undefined) {
+            tile.bottom = null;
+        }
+        if (tile.left === undefined) {
+            tile.left = null;
+        }
+        if (tile.right === undefined) {
+            tile.right = null;
+        }
+    }
+
+    return matched;
 }
+
+const addToImage = (baseImage: boolean[][], tile: boolean[][], row: number, column: number) => {
+    const data = extractImage(tile);
+    const size = data.length;
+    const xoffset = row * size;
+    const yoffset = column * size;
+    for (let x = 0; x<size; x+=1) {
+        for (let y=0; y<size; y+=1) {
+            baseImage[x+xoffset][y+yoffset] = data[x][y];
+        }
+    }
+}
+
+const monsterOffset = [
+    { x: -1, y:	18 },
+    { x: 0, y:	5 },
+    { x: 0, y:	6 },
+    { x: 0, y:	11 },
+    { x: 0, y:	12 },
+    { x: 0, y:	17 },
+    { x: 0, y:	18 },
+    { x: 0, y:	19 },
+    { x: 1, y:	1 },
+    { x: 1, y:	4 },
+    { x: 1, y:	7 },
+    { x: 1, y:	10 },
+    { x: 1, y:	13 },
+    { x: 1, y:	16 },
+]
+
+const checkMonster = (image: string[][], row: number, col: number) => monsterOffset.every(({x, y}) => image[x+row] && image[x+row][y+col] === "#");
 
 const partTwo = (input: Tile[], debug: boolean) => {
-    showInput(input);
-    const imageSide = Math.sqrt(input.length);
-    const tileSize = input[0].values.length;
+    const matched = getMatchingTiles(input);
+    const tileSize = input[0].values.length-2;
+    const tilePerRow = Math.sqrt(input.length);
+    const baseImage = emptyTile(tileSize*tilePerRow);
 
-    const corners = getCorners(input);
+    let current = matched.find(tile => tile.top === null && tile.left === null);
+    let row = 0;
+    let column = 0;
+    let dir: Side = "right";
 
-    // const tiles = input.map(tile => ({
-    //     id: tile.id,
-    //     states: getTileStates(getTileNumbers(tile))
-    // }));
+    while (current) {
+        addToImage(baseImage, current.state.data, row, column);
+        if (dir === "right" && current.right) {
+            current = matched.find(tile => tile.id === current.right);
+            column += 1;
+        } else if (dir === "left" && current.left) {
+            current = matched.find(tile => tile.id === current.left);
+            column -= 1;
+        } else {
+            dir = (dir === "right") ? "left" : "right";
+            current = matched.find(tile => tile.id === current.bottom);
+            row +=1;
+            if (row === tilePerRow) {
+                break;
+            }
+        }
+    }
 
+    const images = getTileStates({id: -1, values: baseImage}).map(ts => ts.data.map(row => row.map(cell => cell ? "#": ".")));
+    let monsters = 0;
+    for (const image of images) {
+        for (let x =0; x < image.length; x +=1) {
+            for (let y =0; y < image.length; y +=1) {
+                if (image[x][y] === "#") {
+                    if (checkMonster(image, x, y)) {
+                        monsters -=- 1;
+                    }
+                }
+            }
+        }
+    }
+
+    const monsterSize = 15;
+
+    const totalHash = images[0].sum(row => row.sum(cell => cell === "#" ? 1 : 0));
     
-    
-    // const image: Tile[][] = new Array(imageSide).fill(null)
-    //     .map(_ => new Array(imageSide).fill(null).map(_ => emptyTile(tileSize)));
-
-    // //set corner tiles;
-    // image[0]
-
-    return 0;
+    return totalHash - monsterSize * monsters;
 };
 
 const resultOne = (_: any, result: number) => {
@@ -299,42 +461,6 @@ const showInput = (input: Tile[]) => {
 
 const test = (_: Tile[]) => {
     console.log("----Test-----");
-    const tile:Tile<string> = {
-        id: -1,
-        values: [
-            [ 'a', 'b', 'c'],
-            [ 'd', 'e', 'f'],
-            [ 'g', 'h', 'i'],
-        ]
-    };
-
-    const states = getTileStates(tile, "");
-    printMatrix(states.top.straight);
-    console.log("--");
-    printMatrix(states.top.reverse);
-    console.log("--");
-    printMatrix(states.bottom.straight);
-    console.log("--");
-    printMatrix(states.bottom.reverse);
-    console.log("--states.left.straight--");
-    printMatrix(states.left.straight);
-    console.log("--states.left.reverse--");
-    printMatrix(states.left.reverse);
-    console.log("--states.right.straight--");
-    printMatrix(states.right.straight);
-    console.log("--states.right.reverse--");
-    printMatrix(states.right.reverse);
-    console.log("--");
-
-    return;
-    printMatrix(states.top.straight);
-    printMatrix(states.top.straight);
-    printMatrix(states.top.straight);
-    printMatrix(states.top.straight);
-    printMatrix(states.top.straight);
-    printMatrix(states.top.straight);
-
-    // console.log(JSON.stringify(, null, 2));
 };
 
 export const solutionTwenty: Puzzle<Tile[], number> = {
@@ -347,5 +473,3 @@ export const solutionTwenty: Puzzle<Tile[], number> = {
     showInput,
     test,
 }
-
-
