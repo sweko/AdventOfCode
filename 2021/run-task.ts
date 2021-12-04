@@ -1,7 +1,7 @@
 import { solutionOne } from "./code/day-01";
 import { solutionTwo } from "./code/day-02";
 import { solutionThree } from "./code/day-03";
-// import { solutionFour } from "./code/day-04";
+import { solutionFour } from "./code/day-04";
 // import { solutionFive } from "./code/day-05";
 // import { solutionSix } from "./code/day-06";
 // import { solutionSeven } from "./code/day-07";
@@ -28,7 +28,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionThree;
+const solution = solutionFour;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
