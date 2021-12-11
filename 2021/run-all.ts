@@ -9,20 +9,20 @@ import { solutionEight } from "./code/day-08";
 import { solutionNine } from "./code/day-09";
 import { solutionTen } from "./code/day-10";
 import { solutionEleven } from "./code/day-11";
-import { solutionTwelve } from "./code/day-12";
-import { solutionThirteen } from "./code/day-13";
-import { solutionFourteen } from "./code/day-14";
-import { solutionFifteen } from "./code/day-15";
-import { solutionSixteen } from "./code/day-16";
-import { solutionSeventeen } from "./code/day-17";
-import { solutionEighteen } from "./code/day-18";
-import { solutionNineteen } from "./code/day-19";
-import { solutionTwenty } from "./code/day-20";
-import { solutionTwentyOne } from "./code/day-21";
-import { solutionTwentyTwo } from "./code/day-22";
-import { solutionTwentyThree } from "./code/day-23";
-import { solutionTwentyFour } from "./code/day-24";
-import { solutionTwentyFive } from "./code/day-25";
+// import { solutionTwelve } from "./code/day-12";
+// import { solutionThirteen } from "./code/day-13";
+// import { solutionFourteen } from "./code/day-14";
+// import { solutionFifteen } from "./code/day-15";
+// import { solutionSixteen } from "./code/day-16";
+// import { solutionSeventeen } from "./code/day-17";
+// import { solutionEighteen } from "./code/day-18";
+// import { solutionNineteen } from "./code/day-19";
+// import { solutionTwenty } from "./code/day-20";
+// import { solutionTwentyOne } from "./code/day-21";
+// import { solutionTwentyTwo } from "./code/day-22";
+// import { solutionTwentyThree } from "./code/day-23";
+// import { solutionTwentyFour } from "./code/day-24";
+// import { solutionTwentyFive } from "./code/day-25";
 import { performance } from "perf_hooks";
 import { Puzzle } from "./code/model";
 
@@ -30,9 +30,10 @@ const debug = process.env.DEBUG;
 const test = process.env.TEST;
 const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
-  solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
-  solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
-  solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
+  solutionEleven];
+  // solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
+  // solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
+  // solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
 
 const runSolution = async <T>(solution: Puzzle<T, number>) => {
   console.log(`Start processing input`);

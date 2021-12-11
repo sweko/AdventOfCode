@@ -21,7 +21,6 @@ const partOne = (input: number[], debug: boolean) => {
         const pvalue = input.map(value => Math.abs(value - position)).reduce((acc, value) => acc + value, 0);
         if (pvalue < minValue) {
             minValue = pvalue;
-            console.log(`Candidate ${position} at ${pvalue}`);
         }
     }
     return minValue;
@@ -45,7 +44,6 @@ const partTwo = (input: number[], debug: boolean) => {
 
         if (pvalue < minValue) {
             minValue = pvalue;
-            console.log(`Candidate ${position} at ${pvalue}`);
         }
     }
     return minValue;
