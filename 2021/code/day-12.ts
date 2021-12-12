@@ -40,7 +40,7 @@ const copyCaves = (input: Caves):Caves => {
     return result;
 }
 
-function getCaves(input: Input[]) {
+const getCaves = (input: Input[]) => {
     const caves: Caves = {};
     const nodeNames = [...new Set(input.map(item => [item.start, item.end]).flat())];
     for (const nodeName of nodeNames) {
@@ -62,10 +62,7 @@ function getCaves(input: Input[]) {
     return caves;
 }
 
-let callCount = 0;
-
 const getPathsOne = (caves: Caves, start: string, end: string): string[][] => {
-    callCount += 1;
     const startNode = caves[start];
     const nexts = startNode.connections;
     const result = [];
@@ -95,10 +92,7 @@ const partOne = (input: Input[], debug: boolean) => {
     }
 
     const caves: Caves = getCaves(input);
-    callCount = 0;
     const paths = getPathsOne(caves, "start", "end");
-    console.log(callCount);
-    
     return paths.length;
 };
 
@@ -121,7 +115,6 @@ const processTwo = (caves: Caves, start: Node, end: string, usedBonus = false) =
 };
 
 const getPathsTwo = (caves: Caves, start: string, end: string, usedBonus = false): string[][] => {
-    callCount += 1;
     const startNode = caves[start];
     const nextCaves = copyCaves(caves);
     if (startNode.type === 'small') {
@@ -133,16 +126,16 @@ const getPathsTwo = (caves: Caves, start: string, end: string, usedBonus = false
             return processTwo(nextCaves, startNode, end, true);
         } else {
             // bonus now
-            const paths = processTwo(nextCaves, startNode, end, true);
+            const pathsOne = processTwo(nextCaves, startNode, end, true);
 
             // no bonus for you
             delete nextCaves[start];
             for (const key in nextCaves) {
                 nextCaves[key].connections = nextCaves[key].connections.filter(item => item !== start);
             }
-            paths.push(...processTwo(nextCaves, startNode, end, false));
+            const pathsTwo = processTwo(nextCaves, startNode, end, false);
 
-            return paths;
+            return [...pathsOne, ...pathsTwo];
         }
     } else {
         return processTwo(nextCaves, startNode, end, usedBonus);
@@ -155,13 +148,8 @@ const partTwo = (input: Input[], debug: boolean) => {
     }
 
     const caves: Caves = getCaves(input);
-    callCount = 0;
     const paths = getPathsTwo(caves, "start", "end");
-    const start = performance.now();
     const distincts = [...new Set(paths.map(path => path.join(",")))];
-    const end = performance.now();
-    console.log(`Distincts duration: ${end - start}ms`);
-    console.log(`Call count: ${callCount}`);
     return distincts.length;
 };
 
