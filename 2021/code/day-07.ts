@@ -7,16 +7,23 @@ const processInput = async (day: number) => {
     return input.split(",").map(n => parseInt(n, 10));
 };
 
-// analytical solution
 const partOne = (input: number[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
-    // the correct position is the median
-    const position = input.slice().sort((a, b) => a - b)[input.length / 2];
-    const pvalue = input.map(value => Math.abs(value - position)).reduce((acc, value) => acc + value, 0);
 
-    return pvalue;
+    const min = Math.min(...input);
+    const max = Math.max(...input);
+
+    let minValue = Number.MAX_SAFE_INTEGER;
+
+    for (let position = min; position <= max; position++) {
+        const pvalue = input.map(value => Math.abs(value - position)).reduce((acc, value) => acc + value, 0);
+        if (pvalue < minValue) {
+            minValue = pvalue;
+        }
+    }
+    return minValue;
 };
 
 const partTwo = (input: number[], debug: boolean) => {
@@ -24,15 +31,22 @@ const partTwo = (input: number[], debug: boolean) => {
         console.log("-------Debug-----");
     }
 
-    // the correct position is the mean
-    const sum = input.reduce((acc, value) => acc + value, 0);
-    const position = sum / input.length | 0;
+    const min = Math.min(...input);
+    const max = Math.max(...input);
 
-    const pvalue = input
-        .map(value => Math.abs(value - position))
-        .map(value => value * (value + 1) / 2)
-        .reduce((acc, value) => acc + value, 0);
-    return pvalue;
+    let minValue = Number.MAX_SAFE_INTEGER;
+
+    for (let position = min; position <= max; position++) {
+        const pvalue = input
+            .map(value => Math.abs(value - position))
+            .map(value => value * (value+1) / 2)
+            .reduce((acc, value) => acc + value, 0);
+
+        if (pvalue < minValue) {
+            minValue = pvalue;
+        }
+    }
+    return minValue;
 };
 
 const resultOne = (_: any, result: number) => {
