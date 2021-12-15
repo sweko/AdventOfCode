@@ -12,7 +12,7 @@ import { solutionEleven } from "./code/day-11";
 import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
-// import { solutionFifteen } from "./code/day-15";
+import { solutionFifteen } from "./code/day-15";
 // import { solutionSixteen } from "./code/day-16";
 // import { solutionSeventeen } from "./code/day-17";
 // import { solutionEighteen } from "./code/day-18";
@@ -30,7 +30,7 @@ const debug = process.env.DEBUG;
 const test = process.env.TEST;
 const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
-  solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen];
+  solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen];
   // solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
   // solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
   // solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
