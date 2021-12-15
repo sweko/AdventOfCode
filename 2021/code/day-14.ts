@@ -21,50 +21,67 @@ const processInput = async (day: number) => {
     return {polymer, rules};
 };
 
-const executeStep = (polymer: string, rules: StringHash) => {
-    const insertions = [];
-    for (let index = 0; index < polymer.length-1; index++) {
-        const key = polymer.substring(index, index+2);
-        insertions.push(rules[key] || "");
+const executeStep = (polymer: Hash<number>, rules: StringHash) => {
+    const result: Hash<number> = {};
+
+    for (const basePair in polymer) {
+        const value = polymer[basePair];
+        const target = rules[basePair];
+        const baseOne = basePair[0] + target;
+        const baseTwo = target + basePair[1];
+        result[baseOne] = (result[baseOne] || 0) + value;
+        result[baseTwo] = (result[baseTwo] || 0) + value;
     }
-    const polyChars = polymer.split("");
-    const output = [];
-    for (let index = 0; index < polymer.length-1; index++) {
-        output.push(polyChars[index]);
-        output.push(insertions[index]);
-    }
-    output.push(polyChars[polymer.length-1]);
-    return output.join("");
+
+    return result;
 };
 
-const partOne = (input: Input, debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
+const calculateFrequencyDiff = (input: Input, limit: number) => {
+    let polymer: Hash<number> = {};
+
+    for (let index = 0; index < input.polymer.length - 1; index++) {
+        const key = input.polymer.substring(index, index + 2);
+        polymer[key] = (polymer[key] || 0) + 1;
     }
 
-    let polymer = input.polymer;
-
-    for (let run = 0; run < 10; run++) {
+    for (let run = 0; run < limit; run++) {
         polymer = executeStep(polymer, input.rules);
     }
 
     const histogram: Hash<number> = {};
 
-    for (let index = 0; index < polymer.length; index++) {
-        const char = polymer[index];
-        histogram[char] = (histogram[char] || 0) + 1;
+    for (const basePair in polymer) {
+        const first = basePair[0];
+        const second = basePair[1];
+        histogram[first] = (histogram[first] || 0) + polymer[basePair];
+        histogram[second] = (histogram[second] || 0) + polymer[basePair];
     }
 
-    const frequencies = Object.entries(histogram).sort((a, b) => (b[1]  as number) - (a[1] as number));
-    return frequencies[0][1] - frequencies[frequencies.length-1][1];
+    for (const key in histogram) {
+        histogram[key] = Math.ceil(histogram[key] / 2);
+    }
+
+    const frequencies = Object.values(histogram).sort((a, b) => b - a);
+    return frequencies[0] - frequencies[frequencies.length - 1];
+}
+
+const partOne = (input: Input, debug: boolean) => {
+    if (debug) {
+        console.log("-------Debug-----");
+    }
+    const limit = 10;
+    return calculateFrequencyDiff(input, limit);
 };
+
+
 
 const partTwo = (input: Input, debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
 
-    return 0;
+    const limit = 40;
+    return calculateFrequencyDiff(input, limit);
 };
 
 const resultOne = (_: any, result: number) => {
