@@ -13,7 +13,7 @@ import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
 import { solutionFifteen } from "./code/day-15";
-// import { solutionSixteen } from "./code/day-16";
+import { solutionSixteen } from "./code/day-16";
 // import { solutionSeventeen } from "./code/day-17";
 // import { solutionEighteen } from "./code/day-18";
 // import { solutionNineteen } from "./code/day-19";
@@ -28,7 +28,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionFifteen;
+const solution = solutionSixteen;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
