@@ -113,11 +113,13 @@ const parsePacket = (input: string): Packet => {
     }
 }
 
+const isLiteral = (packet: Packet): packet is LiteralPacket => packet.type === 4;
+
 const getVersionSum = (packet: Packet) => {
-    if (packet.type === 4) {
+    if (isLiteral(packet)) {
         return packet.version;
     }
-    return packet.version + (packet as OperatorPacket).subpackets.map(p => getVersionSum(p)).sum();
+    return packet.version + packet.subpackets.map(p => getVersionSum(p)).sum();
 }
 
 const partOne = (input: string, debug: boolean) => {
@@ -130,36 +132,34 @@ const partOne = (input: string, debug: boolean) => {
 };
 
 const evaluatePacket = (packet: Packet): number => {
-    if (packet.type === 4) {
-        return (packet as LiteralPacket).value;
-    } else {
-        const opPacket = packet as OperatorPacket;
-        const values = opPacket.subpackets.map(p => evaluatePacket(p));
-        // arithmetic packets
-        if (opPacket.type === 0) { // sum packet
-            return values.sum();
-        }
-        if (opPacket.type === 1) { // product packet
-            return values.reduce((a, b) => a * b, 1);
-        }
-        if (opPacket.type === 2) { // min packet
-            return values.min();
-        }
-        if (opPacket.type === 3) { // max packet
-            return values.max();
-        }
-        // logical packets
-        const first = values[0];
-        const second = values[1];
-        if (opPacket.type === 5) { // greater than packet
-            return (first > second) ? 1 : 0;
-        }
-        if (opPacket.type === 6) { // less than packet
-            return (first < second) ? 1 : 0;
-        }
-        if (opPacket.type === 7) { // equal to packet
-            return (first === second) ? 1 : 0;
-        }
+    if (isLiteral(packet)) {
+        return packet.value;
+    } 
+    const values = packet.subpackets.map(p => evaluatePacket(p));
+    // arithmetic packets
+    if (packet.type === 0) { // sum packet
+        return values.sum();
+    }
+    if (packet.type === 1) { // product packet
+        return values.reduce((a, b) => a * b, 1);
+    }
+    if (packet.type === 2) { // min packet
+        return values.min();
+    }
+    if (packet.type === 3) { // max packet
+        return values.max();
+    }
+    // logical packets
+    const first = values[0];
+    const second = values[1];
+    if (packet.type === 5) { // greater than packet
+        return (first > second) ? 1 : 0;
+    }
+    if (packet.type === 6) { // less than packet
+        return (first < second) ? 1 : 0;
+    }
+    if (packet.type === 7) { // equal to packet
+        return (first === second) ? 1 : 0;
     }
 }
 
