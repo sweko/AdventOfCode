@@ -14,7 +14,7 @@ import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
 import { solutionFifteen } from "./code/day-15";
 import { solutionSixteen } from "./code/day-16";
-// import { solutionSeventeen } from "./code/day-17";
+import { solutionSeventeen } from "./code/day-17";
 // import { solutionEighteen } from "./code/day-18";
 // import { solutionNineteen } from "./code/day-19";
 // import { solutionTwenty } from "./code/day-20";
@@ -31,7 +31,7 @@ const test = process.env.TEST;
 const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
   solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
-  solutionSixteen]
+  solutionSixteen, solutionSeventeen]
   // solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
   // solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
 
