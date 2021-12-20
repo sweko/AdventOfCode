@@ -73,8 +73,6 @@ const partOne = (input: Scanner[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
-    return 0;
-
     const reference = input[0].beacons.map(p => p);
     const rest = [...input.slice(1)];
 
