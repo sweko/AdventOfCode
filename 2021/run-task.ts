@@ -21,14 +21,14 @@ import { solutionTwenty } from "./code/day-20";
 import { solutionTwentyOne } from "./code/day-21";
 import { solutionTwentyTwo } from "./code/day-22";
 import { solutionTwentyThree } from "./code/day-23";
-// import { solutionTwentyFour } from "./code/day-24";
+import { solutionTwentyFour } from "./code/day-24";
 // import { solutionTwentyFive } from "./code/day-25";
 
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwentyThree;
+const solution = solutionTwentyFour;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
