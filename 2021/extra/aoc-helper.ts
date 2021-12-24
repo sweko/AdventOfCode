@@ -32,6 +32,6 @@ export function loopMatrix<T>(matrix: T[][], operation: (row: number, column: nu
 
 export function debugLog(debug: boolean, ...args:any[]) {
     if (debug) {
-        console.log(...args);       
+        console.log(...args);
     }
 }
