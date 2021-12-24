@@ -116,7 +116,7 @@ export const solutionTwentyTwo: Puzzle<Command[], number> = {
     day: 22,
     input: processInput,
     partOne,
-    partTwo,
+    //partTwo,
     resultOne: resultOne,
     resultTwo: resultTwo,
     showInput,
