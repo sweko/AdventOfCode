@@ -2,6 +2,7 @@ export type Hash<T=any> = {[key:string]: T};
 
 export type StringHash = Hash<string>;
 
+// not ok for large arrays
 export const toHash = <T, U>(
     items: T[], 
     selector: (item:T)=>string|number, 

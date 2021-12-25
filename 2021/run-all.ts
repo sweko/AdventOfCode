@@ -22,7 +22,7 @@ import { solutionTwentyOne } from "./code/day-21";
 import { solutionTwentyTwo } from "./code/day-22";
 import { solutionTwentyThree } from "./code/day-23";
 import { solutionTwentyFour } from "./code/day-24";
-// import { solutionTwentyFive } from "./code/day-25";
+import { solutionTwentyFive } from "./code/day-25";
 import { performance } from "perf_hooks";
 import { Puzzle } from "./code/model";
 
@@ -32,7 +32,7 @@ const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, soluti
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
   solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
   solutionSixteen, solutionSeventeen, solutionEighteen, /*solutionNineteen,*/ solutionTwenty,
-  solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour];
+  solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
 
 const runSolution = async <T>(solution: Puzzle<T, number>) => {
   console.log(`Start processing input`);
