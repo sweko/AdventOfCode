@@ -31,7 +31,7 @@ const test = process.env.TEST;
 const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
   solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
-  solutionSixteen, solutionSeventeen, solutionEighteen, /*solutionNineteen,*/ solutionTwenty,
+  solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,
   solutionTwentyOne, solutionTwentyTwo, solutionTwentyThree, solutionTwentyFour, solutionTwentyFive];
 
 const runSolution = async <T>(solution: Puzzle<T, number>) => {

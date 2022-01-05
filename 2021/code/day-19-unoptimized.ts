@@ -1,3 +1,4 @@
+// runs for about 10 minutes per part
 import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
@@ -12,9 +13,7 @@ interface Point {
     z: number;
 }
 
-const offset = 11000;
-const base = 15000;
-const toKey = (point: Point) => (((point.x + offset) * base)  + (point.y + offset)) * base + (point.z + offset);
+const toKey = (point: Point) => `${point.x},${point.y},${point.z}`;
 
 const processInput = async (day: number) => {
     const lines = await readInputLines(day);
@@ -82,7 +81,7 @@ const partOne = (input: Scanner[], debug: boolean) => {
 
     while (rest.length != 0) {
         const target = rest[index];
-        const refkeys = reference.map(p => toKey(p));
+        console.log(`Remaining: ${rest.length}, Current: ${target.id}, References: ${reference.length}`);
 
         for (const rotation of rotations) {
             const beacons = target.beacons.map(p => rotation(p));
@@ -97,30 +96,15 @@ const partOne = (input: Scanner[], debug: boolean) => {
                     diffs.push(diff);
                 }
             }
-            const schwartz = diffs.map<[Point, number]>(d => [d, toKey(d)])
-            const sortedKeyDiffs = schwartz.sort(([_a, ak], [_b, bk]) => ak - bk);
-
-            const first = sortedKeyDiffs[0];
-            let grouped = [{key: first[1], diff: first[0], count: 1}];
-            let current = grouped[0];
-            for (let index = 1; index < sortedKeyDiffs.length; index++) {
-                const [diff, key] = sortedKeyDiffs[index];
-                if (current.key === key) {
-                    current.count += 1;
-                } else {
-                    current = {key, diff, count: 1};
-                    grouped.push(current);
-                }
-            }
-
-            grouped = grouped.filter(g => g.count >= 12);
+            const grouped = diffs.groupBy(d => toKey(d)).filter(g => g.items.length >= 12);
             if (grouped.length === 0) {
                 continue;
             }
             if (grouped.length > 1) {
                 throw new Error("More than one group");
             }
-            const scannerDiff = grouped[0].diff;
+            console.log(`Found a match for ${target.id}`);
+            const scannerDiff = grouped[0].items[0];
 
             const translated = beacons.map(p => ({
                 x: p.x + scannerDiff.x,
@@ -128,6 +112,7 @@ const partOne = (input: Scanner[], debug: boolean) => {
                 z: p.z + scannerDiff.z
             }));
 
+            const refkeys = reference.map(p => toKey(p));
             for (const point of translated) {
                 const key = toKey(point);
                 if (!refkeys.includes(key)) {
@@ -160,7 +145,7 @@ const partTwo = (input: Scanner[], debug: boolean) => {
 
     while (rest.length != 0) {
         const target = rest[index];
-        const refkeys = reference.map(p => toKey(p));
+        console.log(`Remaining: ${rest.length}, Current: ${target.id}, References: ${reference.length}`);
 
         for (const rotation of rotations) {
             const beacons = target.beacons.map(p => rotation(p));
@@ -175,30 +160,15 @@ const partTwo = (input: Scanner[], debug: boolean) => {
                     diffs.push(diff);
                 }
             }
-            const schwartz = diffs.map<[Point, number]>(d => [d, toKey(d)])
-            const sortedKeyDiffs = schwartz.sort(([_a, ak], [_b, bk]) => ak - bk);
-
-            const first = sortedKeyDiffs[0];
-            let grouped = [{key: first[1], diff: first[0], count: 1}];
-            let current = grouped[0];
-            for (let index = 1; index < sortedKeyDiffs.length; index++) {
-                const [diff, key] = sortedKeyDiffs[index];
-                if (current.key === key) {
-                    current.count += 1;
-                } else {
-                    current = {key, diff, count: 1};
-                    grouped.push(current);
-                }
-            }
-
-            grouped = grouped.filter(g => g.count >= 12);
+            const grouped = diffs.groupBy(d => toKey(d)).filter(g => g.items.length >= 12);
             if (grouped.length === 0) {
                 continue;
             }
             if (grouped.length > 1) {
                 throw new Error("More than one group");
             }
-            const scannerDiff = grouped[0].diff;
+            console.log(`Found a match for ${target.id}`);
+            const scannerDiff = grouped[0].items[0];
 
             const translated = beacons.map(p => ({
                 x: p.x + scannerDiff.x,
@@ -206,6 +176,7 @@ const partTwo = (input: Scanner[], debug: boolean) => {
                 z: p.z + scannerDiff.z
             }));
 
+            const refkeys = reference.map(p => toKey(p));
             for (const point of translated) {
                 const key = toKey(point);
                 if (!refkeys.includes(key)) {
@@ -223,6 +194,7 @@ const partTwo = (input: Scanner[], debug: boolean) => {
             index = 0;
         }
     }
+
     let max = 0;
     for (let i1 = 0; i1 < scanners.length; i1++) {
         const sc1 = scanners[i1];
