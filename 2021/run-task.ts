@@ -28,7 +28,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionNineteen;
+const solution = solutionTwentyThree;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)

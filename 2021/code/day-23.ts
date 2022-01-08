@@ -498,7 +498,7 @@ const partTwo = (input: Input, debug: boolean) => {
         };
 
         const allPaths = {} as {[key in Room]: {[key in Room]: Room[]}};
-        
+
         const getPath = (from: Room, to: Room, connections: RoomConnections, currentPath: Room[] = []): Room[] => {
             if (to === from) {
                 const result = [];
