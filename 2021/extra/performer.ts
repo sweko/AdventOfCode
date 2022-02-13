@@ -10,11 +10,16 @@ export class Performer<T extends string = string> {
         this.starts[name] = performance.now();
     }
 
-    public end(name: T) {
+    public clear(name: T) {
+        delete this.starts[name];
+        delete this.values[name];
+    }
+
+    public stop(name: T) {
         if (this.starts[name]) {
-            const end = performance.now();
+            const stop = performance.now();
             const start = this.starts[name];
-            this.values[name] = (this.values[name] ?? 0) + end - start;
+            this.values[name] = (this.values[name] ?? 0) + stop - start;
             delete this.starts[name];
         }
     }
