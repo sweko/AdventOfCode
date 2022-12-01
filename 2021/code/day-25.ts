@@ -29,17 +29,17 @@ const executeStep = (matrix: Cell[][]): {matrix: Cell[][], moves: number} => {
 
     performer.start("copy-array");
     const result: Cell[][] = Array(matrix.length).fill(0).map(() => Array(matrix[0].length).fill("."));
-    performer.end("copy-array");
+    performer.stop("copy-array");
 
     performer.start("get-cells");
     const cells = matrix.reduce<CellIndex[]>((acc, line, y) => [...acc, ...line.map((c, x) => ({x, y, value: c}))], []);
-    performer.end("get-cells");
+    performer.stop("get-cells");
     performer.start("get-cell-map");
     const cellMap = {};
     for (const cell of cells) {
         cellMap[toKey(cell)] = cell;
     }
-    performer.end("get-cell-map");
+    performer.stop("get-cell-map");
     // const cellMap = toHash<CellIndex, CellIndex>(cells, c => toKey(c));
     let moves = 0;
     // evaluate east

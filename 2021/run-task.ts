@@ -28,11 +28,11 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwentyFive;
+const solution = solutionOne;
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
-    console.log(`Start processing input`)
+    console.log("Start processing input")
     const startInput = performance.now();
     const input = await solution.input(solution.day);
     const endInput = performance.now();
@@ -47,7 +47,7 @@ const solution = solutionTwentyFive;
         return;
     }
 
-    console.log(`Part 1: Initiating processing`);
+    console.log("Part 1: Initiating processing");
 
     const startOne = performance.now();
     const resultOne = solution.partOne(input, !!debug);
@@ -60,7 +60,7 @@ const solution = solutionTwentyFive;
         return;
     }
 
-    console.log(`Part 2: Initiating processing`);
+    console.log("Part 2: Initiating processing");
 
     const startTwo = performance.now();
     const resultTwo = solution.partTwo(input, !!debug);
