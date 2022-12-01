@@ -3,24 +3,44 @@ import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
 const processInput = async (day: number) => {
-    // const input = await readInputLines(day);
-    // return input.map(line => parseInt(line, 10));
-    return [];
+    const input = await readInputLines(day);
+    return input;
 };
 
-const partOne = (input: number[], debug: boolean) => {
+const partOne = (input: string[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
-    return 7;
+    const elves: number[][] = [[]];
+    let currentElf = elves[0];
+    for (const line of input) {
+        if (line === "") {
+            currentElf = [];
+            elves.push(currentElf);
+        } else {
+            currentElf.push(parseInt(line));
+        }
+    }
+    const max = elves.map(elf => elf.sum()).max();
+    return max;
 };
 
-const partTwo = (input: number[], debug: boolean) => {
+const partTwo = (input: string[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
-
-    return 0;
+    const elves: number[][] = [[]];
+    let currentElf = elves[0];
+    for (const line of input) {
+        if (line === "") {
+            currentElf = [];
+            elves.push(currentElf);
+        } else {
+            currentElf.push(parseInt(line));
+        }
+    }
+    const elvesTotal = elves.map(elf => elf.sum()).sort((a, b) => b - a);
+    return elvesTotal[0] + elvesTotal[1] + elvesTotal[2];
 };
 
 const resultOne = (_: any, result: number) => {
@@ -31,19 +51,19 @@ const resultTwo = (_: any, result: number) => {
     return `Result part two is ${result}`;
 };
 
-const showInput = (input: number[]) => {
+const showInput = (input: string[]) => {
     console.log(input);
 };
 
-const test = (_: number[]) => {
+const test = (_: string[]) => {
     console.log("----Test-----");
 };
 
-export const solutionOne: Puzzle<number[], number> = {
+export const solutionOne: Puzzle<string[], number> = {
     day: 1,
     input: processInput,
     partOne,
-    //partTwo,
+    partTwo,
     resultOne: resultOne,
     resultTwo: resultTwo,
     showInput,
