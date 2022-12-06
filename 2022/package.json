@@ -20,6 +20,7 @@
     "terminal-kit": "^1.49.4"
   },
   "devDependencies": {
+    "nodemon": "^2.0.20",
     "ts-node": "^7.0.1",
     "typescript": "^3.7.2"
   }
