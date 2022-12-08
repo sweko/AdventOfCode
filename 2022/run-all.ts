@@ -1,9 +1,9 @@
 import { solutionOne } from "./code/day-01";
-// import { solutionTwo } from "./code/day-02";
-// import { solutionThree } from "./code/day-03";
-// import { solutionFour } from "./code/day-04";
-// import { solutionFive } from "./code/day-05";
-// import { solutionSix } from "./code/day-06";
+import { solutionTwo } from "./code/day-02";
+import { solutionThree } from "./code/day-03";
+import { solutionFour } from "./code/day-04";
+import { solutionFive } from "./code/day-05";
+import { solutionSix } from "./code/day-06";
 // import { solutionSeven } from "./code/day-07-analytical";
 // import { solutionEight } from "./code/day-08";
 // import { solutionNine } from "./code/day-09";
@@ -28,8 +28,8 @@ import { Puzzle } from "./code/model";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solutions = [];
-// const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
+const solutions = [solutionOne, solutionTwo, solutionThree, solutionFour, solutionFive, 
+  solutionSix];
 //   solutionSix, solutionSeven, solutionEight, solutionNine, solutionTen,
 //   solutionEleven, solutionTwelve, solutionThirteen, solutionFourteen, solutionFifteen,
 //   solutionSixteen, solutionSeventeen, solutionEighteen, solutionNineteen, solutionTwenty,

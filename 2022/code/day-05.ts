@@ -83,11 +83,11 @@ const partTwo = (input: Input, debug: boolean) => {
     return stacks.map(stack => stack[stack.length-1]).join("");
 };
 
-const resultOne = (_: any, result: string) => {
+const resultOne = (_: Input, result: string) => {
     return `Result part one is ${result}`;
 };
 
-const resultTwo = (_: any, result: string) => {
+const resultTwo = (_: Input, result: string) => {
     return `Result part two is ${result}`;
 };
 

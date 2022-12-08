@@ -1,5 +1,5 @@
 {
-  "name": "advent-of-code-2021",
+  "name": "advent-of-code-2022",
   "version": "1.0.0",
   "description": "",
   "main": "run-task.js",
@@ -8,7 +8,7 @@
     "test": "cross-env TEST=true npm start",
     "debug": "cross-env DEBUG=true npm start",
     "test:mon": "cross-env TEST=true nodemon",
-    "start:mon": "cross-env DEBUG=true nodemon",
+    "start:mon": "cross-env nodemon",
     "all": "ts-node run-all"
   },
   "author": "",
