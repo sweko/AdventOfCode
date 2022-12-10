@@ -7,8 +7,9 @@
     "start": "ts-node run-task",
     "test": "cross-env TEST=true npm start",
     "debug": "cross-env DEBUG=true npm start",
-    "test:mon": "cross-env TEST=true nodemon",
     "start:mon": "cross-env nodemon",
+    "test:mon": "cross-env TEST=true nodemon",
+    "debug:mon": "cross-env DEBUG=true nodemon",
     "all": "ts-node run-all"
   },
   "author": "",
