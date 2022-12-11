@@ -6,7 +6,7 @@ const processInput = async (day: number) => {
     return [];
 };
 
-const partOne = (input: number[], debug: boolean) => {
+const partOne = (input: string[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
@@ -14,7 +14,7 @@ const partOne = (input: number[], debug: boolean) => {
     return 0;
 };
 
-const partTwo = (input: number[], debug: boolean) => {
+const partTwo = (input: string[], debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
@@ -22,24 +22,24 @@ const partTwo = (input: number[], debug: boolean) => {
     return 0;
 };
 
-const resultOne = (_: any, result: number) => {
+const resultOne = (_: string[], result: number) => {
     return `Result part one is ${result}`;
 };
 
-const resultTwo = (_: any, result: number) => {
+const resultTwo = (_: string[], result: number) => {
     return `Result part two is ${result}`;
 };
 
 
-const showInput = (input: number[]) => {
+const showInput = (input: string[]) => {
     console.log(input);
 };
 
-const test = (_: number[]) => {
+const test = (_: string[]) => {
     console.log("----Test-----");
 };
 
-export const solution[ChangeMe]: Puzzle<number[], number> = {
+export const solution[ChangeMe]: Puzzle<string[], number> = {
     day: [ChangeMe],
     input: processInput,
     partOne,
