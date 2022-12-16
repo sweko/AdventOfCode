@@ -1,5 +1,5 @@
 {
-    "watch": ["code", "extra"],
-    "ext": "ts",
+    "watch": ["code", "extra", "input"],
+    "ext": "ts,txt",
     "exec": "ts-node ./run-task.ts"
   }
