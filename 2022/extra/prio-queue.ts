@@ -1,7 +1,7 @@
 // naive, non performant implementation
 export class PriorityQueue<T> {
     private _items: { value: T, metric: number}[] = [];
-    
+
     public get count() {
         return this._items.length;
     }

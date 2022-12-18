@@ -1,5 +1,5 @@
 {
     "watch": ["code", "extra", "input"],
     "ext": "ts,txt",
-    "exec": "ts-node ./run-task.ts"
+    "exec": "node --max-old-space-size=16384 -- node_modules/ts-node/dist/bin -P tsconfig.json run-task.ts"
   }
