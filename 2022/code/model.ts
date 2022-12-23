@@ -1,4 +1,4 @@
-export interface Puzzle<TInput=any[], TOutput = number> {
+export  interface Puzzle<TInput, TOutput> {
     day: number;
 
     input(day: number): Promise<TInput>;
