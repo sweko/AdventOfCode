@@ -134,7 +134,7 @@ const partOne = (input: Volcano, debug: boolean) => {
     while (minute < 30) {
         paths = paths.flatMap(path => getNextPaths(path, input));
         minute += 1;
-        console.log(`Minute ${minute}: ${paths.length} paths`);
+        // console.log(`Minute ${minute}: ${paths.length} paths`);
     }
 
    // console.log(paths);

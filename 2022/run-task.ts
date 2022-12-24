@@ -28,7 +28,7 @@ import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwentyThree; // change this to the puzzle you want to run
+const solution = solutionSixteen; // change this to the puzzle you want to run
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)

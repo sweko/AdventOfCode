@@ -47,12 +47,12 @@ const getNextPaths = ({path, opens}: Path, input: Volcano): Path[] => {
     }
 
     //console.log("Step", step);
-    
+
     const currentValve = input.get(step);
     const result: Path[] = [];
     for (const neighbour of currentValve.neighbours) {
         //console.log(`Neighbour ${neighbour}`);
-        
+
         let prev = path.length - 1;
         let doPath = true;
         while ((prev >= 0) && (path[prev] !== "open")) {
@@ -134,7 +134,7 @@ const partOne = (input: Volcano, debug: boolean) => {
     while (minute < 30) {
         paths = paths.flatMap(path => getNextPaths(path, input));
         minute += 1;
-        console.log(`Minute ${minute}: ${paths.length} paths`);
+        // console.log(`Minute ${minute}: ${paths.length} paths`);
     }
 
    // console.log(paths);

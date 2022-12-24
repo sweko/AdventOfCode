@@ -44,37 +44,18 @@ const isDirectionEmpty = (input: ElfMap, neighbours: Neighbours, direction: Dire
 
 type NextDirection = (elfMap: ElfMap, neighbours: Neighbours, coordinate: Coordinate) => Coordinate | undefined;
 
-const nextNorth = (elfMap: ElfMap, neighbours: Neighbours, { x, y }: Coordinate): Coordinate | undefined => {
-    // check north
-    if (isDirectionEmpty(elfMap, neighbours, "north")) {
-        return { x: x - 1, y }
+const getNextFunction = (direction: Direction, transform: (coordinate: Coordinate) => Coordinate): NextDirection => (elfMap, neighbours, coordinate) => {
+    if (isDirectionEmpty(elfMap, neighbours, direction)) {
+        const next = transform(coordinate);
+        return next;
     }
     return undefined;
 }
 
-const nextSouth = (elfMap: ElfMap, neighbours: Neighbours, { x, y }: Coordinate): Coordinate | undefined => {
-    // check south
-    if (isDirectionEmpty(elfMap, neighbours, "south")) {
-        return { x: x + 1, y }
-    }
-    return undefined;
-}
-
-const nextEast = (elfMap: ElfMap, neighbours: Neighbours, { x, y }: Coordinate): Coordinate | undefined => {
-    // check east
-    if (isDirectionEmpty(elfMap, neighbours, "east")) {
-        return { x, y: y + 1 }
-    }
-    return undefined;
-}
-
-const nextWest = (elfMap: ElfMap, neighbours: Neighbours, { x, y }: Coordinate): Coordinate | undefined => {
-    // check west
-    if (isDirectionEmpty(elfMap, neighbours, "west")) {
-        return { x, y: y - 1 }
-    }
-    return undefined;
-}
+const nextNorth = getNextFunction("north", ({x, y}) => ({x: x - 1, y}));
+const nextSouth = getNextFunction("south", ({x, y}) => ({x: x + 1, y}));
+const nextEast = getNextFunction("east", ({x, y}) => ({x, y: y + 1}));
+const nextWest = getNextFunction("west", ({x, y}) => ({x, y: y - 1}));
 
 const getNeighbours = ({ x, y }: Coordinate): Neighbours => ({
     "north-west": { x: x - 1, y: y - 1 },
@@ -190,7 +171,98 @@ const partTwo = (input: ElfMap, debug: boolean) => {
         console.log("-------Debug-----");
     }
 
-    return 0;
+    let elves: Coordinate[] = [];
+    for (let x = 0; x < input.length; x++) {
+        for (let y = 0; y < input[x].length; y++) {
+            if (input[x][y] === 1) {
+                elves.push({ x: x+1, y: y+1 });
+            }
+        }
+    }
+
+    const directions = [nextNorth, nextSouth, nextWest, nextEast];
+    let dirIndex = 0;
+
+    let round = 0;
+    let moving = true;
+    while (moving) {
+        round += 1;
+        moving = false;
+        const maxx = Math.max(...elves.map(e => e.x));
+        const maxy = Math.max(...elves.map(e => e.y));
+
+        const elfMap = Array(maxx + 2).fill(0).map(() => Array(maxy + 2).fill(0));
+        //console.log(maxx+2, maxy+2);
+
+        for (const { x, y } of elves) {
+            elfMap[x][y] = 1;
+        }
+
+        let nextElves = [];
+
+        for (const elf of elves) {
+            const neighbours: Neighbours = getNeighbours(elf);
+
+            const fullNeighbours = Object.values(neighbours).filter(n => elfMap[n.x][n.y] === 1).length;
+
+            if (fullNeighbours === 0) {
+                nextElves.push(elf);
+                continue;
+            }
+
+            const nextFunctions = [
+                 directions[dirIndex % directions.length],
+                 directions[(dirIndex + 1) % directions.length],
+                 directions[(dirIndex + 2) % directions.length],
+                 directions[(dirIndex + 3) % directions.length]
+            ]
+
+            const nextElf = nextFunctions.reduce((acc, next) => {
+                if (acc) {
+                    return acc;
+                }
+                return next(elfMap, neighbours, elf);
+            }, undefined) as Coordinate | undefined;
+
+            if (nextElf) {
+                moving = true;
+            }
+
+            nextElves.push(nextElf || elf);
+        }
+
+        const nextElfDuplicates = new Map<string, number[]>();
+
+        for (let index = 0; index < nextElves.length; index++) {
+            const { x, y } = nextElves[index];
+            const key = `${x},${y}`;
+            if (nextElfDuplicates.has(key)) {
+                nextElfDuplicates.get(key).push(index);
+            } else {
+                nextElfDuplicates.set(key, [index]);
+            }
+        }
+
+        for (const [_, value] of nextElfDuplicates) {
+            if (value.length > 1) {
+                for (let index = 0; index < value.length; index++) {
+                    const elfIndex = value[index];
+                    nextElves[elfIndex] = elves[elfIndex];
+                }
+            }
+        }
+
+        const minx = Math.min(...nextElves.map(e => e.x));
+        const miny = Math.min(...nextElves.map(e => e.y));
+
+        const movex = 1 - minx;
+        const movey = 1 - miny;
+
+        elves = nextElves.map(({ x, y }) => ({ x: x + movex, y: y + movey }));
+        dirIndex += 1;
+    }
+
+    return round;
 };
 
 const resultOne = (_: ElfMap, result: number) => {
