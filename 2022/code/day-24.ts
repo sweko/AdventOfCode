@@ -1,0 +1,51 @@
+import { readInputLines, readInput } from "../extra/aoc-helper";
+import "../extra/array-helpers";
+import { Puzzle } from "./model";
+
+const processInput = async (day: number) => {
+    return [];
+};
+
+const partOne = (input: string[], debug: boolean) => {
+    if (debug) {
+        console.log("-------Debug-----");
+    }
+
+    return 0;
+};
+
+const partTwo = (input: string[], debug: boolean) => {
+    if (debug) {
+        console.log("-------Debug-----");
+    }
+
+    return 0;
+};
+
+const resultOne = (_: string[], result: number) => {
+    return `Result part one is ${result}`;
+};
+
+const resultTwo = (_: string[], result: number) => {
+    return `Result part two is ${result}`;
+};
+
+
+const showInput = (input: string[]) => {
+    console.log(input);
+};
+
+const test = (_: string[]) => {
+    console.log("----Test-----");
+};
+
+export const solutionTwentyFour: Puzzle<string[], number> = {
+    day: 24,
+    input: processInput,
+    partOne,
+    partTwo,
+    resultOne: resultOne,
+    resultTwo: resultTwo,
+    showInput,
+    test,
+}
