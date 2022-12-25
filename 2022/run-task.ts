@@ -21,14 +21,14 @@ import { solutionEighteen } from "./code/day-18";
 // import { solutionTwentyOne } from "./code/day-21";
 // import { solutionTwentyTwo } from "./code/day-22";
 import { solutionTwentyThree } from "./code/day-23";
- import { solutionTwentyFour } from "./code/day-24";
-// import { solutionTwentyFive } from "./code/day-25";
+import { solutionTwentyFour } from "./code/day-24";
+import { solutionTwentyFive } from "./code/day-25";
 
 import { performance } from "perf_hooks";
 
 const debug = process.env.DEBUG;
 const test = process.env.TEST;
-const solution = solutionTwentyFour; // change this to the puzzle you want to run
+const solution = solutionTwentyFive; // change this to the puzzle you want to run
 
 (async () => {
     console.log(`Running code for day ${solution.day}`)
