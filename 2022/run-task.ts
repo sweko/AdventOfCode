@@ -13,7 +13,7 @@ import { solutionTwelve } from "./code/day-12";
 import { solutionThirteen } from "./code/day-13";
 import { solutionFourteen } from "./code/day-14";
 import { solutionFifteen } from "./code/day-15";
-import { solutionSixteen } from "./code/day-16-failed";
+import { solutionSixteen } from "./code/day-16";
 // import { solutionSeventeen } from "./code/day-17";
 import { solutionEighteen } from "./code/day-18";
 import { solutionNineteen } from "./code/day-19";

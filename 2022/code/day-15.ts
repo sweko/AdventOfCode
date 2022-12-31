@@ -84,13 +84,10 @@ const partTwo = (input: Sensor[], debug: boolean) => {
         console.log(`Finished sensor at ${sensor.location.x},${sensor.location.y}`);
     }
 
-    let x = -1;
-    let y = -1;
-
     for (let yindex = 0; yindex < chunkMap.length; yindex++) {
         const chunks = chunkMap[yindex];
         chunks.sort((a, b) => a.start - b.start);
-        let xindex = 0;
+        const xindex = 0;
         while (xindex < chunks.length-1) {
             const first = chunks[xindex];
             const second = chunks[xindex + 1];
@@ -104,22 +101,7 @@ const partTwo = (input: Sensor[], debug: boolean) => {
         }
     }
 
-    // for (let rindex = 0; rindex < map.length; rindex++) {
-    //     const row = map[rindex];
-    //     for (let cindex = 0; cindex < row.length; cindex++) {
-    //         if (row[cindex] === 0) {
-    //             x = cindex;
-    //             y = rindex;
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // printMatrix(map, value => value === 0 ? "." : "#");
-    // console.log(`(${x},${y})`);
-
-
-    return x * 4_000_000 + y;
+    return -1;
 };
 
 const resultOne = (_: Sensor[], result: number) => {

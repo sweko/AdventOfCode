@@ -2,32 +2,46 @@ import { readInputLines, readInput } from "../extra/aoc-helper";
 import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
-interface InputValve {
+interface Valve {
+    kind: "valve";
     name: string;
     flow: number;
     neighbours: string[];
 }
 
-interface Valve {
+interface Coridor {
+    kind: "coridor";
     name: string;
-    flow: number;
-    neighbours: Map<string, Valve>;
+    neighbours: string[];
 }
 
+type Cell = Valve | Coridor;
 
-type Volcano = Map<string, InputValve>;
+type Volcano = Map<string, Cell>;
+
+type DistanceMap = Map<string, Map<string, number>>;
 
 const processInput = async (day: number) => {
     const lines = await readInputLines(day);
-    const valves: InputValve[] = lines.map(line => {
+    const valves: Cell[] = lines.map(line => {
         const match = line.match(/^Valve ([A-Z]+) has flow rate=(\d+); tunnels? leads? to valves? ([A-Z]+(?:, [A-Z]+)*)/);
-        return {
-            name: match[1],
-            flow: parseInt(match[2]),
-            neighbours: match[3].split(", ")
+        const flow = parseInt(match[2]);
+        if (flow === 0) {
+            return {
+                kind: "coridor",
+                name: match[1],
+                neighbours: match[3].split(", ")
+            }
+        } else {
+            return {
+                kind: "valve",
+                name: match[1],
+                flow: flow,
+                neighbours: match[3].split(", ")
+            }
         }
     });
-    const result = new Map<string, InputValve>();
+    const result = new Map<string, Cell>();
     for (const valve of valves) {
         result.set(valve.name, valve);
     }
@@ -35,114 +49,114 @@ const processInput = async (day: number) => {
     return result;
 };
 
-interface Path {
-    path: string[];
-    opens: Set<string>;
-}
-
-const getNextPaths = ({path, opens}: Path, input: Volcano): Path[] => {
-    let step = path[path.length - 1];
-    if (step === "open") {
-        step = path[path.length - 2];
-    }
-
-    //console.log("Step", step);
-
-    const currentValve = input.get(step);
-    const result: Path[] = [];
-    for (const neighbour of currentValve.neighbours) {
-        //console.log(`Neighbour ${neighbour}`);
-
-        let prev = path.length - 1;
-        let doPath = true;
-        while ((prev >= 0) && (path[prev] !== "open")) {
-            if (neighbour === path[prev]) {
-                doPath = false;
-                break;
-            }
-            prev -= 1;
-        }
-
-        if ((path[prev] === "open") && (path[prev - 1] === neighbour)) {
-            doPath = false;
-        }
-
-        if (doPath) {
-            const next = [...path, neighbour];
-            result.push({
-                path: next,
-                opens: new Set([...opens])
-            });
-        }
-    }
-
-    if (currentValve.flow !== 0 && !opens.has(currentValve.name)) {
-        const next = [...path, "open"];
-        result.push({
-            path: next,
-            opens: new Set([...opens, currentValve.name])
-        });
-    }
-    return result;
-}
-
-const evaluatePath = (path: string[], input: Volcano) => {
-    let currentValve: string = "";
-    let totalFlow = 0;
-    let presure = 0;
-
-    for (let index = 0; index <= 30; index++) {
-        presure += totalFlow;
-
-        const step = path[index];
-        if (step) {
-            if (step === "open") {
-                totalFlow += input.get(currentValve).flow;
-            } else {
-                currentValve = step;
+const getDistances = (start: string, volcano: Volcano) => {
+    const distances = new Map<string, number>([[start, 0]]);
+    const queue: string[] = [start];
+    while (queue.length > 0) {
+        const current = queue.shift();
+        const currentCell = volcano.get(current);
+        const currentDistance = distances.get(current);
+        for (const neighbour of currentCell.neighbours) {
+            if (!distances.has(neighbour)) {
+                distances.set(neighbour, currentDistance + 1);
+                queue.push(neighbour);
             }
         }
     }
-    return presure;
-}
+    const coridors = Array.from(volcano.values()).filter(node => node.kind === "coridor").map(node => node.name);
+    for (const coridor of coridors) {
+            distances.delete(coridor);
+    }
+    distances.delete(start);
+    return distances;
+};
+
+const getReleaseValue = (from: string, to: Valve, minutes: number, distances: DistanceMap) => {
+    const distance = distances.get(from).get(to.name);
+    const releaseTime = minutes - distance - 1;
+    if (releaseTime <= 0) {
+        return 0;
+    }
+    return releaseTime * to.flow;
+};
+
+const getMaximalValue = (start: string, minutes: number, distances: DistanceMap, volcano: Volcano) => {
+    // assume that we're opening a valve every second minute
+    // const valves = Array.from(distances.keys()).filter(key => key !== start);
+    // const presures = valves.map(valve => {
+    //     const presure = getReleaseValue(start, valve, minutes, distances);
+    //     return {
+    //         valve: valve.name,
+    //         presure
+    //     }
+    // }).sort((a, b) => b.presure - a.presure);
+
+    // return presures[0];
+};
+
+type Flow = { valve: string, flow: number, open: number };
+
+const getFlowValue = (flows: Flow[]): number => flows.sum(flow => flow.open * flow.flow);
+
+let callCount = 0;
+
+const getMaximumPresure = (start: string, minutes: number, distances: DistanceMap, volcano: Volcano, flows: Flow[]): Flow[] => {
+    callCount++;
+    // if (callCount > 10) {
+    //     return [];
+    // }
+
+    // console.log(`Called with ${start} and ${minutes}`)
+
+    if (minutes <= 0) {
+        return flows;
+    }
+    const valveDistances = distances.get(start);
+    const valve = volcano.get(start);
+    const flow = (valve.kind === "valve") ? valve.flow : 0;
+    const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
+    let max = getFlowValue(newFlow);
+    let maxFlow = newFlow;
+    for (const [valveName, valveDistance] of valveDistances) {
+        if (newFlow.some(flow => flow.valve === valveName)) {
+            continue;
+        }
+        //const valve = volcano.get(valveName) as Valve;
+        const valveFlow = getMaximumPresure(valveName, minutes - valveDistance - 1, distances, volcano, newFlow);
+        const valveMax = getFlowValue(valveFlow);
+        if (valveMax > max) {
+            maxFlow = valveFlow;
+            max = valveMax;
+        }
+        // console.log(`${start} --> ${valveName} (${valveDistance})`);
+    }
+    return maxFlow;
+};
 
 const partOne = (input: Volcano, debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
 
-    const valves =[...input.values()];
+    // console.log(input);
+
+    const valves = Array.from(input.values()).filter(cell => cell.kind === "valve") as Valve[];
+    // console.log(valves);
+
+    // calculate distances
+    const distances = new Map<string, Map<string, number>>();
     for (const valve of valves) {
-        for (const nei of valve.neighbours) {
-            const neighbour = input.get(nei);
-            if (!neighbour.neighbours.includes(valve.name)) {
-                console.log(`Valve ${valve.name} is not a true neighbour of ${neighbour.name}`);
-            }
-        }
+        const valveDistances = getDistances(valve.name, input);
+        distances.set(valve.name, valveDistances);
     }
 
-    // const path = ["AA", "DD", "open", "CC", "BB", "open", "AA", "II", "JJ", "open", "II", "AA", "DD", "EE", "FF", "GG", "HH", "open", "GG", "FF", "EE", "open", "DD", "CC", "open"];
-    // console.log(evaluatePath(path, input));
+    distances.set("AA", getDistances("AA", input));
 
-    const initialPath: Path = {
-        path: ["AA"],
-        opens: new Set()
-    };
+    // console.log(distances);
 
-    let paths = [initialPath];
-    let minute = 0;
-    while (minute < 30) {
-        paths = paths.flatMap(path => getNextPaths(path, input));
-        minute += 1;
-        // console.log(`Minute ${minute}: ${paths.length} paths`);
-    }
-
-   // console.log(paths);
-
-    // const path =  ["AA", "DD", "open", "CC", "BB", "open", "AA", "II", "JJ", "open", "II", "AA", "DD", "EE", "FF", "GG", "HH", "open", ]//"GG", "FF", "EE", "open", "DD", "CC", "open""];
-    // console.log(getNextPaths({path, opens: new Set(["DD", "BB", "JJ", "HH"])}, input));
-
-    return paths.map(path => evaluatePath(path.path, input)).max();
+    const flow = getMaximumPresure("AA", 30, distances, input, []);
+ 
+    return getFlowValue(flow);
 };
 
 const partTwo = (input: Volcano, debug: boolean) => {
