@@ -98,73 +98,120 @@ type Flow = { valve: string, flow: number, open: number };
 
 const getFlowValue = (flows: Flow[]): number => flows.sum(flow => flow.open * flow.flow);
 
-let callCount = 0;
-
-const getMaximumPresure = (start: string, minutes: number, distances: DistanceMap, volcano: Volcano, flows: Flow[]): Flow[] => {
-    callCount++;
-    // if (callCount > 10) {
-    //     return [];
-    // }
-
-    // console.log(`Called with ${start} and ${minutes}`)
-
-    if (minutes <= 0) {
-        return flows;
-    }
-    const valveDistances = distances.get(start);
-    const valve = volcano.get(start);
-    const flow = (valve.kind === "valve") ? valve.flow : 0;
-    const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
-    let max = getFlowValue(newFlow);
-    let maxFlow = newFlow;
-    for (const [valveName, valveDistance] of valveDistances) {
-        if (newFlow.some(flow => flow.valve === valveName)) {
-            continue;
-        }
-        //const valve = volcano.get(valveName) as Valve;
-        const valveFlow = getMaximumPresure(valveName, minutes - valveDistance - 1, distances, volcano, newFlow);
-        const valveMax = getFlowValue(valveFlow);
-        if (valveMax > max) {
-            maxFlow = valveFlow;
-            max = valveMax;
-        }
-        // console.log(`${start} --> ${valveName} (${valveDistance})`);
-    }
-    return maxFlow;
-};
-
-const partOne = (input: Volcano, debug: boolean) => {
+const partOne = (volcano: Volcano, debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
 
-    // console.log(input);
-
-    const valves = Array.from(input.values()).filter(cell => cell.kind === "valve") as Valve[];
-    // console.log(valves);
+    const valves = Array.from(volcano.values()).filter(cell => cell.kind === "valve") as Valve[];
 
     // calculate distances
     const distances = new Map<string, Map<string, number>>();
     for (const valve of valves) {
-        const valveDistances = getDistances(valve.name, input);
+        const valveDistances = getDistances(valve.name, volcano);
         distances.set(valve.name, valveDistances);
     }
 
-    distances.set("AA", getDistances("AA", input));
+    distances.set("AA", getDistances("AA", volcano));
 
-    // console.log(distances);
+    const getMaximumPresure = (start: string, minutes: number, flows: Flow[]): Flow[] => {
+        if (minutes <= 0) {
+            return flows;
+        }
+        const valveDistances = distances.get(start);
+        const valve = volcano.get(start);
+        const flow = (valve.kind === "valve") ? valve.flow : 0;
+        const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
+        let max = getFlowValue(newFlow);
+        let maxFlow = newFlow;
+        for (const [valveName, valveDistance] of valveDistances) {
+            if (newFlow.some(flow => flow.valve === valveName)) {
+                continue;
+            }
+            const valveFlow = getMaximumPresure(valveName, minutes - valveDistance - 1, newFlow);
+            const valveMax = getFlowValue(valveFlow);
+            if (valveMax > max) {
+                maxFlow = valveFlow;
+                max = valveMax;
+            }
+        }
+        return maxFlow;
+    };
 
-    const flow = getMaximumPresure("AA", 30, distances, input, []);
+    const flow = getMaximumPresure("AA", 30, []);
  
     return getFlowValue(flow);
 };
 
-const partTwo = (input: Volcano, debug: boolean) => {
+const partTwo = (volcano: Volcano, debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
 
-    return 0;
+    const valves = Array.from(volcano.values()).filter(cell => cell.kind === "valve") as Valve[];
+
+    // calculate distances
+    const distances = new Map<string, Map<string, number>>();
+    for (const valve of valves) {
+        const valveDistances = getDistances(valve.name, volcano);
+        distances.set(valve.name, valveDistances);
+    }
+
+    distances.set("AA", getDistances("AA", volcano));
+
+    let callCount = 0;
+
+    const getMaximumPresure = (start: string, minutes: number, flows: Flow[], other: {next: string, minutes: number, kind: "human" | "elephant" }, level: number = 0): Flow[] => {
+        callCount++;
+        if (callCount % 13_456_789 === 0) {
+            console.log(callCount.toLocaleString());
+        }
+
+        if (minutes <= 0) {
+            // console.log(`${''.padStart(level*2)}  flows: ${flows.map(flow => `${flow.valve}(${flow.flow})`).join(', ')}`);
+            return flows;
+        }
+
+        const valveDistances = distances.get(start);
+        const valve = volcano.get(start);
+        const flow = (valve.kind === "valve") ? valve.flow : 0;
+        const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
+        let max = getFlowValue(newFlow);
+        let maxFlow = newFlow;
+        for (const [valveName, valveDistance] of valveDistances) {
+            if (newFlow.some(flow => flow.valve === valveName)) {
+                continue;
+            }
+            if (valveName === other.next) {
+                continue;
+            }
+            const nextMinutes = minutes - valveDistance - 1;
+            if (nextMinutes <= other.minutes) {
+                // pass to other
+                // console.log(`${''.padStart(level*2)}${other.kind} at ${other.next} with ${other.minutes} minutes left ${callCount}`);
+                const valveFlow = getMaximumPresure(other.next, other.minutes, newFlow, { next: valveName, minutes: nextMinutes, kind: other.kind === "human" ? "elephant" : "human" }, level + 1);
+                const valveMax = getFlowValue(valveFlow);
+                if (valveMax > max) {
+                    maxFlow = valveFlow;
+                    max = valveMax;
+                }
+            } else {
+                // console.log(`${''.padStart(level*2)}${other.kind === "elephant" ? "human" : "elephant"} at ${start} with ${nextMinutes} minutes left ${callCount}`);
+                const valveFlow = getMaximumPresure(valveName, nextMinutes, newFlow, other, level + 1);
+                const valveMax = getFlowValue(valveFlow);
+                if (valveMax > max) {
+                    maxFlow = valveFlow;
+                    max = valveMax;
+                }
+            }
+        }
+        return maxFlow;
+    };
+
+    const flow = getMaximumPresure("AA", 26, [], { next: "AA", minutes: 26, kind: "elephant" });
+    console.log(`Total calls: ${callCount.toLocaleString()}`)
+ 
+    return getFlowValue(flow);
 };
 
 const resultOne = (_: Volcano, result: number) => {
