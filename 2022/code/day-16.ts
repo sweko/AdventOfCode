@@ -3,23 +3,22 @@ import "../extra/array-helpers";
 import { Puzzle } from "./model";
 
 interface Valve {
-    kind: "valve";
+    type: "valve";
     name: string;
     flow: number;
     neighbours: string[];
 }
 
-interface Coridor {
-    kind: "coridor";
+interface Corridor {
+    type: "corridor";
     name: string;
     neighbours: string[];
 }
 
-type Cell = Valve | Coridor;
+type Cell = Valve | Corridor;
+
 
 type Volcano = Map<string, Cell>;
-
-type DistanceMap = Map<string, Map<string, number>>;
 
 const processInput = async (day: number) => {
     const lines = await readInputLines(day);
@@ -28,15 +27,15 @@ const processInput = async (day: number) => {
         const flow = parseInt(match[2]);
         if (flow === 0) {
             return {
-                kind: "coridor",
+                type: "corridor",
                 name: match[1],
                 neighbours: match[3].split(", ")
             }
         } else {
             return {
-                kind: "valve",
+                type: "valve",
                 name: match[1],
-                flow: flow,
+                flow, 
                 neighbours: match[3].split(", ")
             }
         }
@@ -49,13 +48,14 @@ const processInput = async (day: number) => {
     return result;
 };
 
-const getDistances = (start: string, volcano: Volcano) => {
-    const distances = new Map<string, number>([[start, 0]]);
-    const queue: string[] = [start];
+const getDistances = (volcano: Volcano, start: string) => {
+    const distances = new Map<string, number>();
+    distances.set(start, 0);
+    const queue = [start];
     while (queue.length > 0) {
         const current = queue.shift();
-        const currentCell = volcano.get(current);
         const currentDistance = distances.get(current);
+        const currentCell = volcano.get(current);
         for (const neighbour of currentCell.neighbours) {
             if (!distances.has(neighbour)) {
                 distances.set(neighbour, currentDistance + 1);
@@ -63,84 +63,72 @@ const getDistances = (start: string, volcano: Volcano) => {
             }
         }
     }
-    const coridors = Array.from(volcano.values()).filter(node => node.kind === "coridor").map(node => node.name);
-    for (const coridor of coridors) {
-            distances.delete(coridor);
+    const coridors = Array.from(volcano.values()).filter(cell => cell.type === "corridor").map(cell => cell.name);
+    for (const corridor of coridors) {
+        distances.delete(corridor);
     }
     distances.delete(start);
     return distances;
 };
 
-const getReleaseValue = (from: string, to: Valve, minutes: number, distances: DistanceMap) => {
-    const distance = distances.get(from).get(to.name);
-    const releaseTime = minutes - distance - 1;
-    if (releaseTime <= 0) {
-        return 0;
+type OpenValve = { valve: string, open: number, flow: number };
+
+const openValve = (cell: Cell, minutes: number, flows: OpenValve[]) => {
+    if (cell.type === "corridor") {
+        return flows;
+    } else {
+        return [...flows, { valve: cell.name, open: minutes, flow: cell.flow }]
     }
-    return releaseTime * to.flow;
-};
+}
 
-const getMaximalValue = (start: string, minutes: number, distances: DistanceMap, volcano: Volcano) => {
-    // assume that we're opening a valve every second minute
-    // const valves = Array.from(distances.keys()).filter(key => key !== start);
-    // const presures = valves.map(valve => {
-    //     const presure = getReleaseValue(start, valve, minutes, distances);
-    //     return {
-    //         valve: valve.name,
-    //         presure
-    //     }
-    // }).sort((a, b) => b.presure - a.presure);
+const getFlowValue = (flows: OpenValve[]) => flows.sum(openValve => openValve.flow * openValve.open);
 
-    // return presures[0];
-};
-
-type Flow = { valve: string, flow: number, open: number };
-
-const getFlowValue = (flows: Flow[]): number => flows.sum(flow => flow.open * flow.flow);
 
 const partOne = (volcano: Volcano, debug: boolean) => {
     if (debug) {
         console.log("-------Debug-----");
     }
 
-    const valves = Array.from(volcano.values()).filter(cell => cell.kind === "valve") as Valve[];
+    const valves = Array.from(volcano.values()).filter(cell => cell.type === "valve") as Valve[];
 
-    // calculate distances
     const distances = new Map<string, Map<string, number>>();
     for (const valve of valves) {
-        const valveDistances = getDistances(valve.name, volcano);
-        distances.set(valve.name, valveDistances);
+        distances.set(valve.name, getDistances(volcano, valve.name));
     }
+    distances.set("AA", getDistances(volcano, "AA"));
 
-    distances.set("AA", getDistances("AA", volcano));
+    let callCount = 0;
 
-    const getMaximumPresure = (start: string, minutes: number, flows: Flow[]): Flow[] => {
+    const getMaximumPresure = (start: string, minutes: number, flows: OpenValve[]):OpenValve[] => {
+        callCount++;
         if (minutes <= 0) {
             return flows;
         }
-        const valveDistances = distances.get(start);
-        const valve = volcano.get(start);
-        const flow = (valve.kind === "valve") ? valve.flow : 0;
-        const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
-        let max = getFlowValue(newFlow);
-        let maxFlow = newFlow;
-        for (const [valveName, valveDistance] of valveDistances) {
-            if (newFlow.some(flow => flow.valve === valveName)) {
+        const currentDistances = distances.get(start);
+        const currentValve = volcano.get(start);
+        const nextFlows = openValve(currentValve, minutes, flows);
+        let maxFlow = nextFlows;
+        let maxValue = getFlowValue(nextFlows);
+        for (const [neighbour, ndistance] of currentDistances) {
+            if (nextFlows.some(flow => flow.valve === neighbour)) {
                 continue;
             }
-            const valveFlow = getMaximumPresure(valveName, minutes - valveDistance - 1, newFlow);
-            const valveMax = getFlowValue(valveFlow);
-            if (valveMax > max) {
-                maxFlow = valveFlow;
-                max = valveMax;
+            const nflow = getMaximumPresure(neighbour, minutes - ndistance - 1, nextFlows);
+            const nvalue = getFlowValue(nflow);
+            if (nvalue > maxValue) {
+                maxFlow = nflow;
+                maxValue = nvalue;
             }
         }
         return maxFlow;
-    };
+    }
 
-    const flow = getMaximumPresure("AA", 30, []);
- 
-    return getFlowValue(flow);
+    const maxFlow = getMaximumPresure("AA", 30, []);
+
+    const result = getFlowValue(maxFlow);
+
+    console.log(callCount);
+    return result;
 };
 
 const partTwo = (volcano: Volcano, debug: boolean) => {
@@ -148,20 +136,20 @@ const partTwo = (volcano: Volcano, debug: boolean) => {
         console.log("-------Debug-----");
     }
 
-    const valves = Array.from(volcano.values()).filter(cell => cell.kind === "valve") as Valve[];
+    const valves = Array.from(volcano.values()).filter(cell => cell.type === "valve") as Valve[];
 
     // calculate distances
     const distances = new Map<string, Map<string, number>>();
     for (const valve of valves) {
-        const valveDistances = getDistances(valve.name, volcano);
+        const valveDistances = getDistances(volcano, valve.name);
         distances.set(valve.name, valveDistances);
     }
 
-    distances.set("AA", getDistances("AA", volcano));
+    distances.set("AA", getDistances(volcano, "AA"));
 
     let callCount = 0;
 
-    const getMaximumPresure = (start: string, minutes: number, flows: Flow[], other: {next: string, minutes: number, kind: "human" | "elephant" }, level: number = 0): Flow[] => {
+    const getMaximumPresure = (start: string, minutes: number, flows: OpenValve[], other: {next: string, minutes: number, kind: "human" | "elephant" }, level: number = 0): OpenValve[] => {
         callCount++;
         if (callCount % 13_456_789 === 0) {
             console.log(callCount.toLocaleString());
@@ -174,7 +162,7 @@ const partTwo = (volcano: Volcano, debug: boolean) => {
 
         const valveDistances = distances.get(start);
         const valve = volcano.get(start);
-        const flow = (valve.kind === "valve") ? valve.flow : 0;
+        const flow = (valve.type === "valve") ? valve.flow : 0;
         const newFlow = flow ? [...flows, { valve: start, flow, open: minutes }] : [...flows];
         let max = getFlowValue(newFlow);
         let maxFlow = newFlow;
