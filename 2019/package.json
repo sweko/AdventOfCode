@@ -15,7 +15,7 @@
     "@types/node": "^10.12.15",
     "fnv-plus": "^1.2.12",
     "md5": "^2.2.1",
-    "terminal-kit": "^1.26.8"
+    "terminal-kit": "^3.0.0"
   },
   "devDependencies": {
     "ts-node": "^7.0.1",
