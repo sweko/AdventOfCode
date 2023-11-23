@@ -27,6 +27,7 @@ if (!Array.prototype.groupBy) {
         keySelector: (item: T, index: number) => U,
         keyEquality: (first: U, second: U) => boolean = (first, second) => (first === second)
     ) {
+        // this can be optimized by using a map instead of an array
         const result: { key: U, items: T[] }[] = [];
         const array = this;
 

@@ -9,13 +9,14 @@
       "moduleResolution": "node",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "target": "es2016",
+      "target": "ESNext",
       "downlevelIteration": true,
       "typeRoots": [
         "node_modules/@types"
       ],
       "lib": [
-        "es2016",
+        "ESNext",
+        "ES2023.Array",
         "dom",
         "esnext"
       ]

@@ -23,6 +23,6 @@
   "devDependencies": {
     "nodemon": "^2.0.20",
     "ts-node": "^7.0.1",
-    "typescript": "^3.7.2"
+    "typescript": "^5.2.2"
   }
 }

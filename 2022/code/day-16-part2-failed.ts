@@ -71,19 +71,17 @@ const getDistances = (volcano: Volcano, start: string) => {
     return Array.from(distances.entries());
 };
 
-type Opener = 'human' | 'elephant';
-
-type OpenValve = { valve: string, open: number, flow: number, opener: Opener };
+type OpenValve = { valve: string, open: number, flow: number, opener: 'human' | 'elephant' };
 
 const isValve = (cell: Cell): cell is Valve => cell.type === "valve";
 
 const isCorridor = (cell: Cell): cell is Corridor => cell.type === "corridor";
 
-const openValve = (cell: Cell, minutes: number, flows: OpenValve[], opener: Opener) => {
+const openValve = (cell: Cell, minutes: number, flows: OpenValve[]) => {
     if (cell.type === "corridor") {
         return flows;
     } else {
-        return [...flows, { valve: cell.name, open: minutes, flow: cell.flow, opener }]
+        return [...flows, { valve: cell.name, open: minutes, flow: cell.flow, opener: 'human' } as OpenValve]
     }
 }
 
@@ -142,111 +140,7 @@ const partOne = (volcano: Volcano, debug: boolean) => {
         }
         const currentDistances = distances.get(start);
         const currentValve = volcano.get(start);
-        const nextFlows = openValve(currentValve, minutes, flows, "human");
-        let maxFlow = nextFlows;
-        let maxValue = getFlowValue(nextFlows);
-        for (const [neighbour, ndistance] of currentDistances) {
-            // skip visited neighbours
-            if (nextFlows.some(flow => flow.valve === neighbour)) {
-                continue;
-            }
-            const nextMinute = minutes - ndistance - 1; // reduce by the distance travelled and the time to open the valve
-
-            // this is the prunning place, the place in which we prune
-            if (getEstimateMaximum(nextMinute, nextFlows) < currentMax) {
-                continue;
-            }
-
-            const nflow = getMaximumPresure(neighbour, nextMinute, nextFlows);
-            const nvalue = getFlowValue(nflow);
-            if (nvalue > maxValue) {
-                maxFlow = nflow;
-                maxValue = nvalue;
-            }
-        }
-        if (maxValue > currentMax) {
-            currentMax = maxValue;
-            console.log(`New max: ${currentMax}`);
-        }
-        return maxFlow;
-    }
-
-    const maxFlow = getMaximumPresure("AA", 30, []);
-    console.log(maxFlow);
-
-    const result = getFlowValue(maxFlow);
-
-    console.log(`Total calls: ${callCount.toLocaleString()}`)
-
-    return result;
-};
-
-const partTwob = (volcano: Volcano, debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
-    }
-
-    const valves = Array.from(volcano.values()).filter(cell => cell.type === "valve") as Valve[];
-
-    const distances = new Map<string, [string, number][]>();
-    for (const valve of valves) {
-        distances.set(valve.name, getDistances(volcano, valve.name));
-    }
-    distances.set("AA", getDistances(volcano, "AA"));
-
-    let callCount = 0;
-
-    let currentMax = Number.NEGATIVE_INFINITY;
-
-    const getEstimateMaximum = (minutes: number, flows: OpenValve[]): number => {
-        if (minutes <= 0) {
-            return Number.NEGATIVE_INFINITY;
-        }
-        // what is the maximum flow we can get from this point, if we open the rest of the valves sequentially
-        // we assume that the human and the elefant will open the valves with the highest flow
-        const localFlows = [...flows];
-        const unreachedValves = valves
-            .filter(valve => !flows.some(flow => flow.valve === valve.name))
-            .map(valve => [valve.name, valve.flow] as [string, number])
-            .toSorted((a, b) => b[1] - a[1]);
-
-        let leftMinutes = minutes;
-        while (leftMinutes > 0) {
-            // the human opens a valve
-            const next1 = unreachedValves.shift();
-            if (!next1) {
-                break;
-            }
-            const cell1 = volcano.get(next1[0]);
-            if (!isValve(cell1)) {
-                continue;
-            }
-            localFlows.push({ valve: next1[0], open: leftMinutes - 1, flow: cell1.flow, opener: 'human' });
-
-            // the elefant opens a valve
-            const next2 = unreachedValves.shift();
-            if (!next2) {
-                break;
-            }
-            const cell2 = volcano.get(next2[0]);
-            if (!isValve(cell2)) {
-                continue;
-            }
-            localFlows.push({ valve: next2[0], open: leftMinutes - 1, flow: cell2.flow, opener: 'elephant' });
-            leftMinutes -= 2;
-        }
-
-        return getFlowValue(localFlows);
-    }
-
-    const getMaximumPresure = (start: string, minutes: number, flows: OpenValve[]):OpenValve[] => {
-        callCount++;
-        if (minutes <= 0) {
-            return flows;
-        }
-        const currentDistances = distances.get(start);
-        const currentValve = volcano.get(start);
-        const nextFlows = openValve(currentValve, minutes, flows, "human");
+        const nextFlows = openValve(currentValve, minutes, flows);
         let maxFlow = nextFlows;
         let maxValue = getFlowValue(nextFlows);
         for (const [neighbour, ndistance] of currentDistances) {
@@ -301,48 +195,6 @@ const partTwo = (volcano: Volcano, debug: boolean) => {
     distances.set("AA", getDistances(volcano, "AA"));
 
     let callCount = 0;
-    let currentMax = Number.NEGATIVE_INFINITY;
-
-    const getEstimateMaximum = (minutes: number, flows: OpenValve[]): number => {
-        if (minutes <= 0) {
-            return Number.NEGATIVE_INFINITY;
-        }
-        // what is the maximum flow we can get from this point, if we open the rest of the valves sequentially
-        // we assume that the human and the elefant will open the valves with the highest flow
-        const localFlows = [...flows];
-        const unreachedValves = valves
-            .filter(valve => !flows.some(flow => flow.valve === valve.name))
-            .map(valve => [valve.name, valve.flow] as [string, number])
-            .toSorted((a, b) => b[1] - a[1]);
-
-        let leftMinutes = minutes;
-        while (leftMinutes > 0) {
-            // the human opens a valve
-            const next1 = unreachedValves.shift();
-            if (!next1) {
-                break;
-            }
-            const cell1 = volcano.get(next1[0]);
-            if (!isValve(cell1)) {
-                continue;
-            }
-            localFlows.push({ valve: next1[0], open: leftMinutes - 1, flow: cell1.flow, opener: 'human' });
-
-            // the elefant opens a valve
-            const next2 = unreachedValves.shift();
-            if (!next2) {
-                break;
-            }
-            const cell2 = volcano.get(next2[0]);
-            if (!isValve(cell2)) {
-                continue;
-            }
-            localFlows.push({ valve: next2[0], open: leftMinutes - 1, flow: cell2.flow, opener: 'elephant' });
-            leftMinutes -= 2;
-        }
-
-        return getFlowValue(localFlows);
-    }
 
     const getMaximumPresure = (start: string, minutes: number, flows: OpenValve[], other: {next: string, minutes: number, kind: "human" | "elephant" }, level: number = 0): OpenValve[] => {
         callCount++;
@@ -368,12 +220,6 @@ const partTwo = (volcano: Volcano, debug: boolean) => {
                 continue;
             }
             const nextMinutes = minutes - valveDistance - 1;
-
-            // // this is the prunning place, the place in which we prune
-            // if (getEstimateMaximum(nextMinutes, newFlow) < currentMax) {
-            //     continue;
-            // }
-
             if (nextMinutes <= other.minutes) {
                 // pass to other
                 const valveFlow = getMaximumPresure(other.next, other.minutes, newFlow, { next: valveName, minutes: nextMinutes, kind: other.kind === "human" ? "elephant" : "human" }, level + 1);
@@ -398,12 +244,6 @@ const partTwo = (volcano: Volcano, debug: boolean) => {
                 maxFlow = valveFlow;
                 max = valveMax;
             }
-        }
-        if (max > currentMax) {
-            currentMax = max;
-            console.log(`New max: ${currentMax}`);
-            console.log(`Total calls: ${callCount.toLocaleString()}`)
-            console.log(newFlow);
         }
         return maxFlow;
     };
@@ -435,7 +275,7 @@ export const solutionSixteen: Puzzle<Volcano, number> = {
     day: 16,
     input: processInput,
     partOne,
-    //partTwo,
+    partTwo,
     resultOne: resultOne,
     resultTwo: resultTwo,
     showInput,
