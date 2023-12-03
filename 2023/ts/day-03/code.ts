@@ -144,50 +144,65 @@ const partTwo = (input: Engine, debug: boolean) => {
     let total = 0;
     for (const gear of potGears) {
         const parts = new Set<PartNumber>();
+
+        //console.log(`Checking potential gear at ${gear.x}, ${gear.y}`)
         // top left
         const tl = findPart(input.parts, gear.x - 1, gear.y - 1);
         if (tl) {
+            //console.log(`  Found part ${tl.value} at top-left`);
             parts.add(tl);
+        }
+        // top
+        const t = findPart(input.parts, gear.x - 1, gear.y);
+        if (t) {
+            //console.log(`  Found part ${t.value} at top`);
+            parts.add(t);
         }
         // top right
         const tr = findPart(input.parts, gear.x - 1, gear.y + 1);
         if (tr) {
+            //console.log(`  Found part ${tr.value} at top-right`);
             parts.add(tr);
         }
         // bottom left
         const bl = findPart(input.parts, gear.x + 1, gear.y - 1);
         if (bl) {
+            //console.log(`  Found part ${bl.value} at bottom-left`);
             parts.add(bl);
-        }
-        // bottom right
-        const br = findPart(input.parts, gear.x + 1, gear.y + 1);
-        if (br) {
-            parts.add(br);
-        }
-        // top
-        const t = findPart(input.parts, gear.x - 1, gear.y);
-        if (t) {
-            parts.add(t);
         }
         // bottom
         const b = findPart(input.parts, gear.x + 1, gear.y);
         if (b) {
+            //console.log(`  Found part ${b.value} at bottom`);
             parts.add(b);
         }
+        // bottom right
+        const br = findPart(input.parts, gear.x + 1, gear.y + 1);
+        if (br) {
+            //console.log(`  Found part ${br.value} at bottom-right`);
+            parts.add(br);
+        }
+
+
         // left
         const l = findPart(input.parts, gear.x, gear.y - 1 );
         if (l) {
+            //console.log(`  Found part ${l.value} at left`);
             parts.add(l);
         }
         // right
-        const r = findPart(input.parts, gear.x, gear.y - 2);
+        const r = findPart(input.parts, gear.x, gear.y + 1);
         if (r) {
+            //console.log(`  Found part ${r.value} at right`);
             parts.add(r);
         }
 
         if (parts.size === 2) {
+            //console.log(`Found two parts for gear, calculating value`)
             const [f, s] = [...parts.values()].map(p => p.value);
             total += f * s;
+        } else {
+            //console.log(`Found ${parts.size} parts for non-gear, ignoring`)
         }
     }
 
