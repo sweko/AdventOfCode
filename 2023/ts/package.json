@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "setup-day": "ts-node ./system/setup-day.ts",
-    "start": "ts-node ./system/run-task.ts"
+    "start": "ts-node ./system/run-task.ts",
+    "all": "ts-node ./system/run-all.ts"
   },
   "author": "Wekoslav Stefanovski",
   "license": "ISC",
