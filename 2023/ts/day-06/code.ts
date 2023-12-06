@@ -49,14 +49,36 @@ const partOne = (input: Race[], debug: boolean) => {
     return total;
 };
 
+const getDistance = (totalTime: number, buttonTime: number) => buttonTime * (totalTime - buttonTime);
+
 const partTwo = (input: Race[], debug: boolean) => {
     const actualTime = +input.map(r => r.time).join("");
     const actualRecord = +input.map(r => r.record).join("");
 
-    const distances = getDistances(actualTime);
-    const bigger = distances.filter(d => d > actualRecord);
+    // const distances = getDistances(actualTime);
+    // const bigger = distances.filter(d => d > actualRecord);
+    // return bigger.length;
 
-    return bigger.length;
+    // binary search
+    let top = Math.floor(actualTime / 2);
+    let bottom = 0;
+    while (top - bottom > 5) {
+        const middle = Math.floor((top + bottom) / 2);
+        const distance = getDistance(actualTime, middle);
+        if (distance > actualRecord) {
+            top = middle;
+        } else {
+            bottom = middle;
+        }
+    }
+
+    // linear search
+    while (getDistance(actualTime, bottom) < actualRecord) {
+        bottom += 1;
+    }
+
+    const result = actualTime - 2 * (bottom - 1) - 1;
+    return result;
 };
 
 const resultOne = (_: any, result: number) => {
