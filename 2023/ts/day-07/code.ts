@@ -43,18 +43,20 @@ const typeValues: Record<HandType, number> = {
     "five-of-a-kind": 7
 };
 
-const getComparer = (getHandType: (hand: PokerHand) => HandType, values: Record<Card, number>) => {
-    const compareHands = (first: PokerHand, second: PokerHand): number => {
-        const ftype = typeValues[getHandType(first)];
-        const stype = typeValues[getHandType(second)];
+type SchwartzedHand = BiddedHand & { handTypeValue: number };
+
+const getComparer = (values: Record<Card, number>) => {
+    const compareHands = (first: SchwartzedHand, second: SchwartzedHand): number => {
+        const ftype = first.handTypeValue;
+        const stype = second.handTypeValue;
         if (ftype > stype) {
             return 1;
         }
         if (ftype < stype) {
             return -1;
         }
-        const fvalues = first.map(card => values[card]);
-        const svalues = second.map(card => values[card]);
+        const fvalues = first.hand.map(card => values[card]);
+        const svalues = second.hand.map(card => values[card]);
 
         for (let index = 0; index < 5; index++) {
             if (fvalues[index] > svalues[index]) {
@@ -121,9 +123,17 @@ const partOne = (input: BiddedHand[], debug: boolean) => {
         return "high-card";
     }
 
-    const compareHands = getComparer(getHandType, values);
+    const schInput = input.map(bhand => ({
+        ...bhand,
+        handTypeValue: typeValues[getHandType(bhand.hand)] // the schwartz is strong in this one
+    }));
 
-    const results = input.toSorted((first, second) => compareHands(first.hand, second.hand));
+    const compareHands = getComparer(values);
+
+    const results = schInput.toSorted(compareHands);
+    // const schResults = schInput.toSorted(compareHands);
+    // const results = schResults.map(({hand, bid}) => ({hand, bid} as BiddedHand))
+
     const result = results.sum((hand, index) => hand.bid * (index + 1));
     return result;
 };
@@ -204,9 +214,14 @@ const partTwo = (input: BiddedHand[], debug: boolean) => {
         return "five-of-a-kind";
     }
 
-    const compareHands = getComparer(getHandType, values);
+    const schInput = input.map(bhand => ({
+        ...bhand,
+        handTypeValue: typeValues[getHandType(bhand.hand)] // the schwartz is strong in this one
+    }));
 
-    const results = input.toSorted((first, second) => compareHands(first.hand, second.hand));
+    const compareHands = getComparer(values);
+
+    const results = schInput.toSorted(compareHands);
     const result = results.sum((hand, index) => hand.bid * (index + 1));
     return result;
 };
