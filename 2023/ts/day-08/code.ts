@@ -43,7 +43,7 @@ const processInput = (day: number) => {
     } as Desert;
 };
 
-const partOne = ({directions, nodes}: Desert, debug: boolean) => {
+const partOne = ({ directions, nodes }: Desert, debug: boolean) => {
     let dirIndex = 0;
     let stepCount = 0;
 
@@ -72,39 +72,102 @@ const isTargetReached = (currentNodes: string[]) => {
     return currentNodes.every(node => node.endsWith("Z"));
 }
 
-const partTwo = ({directions, nodes}: Desert, debug: boolean) => {
-    let dirIndex = 0;
-    let stepCount = 0;
+interface Cycle {
+    offset: number;
+    length: number;
+}
 
-    let currentNodes = Object.keys(nodes).filter(key => key.endsWith("A"));
-    console.log(currentNodes);
+const joinTwoCycles = (first: Cycle, second: Cycle) => {
+    let fcounter = 0;
+    let scounter = 0;
 
-    while (!isTargetReached(currentNodes)) {
-        const nextNodes = [] as string[];
-        for (const node of currentNodes) {
-            const currentDir = directions[dirIndex];
-            const currentNodeData = nodes[node];
-            if (currentDir === "L") {
-                nextNodes.push(currentNodeData.left);
-            } else {
-                nextNodes.push(currentNodeData.right);
+    let matchCounter = 0;
+
+    while (true) {
+        let fnext = first.offset + first.length * fcounter;
+        let snext = second.offset + second.length * scounter;
+        if (fnext === snext) {
+            // console.log("Found common node");
+            // console.log(fnext, fcounter, scounter);
+            // matchCounter += 1;
+            // if (matchCounter === 5) {
+            //     return fnext;
+            // }
+            // fcounter += 1;
+            // scounter += 1;
+
+            return {
+                offset: fnext % (first.length * second.length),
+                length: first.length * second.length
             }
         }
-        currentNodes = nextNodes;
 
-        stepCount += 1;
-        dirIndex += 1;
-        if (dirIndex === directions.length) {
-            dirIndex = 0;
+        if (fnext < snext) {
+            fcounter += 1;
         }
 
-        if (stepCount % 2_000_000 === 0) {
-            console.log(stepCount);
-            console.log(currentNodes);
+        if (fnext > snext) {
+            scounter += 1;
         }
     }
 
-    return stepCount;
+}
+
+const partTwo = ({ directions, nodes }: Desert, debug: boolean) => {
+    let currentNodes = Object.keys(nodes).filter(key => key.endsWith("A"));
+    const numNodes = Object.keys(nodes).length;
+    const dirLength = directions.length;
+
+    const longestPossible = numNodes * dirLength;
+
+    const cycles = [] as Cycle[];
+    for (const startNode of currentNodes) {
+        let currentNode = startNode;
+        let dirIndex = 0;
+        let stepCount = 0;
+        let lastCycle = 0;
+        let ccount = 0;
+        for (let index = 0; index < longestPossible; index++) {
+            const currentDir = directions[dirIndex];
+            const currentNodeData = nodes[currentNode];
+            if (currentDir === "L") {
+                currentNode = currentNodeData.left;
+            } else if (currentDir === "R") {
+                currentNode = currentNodeData.right;
+            } else {
+                throw Error(`Invalid direction ${currentDir}`);
+            }
+
+            stepCount += 1;
+            dirIndex += 1;
+            if (dirIndex === directions.length) {
+                dirIndex = 0;
+            }
+            if (currentNode.endsWith("Z")) {
+                ccount += 1;
+                if (ccount === 2) {
+                    const cycleLength = stepCount - lastCycle;
+                    cycles.push({
+                        offset: lastCycle % cycleLength,
+                        length: cycleLength
+                    })
+                    break;
+                }
+                lastCycle = stepCount;
+            }
+        }
+    }
+
+    // We abuse the facts that
+    // 1. All cycles have a common factor which is the length of the cycle (which is a prime number)
+    // 2. All cycles have a common offset which is 0
+    // 3. Each cycle length divided by the number of directions is a prime number
+    const total = cycles.reduce((acc, cycle) => {
+        acc *= (cycle.length / directions.length);
+        return acc;
+    }, 1);
+
+    return total * directions.length;
 };
 
 const resultOne = (_: any, result: number) => {
