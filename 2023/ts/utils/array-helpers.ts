@@ -20,6 +20,8 @@ interface Array<T> {
 
     skipWhile(predicate: (item: T, index: number) => boolean): T[];
     takeWhile(predicate: (item: T, index: number) => boolean): T[];
+
+    differences(selector?: (item: T, index: number) => number): number[];
 }
 
 if (!Array.prototype.groupBy) {
@@ -183,5 +185,19 @@ if (!Array.prototype.takeWhile) {
             }
         }
         return array.slice();
+    }
+}
+
+if (!Array.prototype.differences) {
+    Array.prototype.differences = function <T>(selector: (item: T, index: number) => number = (item => item as unknown as number)) {
+        const array: T[] = this;
+        const result: number[] = [];
+        const values = array.map(selector);
+        for (let index = 1; index < values.length; index++) {
+            const element = values[index];
+            const previous = values[index - 1];
+            result.push(element - previous);
+        }
+        return result;
     }
 }

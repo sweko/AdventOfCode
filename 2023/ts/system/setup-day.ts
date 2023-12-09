@@ -25,8 +25,8 @@ import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 
 const processInput = (day: number) => {
-    const input = readInputLines(day);
-    return input;
+    const lines = readInputLines(day);
+    return lines;
 };
 
 const partOne = (input: string[], debug: boolean) => {
