@@ -288,7 +288,48 @@ const partOne = (input: Maze, debug: boolean) => {
     return Math.floor(loopLength / 2);
 };
 
+const floodFillRecurse = (matrix: string[][], x: number, y: number, fill: string) => {
+    if (x < 0 || x >= matrix[0].length) {
+        return;
+    }
+    if (y < 0 || y >= matrix.length) {
+        return;
+    }
+    if (matrix[y][x] !== ".") {
+        return;
+    }
+    matrix[y][x] = fill;
+    floodFillRecurse(matrix, x + 1, y, fill);
+    floodFillRecurse(matrix, x - 1, y, fill);
+    floodFillRecurse(matrix, x, y + 1, fill);
+    floodFillRecurse(matrix, x, y - 1, fill);
+}
+
+const floodFill = (matrix: string[][], x: number, y: number, fill: string) => {
+    const queue: Point[] = [];
+    queue.push({ x, y });
+
+    while (queue.length > 0) {
+        const point = queue.shift()!;
+        if (point.x < 0 || point.x >= matrix[0].length) {
+            continue;
+        }
+        if (point.y < 0 || point.y >= matrix.length) {
+            continue;
+        }
+        if (matrix[point.y][point.x] !== ".") {
+            continue;
+        }
+        matrix[point.y][point.x] = fill;
+        queue.push({ x: point.x + 1, y: point.y });
+        queue.push({ x: point.x - 1, y: point.y });
+        queue.push({ x: point.x, y: point.y + 1 });
+        queue.push({ x: point.x, y: point.y - 1 });
+    }
+}
+
 const partTwo = (input: Maze, debug: boolean) => {
+
     const actualStartPipe = getStartPipe(input);
     input.pipes[input.start.y][input.start.x] = actualStartPipe;
     let currentPipe = actualStartPipe;
@@ -314,24 +355,94 @@ const partTwo = (input: Maze, debug: boolean) => {
     }
     loop.push(currentPipe);
 
-    const matrix: string[][] = [];
+    const original: string[][] = [];
 
     for (let y = 0; y < input.pipes.length; y++) {
         const row = input.pipes[y];
         const matrixRow: string[] = [];
         for (let x = 0; x < row.length; x++) {
-            if (loop.find(pipe => pipe.x === x && pipe.y === y)) {
-                matrixRow.push("X");
+            const link = loop.find(pipe => pipe.x === x && pipe.y === y);
+            if (link) {
+                matrixRow.push(link.character);
                 continue;
             }
             matrixRow.push(".");
         }
-        matrix.push(matrixRow);
+        original.push(matrixRow);
     }
 
-    printMatrix(matrix);
+    const expanded: string[][] = Array(original.length * 3)
+        .fill(null)
+        .map(() => Array(original[0].length * 3).fill("."));
 
-    return -1;
+    for (let y = 0; y < original.length; y++) {
+        const row = original[y];
+        for (let x = 0; x < row.length; x++) {
+            const character = row[x];
+            if (character === ".") {
+                continue;
+            }
+            const ey = y * 3 + 1;
+            const ex = x * 3 + 1;
+            expanded[ey][ex] = character;
+
+            if (character === "|") {
+                expanded[ey - 1][ex] = character;
+                expanded[ey + 1][ex] = character;
+                continue;
+            }
+            if (character === "-") {
+                expanded[ey][ex - 1] = character;
+                expanded[ey][ex + 1] = character;
+                continue;
+            }
+            if (character === "L") {
+                expanded[ey - 1][ex] = "|";
+                expanded[ey][ex + 1] = "-";
+                continue;
+            }
+            if (character === "J") {
+                expanded[ey - 1][ex] = "|";
+                expanded[ey][ex - 1] = "-";
+                continue;
+            }
+            if (character === "7") {
+                expanded[ey + 1][ex] = "|";
+                expanded[ey][ex - 1] = "-";
+                continue;
+            }
+            if (character === "F") {
+                expanded[ey + 1][ex] = "|";
+                expanded[ey][ex + 1] = "-";
+                continue;
+            }
+
+            throw `Unknown character ${character}`;
+        }
+    }
+
+    floodFill(expanded, 0, 0, "X");
+
+    const scrunched: string[][] = Array(original.length)
+        .fill(null)
+        .map(() => Array(original[0].length).fill("?"));
+
+    for (let y = 0; y < expanded.length; y++) {
+        if (y % 3 !== 1) {
+            continue;
+        }
+        const row = expanded[y];
+        for (let x = 0; x < row.length; x++) {
+            if (x % 3 !== 1) {
+                continue;
+            }
+            scrunched[Math.floor(y / 3)][Math.floor(x / 3)] = row[x];
+        }
+    }
+
+    const result = scrunched.sum(row => row.filter(item => item === ".").length);
+
+    return result;
 };
 
 const resultOne = (_: any, result: number) => {
