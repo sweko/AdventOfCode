@@ -3,7 +3,6 @@
 import { readInputLines, readInput } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
-import { printMatrix } from "../utils/matrix";
 
 interface Point {
     x: number;
@@ -268,7 +267,6 @@ const partOne = (input: Maze, debug: boolean) => {
     while (!currentPipe[direction]) {
         direction = nextDirection(direction);
     }
-    // console.log(`Starting at ${currentPipe.character} (${currentPipe.x},${currentPipe.y}) going ${direction}`);
     let nextPipe = getNextPipe(input, currentPipe, direction);
     let loopLength = 1;
     while (nextPipe !== actualStartPipe) {
@@ -281,7 +279,6 @@ const partOne = (input: Maze, debug: boolean) => {
                 direction = nextDirection(direction);
             }
         }
-        // console.log(`Continuing at ${currentPipe.character} (${currentPipe.x},${currentPipe.y}) going ${direction}`);
         nextPipe = getNextPipe(input, currentPipe, direction);
     }
 
@@ -337,7 +334,6 @@ const partTwo = (input: Maze, debug: boolean) => {
     while (!currentPipe[direction]) {
         direction = nextDirection(direction);
     }
-    // console.log(`Starting at ${currentPipe.character} (${currentPipe.x},${currentPipe.y}) going ${direction}`);
     let nextPipe = getNextPipe(input, currentPipe, direction);
     const loop: Pipe[] = [];
     while (nextPipe !== actualStartPipe) {
@@ -350,7 +346,6 @@ const partTwo = (input: Maze, debug: boolean) => {
                 direction = nextDirection(direction);
             }
         }
-        // console.log(`Continuing at ${currentPipe.character} (${currentPipe.x},${currentPipe.y}) going ${direction}`);
         nextPipe = getNextPipe(input, currentPipe, direction);
     }
     loop.push(currentPipe);

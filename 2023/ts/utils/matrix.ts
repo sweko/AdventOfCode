@@ -7,3 +7,16 @@ export function loopMatrix<T>(matrix: T[][], operation: (row: number, column: nu
         }
     }
 }
+
+export const printMatrix = <T>(matrix: T[][], processor?: (item: T) => string, rowHeader?: (rowIndex: number) => string) => {
+    for (let rindex = 0; rindex < matrix.length; rindex++) {
+        const row = processor
+            ? matrix[rindex].map(item => processor(item))
+            : matrix[rindex];
+        let rowString = row.join("");
+        if (rowHeader) {
+            rowString = `${rowHeader(rindex)} ${rowString}`
+        }
+        console.log(rowString);
+    }
+}
