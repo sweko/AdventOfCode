@@ -18,7 +18,7 @@
     "@types/node": "^10.12.15",
     "fnv-plus": "^1.2.12",
     "md5": "^2.2.1",
-    "terminal-kit": "^1.49.4"
+    "terminal-kit": "^2.1.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",
