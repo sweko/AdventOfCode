@@ -22,7 +22,7 @@ const processInput = (day: number) => {
     return result;
 };
 
-const patternMatchesGroupsQmark = (pattern: Spring[], groups: number[]): boolean | null => {
+const patternMatchesGroups = (pattern: Spring[], groups: number[]): boolean | null => {
     let pindex = 0;
     let gindex = 0;
     let hashCount = 0;
@@ -114,14 +114,24 @@ const getConfigurationsCountBrute = ({pattern, groups}: Row) => {
     return count;
 };
 
-const getConfigurationsCount = ({pattern, groups}: Row) => {
-    // find the first ? 
+const getConfigurationsCount = ({pattern, groups}: Row): number => {
+    // find the first ?
+    const qmarkIndex = pattern.findIndex(s => s === "?");
+    if (qmarkIndex === -1) {
+        return patternMatchesGroupsBrute(pattern, groups) ? 1 : 0;
+    }
     // ...and replace it with a #
+    const hashPattern = pattern.slice();
+    hashPattern[qmarkIndex] = "#";
     // count configurations now
+    const hashCount = getConfigurationsCount({pattern: hashPattern, groups});
     // ...and replace it with a .
+    const dotPattern = pattern.slice();
+    dotPattern[qmarkIndex] = ".";
     // count configurations now
+    const dotCount = getConfigurationsCount({pattern: dotPattern, groups});
     // return the sum of both
-    return -1;
+    return hashCount + dotCount;
 };
 
 const partOne = (input: Row[], debug: boolean) => {
