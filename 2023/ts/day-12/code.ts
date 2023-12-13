@@ -35,7 +35,7 @@ const patternMatchesGroups = (pattern: Spring[], groups: number[]): boolean | nu
         return groups.length === 0;
     }
 
-    while (pindex < pattern.length && gindex < groups.length) {
+    while (pindex < pattern.length) {
         if (pattern[pindex] === "#") {
             hashCount++;
             if (hashCount > currentGroup) {
@@ -54,11 +54,15 @@ const patternMatchesGroups = (pattern: Spring[], groups: number[]): boolean | nu
             gindex +=1;
             currentGroup = groups[gindex];
             hashCount = 0;
+            while (pattern[pindex] === ".") {
+                pindex++;
+            }
+            continue;
         }
-
-        pindex++;
+        return false;
     }
-    return true;
+
+    return hashCount === currentGroup;
 };
 
 const patternMatchesGroupsBrute = (pattern: Spring[], groups: number[]): boolean => {
@@ -114,7 +118,7 @@ const getConfigurationsCountBrute = ({pattern, groups}: Row) => {
     return count;
 };
 
-const getConfigurationsCount = ({pattern, groups}: Row): number => {
+const getConfigurationsCountRecBrute = ({pattern, groups}: Row): number => {
     // find the first ?
     const qmarkIndex = pattern.findIndex(s => s === "?");
     if (qmarkIndex === -1) {
@@ -124,12 +128,40 @@ const getConfigurationsCount = ({pattern, groups}: Row): number => {
     const hashPattern = pattern.slice();
     hashPattern[qmarkIndex] = "#";
     // count configurations now
-    const hashCount = getConfigurationsCount({pattern: hashPattern, groups});
+    const hashCount = getConfigurationsCountRecBrute({pattern: hashPattern, groups});
     // ...and replace it with a .
     const dotPattern = pattern.slice();
     dotPattern[qmarkIndex] = ".";
     // count configurations now
-    const dotCount = getConfigurationsCount({pattern: dotPattern, groups});
+    const dotCount = getConfigurationsCountRecBrute({pattern: dotPattern, groups});
+    // return the sum of both
+    return hashCount + dotCount;
+};
+
+const getConfigurationsCount = ({pattern, groups}: Row): number => {
+    // find the first ?
+    const qmarkIndex = pattern.findIndex(s => s === "?");
+    if (qmarkIndex === -1) {
+        return patternMatchesGroupsBrute(pattern, groups) ? 1 : 0;
+    }
+    // ...and replace it with a #
+    const hashPattern = pattern.slice();
+    hashPattern[qmarkIndex] = "#";
+    // does the pattern make sense?
+    let hashCount = 0;
+    if (patternMatchesGroups(hashPattern, groups) !== false) {
+        // count configurations now
+        hashCount = getConfigurationsCount({pattern: hashPattern, groups});
+    }
+    // ...and replace it with a .
+    const dotPattern = pattern.slice();
+    dotPattern[qmarkIndex] = ".";
+    // does the pattern make sense?
+    let dotCount = 0;
+    if (patternMatchesGroups(dotPattern, groups) !== false) {
+        // count configurations now
+        dotCount = getConfigurationsCount({pattern: dotPattern, groups});
+    }
     // return the sum of both
     return hashCount + dotCount;
 };
@@ -160,6 +192,8 @@ const showInput = (input: Row[]) => {
 
 const test = (_: Row[]) => {
     console.log("----Test-----");
+    const x = patternMatchesGroups("##.####".split("") as Spring[], [2, 5]);
+    console.log(x);
 };
 
 export const solution: Puzzle<Row[], number> = {
