@@ -17,6 +17,11 @@ type RowExtra = {
     dotsLeft: number;
 } & Row;
 
+type PatternMatch = {
+    groups: number;
+    pattern: number;
+};
+
 const processInput = (day: number) => {
     const lines = readInputLines(day);
     const result = lines.map(line => {
@@ -76,7 +81,7 @@ const patternMatchesGroups = (pattern: Spring[], groups: number[]): boolean | nu
     return hashCount === currentGroup;
 };
 
-const getCurrentMatch = (pattern: Spring[], groups: number[]): boolean | PatternMatch => {
+const getCurrentMatch = (pattern: Spring[], groups: number[]): boolean | PatternMatch | null => {
     let pindex = 0;
     let gindex = 0;
     let hashCount = 0;
@@ -101,7 +106,10 @@ const getCurrentMatch = (pattern: Spring[], groups: number[]): boolean | Pattern
 
         if (pattern[pindex] === "?") {
             if (hashCount === 0) {
-                // 
+                return {
+                    groups: gindex,
+                    pattern: pindex-1
+                };
             }
             return null;
         }
@@ -204,9 +212,16 @@ let callCount = 0;
 const cache = new Map<string, number>();
 
 const getConfigurationsCount = ({pattern, groups, hashLeft, questionLeft, dotsLeft }: RowExtra): number => {
+    const key = `${pattern.join("")}::${groups.join("|")}`;
+    if (cache.has(key)) {
+        return cache.get(key)!;
+    }
+
     callCount += 1;
     if (questionLeft === 0) {
-        return patternMatchesGroupsBrute(pattern, groups) ? 1 : 0;
+        const result = patternMatchesGroupsBrute(pattern, groups) ? 1 : 0;
+        cache.set(key, result);
+        return result;
     }
 
     // find the first ?
@@ -214,12 +229,19 @@ const getConfigurationsCount = ({pattern, groups, hashLeft, questionLeft, dotsLe
     let hashCount = 0;
     let dotCount = 0;
 
-    if (hashLeft >= 0) {
+    if (hashLeft > 0) {
         // ...and replace it with a #
         const hashPattern = pattern.slice();
         hashPattern[qmarkIndex] = "#";
         // does the pattern make sense?
-        if (patternMatchesGroups(hashPattern, groups) !== false) {
+        const match = getCurrentMatch(hashPattern, groups);
+        if (match === true) {
+            const result = 1;
+            cache.set(key, result);
+            return result;
+        } else if (match === false) {
+            // don't do anything
+        } else if (match === null) {
             // count configurations now
             hashCount = getConfigurationsCount({
                 pattern: hashPattern, 
@@ -228,27 +250,58 @@ const getConfigurationsCount = ({pattern, groups, hashLeft, questionLeft, dotsLe
                 questionLeft: questionLeft - 1,
                 dotsLeft
             });
+        } else {
+            const patternLeft = hashPattern.slice(match.pattern + 1);
+            const groupsLeft = groups.slice(match.groups);
+            hashCount = getConfigurationsCount({
+                pattern: patternLeft, 
+                groups: groupsLeft, 
+                hashLeft: hashLeft - 1,
+                questionLeft: questionLeft - 1,
+                dotsLeft
+            });
         }
     }
 
-    if (dotsLeft >= 0) {
+    if (dotsLeft > 0) {
         // ...and replace it with a .
         const dotPattern = pattern.slice();
         dotPattern[qmarkIndex] = ".";
-        // does the pattern make sense?
-        if (patternMatchesGroups(dotPattern, groups) !== false) {
+        const match = getCurrentMatch(dotPattern, groups);
+        if (match === true) {
+            const result = 1;
+            cache.set(key, result);
+            return result;
+        } else if (match === false) {
+            const result = hashCount;
+            cache.set(key, result);
+            return result;
+        } else if (match === null) {
             // count configurations now
             dotCount = getConfigurationsCount({
                 pattern: dotPattern, 
-                groups,
+                groups, 
+                hashLeft,
+                questionLeft: questionLeft - 1,
+                dotsLeft: dotsLeft - 1
+            });
+        } else {
+            const patternLeft = dotPattern.slice(match.pattern + 1);
+            const groupsLeft = groups.slice(match.groups);
+            dotCount = getConfigurationsCount({
+                pattern: patternLeft, 
+                groups: groupsLeft, 
                 hashLeft,
                 questionLeft: questionLeft - 1,
                 dotsLeft: dotsLeft - 1
             });
         }
+
     }
     // return the sum of both
-    return hashCount + dotCount;
+    const result = hashCount + dotCount;
+    cache.set(key, result);
+    return result;
 };
 
 const toRowExtra = ({pattern, groups}: Row): RowExtra => {
@@ -270,10 +323,10 @@ const partOne = (input: Row[], debug: boolean) => {
     callCount = 0;
     const result = input
         .map(row => toRowExtra(row))
-        .sum(row => getConfigurationsCount(row));
-
-    console.log(`Call count: ${callCount}`);
-    return result;
+        .map(row => getConfigurationsCount(row));
+    // console.log(result);
+    // console.log(`Call count: ${callCount}`);
+    return result.sum();
 };
 
 const partTwo = (input: Row[], debug: boolean) => {
@@ -285,10 +338,11 @@ const partTwo = (input: Row[], debug: boolean) => {
     const unfolded = unfoldedDirect.map(row => toRowExtra(row));
     // console.log(`${unfolded[0].pattern.join("")} ${unfolded[0].groups.join(",")}`);
     const result = unfolded.map((row, index) => {
-        console.log(`Processing #${index + 1}: ${row.pattern.join("")}`);
+        // console.log(`Processing #${index + 1}: ${row.pattern.join("")}`);
         return getConfigurationsCount(row);
     });
-    console.log(`Call count: ${callCount}`);
+    // console.log(result);
+    // console.log(`Call count: ${callCount}`);
     return result.sum();
 };
 
