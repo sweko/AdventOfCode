@@ -77,23 +77,19 @@ const partOne = (input: PlanStep[], debug: boolean) => {
     }
 
     const maxy = trench.max(p => p.y);
-    const miny = trench.min(p => p.y);
-    const maxx = trench.max(p => p.x);
     const minx = trench.min(p => p.x);
 
-    console.log(`minx: ${minx}, maxx: ${maxx}, miny: ${miny}, maxy: ${maxy}`)
+    const digStart = { x: minx, y: maxy };
+    while (!trenchSet.has(`${digStart.x},${digStart.y}`)) {
+        digStart.x += 1;
+    }
 
+    digStart.x += 1;
+    digStart.y -= 1;
 
-    const digStart = { x: minx + 1, y: maxy - 1 };
     const queue: Point[] = [digStart];
 
-    let callCount = 0;
-
     while (queue.length > 0) {
-        callCount += 1;
-        if (callCount % 10000 === 0) {
-            console.log(`call count: ${callCount}, queue length: ${queue.length}, trench size: ${trenchSet.size}`);
-        }
         const {x, y} = queue.shift()!;
         const key = `${x},${y}`;
         if (trenchSet.has(key)) {
