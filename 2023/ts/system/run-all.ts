@@ -49,24 +49,21 @@ const test = process.env.TEST;
         console.log(`  ${solution.resultOne(input, resultOne)}`);
         console.log(`  Running time for part 1 is ${timeOne}ms`);
 
-        if (!solution.partTwo) {
-            return;
-        }
+        let timeTwo = 0;
         // these two methods are a set, so if one is missing, the other is too
         // we need to check for this, otherwise we get a runtime error
-        if (!solution.resultTwo) {
-            return;
+        if (solution.partTwo && solution.resultTwo) {
+            console.log("  Part 2: Initiating processing");
+
+            const startTwo = performance.now();
+            const resultTwo = solution.partTwo(input, !!debug);
+            const endTwo = performance.now();
+            timeTwo = Math.round(endTwo - startTwo);
+
+            console.log(`  ${solution.resultTwo(input, resultTwo)}`);
+            console.log(`  Running time for part 2 is ${timeTwo}ms`);
         }
 
-        console.log("  Part 2: Initiating processing");
-
-        const startTwo = performance.now();
-        const resultTwo = solution.partTwo(input, !!debug);
-        const endTwo = performance.now();
-        const timeTwo = Math.round(endTwo - startTwo);
-
-        console.log(`  ${solution.resultTwo(input, resultTwo)}`);
-        console.log(`  Running time for part 2 is ${timeTwo}ms`);
 
         times.push({
             day: solution.day,

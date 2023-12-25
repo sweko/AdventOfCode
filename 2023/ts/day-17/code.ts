@@ -268,61 +268,61 @@ const getRightPosition = (costs: number[][], prices: PriceList[][], position: Tr
 
 
 const partOne = (input: number[][], debug: boolean) => {
+    return -1;
+    // const startPosition = { x: 0, y: 0, direction: 'right', distance: -1, price: 0 } as const;
 
-    const startPosition = { x: 0, y: 0, direction: 'right', distance: -1, price: 0 } as const;
+    // const prices: PriceList[][]  = Array(input.length).fill(0).map(_ => Array(input[0].length).fill(0).map(_ => getDefaultPriceList()));
+    // prices[0][0] = {
+    //     "up-0": 0,
+    //     "up-1": 0,
+    //     "up-2": 0,
+    //     "down-0": 0,
+    //     "down-1": 0,
+    //     "down-2": 0,
+    //     "left-0": 0,
+    //     "left-1": 0,
+    //     "left-2": 0,
+    //     "right-0": 0,
+    //     "right-1": 0,
+    //     "right-2": 0,
+    // }
 
-    const prices: PriceList[][]  = Array(input.length).fill(0).map(_ => Array(input[0].length).fill(0).map(_ => getDefaultPriceList()));
-    prices[0][0] = {
-        "up-0": 0,
-        "up-1": 0,
-        "up-2": 0,
-        "down-0": 0,
-        "down-1": 0,
-        "down-2": 0,
-        "left-0": 0,
-        "left-1": 0,
-        "left-2": 0,
-        "right-0": 0,
-        "right-1": 0,
-        "right-2": 0,
-    }
+    // const queue: TravelingPoint[] = [startPosition];
 
-    const queue: TravelingPoint[] = [startPosition];
+    // let callCount = 0;
 
-    let callCount = 0;
+    // while (queue.length > 0) {
+    //     callCount += 1;
+    //     if (callCount % 10_000 === 0) {
+    //         console.log(`At ${callCount} calls, queue is ${queue.length}`);
+    //     }
+    //     const position = queue.shift()!;
 
-    while (queue.length > 0) {
-        callCount += 1;
-        if (callCount % 10_000 === 0) {
-            console.log(`At ${callCount} calls, queue is ${queue.length}`);
-        }
-        const position = queue.shift()!;
+    //     const upPosition = getUpPosition(input, prices, position);
+    //     if (upPosition) {
+    //         queue.push(upPosition);
+    //     }
 
-        const upPosition = getUpPosition(input, prices, position);
-        if (upPosition) {
-            queue.push(upPosition);
-        }
+    //     const downPosition = getDownPosition(input, prices, position);
+    //     if (downPosition) {
+    //         queue.push(downPosition);
+    //     }
 
-        const downPosition = getDownPosition(input, prices, position);
-        if (downPosition) {
-            queue.push(downPosition);
-        }
+    //     const leftPosition = getLeftPosition(input, prices, position);
+    //     if (leftPosition) {
+    //         queue.push(leftPosition);
+    //     }
 
-        const leftPosition = getLeftPosition(input, prices, position);
-        if (leftPosition) {
-            queue.push(leftPosition);
-        }
+    //     const rightPosition = getRightPosition(input, prices, position);
+    //     if (rightPosition) {
+    //         queue.push(rightPosition);
+    //     }
+    // }
 
-        const rightPosition = getRightPosition(input, prices, position);
-        if (rightPosition) {
-            queue.push(rightPosition);
-        }
-    }
-
-    console.log(callCount);
-    const finishPrices = prices[prices.length-1][prices[0].length-1];
-    const minPrice = Math.min(...Object.values(finishPrices));
-    return minPrice;
+    // console.log(callCount);
+    // const finishPrices = prices[prices.length-1][prices[0].length-1];
+    // const minPrice = Math.min(...Object.values(finishPrices));
+    // return minPrice;
 };
 
 const partTwo = (input: number[][], debug: boolean) => {

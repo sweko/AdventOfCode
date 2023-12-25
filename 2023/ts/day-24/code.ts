@@ -64,22 +64,22 @@ const partOne = (input: Particle[], debug: boolean) => {
         for (let sindex = findex + 1; sindex < params.length; sindex++) {
             const second = params[sindex];
             if (first.slope === second.slope) {
-                console.log(`Parallel lines ${findex} and ${sindex}`);
+                // console.log(`Parallel lines ${findex} and ${sindex}`);
                 continue;
             }
             const intx = (second.intercept - first.intercept) / (first.slope - second.slope);
             const inty = first.slope * intx + first.intercept;
             if (!first.isFuture(inty)) {
-                console.log(`The point is in the past for ${findex}`);
+                // console.log(`The point is in the past for ${findex}`);
                 continue;
             }
             if (!second.isFuture(inty)) {
-                console.log(`The point is in the past for ${sindex}`);
+                // console.log(`The point is in the past for ${sindex}`);
                 continue;
             }
-            console.log(`Intersection between ${findex} and ${sindex} is at ${intx},${inty}`);
+            // console.log(`Intersection between ${findex} and ${sindex} is at ${intx},${inty}`);
             if (intx >= min && intx <= max && inty >= min && inty <= max) {
-                console.log(`   Intersection is in the box`);
+                // console.log(`   Intersection is in the box`);
                 intersections += 1;
             }
         }
