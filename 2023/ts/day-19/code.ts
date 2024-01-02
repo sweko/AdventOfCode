@@ -13,8 +13,40 @@ interface Part {
     s: number;
 }
 
+
+interface Hypercube {
+    x: {
+        min: number;
+        max: number;
+    }
+    m: {
+        min: number;
+        max: number;
+    }
+    a: {
+        min: number;
+        max: number;
+    }
+    s: {
+        min: number;
+        max: number;
+    }
+}
+
+type HypercubeResult = {
+    hypercube: Hypercube;
+    next: string;
+}
+
+type HypercubeRuleResult = {
+    matched: Hypercube | null;
+    unmatched: Hypercube | null;
+    next: string;
+}
+
 abstract class Rule {
-    public abstract readonly kind:string;
+
+    public abstract readonly kind: string;
 
     constructor(public readonly target: string) { }
 
@@ -30,14 +62,15 @@ abstract class Rule {
     }
 
     abstract matches(part: Part): boolean;
+    abstract executeMatch(hypercube: Hypercube): HypercubeRuleResult;
 }
 
 class QualifiedRule extends Rule {
     public readonly kind = "qualified";
 
     constructor(
-        readonly target: string, 
-        public readonly category: Category, 
+        readonly target: string,
+        public readonly category: Category,
         public readonly direction: ">" | "<",
         public readonly value: number) {
         super(target);
@@ -48,6 +81,102 @@ class QualifiedRule extends Rule {
             return part[this.category] < this.value;
         } else {
             return part[this.category] > this.value;
+        }
+    }
+
+    private executeLess(hypercube: Hypercube): HypercubeRuleResult {
+        // is the rule applicable to the hypercube?
+        if (hypercube[this.category].min >= this.value) {
+            // rule is not applicable
+            return {
+                matched: null,
+                unmatched: hypercube,
+                next: this.target
+            };
+        }
+
+        // is the whole hypercube matched?
+        if (hypercube[this.category].max < this.value) {
+            // whole hypercube is matched
+            return {
+                matched: hypercube,
+                unmatched: null,
+                next: this.target
+            };
+        }
+
+        // split hypercube
+        const matched: Hypercube = {
+            ...hypercube,
+            [this.category]: {
+                min: hypercube[this.category].min,
+                max: this.value - 1
+            }
+        };
+        const unmatched: Hypercube = {
+            ...hypercube,
+            [this.category]: {
+                min: this.value,
+                max: hypercube[this.category].max
+            }
+        };
+
+        return {
+            matched,
+            unmatched,
+            next: this.target
+        };
+    }
+
+    private executeMore(hypercube: Hypercube): HypercubeRuleResult {
+        // is the rule applicable to the hypercube?
+        if (hypercube[this.category].max <= this.value) {
+            // rule is not applicable
+            return {
+                matched: null,
+                unmatched: hypercube,
+                next: this.target
+            };
+        }
+
+        // is the whole hypercube matched?
+        if (hypercube[this.category].min > this.value) {
+            // whole hypercube is matched
+            return {
+                matched: hypercube,
+                unmatched: null,
+                next: this.target
+            };
+        }
+
+        // split hypercube
+        const matched: Hypercube = {
+            ...hypercube,
+            [this.category]: {
+                min: this.value + 1,
+                max: hypercube[this.category].max
+            }
+        };
+        const unmatched: Hypercube = {
+            ...hypercube,
+            [this.category]: {
+                min: hypercube[this.category].min,
+                max: this.value
+            }
+        };
+
+        return {
+            matched,
+            unmatched,
+            next: this.target
+        };
+    }
+
+    executeMatch(hypercube: Hypercube): HypercubeRuleResult {
+        if (this.direction === "<") {
+            return this.executeLess(hypercube);
+        } else {
+            return this.executeMore(hypercube);
         }
     }
 }
@@ -62,10 +191,46 @@ class EverythingRule extends Rule {
     matches(_part: Part): boolean {
         return true;
     }
+
+    executeMatch(hypercube: Hypercube): HypercubeRuleResult {
+        return {
+            matched: hypercube,
+            unmatched: null,
+            next: this.target
+        };
+    }
 }
 
 class Workflow {
-    constructor(public name:string, public rules: Rule[]) {}
+    constructor(public name: string, public rules: Rule[]) { }
+
+    // execute(hypercubes: Hypercube[]) {
+    //     const results: HypercubeResult[] = [];
+    //     for (const hypercube of hypercubes) {
+    //         const hcResult = this.executeHypercube(hypercube);
+    //         results.push(...hcResult);
+    //     }
+    //     return results;
+    // }
+
+    executeHypercube(hypercube: Hypercube) {
+        const results: HypercubeResult[] = [];
+        let activeHypercube = hypercube;
+        for (const rule of this.rules) {
+            const match = rule.executeMatch(activeHypercube);
+            if (match.matched) {
+                results.push({
+                    hypercube: match.matched,
+                    next: match.next
+                });
+            }
+            if (match.unmatched) {
+                activeHypercube = match.unmatched;
+            }
+        }
+        return results;
+    }
+
 }
 
 const processInput = (day: number) => {
@@ -92,9 +257,9 @@ const processInput = (day: number) => {
             throw Error("Invalid part definition");
         }
         const [, x, m, a, s] = match;
-        return {x: parseInt(x, 10), m: parseInt(m, 10), a: parseInt(a, 10), s: parseInt(s, 10)};
+        return { x: parseInt(x, 10), m: parseInt(m, 10), a: parseInt(a, 10), s: parseInt(s, 10) };
     });
-    return {parts, workflows};
+    return { parts, workflows };
 };
 
 interface Situation {
@@ -102,7 +267,7 @@ interface Situation {
     workflows: Record<string, Workflow>;
 }
 
-const partOne = ({parts, workflows}: Situation, debug: boolean) => {
+const partOne = ({ parts, workflows }: Situation, debug: boolean) => {
     let accCount = 0;
     for (const part of parts) {
         let wfName = "in";
@@ -125,11 +290,48 @@ const partOne = ({parts, workflows}: Situation, debug: boolean) => {
     return accCount;
 };
 
-const partTwo = (input: Situation, debug: boolean) => {
-    if (debug) {
-        console.log("-------Debug-----");
+
+const partTwo = ({ workflows }: Situation, debug: boolean) => {
+    const hypercube: Hypercube = {
+        x: { min: 1, max: 4000 },
+        m: { min: 1, max: 4000 },
+        a: { min: 1, max: 4000 },
+        s: { min: 1, max: 4000 }
+    };
+
+    // start with the "in" workflow
+    const hcResults = workflows["in"].executeHypercube(hypercube);
+
+    const accepteds: Hypercube[] = [];
+
+    while (hcResults.length > 0) {
+        const hcResult = hcResults.shift()!;
+        if (hcResult.next === "A") {
+            accepteds.push(hcResult.hypercube);
+            continue;
+        }
+        if (hcResult.next === "R") {
+            continue;
+        }
+
+        const workflow = workflows[hcResult.next];
+        const nextResults = workflow.executeHypercube(hcResult.hypercube)
+
+        hcResults.push(...nextResults);
     }
-    return -1;
+
+    let totalHypervolume = 0;
+
+    for (const hypercube of accepteds) {
+        const xsize = hypercube.x.max - hypercube.x.min + 1;
+        const msize = hypercube.m.max - hypercube.m.min + 1;
+        const asize = hypercube.a.max - hypercube.a.min + 1;
+        const ssize = hypercube.s.max - hypercube.s.min + 1;
+        const hypervolume = xsize * msize * asize * ssize;
+        totalHypervolume += hypervolume;
+    }
+
+    return totalHypervolume;
 };
 
 const resultOne = (_: any, result: number) => {
