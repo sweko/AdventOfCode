@@ -328,7 +328,7 @@ const partOne = (input: number[][], debug: boolean) => {
                 queue.splice(existing, 1);
                 existing = queue.findIndex(q => q.x === downPosition.x && q.y === downPosition.y && q.direction === downPosition.direction && q.distance === downPosition.distance);
             }
-            queue.unshift(downPosition);
+            queue.push(downPosition);
         }
 
         const leftPosition = getLeftPosition(input, prices, position);
@@ -350,7 +350,7 @@ const partOne = (input: number[][], debug: boolean) => {
                 queue.splice(existing, 1);
                 existing = queue.findIndex(q => q.x === rightPosition.x && q.y === rightPosition.y && q.direction === rightPosition.direction && q.distance === rightPosition.distance);
             }
-            queue.unshift(rightPosition);
+            queue.push(rightPosition);
         }
     }
 
