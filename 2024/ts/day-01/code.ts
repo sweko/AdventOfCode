@@ -1,4 +1,4 @@
-// Solution for day 1 of advent of code 2023
+// Solution for day 1 of advent of code 2024
 
 import { readInputLines, readInput } from "../system/aoc-helper";
 import "../utils/array-helpers";
