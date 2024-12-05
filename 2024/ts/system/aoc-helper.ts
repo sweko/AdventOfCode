@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { debug } from "./run-task";
 
 export function getDay(day: number) {
     if (day < 10) {
@@ -18,7 +19,7 @@ export function readInputLines(day: number) {
     return input.split("\r\n");
 }
 
-export function debugLog(debug: boolean, ...args:any[]) {
+export function dlog(...args:any[]) {
     if (debug) {
         console.log(...args);
     }

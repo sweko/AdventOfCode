@@ -1,9 +1,8 @@
 // Solution for day 5 of advent of code 2024
 
-import { readInputLines, readInput } from "../system/aoc-helper";
+import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
-import { parse } from "path";
 
 type Input = {
     ruleset: [number, number][],
@@ -43,12 +42,12 @@ const checkUpdate = (update: number[], ruleset: [number, number][]) => {
         for (let sindex = findex + 1; sindex < update.length; sindex++) {
             const second = update[sindex];
             if (ruleset.some(([frule, srule]) => (frule === second && srule === first))) {
-                //console.log(`Failed update ${update} for ${first} and ${second}`);
+                dlog(`Failed update ${update} for ${first} and ${second}`);
                 return false;
             }
         }
     }
-    //console.log(`Passed update ${update}`);
+    dlog(`Passed update ${update}`);
     return true;
 };
 
@@ -69,7 +68,6 @@ const findProblemIndices = (update: number[], ruleset: [number, number][]) => {
         for (let sindex = findex + 1; sindex < update.length; sindex++) {
             const second = update[sindex];
             if (ruleset.some(([frule, srule]) => (frule === second && srule === first))) {
-                //console.log(`Failed update ${update} for ${first} and ${second}`);
                 return [findex, sindex];
             }
         }
@@ -98,10 +96,11 @@ const fixUpdate = (update: number[], ruleset: [number, number][]) => {
 const partTwo = (input: Input, debug: boolean) => {
     let result = 0;
     const invalidUpdates = input.updates.filter(update => !checkUpdate(update, input.ruleset));
+    dlog("-----");
     for (const update of invalidUpdates) {
         const fixed = fixUpdate(update, input.ruleset);
         // assumes that the update has an odd number of elements
-        // console.log(`Fixed update ${update} to ${fixed}`);
+        dlog(`Fixed update [${update}] to [${fixed}]`);
         result += fixed[(fixed.length - 1) / 2];
     }
     return result;

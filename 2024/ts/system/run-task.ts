@@ -1,8 +1,8 @@
 import { performance } from "perf_hooks";
 import { Puzzle } from "../model/puzzle";
 
-const debug = process.env.DEBUG;
-const test = process.env.TEST;
+export const debug = process.env.DEBUG;
+export const test = process.env.TEST;
 
 (async () => {
 
