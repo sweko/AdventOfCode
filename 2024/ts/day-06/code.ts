@@ -4,6 +4,7 @@ import { readInputLines, readInput } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 import { printMatrix } from "../utils/matrix";
+import { Performancer } from "../utils/performancer";
 
 type Input = {
     maze: boolean[][]; // true is open, false is wall
@@ -120,7 +121,7 @@ const partOne = (input: Input, debug: boolean) => {
 const stateToString = ({ position, direction }: State) => `${positionToString(position)}-${direction}`;
 
 const willItLoop = (maze: boolean[][], position: Position, direction: Direction) => {
-
+    Performancer.start("willItLoop");
     const visiteds = new Set<string>();
     const width = maze[0].length;
     const height = maze.length;
@@ -136,6 +137,7 @@ const willItLoop = (maze: boolean[][], position: Position, direction: Direction)
 
         // check if we go overboard
         if (next.x < 0 || next.x >= width || next.y < 0 || next.y >= height) {
+            Performancer.end("willItLoop");
             return false;
         }
 
@@ -143,6 +145,7 @@ const willItLoop = (maze: boolean[][], position: Position, direction: Direction)
             state.position = next;
             const stateString = stateToString(state);
             if (visiteds.has(stateString)) {
+                Performancer.end("willItLoop");
                 return true;
             }
             visiteds.add(stateString);
@@ -174,6 +177,8 @@ const partTwo = (input: Input, debug: boolean) => {
             }
         }
     }
+
+    Performancer.print("willItLoop");
 
     return positions;
 };
