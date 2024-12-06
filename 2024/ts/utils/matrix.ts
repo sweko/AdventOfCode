@@ -8,10 +8,14 @@ export function loopMatrix<T>(matrix: T[][], operation: (row: number, column: nu
     }
 }
 
-export const printMatrix = <T>(matrix: T[][], processor?: (item: T) => string, rowHeader?: (rowIndex: number) => string) => {
+export const printMatrix = <T>(
+    matrix: T[][], 
+    processor?: (item: T, rindex: number, cindex:number) => string, 
+    rowHeader?: (rowIndex: number) => string
+) => {
     for (let rindex = 0; rindex < matrix.length; rindex++) {
         const row = processor
-            ? matrix[rindex].map(item => processor(item))
+            ? matrix[rindex].map((item, cindex) => processor(item, rindex, cindex))
             : matrix[rindex];
         let rowString = row.join("");
         if (rowHeader) {
