@@ -49,7 +49,7 @@ const test = process.env.TEST;
         console.log(`  ${solution.resultOne(input, resultOne)}`);
         console.log(`  Running time for part 1 is ${timeOne}ms`);
 
-        let timeTwo = 0;
+        let timeTwo: number | "--" = "--";
         // these two methods are a set, so if one is missing, the other is too
         // we need to check for this, otherwise we get a runtime error
         if (solution.partTwo && solution.resultTwo) {
@@ -74,14 +74,16 @@ const test = process.env.TEST;
         });
     }
 
+    const getTimeTwo = (time: number | "--") => time === "--" ? 0 : time;
+
     const totalInput = times.reduce((acc, cur) => acc + cur.input, 0);
     const totalOne = times.reduce((acc, cur) => acc + cur.one, 0);
-    const totalTwo = times.reduce((acc, cur) => acc + cur.two, 0);
+    const totalTwo = times.reduce((acc, cur) => acc + getTimeTwo(cur.two), 0);
 
     const total = totalInput + totalOne + totalTwo;
 
     for (const time of times) {
-        time.percentage = Math.round(((time.input + time.one + time.two)  / total) * 100);
+        time.percentage = Math.round(((time.input + time.one + getTimeTwo(time.two))  / total) * 100);
     };
 
     console.log("Summary");

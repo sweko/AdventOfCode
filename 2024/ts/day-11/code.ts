@@ -153,9 +153,9 @@ export const solution: Puzzle<number[], number> = {
     day: 11,
     input: () => processInput(11),
     partOne,
-    partTwo,
+    //partTwo,
     resultOne: resultOne,
-    resultTwo: resultTwo,
+    //resultTwo: resultTwo,
     showInput,
     test,
 }

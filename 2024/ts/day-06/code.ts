@@ -121,7 +121,7 @@ const partOne = (input: Input, debug: boolean) => {
 const stateToString = ({ position, direction }: State) => `${positionToString(position)}-${direction}`;
 
 const willItLoop = (maze: boolean[][], position: Position, direction: Direction) => {
-    Performancer.start("willItLoop");
+    Performancer.begin("willItLoop");
     const visiteds = new Set<string>();
     const width = maze[0].length;
     const height = maze.length;
@@ -178,7 +178,7 @@ const partTwo = (input: Input, debug: boolean) => {
         }
     }
 
-    Performancer.print("willItLoop");
+    //Performancer.print("willItLoop");
 
     return positions;
 };
