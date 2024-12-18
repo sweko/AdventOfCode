@@ -1,6 +1,6 @@
 // Solution for day 17 of advent of code 2024
 
-import { readInputLines, readInput } from "../system/aoc-helper";
+import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 import { register } from "module";
@@ -172,39 +172,50 @@ const runProgram = (input: Computer) => {
         const process = instructionSet[instruction];
         if (!process) {
             console.error(`Unknown instruction ${instruction} at ${computer.pointer}`);
-            return "";
+            return [];
         }
         computer = process(computer, parameter);
     }
-    return computer.output.join(",");
+    return computer.output;
 }
 
 const partOne = (input: Computer, debug: boolean) => {
-    return runProgram(input);
+    return runProgram(input).join(",");
 };
 
-const partTwo = (input: Computer, debug: boolean) => {
-    // let value = 100_000_000_000_000;
-    // const limit = 100_000_001_000_000;
-    let value = 0;
-    const limit = 8;
-    
-    while (value < limit) {
-        const computer = copyComputer(input);
-        computer.registers.A = value;
-        const output = runProgram(computer);
-        if (output === input.program.join(",")) {
-            return value.toString();
-        }
-        //if (value % 100_000 === 0) {
-            console.log(`Trying value ${value}`);
-            console.log(`Value ${value} failed: ${output}`);
-         //}
-         if (output.startsWith("2,4,1,5,7,5,4,3,1,6,0"))
-            console.log(`Value ${value} failed: ${output}`);
-        value += 1;
+const findQuineValue = (input: Computer, targets: number[], candidate: number):number => {
+    if (targets.length === 0) {
+        return candidate;
     }
-    return "No value found";
+    const target = targets[targets.length-1];
+
+    const start = 0o0;
+    const end = 0o7;
+
+    for (let i = start; i <= end; i++) {
+        const newCandidate = candidate * 8 + i;
+        const computer = copyComputer(input);
+        computer.registers.A = newCandidate;
+        const output = runProgram(computer);
+        if (output[0] === target) {
+            dlog(`Found candidate ${newCandidate} for ${target} (target ${targets.length})`);
+            const result = findQuineValue(input, targets.slice(0, -1), newCandidate);
+            if (result > 0) {
+                dlog(`Found ${result} for ${target}`);
+                return result;
+            }
+        }
+    }
+
+    return 0;
+}
+
+const partTwo = (input: Computer, debug: boolean) => {
+    const targets = input.program.slice();
+
+    const result = findQuineValue(input, targets, 0);
+
+    return result.toString();
 };
 
 const resultOne = (_: any, result: string) => {
