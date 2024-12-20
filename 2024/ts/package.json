@@ -4,12 +4,12 @@
   "description": "Advent of Code solutions for 2024",
   "main": "index.js",
   "scripts": {
-    "setup-day": "ts-node ./system/setup-day.ts",
-    "start": "ts-node ./system/run-task.ts",
-    "start:debug": "set DEBUG=true && ts-node ./system/run-task.ts",
+    "setup-day": "tsx ./system/setup-day.ts",
+    "start": "tsx ./system/run-task.ts",
+    "start:debug": "set DEBUG=true && tsx ./system/run-task.ts",
     "start:extra": "node --stack-size=19600 -r ts-node/register ./system/run-task.ts",
-    "all": "ts-node ./system/run-all.ts",
-    "test": "set TEST=true && ts-node ./system/run-task.ts"
+    "all": "tsx ./system/run-all.ts",
+    "test": "set TEST=true && tsx ./system/run-task.ts"
   },
   "author": "Wekoslav Stefanovski",
   "license": "ISC",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@types/node": "^20.10.0",
-    "terminal-kit": "^3.0.1"
+    "terminal-kit": "^3.0.1",
+    "tsx": "^4.19.2"
   }
 }
