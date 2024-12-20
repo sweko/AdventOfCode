@@ -3,6 +3,7 @@
 import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
+import { monitored, Performancer } from "../utils/performancer";
 
 type Equation = {
     target: number,
@@ -47,25 +48,28 @@ const partOne = (input: Equation[], debug: boolean) => {
     return result;
 };
 
-const canBeAchivedTwo = (target: number, accumulator: number, values: number[]) => {
+const canBeAchivedTwo = monitored((target: number, accumulator: number, values: number[]) => {
     if (values.length === 0) {
         return accumulator === target;
     }
     const [head, ...rest] = values;
     // handle addition
-    if (canBeAchivedTwo(target, accumulator + head, rest)) {
+    const sum = accumulator + head;
+    if (canBeAchivedTwo(target, sum, rest)) {
         return true;
     }
     // handle multiplication
-    if (canBeAchivedTwo(target, accumulator * head, rest)) {
+    const product = accumulator * head;
+    if (canBeAchivedTwo(target, product, rest)) {
         return true;
     }
     // handle concatenation
-    if (canBeAchivedTwo(target, parseInt(accumulator.toString() + head.toString(), 10), rest)) {
+    const concatenated = parseInt(accumulator.toString() + head.toString(), 10);
+    if (canBeAchivedTwo(target, concatenated, rest)) {
         return true;
     }
     return false;
-};
+}, "canBeAchivedTwo");
 
 const partTwo = (input: Equation[], debug: boolean) => {
     let result = 0;
@@ -75,6 +79,7 @@ const partTwo = (input: Equation[], debug: boolean) => {
             result += target;
         }
     }
+    canBeAchivedTwo.performance.print();
     return result;
 };
 
