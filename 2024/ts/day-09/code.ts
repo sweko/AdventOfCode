@@ -56,8 +56,9 @@ const partOne = (input: number[], debug: boolean) => {
     return checksum;
 };
 
-const partTwoCalculated = (input: number[], debug: boolean) => {
+const partTwo = (input: number[], debug: boolean) => {
     const disk = explode(input);
+    console.log(disk.join(""));
     const files = input.filter((_, index) => index % 2 === 0);
     const blocks = files.slice();
     const empties = input.filter((_, index) => index % 2 === 1);
@@ -67,6 +68,10 @@ const partTwoCalculated = (input: number[], debug: boolean) => {
         if (eindex === -1) {
             continue;
         }
+        if (eindex >= findex) {
+            continue;
+        }
+        console.log(`Moving file ${findex} of size ${fileSize} to empty ${eindex} of size ${empties[eindex]}`);
         const emptySize = empties[eindex];
         const emptyStart = blocks.slice(0, eindex+1).sum() + empties.slice(0, eindex).sum();
         const fileStart = blocks.slice(0, findex).sum() + empties.slice(0, findex).sum();
@@ -81,32 +86,7 @@ const partTwoCalculated = (input: number[], debug: boolean) => {
         // console.log(blocks);
         // console.log(empties);
     }
-    //console.log(disk.join(""));
-    const checksum = disk.sum((item, index) => (item === '.') ? 0 : item * index);
-    return checksum;
-};
-
-const partTwo = (input: number[], debug: boolean) => {
-    const disk = explode(input);
-    let lastBlockIndex = disk.length - 1;
-    while (disk[lastBlockIndex] === '.') {
-        lastBlockIndex -= 1;
-    }
-    let firstEmptyIndex = 0;
-    while (disk[firstEmptyIndex] !== '.') {
-        firstEmptyIndex += 1;
-    }
-    while (firstEmptyIndex < lastBlockIndex) {
-        disk[firstEmptyIndex] = disk[lastBlockIndex];
-        disk[lastBlockIndex] = '.';
-        while (disk[lastBlockIndex] === '.') {
-            lastBlockIndex -= 1;
-        }
-        while (disk[firstEmptyIndex] !== '.') {
-            firstEmptyIndex += 1;
-        }
-    }
-
+    console.log(disk.join(""));
     const checksum = disk.sum((item, index) => (item === '.') ? 0 : item * index);
     return checksum;
 };
@@ -131,9 +111,9 @@ export const solution: Puzzle<number[], number> = {
     day: 9,
     input: () => processInput(9),
     partOne,
-    //partTwo,
+    partTwo,
     resultOne: resultOne,
-    //resultTwo: resultTwo,
+    resultTwo: resultTwo,
     showInput,
     test,
 }
