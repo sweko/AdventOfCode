@@ -1,6 +1,6 @@
 // Solution for day 9 of advent of code 2024
 
-import { readInputLines, readInput } from "../system/aoc-helper";
+import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 
@@ -58,7 +58,7 @@ const partOne = (input: number[], debug: boolean) => {
 
 const partTwo = (input: number[], debug: boolean) => {
     const disk = explode(input);
-    console.log(disk.join(""));
+    dlog(disk.join(""));
     const files = input.filter((_, index) => index % 2 === 0);
     const blocks = files.slice();
     const empties = input.filter((_, index) => index % 2 === 1);
@@ -71,7 +71,6 @@ const partTwo = (input: number[], debug: boolean) => {
         if (eindex >= findex) {
             continue;
         }
-        console.log(`Moving file ${findex} of size ${fileSize} to empty ${eindex} of size ${empties[eindex]}`);
         const emptySize = empties[eindex];
         const emptyStart = blocks.slice(0, eindex+1).sum() + empties.slice(0, eindex).sum();
         const fileStart = blocks.slice(0, findex).sum() + empties.slice(0, findex).sum();
@@ -81,12 +80,9 @@ const partTwo = (input: number[], debug: boolean) => {
         }
         empties[eindex] = emptySize - fileSize;
         blocks[eindex] += fileSize;
-        // console.log(disk.join(""));
-        // console.log(files);
-        // console.log(blocks);
-        // console.log(empties);
     }
-    console.log(disk.join(""));
+    dlog("---------------");
+    dlog(disk.join(""));
     const checksum = disk.sum((item, index) => (item === '.') ? 0 : item * index);
     return checksum;
 };
