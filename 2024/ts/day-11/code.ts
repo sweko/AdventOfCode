@@ -137,36 +137,6 @@ const partTwo = (input: number[], debug: boolean) => {
         return result;
     }
 
-    const getChildren = (() => {
-        const cache: Record<number, number[]> = {};
-    
-        const implementation = (value: number): number[] => {
-            if (value === 0) {
-                return [1];
-            }
-            const valueStr = value.toString();
-            if (valueStr.length % 2 === 0) {
-                const firstHalf = parseInt(valueStr.slice(0, valueStr.length / 2), 10);
-                const secondHalf = parseInt(valueStr.slice(valueStr.length / 2), 10);
-                return [firstHalf, secondHalf];
-            }
-            return [value * 2024];
-        }
-    
-        for (let index = 0; index < 1000; index++) {
-            cache[index] = implementation(index);
-        }
-    
-        return (value: number) => { 
-            if (cache[value]) {
-                return cache[value];
-            }
-            const result = implementation(value);
-            cache[value] = result;
-            return result;
-        }
-    })();
-
     const result = input.map((item) => getStoneCount(item, 75)).sum();
     return result;
 
@@ -192,9 +162,9 @@ export const solution: Puzzle<number[], number> = {
     day: 11,
     input: () => processInput(11),
     partOne,
-    //partTwo,
+    partTwo,
     resultOne: resultOne,
-    //resultTwo: resultTwo,
+    resultTwo: resultTwo,
     showInput,
     test,
 }
