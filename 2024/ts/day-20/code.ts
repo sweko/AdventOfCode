@@ -121,16 +121,26 @@ const makeMaze = (source: string[][]) => {
     return maze;
 };
 
-const partOne = (input: string[][], debug: boolean) => {
-    const maze = makeMaze(input);
-    const width = maze.maze[0].length;
-    const height = maze.maze.length;
+const getNeighbours = (point: Point, distance: number, width: number, height: number) => {
+    // generate all points that have a distance distance away from the point
+    const neighbours = [];
+    for (let x = point.x - distance; x <= point.x + distance; x += 1) {
+        if (x < 0 || x >= width) {
+            continue;
+        }
+        const y = point.y - distance;
+    }
+    
+};
 
+const getCheats = ({maze}: Maze, distance: number) => {
     const cheats: number[] = [];
+    const width = maze[0].length;
+    const height = maze.length;
 
     for (let rindex = 0; rindex < height; rindex++) {
         for (let cindex = 0; cindex < width; cindex++) {
-            const cell = maze.maze[rindex][cindex];
+            const cell = maze[rindex][cindex];
             if (isWallCell(cell)) {
                 continue;
             }
@@ -144,29 +154,39 @@ const partOne = (input: string[][], debug: boolean) => {
                 { x: cindex - 1, y: rindex + 1 },
                 { x: cindex + 1, y: rindex + 1 },
             ].filter(neighbour => neighbour.x >= 0 && neighbour.x < width && neighbour.y >= 0 && neighbour.y < height)
-            .map(neighbour => maze.maze[neighbour.y][neighbour.x])
+            .map(neighbour => maze[neighbour.y][neighbour.x])
             .filter(neighbour => isOpenCell(neighbour));
 
-            let cellCheat = 0;
             for (const neighbour of neighbours) {
                 const cheat = neighbour.distance - cell.distance - 2;
-                if (cheat > cellCheat) {
-                    cellCheat = cheat;
+                if (cheat > 0) {
+                    cheats.push(cheat);
                 }
-            }
-
-            if (cellCheat > 0) {
-                cheats.push(cellCheat);
             }
         }
     }
+    return cheats;
+};
+
+const partOne = (input: string[][], debug: boolean) => {
+    const maze = makeMaze(input);
+
+
+    printMatrix(maze.maze, cell => {
+        if (isWallCell(cell)) {
+            return "####";
+        }
+        return cell.distance.toString().padStart(3, " ").padEnd(4, " ");
+    });
+
+    const cheats = getCheats(maze, 2);
 
     const freqs = cheats.groupReduce(cheat => cheat, (a, _b) => a + 1, 0).toSorted((a, b) => a.key - b.key);
     for (const {key, value} of freqs) {
         if (value === 1) {
-            console.log(`There is one cheat that saves ${key} picoseconds`);
+            console.log(`There is one cheat that saves ${key} picoseconds.`);
         } else {
-            console.log(`There are ${value} cheats that save ${key} picoseconds`);
+            console.log(`There are ${value} cheats that save ${key} picoseconds.`);
         }
     }
 

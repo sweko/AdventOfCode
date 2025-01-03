@@ -129,6 +129,7 @@ class Robot {
 }
 
 const partOne = (input: string[][], debug: boolean) => {
+    return -1;
     const numKeypad = [
         ["7", "8", "9"],
         ["4", "5", "6"],
