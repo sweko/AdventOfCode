@@ -1,6 +1,6 @@
 // Solution for day 18 of advent of code 2024
 
-import { readInputLines, readInput } from "../system/aoc-helper";
+import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 import { printMatrix } from "../utils/matrix";
@@ -119,19 +119,19 @@ const partTwo = (input: [number, number][], debug: boolean) => {
     while (blockLimit < input.length) {
         const result = findPath(input, blockLimit);
         if (result === Number.MAX_SAFE_INTEGER) {
-            console.log(`Block limit ${blockLimit} (${input[blockLimit-1]}) is unreachable`);
-            return blockLimit;
+            dlog(`Block limit ${blockLimit} (${input[blockLimit-1]}) is unreachable`);
+            return input[blockLimit-1].toString();
         }
         blockLimit += 1;
     }
-    return blockLimit;
+    return "--no result--";
 };
 
 const resultOne = (_: any, result: number) => {
     return `Result part one is ${result}`;
 };
 
-const resultTwo = (_: any, result: number) => {
+const resultTwo = (_: any, result: string) => {
     return `Result part two is ${result}`;
 };
 
@@ -143,7 +143,7 @@ const test = (_: [number, number][]) => {
     console.log("----Test-----");
 };
 
-export const solution: Puzzle<[number, number][], number> = {
+export const solution: Puzzle<[number, number][], number, string> = {
     day: 18,
     input: () => processInput(18),
     partOne,
