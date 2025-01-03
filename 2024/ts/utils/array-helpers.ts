@@ -22,6 +22,8 @@ interface Array<T> {
     takeWhile(predicate: (item: T, index: number) => boolean): T[];
 
     differences(selector?: (item: T, index: number) => number): number[];
+
+    count(predicate: (item: T, index: number) => boolean): number;
 }
 
 if (!Array.prototype.groupBy) {
@@ -199,5 +201,12 @@ if (!Array.prototype.differences) {
             result.push(element - previous);
         }
         return result;
+    }
+}
+
+if (!Array.prototype.count) {
+    Array.prototype.count = function <T>(predicate: (item: T, index: number) => boolean) {
+        const array: T[] = this;
+        return array.reduce((acc, item, index) => acc + (predicate(item, index) ? 1 : 0), 0);
     }
 }

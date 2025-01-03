@@ -40,7 +40,8 @@ const partOne = (input: number[], debug: boolean) => {
             index += 1;
         }
         stones = nextStones;
-        dlog(`Loop ${loop} - ${stones}`);
+        dlog(`Loop ${loop} - ${stones.length}`);
+        dlog(`  ${stones}`);
     }
     return stones.length;
 };
@@ -99,38 +100,76 @@ const partOneLinkedList = (input: number[], debug: boolean) => {
 };
 
 const partTwo = (input: number[], debug: boolean) => {
-    let stones = input.slice();
+    const cache: Record<number, Record<number, number>> = {};
 
-    const loopTarget = 10;
-
-    for (let loop = 1; loop <= loopTarget; loop++) {
-        const newStones = [];
-        let index = 0;
-
-        while (index < stones.length) {
-            const stone = stones[index];
-            if (stone === 0) {
-                newStones.push(1);
-                index += 1;
-                continue;
-            }
-            const stoneStr = stone.toString();
-            if (stoneStr.length % 2 === 0) {
-                const firstHalf = parseInt(stoneStr.slice(0, stoneStr.length / 2), 10);
-                const secondHalf = parseInt(stoneStr.slice(stoneStr.length / 2), 10);
-                newStones.push(firstHalf);
-                newStones.push(secondHalf);
-                index += 1;
-                continue;
-            }
-
-            newStones.push(stones[index] * 2024);
-            index += 1;
+    const setCache = (value: number, blinks: number, count: number) => {
+        if (!cache[value]) {
+            cache[value] = {};
         }
-        stones = newStones;
-        console.log(`Loop ${loop} - ${stones.length}`);
+        cache[value][blinks] = count;
     }
-    return stones.length;
+    
+    const getStoneCount = (value: number, blinks: number): number => {
+        if (cache[value] && cache[value][blinks]) {
+            return cache[value][blinks];
+        }
+        if (blinks === 0) {
+            setCache(value, blinks, 1);
+            return 1;
+        }
+        if (value === 0) {
+            const result = getStoneCount(1, blinks - 1);
+            setCache(value, blinks, result);
+            return result;
+        }
+        const valueStr = value.toString();
+        if (valueStr.length % 2 === 0) {
+            const firstHalf = parseInt(valueStr.slice(0, valueStr.length / 2), 10);
+            const secondHalf = parseInt(valueStr.slice(valueStr.length / 2), 10);
+            const firstCount = getStoneCount(firstHalf, blinks - 1);
+            const secondCount = getStoneCount(secondHalf, blinks - 1);
+            const result = firstCount + secondCount;
+            setCache(value, blinks, result);
+            return result;
+        }
+        const result = getStoneCount(value * 2024, blinks - 1);
+        setCache(value, blinks, result);
+        return result;
+    }
+
+    const getChildren = (() => {
+        const cache: Record<number, number[]> = {};
+    
+        const implementation = (value: number): number[] => {
+            if (value === 0) {
+                return [1];
+            }
+            const valueStr = value.toString();
+            if (valueStr.length % 2 === 0) {
+                const firstHalf = parseInt(valueStr.slice(0, valueStr.length / 2), 10);
+                const secondHalf = parseInt(valueStr.slice(valueStr.length / 2), 10);
+                return [firstHalf, secondHalf];
+            }
+            return [value * 2024];
+        }
+    
+        for (let index = 0; index < 1000; index++) {
+            cache[index] = implementation(index);
+        }
+    
+        return (value: number) => { 
+            if (cache[value]) {
+                return cache[value];
+            }
+            const result = implementation(value);
+            cache[value] = result;
+            return result;
+        }
+    })();
+
+    const result = input.map((item) => getStoneCount(item, 75)).sum();
+    return result;
+
 };
 
 const resultOne = (_: any, result: number) => {
