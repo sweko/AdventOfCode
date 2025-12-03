@@ -18,7 +18,7 @@ fs.mkdirSync(`./${folder}`);
 
 fs.writeFileSync(`./${folder}/input.txt`, "demo input");
 
-const puzzleTemplate = `// Solution for day ${day} of advent of code 2024
+const puzzleTemplate = `// Solution for day ${day} of advent of code 2025
 
 import { readInputLines, readInput } from "../system/aoc-helper";
 import "../utils/array-helpers";
