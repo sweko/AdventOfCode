@@ -35,7 +35,7 @@ const partOne = (input: string[][], debug: boolean) => {
     for (let rindex = 0; rindex < height; rindex++) {
         for (let cindex = 0; cindex < width; cindex++) {
             const cell = input[rindex][cindex];
-            
+
             if (plots[cell] === undefined) {
                 plots[cell] = [];
             }
@@ -130,7 +130,7 @@ export const solution: Puzzle<string[][], number> = {
     partOne,
     //partTwo,
     resultOne: resultOne,
-    //resultTwo: resultTwo,
+    resultTwo: resultTwo,
     showInput,
     test,
 }
