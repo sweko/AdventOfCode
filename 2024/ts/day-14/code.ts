@@ -1,6 +1,6 @@
 // Solution for day 14 of advent of code 2024
 
-import { readInputLines, readInput } from "../system/aoc-helper";
+import { readInputLines, readInput, dlog } from "../system/aoc-helper";
 import "../utils/array-helpers";
 import { Puzzle } from "../model/puzzle";
 
@@ -85,7 +85,7 @@ const partOne = (input: Robot[], debug: boolean) => {
             }
         }
     }
-    console.log(first, second, third, fourth);
+    dlog(first, second, third, fourth);
     return first * second * third * fourth;
 };
 
