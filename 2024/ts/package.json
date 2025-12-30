@@ -21,6 +21,6 @@
   "dependencies": {
     "@types/node": "^20.10.0",
     "terminal-kit": "^3.0.1",
-    "tsx": "^4.19.2"
+    "tsx": "^4.21.0"
   }
 }
